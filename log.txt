@@ -1,0 +1,28 @@
+Improve djoser email templates
+
+
+
+
+
+
+
+
+8/5/2023
+
+-- Narendra added auth file logic for Modal login/signup form
+
+9/5/23
+
+-- Implemented Modal login form
+-- Created Custom User at backend
+
+10/05/23
+
+-- Solved bugs og Registeration and Login API FE BE
+-- Added Restaurant Model
+
+
+
+
+
+Implement Rtk query instead of Axios --Done
