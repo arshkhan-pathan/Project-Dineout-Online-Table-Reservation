@@ -1,5 +1,5 @@
 Improve djoser email templates
-
+improve folder strucutre
 
 
 
@@ -21,7 +21,11 @@ Improve djoser email templates
 -- Solved bugs og Registeration and Login API FE BE
 -- Added Restaurant Model
 
+13/05/2023
 
+-- RTK QUERY
+-- REDUX TOOKIT STATE MANAGEMENT CODE ADDED
+-- forgot password page
 
 
 
