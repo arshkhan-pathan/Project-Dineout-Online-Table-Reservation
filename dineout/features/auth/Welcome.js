@@ -5,7 +5,7 @@ const Welcome = () => {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   console.log(token);
-  const welcome = user ? `Welcome ${user}!` : "Welcome!";
+  const welcome = user ? `Welcome ${user.first_name}!` : "Welcome!";
   const tokenAbbr = `${token.slice(0, 9)}...`;
 
   const content = (

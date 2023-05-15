@@ -7,12 +7,12 @@ const emailInitialValues = {
   email: "",
 };
 
-function Emailcheck({ emailHandler }) {
+function Emailcheck({ emailHandler, heading }) {
   return (
     <>
       {" "}
       <div>
-        <h1 className={styles.h1}>Login / SignUp</h1>
+        <h1 className={styles.h1}>{heading}</h1>
         <Formik
           initialValues={emailInitialValues}
           validationSchema={emailValidationSchema}

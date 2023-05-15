@@ -1,6 +1,18 @@
+-- Learn Nextjs concepts
+-- Fix authentication from frontend
+
+
+
+
+
+
+
+
+
 Improve djoser email templates
 improve folder strucutre
-
+custom 404 page visit dineout 404
+login page refactor content change
 
 
 
@@ -26,6 +38,12 @@ improve folder strucutre
 -- RTK QUERY
 -- REDUX TOOKIT STATE MANAGEMENT CODE ADDED
 -- forgot password page
+
+
+14/05/2023
+
+-- Changed Login Api from tokenpair to custom
+-- Improved Login
 
 
 

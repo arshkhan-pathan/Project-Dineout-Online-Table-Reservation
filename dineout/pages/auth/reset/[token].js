@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 
 import ForgotPassword from "@/components/Forms/ForgotPassword";
+import Navbar from "@/components/Navigation/Navbar";
 
 function ResetPassword() {
   const router = useRouter();
@@ -10,6 +11,7 @@ function ResetPassword() {
 
   return (
     <>
+      {/* <Navbar></Navbar> */}
       {token}
       <ForgotPassword tokens={tokens}></ForgotPassword>
       {}

@@ -1,28 +1,28 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
+import axios from "axios";
 import styles from "../../styles/Login.module.css";
 
 import { loginValidationSchema } from "../../schemas";
 const loginInitialValues = { password: "" };
 
 const forgotHandler = () => {
-  axios
-    .post("http://127.0.0.1:8000/auth/users/reset_password_confirm/", {
-      uid: tokens[0],
-      token: tokens[1],
-      new_password: value.password,
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  console.log(value);
+  // axios;
+  //   .post("http://127.0.0.1:8000/auth/users/reset_password_confirm/", {
+  //     uid: tokens[0],
+  //     token: tokens[1],
+  //     new_password: value.password,
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // console.log(value);
 };
 
-function Login({ loginHandler, errMsg }) {
+function Login({ loginHandler, errMsg, forgotHandler }) {
   return (
     <>
       {" "}

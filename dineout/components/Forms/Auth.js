@@ -36,29 +36,13 @@ const Auth = () => {
       });
   };
 
-  // const loginHandler = async (value) => {
-  //   console.log(data.email);
-
-  //   axios
-  //     .post("http://127.0.0.1:8000/api/token/", {
-  //       email: data.email,
-  //       password: value.password,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-
   const loginHandler = async (value) => {
     const email = data.email;
     const password = value.password;
     try {
       const userData = await login({ email, password }).unwrap();
       console.log("Sucess Login", userData);
-      dispatch(setCredentials({ ...userData, email }));
+      dispatch(setCredentials({ ...userData }));
       console.log("Login Done");
       router.push("/test");
     } catch (err) {
@@ -83,6 +67,8 @@ const Auth = () => {
     });
     axios
       .post("http://127.0.0.1:8000/api/register/", {
+        first_name: value.first_name,
+        last_name: value.last_name,
         email: data.email,
         password: value.password,
         password2: value.confirm_password,
@@ -95,16 +81,47 @@ const Auth = () => {
       });
   };
 
+  const forgotHandler = () => {
+    setAuthPage("forgotPage");
+  };
+
+  const forgotPageHandler = (value) => {
+    // Send Request to Backend For password Reset
+    console.log(value.email);
+    axios
+      .post("http://127.0.0.1:8000/auth/users/reset_password/", {
+        email: value.email,
+      })
+      .then(function (response) {
+        console.log(response);
+
+        console.log("Password Email Sent");
+        setAuthPage("message");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // Show Acknowledgment
+  };
+
   if (authPage === "auth") {
     return (
-      <Emailcheck emailHandler={emailHandler} errMsg={errMsg}></Emailcheck>
+      <Emailcheck
+        emailHandler={emailHandler}
+        heading={"Login / SignUp"}
+        errMsg={errMsg}
+      ></Emailcheck>
     );
   }
 
   if (authPage === "login") {
     return (
       <>
-        <Login loginHandler={loginHandler} errMsg={errMsg}></Login>
+        <Login
+          loginHandler={loginHandler}
+          forgotHandler={forgotHandler}
+          errMsg={errMsg}
+        ></Login>
       </>
     );
   }
@@ -115,6 +132,20 @@ const Auth = () => {
         <Register registerHandler={registerHandler}></Register>
       </>
     );
+  }
+
+  if (authPage === "forgotPage") {
+    return (
+      <>
+        <Emailcheck
+          heading={"Forgot Password"}
+          emailHandler={forgotPageHandler}
+        ></Emailcheck>
+      </>
+    );
+  }
+  if (authPage === "message") {
+    return <>Password Rest Link has been sent to your mail !</>;
   }
 };
 
