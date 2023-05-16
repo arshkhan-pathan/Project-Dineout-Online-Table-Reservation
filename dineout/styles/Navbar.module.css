@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: -10px;
 }
 
 .nav {
@@ -160,6 +161,7 @@
   background: url(https://im1.dineout.co.in/images/uploads/misc/2021/Mar/31/oldherobannerwebfinal_bau.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  margin: -10px;
 }
 .imgCon {
   text-align: center;

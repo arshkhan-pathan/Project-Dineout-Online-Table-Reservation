@@ -48,21 +48,20 @@ function Navbar() {
           <div id="con" className={classes.con}>
             <ul className={classes.ul}>
               <li className={classes.li}>
-                <a className={classes.navheading} href="">
-                  {" "}
+                <Link href="" className={classes.navheading}>
                   Home
-                </a>
+                </Link>
               </li>
               <li className={classes.li}>
-                <a className={classes.navheading} href="./login/login.html">
-                  Book a table
-                </a>
+                <Link href="" className={classes.navheading}>
+                  Book a Table
+                </Link>
               </li>
 
               <li className={classes.li}>
-                <a className={classes.navheading} href="./login/login.html">
+                <Link href="/restaurants" className={classes.navheading}>
                   Restaurants
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

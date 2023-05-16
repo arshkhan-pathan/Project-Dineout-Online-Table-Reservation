@@ -46,8 +46,7 @@ function NavbarSecondary() {
             <p className={classes.p}>Home</p>
             <p className={classes.p}>Book A Table</p>
             <p className={classes.p}>Dineout Pay</p>
-            <p className={classes.p}>Dinout Passport</p>
-            <p className={classes.p}>Super Saver</p>
+            <p className={classes.p}>Restaurant Login</p>
           </div>
         </div>
       </div>
