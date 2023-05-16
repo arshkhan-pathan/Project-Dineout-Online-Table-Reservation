@@ -4,6 +4,9 @@
 -- restaurant api
 
 
+
+-- Forgot Password Page
+
 -- Fix authentication from frontend
 -- design 2nd Navbar
 -- implement scroll on navbar
