@@ -44,3 +44,7 @@ __pycache__
 venv
 .venv
 /venv
+
+.idea
+
+/.idea
