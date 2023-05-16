@@ -30,7 +30,7 @@ function NavbarSecondary() {
             </select>
           </div>
           <div className={classes.search_section}>
-            <i class="fas fa-search"></i>
+            <i class={classes.fa_search}></i>
             <input
               type="text"
               placeholder="Search restaurants, Offers, Deals or Events... "
