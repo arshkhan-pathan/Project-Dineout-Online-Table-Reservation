@@ -1,34 +1,40 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Modalmui from "../ui/Modal";
 import Auth from "../Forms/Auth";
+import classes from "../../styles/Navbar.module.css";
 
 function Navbar() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
-      <header id="header">
-        <div id="nav">
-          <div id="logo">
+    <div className={classes.body}>
+      <header id="header" className={classes.header}>
+        <div id="nav" className={classes.nav}>
+          <div id="logo" className={classes.logo}>
             <Link legacyBehavior href="/">
               <a>
                 <img
-                  style={{ "box-shadow": "none" }}
+                  style={{ boxShadow: "none" }}
                   src="https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
                   alt="dineout Logo"
+                  classes={classes.aimg}
                 />
               </a>
             </Link>
           </div>
-          <div id="city">
-            <div id="location">
-              <img id="loc" src="location_logo.png" alt="" />
+          <div id="city" className={classes.city}>
+            <div id="location" className={classes.location}>
+              <img
+                id="loc"
+                src="location_logo.png"
+                alt=""
+                className={classes.loc}
+              />
             </div>
             <select
-              className="location"
+              className={classes.cityselect}
               name=""
               aria-placeholder="Please type a location"
             >
@@ -39,29 +45,29 @@ function Navbar() {
             </select>
           </div>
 
-          <div id="con">
-            <ul>
-              <li>
-                <a className="navheading" href="">
+          <div id="con" className={classes.con}>
+            <ul className={classes.ul}>
+              <li className={classes.li}>
+                <a className={classes.navheading} href="">
                   {" "}
                   Home
                 </a>
               </li>
-              <li>
-                <a className="navheading" href="./login/login.html">
+              <li className={classes.li}>
+                <a className={classes.navheading} href="./login/login.html">
                   Book a table
                 </a>
               </li>
 
-              <li>
-                <a className="navheading" href="./login/login.html">
+              <li className={classes.li}>
+                <a className={classes.navheading} href="./login/login.html">
                   Restaurants
                 </a>
               </li>
             </ul>
           </div>
-          <div id="loginD">
-            <button id="login" onClick={handleOpen}>
+          <div id="loginD" className={classes.loginD}>
+            <button id="login" className={classes.login} onClick={handleOpen}>
               Login
             </button>
             {
@@ -78,18 +84,18 @@ function Navbar() {
         </div>
       </header>
 
-      <div id="bigImage">
-        <div id="imgCon">
-          <h1>
+      <div id="bigImage" className={classes.bigImage}>
+        <div id="imgCon" className={classes.imgCon}>
+          <h1 className={classes.imgConh1}>
             It's Now Safe To <span style={{ color: "#ff645a" }}>Crave!</span>
           </h1>
         </div>
 
-        <div id="serachbar">
+        <div id="serachbar" className={classes.serachbar}>
           <div>
             <img
-              className="searchLogo"
-              style={{ "font-size": "20px" }}
+              className={classes.searchLogo}
+              style={{ fontSize: "20px" }}
               src="serchlogo.png"
               alt=""
             />
@@ -97,9 +103,10 @@ function Navbar() {
           <input
             type="text"
             id="search"
+            className={classes.search}
             placeholder="Search for Restaurants, Cuisines, Location..."
           />
-          <button type="submit" id="searchBut">
+          <button type="submit" id="searchBut" className={classes.searchBut}>
             Search
           </button>
         </div>
