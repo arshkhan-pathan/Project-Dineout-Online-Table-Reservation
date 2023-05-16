@@ -1,0 +1,127 @@
+.body {
+  margin: 0px;
+  font-family: Metropolis, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  box-sizing: border-box;
+}
+
+.inner_page_header {
+  width: 100%;
+  height: 100px;
+  justify-content: space-around;
+}
+
+.header_section1 {
+  width: 90%;
+  height: 70%;
+  display: grid;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas: "a b b b c c c c c c d d";
+  justify-content: space-around;
+  box-sizing: border-box;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.logo_section {
+  grid-area: a;
+  /* border: 1px solid magenta; */
+}
+
+.location_section {
+  grid-area: b;
+  margin-left: 20px;
+  width: 80%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: "Metropolis Light";
+  font-style: normal;
+  font-weight: 400;
+  border: 1px solid gray;
+  background-color: white;
+}
+
+.select_location {
+  width: 90%;
+  padding: 5px;
+  margin: auto;
+  border: none;
+  outline: none;
+}
+
+.search_section {
+  grid-area: c;
+  width: 90%;
+  padding: 5px 10px;
+  margin-left: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.fa-search {
+  color: #ff645a;
+}
+
+.search_section > input {
+  width: 95%;
+  height: 25px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.search_button {
+  grid-area: d;
+  height: 36px;
+  position: relative;
+  right: 35px;
+  border-radius: 5px;
+}
+
+.search_button > button {
+  width: 70%;
+  height: 100%;
+  background-color: #ff645a;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.header_section2 {
+  width: 100%;
+  height: 40%;
+  box-shadow: 2px 2px 5px gray;
+}
+
+.list {
+  display: flex;
+  width: 40%;
+  height: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.list > p:hover {
+  color: #ff645a;
+  cursor: pointer;
+}
+
+.horizontal_line {
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+}
+
+.p {
+  font-family: "Verdana";
+}

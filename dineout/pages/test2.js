@@ -1,7 +1,8 @@
+import NavbarSecondary from "@/components/Navigation/NavbarSecondary";
 import React from "react";
 
 function test2() {
-  return <div>test2</div>;
+  return <NavbarSecondary></NavbarSecondary>;
 }
 
 export default test2;
