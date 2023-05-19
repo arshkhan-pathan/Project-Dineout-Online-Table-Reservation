@@ -17,7 +17,7 @@
 - Persist authentication using local storage
 - Refactor login page content
 - Change login API from tokenpair to custom
-- Improve login
+- Improve login.
 
 ## Updates
 
