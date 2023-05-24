@@ -1,0 +1,28 @@
+    {
+        
+        "email": "sasdasdasdasdasdasddada@gmail.com",
+        "name": "sdfsf",
+        "locality": "sdfsd",
+        "address": "sdfs",
+        "city": "dfsdfsd",
+        "avg_cost": 2,
+        "coordinates": "fsdf",
+        "phone_number": "sdf",
+        "description": "",
+        "opening_time": "07:03:36",
+        "closing_time": "00:00:00",
+        "manager": 6,
+        "Cuisines": [],
+        "Tags": [],
+        "type": [],
+    
+}
+
+    {
+    "email": "pathan@gmail.com",
+    "manager": 2,
+    "name": "Arshkihan",
+    "uploaded_images": [],
+    "uploaded_menuImages": [],
+   "tag_list": []
+}
