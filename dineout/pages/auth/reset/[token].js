@@ -11,9 +11,8 @@ function ResetPassword() {
 
   return (
     <>
-      {/* <Navbar></Navbar> */}
       {token}
-      <ForgotPassword tokens={tokens}></ForgotPassword>
+      <ForgotPassword tokens={tokens} />
       {}
     </>
   );
