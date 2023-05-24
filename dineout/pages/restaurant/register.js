@@ -14,6 +14,8 @@ import { styled } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRegisterMutation } from "@/features/auth/authApiSlice";
+// layouts
+import RestaurantLayout from "@/layouts/restaurant";
 
 
 const initialValues = {
@@ -81,101 +83,103 @@ const Register = () => {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <StyledPaper>
-                <StyledAvatar>
-                    <LockOutlinedIcon />
-                </StyledAvatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
-                </Typography>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}
-                >
-                <StyledForm>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <Field
-                                name="name"
-                                variant="outlined"
-                                fullWidth
-                                id="name"
-                                label="Name"
-                                autoFocus
-                                as={TextField}
-                                helperText={<StyledErrorMessage name="name" component="div" />}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <Field
-                                variant="outlined"
-                                fullWidth
-                                id="city"
-                                label="City"
-                                name="city"
-                                as={TextField}
-                                helperText={<StyledErrorMessage name="city" component="div" />}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Field
-                                variant="outlined"
-                                fullWidth
-                                id="email"
-                                label="Email"
-                                name="email"
-                                autoComplete="email"
-                                as={TextField}
-                                helperText={<StyledErrorMessage name="email" component="div" />}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Field
-                                variant="outlined"
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                as={TextField}
-                                helperText={<StyledErrorMessage name="password" component="div" />}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Field
-                                variant="outlined"
-                                fullWidth
-                                name="password2"
-                                label="Password2"
-                                type="password2"
-                                id="password2"
-                                as={TextField}
-                                helperText={<StyledErrorMessage name="password2" component="div" />}
-                            />
-                        </Grid>
-                    </Grid>
-                    <StyledButton
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
+        <RestaurantLayout>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <StyledPaper>
+                    <StyledAvatar>
+                        <LockOutlinedIcon />
+                    </StyledAvatar>
+                    <Typography component="h1" variant="h5">
+                        Sign up
+                    </Typography>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
                     >
-                        Sign Up
-                    </StyledButton>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="/" variant="body2">
-                                Already have an account? Sign in
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </StyledForm>
-                </Formik>
-            </StyledPaper>
-        </Container>
+                        <StyledForm>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <Field
+                                        name="name"
+                                        variant="outlined"
+                                        fullWidth
+                                        id="name"
+                                        label="Name"
+                                        autoFocus
+                                        as={TextField}
+                                        helperText={<StyledErrorMessage name="name" component="div" />}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Field
+                                        variant="outlined"
+                                        fullWidth
+                                        id="city"
+                                        label="City"
+                                        name="city"
+                                        as={TextField}
+                                        helperText={<StyledErrorMessage name="city" component="div" />}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        variant="outlined"
+                                        fullWidth
+                                        id="email"
+                                        label="Email"
+                                        name="email"
+                                        autoComplete="email"
+                                        as={TextField}
+                                        helperText={<StyledErrorMessage name="email" component="div" />}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        variant="outlined"
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        as={TextField}
+                                        helperText={<StyledErrorMessage name="password" component="div" />}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        variant="outlined"
+                                        fullWidth
+                                        name="password2"
+                                        label="Password2"
+                                        type="password2"
+                                        id="password2"
+                                        as={TextField}
+                                        helperText={<StyledErrorMessage name="password2" component="div" />}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <StyledButton
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                            >
+                                Sign Up
+                            </StyledButton>
+                            <Grid container justify="flex-end">
+                                <Grid item>
+                                    <Link href="/" variant="body2">
+                                        Already have an account? Sign in
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        </StyledForm>
+                    </Formik>
+                </StyledPaper>
+            </Container>
+        </RestaurantLayout>
     );
 };
 
