@@ -10,6 +10,12 @@
 - Improve folder structure
 - Refactor login page content
 - Create custom 404 page for Dineout
+
+- ## Backend
+- Admin Routes
+
+  - Add tag/types
+
 - ## Authentication
 
 - Implement forgot password page
