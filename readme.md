@@ -1,3 +1,17 @@
+- ## Backend
+- Admin Routes
+  - Give Permisson To routes
+  - Tag types Cuisines
+- Shift manager Logins Logic to separate Folder
+- ## Authentication
+
+- Implement forgot password page
+- Fix authentication from frontend
+- Persist authentication using local storage
+- Refactor login page content
+- Change login API from tokenpair to custom
+- Improve login.
+
 # General
 
 - Implement social authentication using the tutorial [here](https://www.youtube.com/watch?v=KiJFHBQ44sw&list=PLJRGQoqpRwdfoa9591BcUS6NmMpZcvFsM&index=10&t=150s)
@@ -10,20 +24,6 @@
 - Improve folder structure
 - Refactor login page content
 - Create custom 404 page for Dineout
-
-- ## Backend
-- Admin Routes
-
-  - Add tag/types
-
-- ## Authentication
-
-- Implement forgot password page
-- Fix authentication from frontend
-- Persist authentication using local storage
-- Refactor login page content
-- Change login API from tokenpair to custom
-- Improve login.
 
 ## Updates
 
