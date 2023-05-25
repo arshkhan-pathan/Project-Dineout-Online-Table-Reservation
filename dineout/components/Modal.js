@@ -1,9 +1,7 @@
-import * as React from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
+import {Modal as MuiModal} from "@mui/material";
 import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
 
 const style = {
   position: "absolute",
@@ -17,19 +15,14 @@ const style = {
   p: 4,
 };
 
-export default function Modalmui(props) {
-  //   const [open, setOpen] = React.useState(false);
-  //   const handleOpen = () => setOpen(true);
-  //   const handleClose = () => setOpen(false);
-
+export default function Modal({isOpen, onClose, children}) {
   return (
     <div>
-      {/* <Button onClick={props.handleOpen}>Open modal</Button> */}
-      <Modal
+      <MuiModal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={props.open}
-        onClose={props.handleClose}
+        open={isOpen}
+        onClose={onClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -38,10 +31,10 @@ export default function Modalmui(props) {
           },
         }}
       >
-        <Fade in={props.open}>
-          <Box sx={style}>{props.children}</Box>
+        <Fade in={isOpen}>
+          <Box sx={style}>{children}</Box>
         </Fade>
-      </Modal>
+      </MuiModal>
     </div>
   );
 }

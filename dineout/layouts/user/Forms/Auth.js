@@ -4,8 +4,8 @@ import Login from "./login";
 import Register from "./register";
 import Emailcheck from "./emailcheck";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../features/auth/authSlice";
-import { useLoginMutation } from "../../features/auth/authApiSlice";
+import { setCredentials } from "@/store/slices/auth";
+import { useLoginMutation } from "@/store/api/auth";
 import { useRouter } from "next/router";
 
 const Auth = () => {

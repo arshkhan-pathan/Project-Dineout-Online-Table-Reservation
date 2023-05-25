@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-import ForgotPassword from "@/components/Forms/ForgotPassword";
+import ForgotPassword from "@/layouts/user/Forms/ForgotPassword";
 import Navbar from "@/components/Navigation/Navbar";
 
 function ResetPassword() {

@@ -1,5 +1,5 @@
 //
-import baseApi from './baseApi';
+import baseApi from './base';
 
 
 export const authApi = baseApi.injectEndpoints({

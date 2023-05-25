@@ -1,4 +1,6 @@
-import classes from "../../styles/NavbarSecondary.module.css";
+// css
+import classes from '@/styles/NavbarSecondary.module.css';
+
 
 const Navbar = () => {
     return (

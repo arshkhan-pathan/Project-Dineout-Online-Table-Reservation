@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import styles from "../../styles/Login.module.css";
-import { emailValidationSchema } from "../../schemas";
+import styles from "@/styles/Login.module.css";
+import { emailValidationSchema } from "../../../schemas";
 
 const emailInitialValues = {
   email: "",

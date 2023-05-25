@@ -1,9 +1,16 @@
-import Navbar from "@/components/Navigation/Navbar";
+// layouts
+import UserLayout from '@/layouts/user';
+// sections
+import Banner from '@/sections/user/home/Banner';
 
-import React from "react";
 
-function test() {
-  return <Navbar />;
-}
+const Home = () => {
+  return (
+    <UserLayout>
+      <Banner />
+      <div>Home Page</div>
+    </UserLayout>
+  );
+};
 
-export default test;
+export default Home;

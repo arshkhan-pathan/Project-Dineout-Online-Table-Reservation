@@ -1,7 +1,7 @@
 // packages
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // features
-import { setCredentials, logOut } from '../../features/auth/authSlice';
+import { setCredentials, logOut } from '@/store/slices/auth';
 
 
 // base query

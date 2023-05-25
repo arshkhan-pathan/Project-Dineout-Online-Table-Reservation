@@ -1,9 +1,9 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import styles from "../../styles/Login.module.css";
+import styles from "@/styles/Login.module.css";
 
-import { registerValidationSchema } from "../../schemas";
+import { registerValidationSchema } from "../../../schemas";
 const registerInitialValues = {
   first_name: "",
   last_name: "",

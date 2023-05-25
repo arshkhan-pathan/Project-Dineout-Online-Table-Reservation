@@ -2,9 +2,9 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 
-import styles from "../../styles/Login.module.css";
+import styles from "@/styles/Login.module.css";
 
-import { forgotPasswordValidationSchema } from "../../schemas";
+import { forgotPasswordValidationSchema } from "../../../schemas";
 const forrgotPasswordInitialValues = {
   password: "",
   confirm_password: "",
