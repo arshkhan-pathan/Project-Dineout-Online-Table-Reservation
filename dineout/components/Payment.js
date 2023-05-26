@@ -62,9 +62,9 @@ export default function Payment() {
       },
       data: {
         id: 1,
-        date: "2023-05-26",
-        start_time: "16:35:00",
-        end_time: "17:35:00",
+        date: "2023-05-28",
+        start_time: "21:35:00",
+        end_time: "22:35:00",
         guests: 4,
         additional_details: "",
         amount: 100,
