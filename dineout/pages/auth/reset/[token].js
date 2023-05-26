@@ -1,20 +1,16 @@
-import React from "react";
-import { useRouter } from "next/router";
+// packages
+import { useRouter } from 'next/router';
+// layouts
+import ForgotPassword from '@/layouts/user/navbar/auth/ForgotPassword';
 
-import ForgotPassword from "@/layouts/user/Forms/ForgotPassword";
-import Navbar from "@/components/Navigation/Navbar";
 
-function ResetPassword() {
+const ResetPassword = () => {
   const router = useRouter();
   const token = router.query.token;
-  let tokens = token?.split("&");
+  let tokens = token?.split('&');
 
   return (
-    <>
-      {token}
-      <ForgotPassword tokens={tokens} />
-      {}
-    </>
+    <ForgotPassword tokens={tokens} />
   );
 }
 

@@ -11,14 +11,21 @@ export const authApi = baseApi.injectEndpoints({
                 body: { ...credentials },
             }),
         }),
-        register: builder.mutation({
+        restaurantRegister: builder.mutation({
             query: (credentials) => ({
                 url: '/api/restaurant/register/',
                 method: 'POST',
                 body: { ...credentials }
             })
-        })
+        }),
+        restaurantLogin: builder.mutation({
+            query: (credentials) => ({
+                url: '/api/restaurant/login/',
+                method: 'POST',
+                body: { ...credentials }
+            })
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRestaurantRegisterMutation, useRestaurantLoginMutation } = authApi;

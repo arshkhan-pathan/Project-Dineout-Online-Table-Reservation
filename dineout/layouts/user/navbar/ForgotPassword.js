@@ -1,22 +1,30 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
+// packages
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+// css
+import styles from '@/styles/Login.module.css';
 
-import styles from "@/styles/Login.module.css";
 
-import { forgotPasswordValidationSchema } from "../../../schemas";
-const forrgotPasswordInitialValues = {
-  password: "",
-  confirm_password: "",
+const initialValues = {
+  password: '',
+  confirmPassword: '',
 };
 
+const validationSchema = Yup.object({
+  password: Yup.string().min(6).required('Enter your Password'),
+  confirmPassword: Yup.string()
+    .required('Renter your Password')
+    .oneOf([Yup.ref('password'), null], 'Password must match'),
+});
+
 const ForgotPassword = ({ tokens }) => {
-  const forgotPasswordHandler = async (value) => {
+  const onSubmit = async (values) => {
     axios
-      .post("http://127.0.0.1:8000/auth/users/reset_password_confirm/", {
+      .post('http://127.0.0.1:8000/auth/users/reset_password_confirm/', {
         uid: tokens[0],
         token: tokens[1],
-        new_password: value.password,
+        new_password: values.password,
       })
       .then(function (response) {
         console.log(response);
@@ -24,16 +32,17 @@ const ForgotPassword = ({ tokens }) => {
       .catch(function (error) {
         console.log(error);
       });
-    console.log(value);
+    console.log(values);
   };
+
   return (
     <div className={styles.body}>
       <div className={styles.parent1}>
         <h1 className={styles.h1}> Forgot Password </h1>
         <Formik
-          initialValues={forrgotPasswordInitialValues}
-          validationSchema={forgotPasswordValidationSchema}
-          onSubmit={forgotPasswordHandler}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
         >
           <Form className={styles.form}>
             <label className={styles.label}>Password</label>
@@ -44,19 +53,18 @@ const ForgotPassword = ({ tokens }) => {
 
             <label className={styles.label}>Confirm Password</label>
             <Field
-              name="confirm_password"
-              id="confirm_password"
+              name="confirmPassword"
+              id="confirmPassword"
               className={styles.input}
             />
             <div className={styles.error}>
-              <ErrorMessage name="confirm_password" />
+              <ErrorMessage name="confirmPassword" />
             </div>
 
             <input
               style={{ border: "none" }}
               type="submit"
               value="Sign In"
-              //   class="btn-disabled"
               className={styles.input}
             />
           </Form>

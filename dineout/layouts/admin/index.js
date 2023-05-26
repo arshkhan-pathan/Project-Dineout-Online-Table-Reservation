@@ -1,6 +1,6 @@
 //
 import Footer from '../user/Footer';
-import Navbar from '../user/Navbar';
+import Navbar from '../user/navbar';
 
 
 const AdminLayout = ({ children }) => {

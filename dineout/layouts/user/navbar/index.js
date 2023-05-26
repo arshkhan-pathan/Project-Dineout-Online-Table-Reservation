@@ -3,7 +3,7 @@ import Link from 'next/link';
 // css
 import classes from '@/styles/Navbar.module.css';
 //
-import Login from './Login';
+import Login from './LoginButton';
 
 
 const Navbar = () => {

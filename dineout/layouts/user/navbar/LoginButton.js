@@ -4,7 +4,7 @@ import classes from '@/styles/Navbar.module.css';
 import useToggle from '@/hooks/useToggle';
 // components
 import Modal from '@/components/Modal';
-import Auth from '@/layouts/user/Forms/Auth';
+import Auth from './Auth';
 
 
 const Login = () => {

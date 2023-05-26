@@ -14,24 +14,18 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 // store
-import { useRestaurantRegisterMutation } from '@/store/api/auth';
+import { useRestaurantLoginMutation } from '@/store/api/auth';
 import { setCredentials } from '@/store/slices/auth';
 
 
 const initialValues = {
-    name: '',
-    city: '',
     email: '',
     password: '',
-    confirmPassword: '',
 };
 
 const validationSchema = Yup.object({
-    name: Yup.string(),
-    city: Yup.string(),
     email: Yup.string().email('Please enter an valid email address').required('Email address is required'),
     password: Yup.string().min(8, 'Password should be atleaset 6 characters').required('Please enter your new password'),
-    confirmPassword: Yup.string().min(8, 'Password should be atleaset 6 characters').required('Please enter your confirm password').oneOf([Yup.ref('password'), null], 'Passwords does not match'),
 });
 
 const StyledPaper = styled('div')(({ theme }) => ({
@@ -63,15 +57,15 @@ const StyledErrorMessage = styled(ErrorMessage)(({ theme }) => ({
     color: 'red',
 }));
 
-const Register = () => {
-    const [register] = useRestaurantRegisterMutation();
+const Login = () => {
+    const [login] = useRestaurantLoginMutation();
     const router = useRouter();
     const dispatch = useDispatch();
 
-    const onSubmit = (values) => {
-        const response = register({ ...values, password2: values.confirmPassword });
+    const onSubmit = async (values) => {
+        const response = login(values).unwrap();
 
-        if(response){
+        if(response) {
             const { user, ...rest} = response;
             dispatch(setCredentials({user: user, token: rest}));
             router.push('/restaurant');
@@ -85,7 +79,7 @@ const Register = () => {
                     <LockOutlinedIcon />
                 </StyledAvatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Sign In
                 </Typography>
                 <Formik
                     initialValues={initialValues}
@@ -94,29 +88,6 @@ const Register = () => {
                 >
                     <StyledForm>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <Field
-                                    name="name"
-                                    variant="outlined"
-                                    fullWidth
-                                    id="name"
-                                    label="Name"
-                                    autoFocus
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="name" component="div" />}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Field
-                                    variant="outlined"
-                                    fullWidth
-                                    id="city"
-                                    label="City"
-                                    name="city"
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="city" component="div" />}
-                                />
-                            </Grid>
                             <Grid item xs={12}>
                                 <Field
                                     variant="outlined"
@@ -141,18 +112,6 @@ const Register = () => {
                                     helperText={<StyledErrorMessage name="password" component="div" />}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <Field
-                                    variant="outlined"
-                                    fullWidth
-                                    name="confirmPassword"
-                                    label="confirmPassword"
-                                    type="confirmPassword"
-                                    id="confirmPassword"
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="confirmPassword" component="div" />}
-                                />
-                            </Grid>
                         </Grid>
                         <StyledButton
                             type="submit"
@@ -160,12 +119,12 @@ const Register = () => {
                             variant="contained"
                             color="primary"
                         >
-                            Sign Up
+                            Sign In
                         </StyledButton>
                         <Grid container justify="flex-end">
                             <Grid item>
-                                <MuiLink href="/restaurant/login" component={Link} variant="body2">
-                                    Already have an account? Sign in
+                                <MuiLink href="/restaurant/register" component={Link} variant="body2">
+                                    Don't have an account? Sign up
                                 </MuiLink>
                             </Grid>
                         </Grid>
@@ -176,4 +135,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default Login;
