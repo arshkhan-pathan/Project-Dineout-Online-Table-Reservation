@@ -3,6 +3,7 @@
   - Give Permisson To routes
   - Tag types Cuisines
 - Shift manager Logins Logic to separate Folder
+- Handle Unpaid Booking Deletions after 7 min
 
 ## Restauarant Dashboard
 
@@ -14,6 +15,8 @@
 - Earning this month
 - Earning is Week
 - Earning Today
+- Add Dayanmic Price
+- Veiw Booking Details
 - Add Tables
 - AddBest seller
 - Reviews
