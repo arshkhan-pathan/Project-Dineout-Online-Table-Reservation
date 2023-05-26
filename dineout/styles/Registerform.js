@@ -1,20 +1,29 @@
-import React from "react";
-import styles from "../styles/Login.module.css";
-import { useFormik } from "formik";
-import { signUpSchema } from "../schemas";
+// packages
+import { useFormik } from 'formik';
+// css
+import styles from '@/styles/Login.module.css';
+
 
 const initialValues = {
-  name: "",
-  email: "",
-  password: "",
-  confirm_password: "",
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
+
+const validationSchema = Yup.object({
+  name: Yup.string(),
+  city: Yup.string(),
+  email: Yup.string().email('Please enter an valid email address').required('Email address is required'),
+  password: Yup.string().min(8, 'Password should be atleaset 6 characters').required('Please enter your new password'),
+  confirmPassword: Yup.string().min(8, 'Password should be atleaset 6 characters').required('Please enter your confirm password').oneOf([Yup.ref('password'), null], 'Passwords does not match'),
+});
 
 function Registerform() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
-      validationSchema: signUpSchema,
+      validationSchema,
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
@@ -113,15 +122,15 @@ function Registerform() {
               }
               type="password"
               autoComplete="off"
-              name="confirm_password"
-              id="confirm_password"
+              name="confirmPassword"
+              id="confirmPassword"
               placeholder="Confirm Password"
-              value={values.confirm_password}
+              value={values.confirmPassword}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.confirm_password && touched.confirm_password ? (
-              <p className={styles.error}>{errors.confirm_password}</p>
+            {errors.confirmPassword && touched.confirmPassword ? (
+              <p className={styles.error}>{errors.confirmPassword}</p>
             ) : null}
 
             <input
