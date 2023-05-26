@@ -3,6 +3,34 @@
   - Give Permisson To routes
   - Tag types Cuisines
 - Shift manager Logins Logic to separate Folder
+
+## Restauarant Dashboard
+
+- Basic Information
+- Edit Restaurant
+- Past Bookings
+- Todays Bookings
+- Future Bookings
+- Earning this month
+- Earning is Week
+- Earning Today
+- Add Tables
+- AddBest seller
+- Reviews
+- Table Avilibility
+- optional End time start time
+- optional Menu Image
+
+- ## Admin Dashboard
+
+  - Total Users
+  - Total Restaurants
+  - Pending Restauarants
+  - New Users This Month
+  - New restaurants this Month
+  - Restauarant Performances Analytics
+  - CRUD - Tags / Types / Cuisines
+
 - ## Authentication
 
 - Implement forgot password page
