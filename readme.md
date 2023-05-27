@@ -1,3 +1,11 @@
+- ## Frontend
+
+  - Understand Code
+  - Get user state
+  - understand redux
+  - understand admin template
+  - create flow
+
 - ## Backend
 - Admin Routes
   - Give Permisson To routes
