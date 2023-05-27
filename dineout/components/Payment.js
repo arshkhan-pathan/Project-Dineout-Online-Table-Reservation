@@ -61,7 +61,7 @@ export default function Payment() {
         "Content-Type": "application/json",
       },
       data: {
-        id: 1,
+        id: 13,
         date: "2023-05-28",
         start_time: "21:35:00",
         end_time: "22:35:00",
@@ -70,8 +70,8 @@ export default function Payment() {
         amount: 100,
         isPaid: false,
         customer: 2,
-        restaurant: 12,
-        table: 5,
+        restaurant: 13,
+        table: 6,
       },
     }).then((res) => {
       return res;
