@@ -70,8 +70,8 @@ export default function Payment() {
         amount: 100,
         isPaid: false,
         customer: 2,
-        restaurant: 1,
-        table: 4,
+        restaurant: 12,
+        table: 5,
       },
     }).then((res) => {
       return res;
@@ -85,9 +85,10 @@ export default function Payment() {
       key_secret: "lA9TlERaqw3vmBfpjdw3f4RG",
       amount: data.data.payment.amount,
       currency: "INR",
-      name: "Org. Name",
-      description: "Test teansaction",
-      image: "", // add image url
+      name: "DineOut",
+      description: "Transacrion to Confirm Booking!",
+      image:
+        "https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png", // add image url
       order_id: data.data.payment.id,
       handler: function (response) {
         // we will handle success by calling handlePaymentSuccess method and
