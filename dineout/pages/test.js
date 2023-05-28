@@ -1,4 +1,4 @@
-import MediaCard, { DummyCard } from "@/components/Card";
+// import MediaCard, { DummyCard } from "@/components/Card";
 import Payment from "@/components/Payment";
 
 import React from "react";

@@ -1,7 +1,7 @@
 const Restaurant = () => {
     return (
         <div>
-            Welcome to the restaurant
+            Manage the restaurant
         </div>
     );
 };

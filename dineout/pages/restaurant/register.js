@@ -1,21 +1,12 @@
 // packages
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import MuiLink from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { styled } from '@mui/material';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 // store
 import { useRestaurantRegisterMutation } from '@/store/api/auth';
 import { setCredentials } from '@/store/slices/auth';
+// components
+import Auth from '@/components/Auth';
 
 
 const initialValues = {
@@ -34,35 +25,6 @@ const validationSchema = Yup.object({
     confirmPassword: Yup.string().min(8, 'Password should be atleaset 6 characters').required('Please enter your confirm password').oneOf([Yup.ref('password'), null], 'Passwords does not match'),
 });
 
-const StyledPaper = styled('div')(({ theme }) => ({
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-}));
-
-const StyledAvatar = styled(Avatar)(({ theme }) => ({
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-}));
-
-
-const StyledForm = styled(Form)(({ theme }) => ({
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-    '& .css-1wc848c-MuiFormHelperText-root': {
-        marginLeft: 0,
-    }
-}));
-
-const StyledButton = styled(Button)(({ theme }) => ({
-    margin: theme.spacing(3, 0, 2)
-}));
-
-const StyledErrorMessage = styled(ErrorMessage)(({ theme }) => ({
-    color: 'red',
-}));
-
 const Register = () => {
     const [register] = useRestaurantRegisterMutation();
     const router = useRouter();
@@ -79,100 +41,12 @@ const Register = () => {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <StyledPaper>
-                <StyledAvatar>
-                    <LockOutlinedIcon />
-                </StyledAvatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
-                </Typography>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}
-                >
-                    <StyledForm>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <Field
-                                    name="name"
-                                    variant="outlined"
-                                    fullWidth
-                                    id="name"
-                                    label="Name"
-                                    autoFocus
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="name" component="div" />}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Field
-                                    variant="outlined"
-                                    fullWidth
-                                    id="city"
-                                    label="City"
-                                    name="city"
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="city" component="div" />}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Field
-                                    variant="outlined"
-                                    fullWidth
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    autoComplete="email"
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="email" component="div" />}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Field
-                                    variant="outlined"
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="password" component="div" />}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Field
-                                    variant="outlined"
-                                    fullWidth
-                                    name="confirmPassword"
-                                    label="confirmPassword"
-                                    type="confirmPassword"
-                                    id="confirmPassword"
-                                    as={TextField}
-                                    helperText={<StyledErrorMessage name="confirmPassword" component="div" />}
-                                />
-                            </Grid>
-                        </Grid>
-                        <StyledButton
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                        >
-                            Sign Up
-                        </StyledButton>
-                        <Grid container justify="flex-end">
-                            <Grid item>
-                                <MuiLink href="/restaurant/login" component={Link} variant="body2">
-                                    Already have an account? Sign in
-                                </MuiLink>
-                            </Grid>
-                        </Grid>
-                    </StyledForm>
-                </Formik>
-            </StyledPaper>
-        </Container>
+        <Auth 
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+            authType='Sign Up'
+        />
     );
 };
 
