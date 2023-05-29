@@ -1,12 +1,15 @@
 // packages
-import Link from 'next/link';
+import Link from "next/link";
+import { useSelector } from "react-redux";
 // css
-import classes from '@/styles/Navbar.module.css';
+import classes from "@/styles/Navbar.module.css";
 //
-import Login from './LoginButton';
-
+import Login from "./LoginButton";
+import { selectCurrentUser, selectCurrentToken } from "@/store/slices/auth.js";
+import Profile from "./profile";
 
 const Navbar = () => {
+  const user = useSelector(selectCurrentUser);
   return (
     <header id="header" className={classes.header}>
       <div id="nav" className={classes.nav}>
@@ -63,8 +66,9 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Login />
+        {!user ? <Login /> : <Profile />}
       </div>
+      {console.log(user)}
     </header>
   );
 };

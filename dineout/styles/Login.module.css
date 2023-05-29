@@ -101,6 +101,7 @@
   margin-right: 35px;
   z-index: 1;
 }
+
 @media screen and (max-width: 480px) {
   .body {
     padding: 20px;

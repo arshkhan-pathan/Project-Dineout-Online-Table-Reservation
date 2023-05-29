@@ -1,31 +1,27 @@
 // css
-import classes from '@/styles/Navbar.module.css';
+import classes from "@/styles/Navbar.module.css";
 // hooks
-import useToggle from '@/hooks/useToggle';
+import useToggle from "@/hooks/useToggle";
 // components
-import Modal from '@/components/Modal';
-import Auth from './Auth';
-
+import Modal from "@/components/Modal";
+import Auth from "./Auth";
 
 const Login = () => {
-    const { isOpen, onOpen, onClose } = useToggle();
+  const { isOpen, onOpen, onClose } = useToggle();
 
-    return (
-        <div id="loginD" className={classes.loginD}>
-            <button id="login" className={classes.login} onClick={onOpen}>
-                Login
-            </button>
+  return (
+    <div id="loginD" className={classes.loginD}>
+      <button id="login" className={classes.login} onClick={onOpen}>
+        Login
+      </button>
 
-            {isOpen && (
-                <Modal
-                    isOpen={isOpen}
-                    onClose={onClose}
-                >
-                    <Auth />
-                </Modal>
-            )}
-        </div>
-    );
+      {isOpen && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <Auth onClose={onClose} />
+        </Modal>
+      )}
+    </div>
+  );
 };
 
 export default Login;
