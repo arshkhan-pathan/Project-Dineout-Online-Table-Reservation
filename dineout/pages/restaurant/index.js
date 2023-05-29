@@ -1,7 +1,7 @@
 import { withRole } from "@/components/Middleware";
 
-const Restaurant = withRole("admin")((userRole = "manager") => {
+const Restaurant = () => {
   return <div>Manage the restaurant</div>;
-});
+};
 
 export default Restaurant;

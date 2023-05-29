@@ -16,11 +16,11 @@ export function withRole(role) {
       const user = props.user; // Assuming the user object contains authentication information
 
       // Redirect to the login page if the user is not authenticated
-      if (!user || !user.isAuthenticated) {
-        // Redirect to the login page or homepage
-        router.push("/login");
-        return null; // Return null or a loading component while redirecting
-      }
+      // if (!user || !user.isAuthenticated) {
+      //   // Redirect to the login page or homepage
+      //   router.push("/login");
+      //   return null; // Return null or a loading component while redirecting
+      // }
 
       const userRole = user.role;
 

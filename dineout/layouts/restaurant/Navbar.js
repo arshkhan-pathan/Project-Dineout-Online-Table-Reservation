@@ -5,7 +5,7 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <div className={classes.body}>
-      <div classname={classes.inner_page_header}>
+      <div className={classes.inner_page_header}>
         <div className={classes.header_section1}>
           <div className={classes.logo_section}>
             <Link href="/" legacyBehavior>
@@ -19,7 +19,7 @@ const Navbar = () => {
           </div>
 
           <div className={classes.location_section}>
-            <i class="fas fa-map-marker-alt"></i>
+            <i className="fas fa-map-marker-alt"></i>
             <select
               name=""
               id="select_location"
@@ -33,7 +33,7 @@ const Navbar = () => {
             </select>
           </div>
           <div className={classes.search_section}>
-            <i class={classes.fa_search}></i>
+            <i className={classes.fa_search}></i>
             <input
               type="text"
               placeholder="Search restaurants, Offers, Deals or Events... "
@@ -52,7 +52,10 @@ const Navbar = () => {
             <Link href="/" legacyBehavior>
               <p className={classes.p}>Book a Table</p>
             </Link>{" "}
-            <Link href="/" legacyBehavior>
+            <Link href="/restaurants" legacyBehavior>
+              <p className={classes.p}>Restaurants</p>
+            </Link>{" "}
+            <Link href="/restaurant/login" legacyBehavior>
               <p className={classes.p}>Restaurant Login</p>
             </Link>{" "}
           </div>
