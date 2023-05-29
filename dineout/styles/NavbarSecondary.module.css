@@ -126,6 +126,11 @@
   font-family: "Verdana";
 }
 
+.pActive {
+  font-family: "Verdana";
+  color: #b90d01;
+}
+
 @media (max-width: 575.98px) {
   .inner_page_header {
     height: 150px;

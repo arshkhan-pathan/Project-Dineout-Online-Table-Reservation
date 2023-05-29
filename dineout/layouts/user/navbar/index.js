@@ -7,9 +7,12 @@ import classes from "@/styles/Navbar.module.css";
 import Login from "./LoginButton";
 import { selectCurrentUser, selectCurrentToken } from "@/store/slices/auth.js";
 import Profile from "./profile";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
+  const router = useRouter();
+  console.log(router.pathname);
   return (
     <header id="header" className={classes.header}>
       <div id="nav" className={classes.nav}>
@@ -49,7 +52,14 @@ const Navbar = () => {
         <div id="con" className={classes.con}>
           <ul className={classes.ul}>
             <li className={classes.li}>
-              <Link href="" className={classes.navheading}>
+              <Link
+                href=""
+                className={
+                  router.pathname == "/"
+                    ? classes.navheadingActive
+                    : classes.navheading
+                }
+              >
                 Home
               </Link>
             </li>

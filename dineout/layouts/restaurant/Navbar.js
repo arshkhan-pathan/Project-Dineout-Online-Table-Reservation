@@ -1,8 +1,10 @@
 // css
 import classes from "@/styles/NavbarSecondary.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <div className={classes.body}>
       <div className={classes.inner_page_header}>
@@ -53,10 +55,26 @@ const Navbar = () => {
               <p className={classes.p}>Book a Table</p>
             </Link>{" "}
             <Link href="/restaurants" legacyBehavior>
-              <p className={classes.p}>Restaurants</p>
+              <p
+                className={
+                  router.pathname == "/restaurants"
+                    ? classes.pActive
+                    : classes.p
+                }
+              >
+                Restaurants
+              </p>
             </Link>{" "}
             <Link href="/restaurant/login" legacyBehavior>
-              <p className={classes.p}>Restaurant Login</p>
+              <p
+                className={
+                  router.pathname == "/restaurant/login"
+                    ? classes.pActive
+                    : classes.p
+                }
+              >
+                Restaurant Login
+              </p>
             </Link>{" "}
           </div>
         </div>
