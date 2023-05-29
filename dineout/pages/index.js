@@ -1,8 +1,7 @@
 // layouts
-import UserLayout from '@/layouts/user';
+import UserLayout from "@/layouts/user";
 // sections
-import Banner from '@/sections/user/home/Banner';
-
+import Banner from "@/sections/user/home/Banner";
 
 const Home = () => {
   return (
