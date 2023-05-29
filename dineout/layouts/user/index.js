@@ -2,8 +2,12 @@
 import Footer from "./Footer";
 import Head from "next/head";
 import Navbar from "./navbar";
+import Banner from "@/sections/user/home/Banner";
+import { useRouter } from "next/router";
 
 const UserLayout = ({ title, keywords, description, children }) => {
+  const router = useRouter();
+
   return (
     <div className="app">
       <Head>
@@ -11,7 +15,9 @@ const UserLayout = ({ title, keywords, description, children }) => {
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
       </Head>
+
       <Navbar />
+      {router.pathname === "/" && <Banner />}
       <main>{children}</main>
       <Footer />
     </div>
