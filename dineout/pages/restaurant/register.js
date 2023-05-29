@@ -56,7 +56,7 @@ const Register = () => {
   };
 
   return (
-    <RestaurantLayout>
+    <>
       {" "}
       <Auth
         initialValues={initialValues}
@@ -64,7 +64,7 @@ const Register = () => {
         onSubmit={onSubmit}
         authType="Sign Up"
       />
-    </RestaurantLayout>
+    </>
   );
 };
 

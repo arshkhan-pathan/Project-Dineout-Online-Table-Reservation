@@ -44,13 +44,13 @@ const Login = () => {
   };
   return (
     <>
-      <RestaurantLayout>
+      <>
         <Auth
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         />
-      </RestaurantLayout>
+      </>
     </>
   );
 };
