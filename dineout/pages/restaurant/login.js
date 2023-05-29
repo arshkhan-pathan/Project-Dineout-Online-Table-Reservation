@@ -29,16 +29,19 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (values) => {
-    const response = login(values).unwrap();
+    try {
+      const response = await login(values);
+      console.log("login response: ", response);
 
-    if (response) {
-      console.log("login response : ", response);
-      const { user, ...rest } = response;
-      dispatch(setCredentials({ user: user, token: rest }));
-      router.push("/restaurant");
+      if (response && response.data.statusCode == 200) {
+        const { user, ...rest } = response;
+        dispatch(setCredentials({ user: user, token: rest }));
+        router.push("/restaurant");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
-
   return (
     <>
       <RestaurantLayout>
