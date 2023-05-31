@@ -10,7 +10,6 @@ import {
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useState } from 'react';
 // layouts
 import RestaurantLayout from '@/layouts/restaurant';
 // components
@@ -67,16 +66,10 @@ const validationSchema = Yup.object({
 });
 
 const Manage = () => {
-  const [imageUrls, setImageUrls] = useState([]);
-
-  const addData = (newData) => {
-    setImageUrls([...imageUrls, newData]);
-  };
-
-  const [createRestaurant] = useCreateRestaurantMutation();
   const { data: tagOptions } = useGetTagsQuery();
   const { data: cuisineOptions } = useGetCuisinesQuery();
   const { data: typeOptions } = useGetTypesQuery();
+  const [createRestaurant] = useCreateRestaurantMutation();
 
   const uploadOnCloudinary = async (files) => {
     const listSecureUrl = await files?.map(async (file) => {
