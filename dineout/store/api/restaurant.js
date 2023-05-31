@@ -11,7 +11,21 @@ export const restaurantApi = baseApi.injectEndpoints({
                 body: credentials,
             }),
         }),
+        getTags: builder.query({
+            query: () => '/api/mod/tags',
+        }),
+        getCuisines: builder.query({
+            query: () => '/api/mod/cuisines',
+        }),
+        getTypes: builder.query({
+            query: () => '/api/mod/types',
+        }),
     }),
 });
 
-export const { useCreateRestaurantMutation } = restaurantApi;
+export const {
+    useCreateRestaurantMutation,
+    useGetTagsQuery,
+    useGetCuisinesQuery,
+    useGetTypesQuery
+} = restaurantApi;

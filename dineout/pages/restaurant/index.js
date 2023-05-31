@@ -3,9 +3,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
 import { Grid } from "@mui/material";
-import Typography from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
+import Summery from "@/sections/restaurant/home/Summery";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -22,15 +23,13 @@ const Restaurant = () => {
         <MiniDrawer />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <h1>Home</h1>
-          <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <h2>Hi</h2>
-            </Grid>
-            <Grid h1 xs={4}>
-              <h1>xs=4</h1>
-            </Grid>
-          </Grid>
+          <Box sx={{mb: 4}}>
+            <Typography variant="h5" sx={{fontWeight:"bold"}}>Hello, Manager</Typography>
+          </Box>
+
+          <Box>
+            <Summery />
+          </Box>
         </Box>
       </Box>
     </div>
