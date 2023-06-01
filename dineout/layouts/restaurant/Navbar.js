@@ -51,7 +51,7 @@ const Navbar = () => {
             <Link href="/" legacyBehavior>
               <p className={classes.p}>Home</p>
             </Link>
-            <Link href="/restaurant/add" legacyBehavior>
+            <Link href="/restaurant/manage" legacyBehavior>
               <p className={classes.p}>Book a Table</p>
             </Link>{" "}
             <Link href="/restaurants" legacyBehavior>

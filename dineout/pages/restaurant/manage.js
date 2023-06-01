@@ -6,40 +6,40 @@ import {
   TextField,
   Grid,
   Button,
-} from '@mui/material';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
+} from "@mui/material";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 // layouts
-import RestaurantLayout from '@/layouts/restaurant';
+import RestaurantLayout from "@/layouts/restaurant";
 // components
-import Select from '@/components/Select';
-import Dropzone from '@/components/Dropzone';
+import Select from "@/components/Select";
+import Dropzone from "@/components/Dropzone";
 // store
 import {
   useCreateRestaurantMutation,
   useGetTagsQuery,
   useGetCuisinesQuery,
   useGetTypesQuery,
-} from '@/store/api/restaurant';
-
+} from "@/store/api/restaurant";
+import { useState } from "react";
 
 // initial values
 const initialValues = {
-  name: '',
-  locality: '',
-  address: '',
-  city: '',
-  avgCost: '',
-  coordinates: '',
-  phoneNumber: '',
-  description: '',
+  name: "",
+  locality: "",
+  address: "",
+  city: "",
+  avgCost: "",
+  coordinates: "",
+  phoneNumber: "",
+  description: "",
   tags: [],
   cuisines: [],
   types: [],
-  openingTime: '',
-  closingTime: '',
-  unitCharge: '',
+  openingTime: "",
+  closingTime: "",
+  unitCharge: "",
   restaurantImages: [],
   menuImages: [],
 };
@@ -49,20 +49,20 @@ const validationSchema = Yup.object({
   name: Yup.string()
     .min(2)
     .max(25)
-    .required('Please enter your restaurant name'),
-  locality: Yup.string().min(2).max(50).required('Please enter your locality'),
-  address: Yup.string().min(2).max(70).required('Please enter your address'),
-  city: Yup.string().min(2).max(15).required('Please enter your city'),
-  avgCost: Yup.number().required('Enter average cost').positive().integer(),
-  coordinates: Yup.string().min(2).required('Enter Your location link'),
+    .required("Please enter your restaurant name"),
+  locality: Yup.string().min(2).max(50).required("Please enter your locality"),
+  address: Yup.string().min(2).max(70).required("Please enter your address"),
+  city: Yup.string().min(2).max(15).required("Please enter your city"),
+  avgCost: Yup.number().required("Enter average cost").positive().integer(),
+  coordinates: Yup.string().min(2).required("Enter Your location link"),
   phoneNumber: Yup.string()
-    .matches(/^\d{10,}$/, 'Invalid phone number')
-    .required('Enter your phone number'),
+    .matches(/^\d{10,}$/, "Invalid phone number")
+    .required("Enter your phone number"),
   description: Yup.string()
     .min(2)
     .max(100)
-    .required('Please enter description'),
-  unitCharge: Yup.number().required('Enter charges').positive().integer(),
+    .required("Please enter description"),
+  unitCharge: Yup.number().required("Enter charges").positive().integer(),
 });
 
 const Manage = () => {
@@ -72,50 +72,37 @@ const Manage = () => {
   const [createRestaurant] = useCreateRestaurantMutation();
 
   const uploadOnCloudinary = async (files) => {
-    const listSecureUrl = await files?.map(async (file) => {
+    let uploadedLinks = [];
+    const listSecureUrl = files?.map(async (imgFile) => {
       const formData = new FormData();
+      const { file } = imgFile;
       formData.append("file", file);
-      formData.append(
-        "tags",
-        "codeinfuse, medium, gist"
-      );
-      formData.append("upload_preset", "dineout");
+      formData.append("upload_preset", "resImages");
       formData.append("api_key", "257987867351426");
-      formData.append(
-        "timestamp",
-        (Date.now() / 1000) | 0
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dhe9hmzbn/image/upload",
+        formData,
+        { headers: { "X-Requested-With": "XMLHttpRequest" } }
       );
 
-      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dhe9hmzbn/image/upload", 
-        formData,
-        { headers: {"X-Requested-With": "XMLHttpRequest"}}
-        );
-
-        const secure_url = response?.data?.secure_url;
-
-        return secure_url;
+      const secure_url = response?.data?.secure_url;
+      uploadedLinks.push(secure_url);
+      return secure_url;
     });
 
-    return listSecureUrl;
-  }
+    await Promise.all(listSecureUrl); // Wait for all the image uploads to complete
+
+    return uploadedLinks;
+  };
 
   const onSubmit = async (values) => {
-    /**
-     *  Note:
-     * 
-     *  1. It gives an error while uploading images to the cloudinary :Unsupported source URL: [object Object]
-     *  2. It gives an error while creating an new restaurant using createRestaurant mutation: Unsupported media type \"application/json\" in request.
-     * 
-     *  As soon as you fix these errors then your add restaurant functionality will be completed.
-     * 
-     */
-
-
     // upload images to cloudinary
     const uploaded_images = await uploadOnCloudinary(values?.restaurantImages);
+    console.log(uploaded_images, "images");
     const uploaded_menuImages = await uploadOnCloudinary(values?.menuImages);
+    console.log(uploaded_menuImages, "menu");
 
     // formate fields accordingly
     const formatedValues = {
@@ -129,9 +116,9 @@ const Manage = () => {
       avg_cost: values.avgCost,
       opening_time: values.openingTime,
       closing_time: values.closingTime,
-      tag_list: values.tags.map(tag => tag.id),
-      types_list: values.types.map(type => type.id),
-      cuisines_list: values.cuisines.map(cuisine => cuisine.id),
+      tag_list: values.tags.map((tag) => tag.id),
+      types_list: values.types.map((type) => type.id),
+      cuisines_list: values.cuisines.map((cuisine) => cuisine.id),
       unit_charge: values.unitCharge,
       manager: 2,
       uploaded_images,
@@ -250,7 +237,6 @@ const Manage = () => {
                           value={values.tags}
                           onChange={(values) => setFieldValue("tags", values)}
                           placeholder="Tags"
-
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -311,7 +297,7 @@ const Manage = () => {
                             handleDrop={(acceptedFiles) => {
                               const newFiles = acceptedFiles.map((file) => ({
                                 file,
-                                preview: URL.createObjectURL(file),
+                                // preview: URL.createObjectURL(file),
                               }));
                               setFieldValue("restaurantImages", [
                                 ...values.restaurantImages,
@@ -332,7 +318,7 @@ const Manage = () => {
                             handleDrop={(acceptedFiles) => {
                               const newFiles = acceptedFiles.map((file) => ({
                                 file,
-                                preview: URL.createObjectURL(file),
+                                // preview: URL.createObjectURL(file),
                               }));
                               setFieldValue("menuImages", [
                                 ...values.menuImages,
