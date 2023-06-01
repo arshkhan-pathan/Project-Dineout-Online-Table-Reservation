@@ -25,10 +25,12 @@ import {
   useGetCuisinesQuery,
   useGetTypesQuery,
   useGetRestaurantDataQuery,
+  useGetRestaurantByIdQuery,
 } from "@/store/api/restaurant";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -40,7 +42,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 // initial values
-const initialValues = {
+const initialRestaurantValues = {
   name: "",
   locality: "",
   address: "",
@@ -81,12 +83,41 @@ const validationSchema = Yup.object({
 });
 
 const Manage = () => {
+  const [initialValues, setInitialValues] = useState(initialRestaurantValues)
   const router = useRouter();
   const user = useSelector(selectCurrentUser);
   const { data: tagOptions } = useGetTagsQuery();
   const { data: cuisineOptions } = useGetCuisinesQuery();
   const { data: typeOptions } = useGetTypesQuery();
   const [createRestaurant] = useCreateRestaurantMutation();
+  const { data: restaurantData } = useGetRestaurantByIdQuery(39);
+
+  useEffect(() => {
+    if(restaurantData){
+      const formattedRestaurantData = {
+        name: restaurantData.name,
+        locality: restaurantData.locality,
+        address: restaurantData.address,
+        city: restaurantData.city,
+        avgCost: restaurantData.avg_cost,
+        coordinates: restaurantData.coordinates,
+        phoneNumber: restaurantData.phone_number,
+        description: restaurantData.description,
+        tags: restaurantData.tags,
+        cuisines: restaurantData.cuisines,
+        types: restaurantData.types,
+        openingTime: restaurantData.opening_time,
+        closingTime: restaurantData.closing_time,
+        unitCharge: restaurantData.unit_charge,
+        restaurantImages: restaurantData.uploaded_images,
+        menuImages: restaurantData.uploaded_imagesuploaded_menuImages,
+      };
+
+      setInitialValues(formattedRestaurantData);
+    }
+  }, [restaurantData]);
+
+  console.log({initialValues})
 
   const uploadOnCloudinary = async (files) => {
     let uploadedLinks = [];
@@ -172,6 +203,7 @@ const Manage = () => {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
+                    enableReinitialize
                   >
                     {({ values, setFieldValue }) => (
                       <Form>
@@ -181,6 +213,7 @@ const Manage = () => {
                               name="name"
                               label="Name"
                               size="small"
+                              value={values.name}
                               as={TextField}
                               helperText={<ErrorMessage name="name" />}
                               fullWidth

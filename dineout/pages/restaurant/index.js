@@ -20,7 +20,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 const Restaurant = () => {
   const user = useSelector(selectCurrentUser);
-  const { data } = useGetRestaurantEarningsQuery(39);
+  const {data}= useGetRestaurantEarningsQuery(39, {
+    pollingInterval: 20000,
+  });
+
 
   console.log(user);
 
@@ -33,7 +36,7 @@ const Restaurant = () => {
           <DrawerHeader />
           <Box sx={{ mb: 4 }}>
             <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-              Hello {user.name}
+              Hello {user?.name}
             </Typography>
           </Box>
 

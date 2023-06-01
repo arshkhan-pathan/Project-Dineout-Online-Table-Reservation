@@ -47,7 +47,7 @@ const Dropzone = ({ allFiles, handleDrop, handleDelete, title }) => {
           {files &&
             files?.map((file, index) => (
               <FileRow key={index}>
-                <FileName>{file.file.name}</FileName>
+                <FileName>{file?.file?.name}</FileName>
                 <IconButton
                   color="secondary"
                   onClick={() => handleDelete(index)}
