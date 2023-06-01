@@ -4,6 +4,9 @@ import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { selectCurrentUser } from "@/store/slices/auth";
+import { useSelector, useEffect } from "react-redux";
+import { useGetRestaurantEarningsQuery } from "@/store/api/restaurant";
 
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
 import Summary from "@/sections/restaurant/home/Summary";
@@ -16,6 +19,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 const Restaurant = () => {
+  const user = useSelector(selectCurrentUser);
+  const { data } = useGetRestaurantEarningsQuery(39);
+
+  console.log(user);
+
   return (
     <div>
       <PrimarySearchAppBar />
@@ -25,12 +33,12 @@ const Restaurant = () => {
           <DrawerHeader />
           <Box sx={{ mb: 4 }}>
             <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-              Hello, Manager
+              Hello {user.name}
             </Typography>
           </Box>
 
           <Box>
-            <Summary />
+            <Summary data={data} />
           </Box>
         </Box>
       </Box>

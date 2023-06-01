@@ -10,7 +10,7 @@ import {
   Legend,
 } from "recharts";
 
-const data = [
+const data1 = [
   {
     name: "dat",
     uv: 4000,
@@ -55,29 +55,29 @@ const data = [
   },
 ];
 
-const Summary = () => {
+const Summary = ({ data }) => {
   return (
     <>
       {" "}
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget />
+            <Widget title="Todays Earning" amount={data.today} />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget />
+            <Widget title="Week Earning" amount={data.last_week} />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget />
+            <Widget title="Todays Booking" amount="2" />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget />
+            <Widget title="Upcoming Bookings" amount="20" />
           </Grid>{" "}
           <Grid item xs={6}>
             <LineChart
               width={500}
               height={300}
-              data={data}
+              data={data1}
               margin={{
                 top: 5,
                 right: 30,
@@ -103,7 +103,7 @@ const Summary = () => {
             <LineChart
               width={500}
               height={300}
-              data={data}
+              data={data1}
               margin={{
                 top: 5,
                 right: 30,

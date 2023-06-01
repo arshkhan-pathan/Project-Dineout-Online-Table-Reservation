@@ -12,14 +12,14 @@ export const authApi = baseApi.injectEndpoints({
     }),
     restaurantRegister: builder.mutation({
       query: (credentials) => ({
-        url: "/api/restaurant/register/",
+        url: "/api/managers/register/",
         method: "POST",
         body: { ...credentials },
       }),
     }),
     restaurantLogin: builder.mutation({
       query: (credentials) => ({
-        url: "/api/restaurant/login/",
+        url: "/api/managers/login/",
         method: "POST",
         body: { ...credentials },
       }),

@@ -1,5 +1,5 @@
 // @mui
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { Card, Typography } from "@mui/material";
 // utils
 // import { fShortenNumber } from '../../../utils/formatNumber';
@@ -19,7 +19,7 @@ const StyledIcon = styled("div")(({ theme }) => ({
   marginBottom: theme.spacing(3),
 }));
 
-export default function AppWidgetSummary({ sx, ...other }) {
+export default function AppWidgetSummary({ sx, title, amount }) {
   return (
     <Card
       sx={{
@@ -30,16 +30,15 @@ export default function AppWidgetSummary({ sx, ...other }) {
         bgcolor: "#ffe6e6",
         ...sx,
       }}
-      {...other}
     >
       <StyledIcon sx={{ fontSize: "20px" }}>Icon</StyledIcon>
 
       <Typography variant="h3" gutterBottom>
-        1200K
+        {amount}
       </Typography>
 
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Today Earnings
+        {title}
       </Typography>
     </Card>
   );

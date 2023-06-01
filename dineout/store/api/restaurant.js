@@ -19,6 +19,12 @@ export const restaurantApi = baseApi.injectEndpoints({
     getTypes: builder.query({
       query: () => "/api/mod/types",
     }),
+    getRestaurantData: builder.query({
+      query: (id) => `api/restaurant/restaurants/${id}/`,
+    }),
+    getRestaurantEarnings: builder.query({
+      query: (id) => `api/restaurant/restaurants/${id}/earnings`,
+    }),
   }),
 });
 
@@ -27,4 +33,6 @@ export const {
   useGetTagsQuery,
   useGetCuisinesQuery,
   useGetTypesQuery,
+  useGetRestaurantDataQuery,
+  useGetRestaurantEarningsQuery,
 } = restaurantApi;

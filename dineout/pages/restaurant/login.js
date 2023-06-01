@@ -34,7 +34,7 @@ const Login = () => {
       console.log("login response: ", response);
 
       if (response && response.data.statusCode == 200) {
-        const { user, ...rest } = response;
+        const { user, ...rest } = response.data;
         dispatch(setCredentials({ user: user, token: rest }));
         router.push("/restaurant");
       }

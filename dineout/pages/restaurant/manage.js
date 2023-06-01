@@ -8,10 +8,13 @@ import {
   Button,
 } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { styled, useTheme } from "@mui/material/styles";
 import * as Yup from "yup";
 import axios from "axios";
 // layouts
-import RestaurantLayout from "@/layouts/restaurant";
+import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
+import MiniDrawer from "@/components/Dashboard/Drawer";
+
 // components
 import Select from "@/components/Select";
 import Dropzone from "@/components/Dropzone";
@@ -21,8 +24,20 @@ import {
   useGetTagsQuery,
   useGetCuisinesQuery,
   useGetTypesQuery,
+  useGetRestaurantDataQuery,
 } from "@/store/api/restaurant";
-import { useState } from "react";
+import { selectCurrentUser } from "@/store/slices/auth";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 
 // initial values
 const initialValues = {
@@ -66,6 +81,8 @@ const validationSchema = Yup.object({
 });
 
 const Manage = () => {
+  const router = useRouter();
+  const user = useSelector(selectCurrentUser);
   const { data: tagOptions } = useGetTagsQuery();
   const { data: cuisineOptions } = useGetCuisinesQuery();
   const { data: typeOptions } = useGetTypesQuery();
@@ -120,237 +137,257 @@ const Manage = () => {
       types_list: values.types.map((type) => type.id),
       cuisines_list: values.cuisines.map((cuisine) => cuisine.id),
       unit_charge: values.unitCharge,
-      manager: 2,
+      manager: user.id,
       uploaded_images,
       uploaded_menuImages,
     };
 
     // create an new restaurant
-    createRestaurant(formatedValues);
+    const response = await createRestaurant(formatedValues);
+    console.log();
+    if (response.data.status == 201) {
+      router.push("/restaurant");
+    }
   };
 
   return (
-    <RestaurantLayout>
-      <Box sx={{ my: 5 }}>
-        <Container maxWidth="xl">
-          <Box>
-            <Box>
-              <Typography variant="h5" gutterBottom>
-                Add Restaurant
-              </Typography>
-            </Box>
+    <>
+      {" "}
+      <PrimarySearchAppBar />
+      <Box sx={{ display: "flex" }}>
+        <MiniDrawer />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <Box sx={{ my: 5 }}>
+            <Container maxWidth="xl">
+              <Box>
+                <Box>
+                  <Typography variant="h5" gutterBottom>
+                    Add / Manage Restaurant
+                  </Typography>
+                </Box>
 
-            <Box>
-              <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-              >
-                {({ values, setFieldValue }) => (
-                  <Form>
-                    <Grid container rowSpacing={3} columnSpacing={3}>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="name"
-                          label="Name"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="name" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="locality"
-                          label="Locality"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="locality" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="address"
-                          label="Address"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="address" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="city"
-                          label="City"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="city" />}
-                          fullWidth
-                        />
-                      </Grid>
+                <Box>
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                  >
+                    {({ values, setFieldValue }) => (
+                      <Form>
+                        <Grid container rowSpacing={3} columnSpacing={3}>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="name"
+                              label="Name"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="name" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="locality"
+                              label="Locality"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="locality" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="address"
+                              label="Address"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="address" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="city"
+                              label="City"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="city" />}
+                              fullWidth
+                            />
+                          </Grid>
 
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="avgCost"
-                          label="Average Cost"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="avgCost" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="coordinates"
-                          label="Coordinates"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="coordinates" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="phoneNumber"
-                          label="Phone Number"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="phoneNumber" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="description"
-                          label="Description"
-                          size="small"
-                          as={TextField}
-                          helperText={<ErrorMessage name="description" />}
-                          fullWidth
-                        />
-                      </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="avgCost"
+                              label="Average Cost"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="avgCost" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="coordinates"
+                              label="Coordinates"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="coordinates" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="phoneNumber"
+                              label="Phone Number"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="phoneNumber" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="description"
+                              label="Description"
+                              size="small"
+                              as={TextField}
+                              helperText={<ErrorMessage name="description" />}
+                              fullWidth
+                            />
+                          </Grid>
 
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Select
-                          options={tagOptions}
-                          value={values.tags}
-                          onChange={(values) => setFieldValue("tags", values)}
-                          placeholder="Tags"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Select
-                          options={cuisineOptions}
-                          value={values.cuisines}
-                          onChange={(values) =>
-                            setFieldValue("cuisines", values)
-                          }
-                          placeholder="Cuisines"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Select
-                          options={typeOptions}
-                          value={values.types}
-                          onChange={(values) => setFieldValue("types", values)}
-                          placeholder="Types"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="unitCharge"
-                          label="Unit Charge"
-                          size="small"
-                          type="number"
-                          as={TextField}
-                          helperText={<ErrorMessage name="unitCharge" />}
-                          fullWidth
-                        />
-                      </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Select
+                              options={tagOptions}
+                              value={values.tags}
+                              onChange={(values) =>
+                                setFieldValue("tags", values)
+                              }
+                              placeholder="Tags"
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Select
+                              options={cuisineOptions}
+                              value={values.cuisines}
+                              onChange={(values) =>
+                                setFieldValue("cuisines", values)
+                              }
+                              placeholder="Cuisines"
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Select
+                              options={typeOptions}
+                              value={values.types}
+                              onChange={(values) =>
+                                setFieldValue("types", values)
+                              }
+                              placeholder="Types"
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="unitCharge"
+                              label="Unit Charge"
+                              size="small"
+                              type="number"
+                              as={TextField}
+                              helperText={<ErrorMessage name="unitCharge" />}
+                              fullWidth
+                            />
+                          </Grid>
 
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="openingTime"
-                          size="small"
-                          type="time"
-                          as={TextField}
-                          helperText={<ErrorMessage name="openingTime" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Field
-                          name="closingTime"
-                          size="small"
-                          type="time"
-                          as={TextField}
-                          helperText={<ErrorMessage name="closingTime" />}
-                          fullWidth
-                        />
-                      </Grid>
-                      <Grid container item xs={12} spacing={3}>
-                        <Grid item xs={12} sm={6}>
-                          <Dropzone
-                            title="restaurant"
-                            allFiles={values.restaurantImages}
-                            handleDrop={(acceptedFiles) => {
-                              const newFiles = acceptedFiles.map((file) => ({
-                                file,
-                                // preview: URL.createObjectURL(file),
-                              }));
-                              setFieldValue("restaurantImages", [
-                                ...values.restaurantImages,
-                                ...newFiles,
-                              ]);
-                            }}
-                            handleDelete={(index) => {
-                              const newFiles = [...values.restaurantImages];
-                              newFiles.splice(index, 1);
-                              setFieldValue("restaurantImages", newFiles);
-                            }}
-                          />
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="openingTime"
+                              size="small"
+                              type="time"
+                              as={TextField}
+                              helperText={<ErrorMessage name="openingTime" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <Field
+                              name="closingTime"
+                              size="small"
+                              type="time"
+                              as={TextField}
+                              helperText={<ErrorMessage name="closingTime" />}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid container item xs={12} spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                              <Dropzone
+                                title="restaurant"
+                                allFiles={values.restaurantImages}
+                                handleDrop={(acceptedFiles) => {
+                                  const newFiles = acceptedFiles.map(
+                                    (file) => ({
+                                      file,
+                                      // preview: URL.createObjectURL(file),
+                                    })
+                                  );
+                                  setFieldValue("restaurantImages", [
+                                    ...values.restaurantImages,
+                                    ...newFiles,
+                                  ]);
+                                }}
+                                handleDelete={(index) => {
+                                  const newFiles = [...values.restaurantImages];
+                                  newFiles.splice(index, 1);
+                                  setFieldValue("restaurantImages", newFiles);
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={6} lg={6}>
+                              <Dropzone
+                                title="menu"
+                                allFiles={values.menuImages}
+                                handleDrop={(acceptedFiles) => {
+                                  const newFiles = acceptedFiles.map(
+                                    (file) => ({
+                                      file,
+                                      // preview: URL.createObjectURL(file),
+                                    })
+                                  );
+                                  setFieldValue("menuImages", [
+                                    ...values.menuImages,
+                                    ...newFiles,
+                                  ]);
+                                }}
+                                handleDelete={(index) => {
+                                  const newFiles = [...values.menuImages];
+                                  newFiles.splice(index, 1);
+                                  setFieldValue("menuImages", newFiles);
+                                }}
+                              />
+                            </Grid>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Button
+                              type="submit"
+                              variant="contained"
+                              color="primary"
+                            >
+                              Add
+                            </Button>
+                          </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={6}>
-                          <Dropzone
-                            title="menu"
-                            allFiles={values.menuImages}
-                            handleDrop={(acceptedFiles) => {
-                              const newFiles = acceptedFiles.map((file) => ({
-                                file,
-                                // preview: URL.createObjectURL(file),
-                              }));
-                              setFieldValue("menuImages", [
-                                ...values.menuImages,
-                                ...newFiles,
-                              ]);
-                            }}
-                            handleDelete={(index) => {
-                              const newFiles = [...values.menuImages];
-                              newFiles.splice(index, 1);
-                              setFieldValue("menuImages", newFiles);
-                            }}
-                          />
-                        </Grid>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                        >
-                          Add
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </Form>
-                )}
-              </Formik>
-            </Box>
+                      </Form>
+                    )}
+                  </Formik>
+                </Box>
+              </Box>
+            </Container>
           </Box>
-        </Container>
+        </Box>
       </Box>
-    </RestaurantLayout>
+    </>
   );
 };
 
