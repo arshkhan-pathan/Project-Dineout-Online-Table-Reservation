@@ -5,6 +5,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
 
 import Typography from "@mui/material/Typography";
+import BookingSummary from "@/sections/restaurant/home/BookingSummary";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -19,10 +20,17 @@ const Bookings = () => {
       <PrimarySearchAppBar />
       <Box sx={{ display: "flex" }}>
         <MiniDrawer />
-
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <h1>Bookings</h1>
+          <Box sx={{ mb: 4 }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+              Bookings
+            </Typography>
+          </Box>
+
+          <Box>
+            <BookingSummary />
+          </Box>
         </Box>
       </Box>
     </div>

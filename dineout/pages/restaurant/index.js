@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
-import Summery from "@/sections/restaurant/home/Summery";
+import Summary from "@/sections/restaurant/home/Summary";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -23,12 +23,14 @@ const Restaurant = () => {
         <MiniDrawer />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Box sx={{mb: 4}}>
-            <Typography variant="h5" sx={{fontWeight:"bold"}}>Hello, Manager</Typography>
+          <Box sx={{ mb: 4 }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+              Hello, Manager
+            </Typography>
           </Box>
 
           <Box>
-            <Summery />
+            <Summary />
           </Box>
         </Box>
       </Box>

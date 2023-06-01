@@ -5,6 +5,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
 
 import Typography from "@mui/material/Typography";
+import TablesSummary from "@/sections/restaurant/TablesSummary";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -16,15 +17,24 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const Tables = () => {
   return (
     <div>
-      <PrimarySearchAppBar />
-      <Box sx={{ display: "flex" }}>
-        <MiniDrawer />
+      <div>
+        <PrimarySearchAppBar />
+        <Box sx={{ display: "flex" }}>
+          <MiniDrawer />
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <DrawerHeader />
+            <Box sx={{ mb: 4 }}>
+              <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                Tables
+              </Typography>
+            </Box>
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-          <h1>Tables</h1>
+            <Box>
+              <TablesSummary></TablesSummary>
+            </Box>
+          </Box>
         </Box>
-      </Box>
+      </div>
     </div>
   );
 };
