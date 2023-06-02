@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Card,
   CardHeader,
@@ -8,12 +9,19 @@ import {
 } from "@mui/material";
 import Rating from "@mui/lab/Rating";
 
-const Review = ({ reviewerName, reviewerAvatar, rating, reviewText }) => {
+const Review = ({
+  reviewerName,
+  reviewerAvatar,
+  rating,
+  reviewText,
+  reviewDate,
+}) => {
   return (
     <Card>
       <CardHeader
         avatar={<Avatar src={reviewerAvatar} />}
         title={reviewerName}
+        subheader={reviewDate} // Replace 'reviewDate' with the actual variable containing the date
       />
       <Typography variant="body1" gutterBottom>
         {reviewText}
@@ -23,49 +31,28 @@ const Review = ({ reviewerName, reviewerAvatar, rating, reviewText }) => {
   );
 };
 
-const ReviewSummmary = ({ currentPage, totalPages, onPageChange }) => {
-  const generateDummyReviews = (count) => {
-    const reviews = [];
-
-    for (let i = 1; i <= count; i++) {
-      const review = {
-        id: i,
-        reviewerName: `Reviewer ${i}`,
-        reviewerAvatar: `https://example.com/avatar-${i}.jpg`,
-        rating: Math.floor(Math.random() * 5) + 1,
-        reviewText: `This is review ${i}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-      };
-
-      reviews.push(review);
-    }
-
-    return reviews;
-  };
-
-  // Usage
-  const reviews = generateDummyReviews(20);
+const ReviewSummmary = ({
+  reviews,
+  currentPage,
+  totalPages,
+  onPageChange,
+  count,
+}) => {
+  console.log(reviews);
   return (
     <div>
-      <Typography variant="h6" gutterBottom>
-        Sort by Ratings:
-      </Typography>
-      {/* Add sorting header here */}
-      <Pagination
-        count={totalPages}
-        page={currentPage}
-        onChange={onPageChange}
-      />
-      {reviews.map((review) => (
+      {reviews?.map((review) => (
         <Review
           key={review.id}
-          reviewerName={review.reviewerName}
-          reviewerAvatar={review.reviewerAvatar}
+          reviewerName={review.customer_name}
+          reviewerAvatar={"xyz.com"}
           rating={review.rating}
-          reviewText={review.reviewText}
+          reviewText={review.comment}
+          reviewDate={review.created_at}
         />
       ))}
       <Pagination
-        count={totalPages}
+        count={Math.ceil(count / 5)}
         page={currentPage}
         onChange={onPageChange}
       />

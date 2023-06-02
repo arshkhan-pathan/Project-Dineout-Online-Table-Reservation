@@ -174,7 +174,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{backgroundColor: '#f21600b8'}}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#f21600b8" }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -191,7 +191,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            dineout
           </Typography>
           <Search>
             <SearchIconWrapper>
