@@ -83,17 +83,17 @@ const validationSchema = Yup.object({
 });
 
 const Manage = () => {
-  const [initialValues, setInitialValues] = useState(initialRestaurantValues)
+  const [initialValues, setInitialValues] = useState(initialRestaurantValues);
   const router = useRouter();
   const user = useSelector(selectCurrentUser);
   const { data: tagOptions } = useGetTagsQuery();
   const { data: cuisineOptions } = useGetCuisinesQuery();
   const { data: typeOptions } = useGetTypesQuery();
   const [createRestaurant] = useCreateRestaurantMutation();
-  const { data: restaurantData } = useGetRestaurantByIdQuery(39);
+  const { data: restaurantData } = useGetRestaurantByIdQuery(user?.id);
 
   useEffect(() => {
-    if(restaurantData){
+    if (restaurantData) {
       const formattedRestaurantData = {
         name: restaurantData.name,
         locality: restaurantData.locality,
@@ -117,7 +117,7 @@ const Manage = () => {
     }
   }, [restaurantData]);
 
-  console.log({initialValues})
+  console.log({ initialValues });
 
   const uploadOnCloudinary = async (files) => {
     let uploadedLinks = [];

@@ -5,7 +5,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
 
 import Typography from "@mui/material/Typography";
-import TablesSummary from "@/sections/restaurant/TablesSummary";
+import TablesSummary from "@/sections/restaurant/home/TablesSummary";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",

@@ -5,6 +5,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
 
 import Typography from "@mui/material/Typography";
+import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -22,7 +23,7 @@ const Reviews = () => {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <h1>Reviews</h1>
+          <ReviewSummmary />
         </Box>
       </Box>
     </div>
