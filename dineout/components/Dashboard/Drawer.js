@@ -153,32 +153,6 @@ export default function MiniDrawer() {
             disablePadding
             sx={{ display: "block" }}
             onClick={() => {
-              router.push("/restaurant/earnings");
-            }}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Earnings" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
               router.push("/restaurant/dyanamicpricing");
             }}
           >
@@ -256,7 +230,6 @@ export default function MiniDrawer() {
               <ListItemText primary="Reviews" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-
           {/* TEMT */}
           <ListItem
             disablePadding
