@@ -3,7 +3,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
-
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
 import Typography from "@mui/material/Typography";
 import Pricing from "@/sections/restaurant/home/Pricings";
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -14,7 +16,26 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
+
 const DyanamicPrice = () => {
+  const [data, setData] = useState();
+  const user = useSelector(selectCurrentUser);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/tables/all`
+        );
+
+        setData(response.data);
+      } catch (error) {
+        console.error("API Error:", error);
+      }
+    };
+
+    fetchData();
+  }, [user?.id]);
+  console.log(data);
   return (
     <div>
       <PrimarySearchAppBar />

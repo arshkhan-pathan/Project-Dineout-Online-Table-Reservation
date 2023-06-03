@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 const Summary = ({ data, stats, graph }) => {
-  console.log(graph);
+  console.log(data);
 
   return (
     <>
@@ -22,7 +22,7 @@ const Summary = ({ data, stats, graph }) => {
             <Widget title="Todays Earning" amount={data?.today} />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget title="Week Earning" amount={data?.last_week} />
+            <Widget title="Week Earning" amount={data?.last_week || 0} />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget title="Todays Booking" amount={stats?.today_bookings} />
