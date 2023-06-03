@@ -1,8 +1,8 @@
-import MiniDrawer from "@/components/Dashboard/Drawer";
+import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
-import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
+import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";

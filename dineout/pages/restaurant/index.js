@@ -1,4 +1,4 @@
-import MiniDrawer from "@/components/Dashboard/Drawer";
+import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import withAuth from "@/hooks/withAuth";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -11,7 +11,7 @@ import { useGetRestaurantEarningsQuery } from "@/store/api/restaurant";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
+import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import Summary from "@/sections/restaurant/home/Summary";
 
 const DrawerHeader = styled("div")(({ theme }) => ({

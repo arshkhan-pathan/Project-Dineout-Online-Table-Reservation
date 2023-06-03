@@ -12,8 +12,8 @@ import { styled, useTheme } from "@mui/material/styles";
 import * as Yup from "yup";
 import axios from "axios";
 // layouts
-import PrimarySearchAppBar from "@/components/Dashboard/Appbar";
-import MiniDrawer from "@/components/Dashboard/Drawer";
+import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
+import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 
 // components
 import Select from "@/components/Select";
