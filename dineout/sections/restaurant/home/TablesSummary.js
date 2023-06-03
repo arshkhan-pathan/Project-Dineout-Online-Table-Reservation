@@ -43,6 +43,13 @@ const columns = [
     width: 110,
     editable: false,
   },
+  {
+    field: "is_occupied",
+    headerName: "Occupied",
+    type: "text",
+    width: 110,
+    editable: false,
+  },
 ];
 
 const TablesSummary = () => {
@@ -66,7 +73,7 @@ const TablesSummary = () => {
   }, [user?.id]);
   console.log(data);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, action) => {
     // console.log(values);
 
     const tableData = {
@@ -88,6 +95,7 @@ const TablesSummary = () => {
       setData(response.data);
     } catch (error) {
       console.error(error);
+      action.resetForm();
     }
   };
   return (
@@ -95,7 +103,7 @@ const TablesSummary = () => {
       {" "}
       <Box>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={12} lg={12}>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -135,7 +143,7 @@ const TablesSummary = () => {
               )}
             </Formik>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={6} lg={6}>
             <DataGrid
               rows={data || []}
               columns={columns}
