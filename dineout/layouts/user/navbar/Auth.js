@@ -10,6 +10,7 @@ import { useLoginMutation } from "@/store/api/auth";
 import Login from "./login";
 import Register from "./Register";
 import Form from "./Form";
+//Snacks
 
 const Auth = ({ onClose }) => {
   const [authPage, setAuthPage] = useState("auth");
@@ -69,6 +70,11 @@ const Auth = ({ onClose }) => {
       })
       .then(function (response) {
         console.log(response);
+        if (response.status == 201) {
+          console.log("success");
+
+          onClose();
+        }
       })
       .catch(function (error) {
         console.log(error);

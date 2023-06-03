@@ -5,6 +5,9 @@
   - sort tag search bookings , reviews
   - add image fields in Restaurant add , multiple select
   - Protect routes with roles
+  - Refine Manager code
+  - add put method
+  - delete render method
 
 - ## Frontend
 
