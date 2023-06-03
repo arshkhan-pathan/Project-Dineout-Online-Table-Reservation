@@ -6,20 +6,21 @@ import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // components
-import Select from "@/components/Select";
 import { useCreateTableMutation } from "@/store/api/restaurant";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 // store
 
 const initialValues = {
-  tableNo: "",
+  table_number: "",
   capacity: "",
 };
 
 const validationSchema = Yup.object().shape({
-  tableNo: Yup.string().required("Table number is required"),
+  table_number: Yup.string().required("Table number is required"),
   capacity: Yup.number()
     .required("Capacity is required")
     .positive("Capacity must be a positive number")
@@ -29,7 +30,7 @@ const validationSchema = Yup.object().shape({
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "tableNo",
+    field: "table_number",
     headerName: "Table Number",
     width: 150,
     editable: false,
@@ -44,26 +45,50 @@ const columns = [
   },
 ];
 
-const rows = [
-  { id: 1, tableNo: "123", capacity: 24 },
-  { id: 2, tableNo: "123", capacity: 24 },
-  { id: 3, tableNo: "123", capacity: 24 },
-  { id: 4, tableNo: "123", capacity: 24 },
-  { id: 5, tableNo: "123", capacity: 25 },
-  { id: 6, tableNo: "123", capacity: 24 },
-  { id: 7, tableNo: "123", capacity: 24 },
-  { id: 8, tableNo: "123", capacity: 24 },
-  { id: 9, tableNo: "123", capacity: 24 },
-];
-
 const TablesSummary = () => {
+  const [data, setData] = useState();
   const user = useSelector(selectCurrentUser);
-  console.log(user);
   const [createTable] = useCreateTableMutation();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/tables/all`
+        );
+
+        setData(response.data);
+      } catch (error) {
+        console.error("API Error:", error);
+      }
+    };
+
+    fetchData();
+  }, [user?.id]);
+  console.log(data);
+
   const onSubmit = async (values) => {
-    console.log(values);
-    console.log(user, "in");
-    const data = await createTable(4, values);
+    // console.log(values);
+
+    const tableData = {
+      table_number: values.table_number,
+      capacity: values.capacity,
+    };
+    console.log(tableData);
+    // const data = await createTable(4, tableData);
+
+    try {
+      await axios.post(
+        `http://localhost:8000/api/restaurant/restaurants/${user.id}/tables/`,
+        tableData
+      );
+      // After successful submission, fetch the updated table data
+      const response = await axios.get(
+        `http://localhost:8000/api/restaurant/restaurants/${user?.id}/tables/all`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -81,11 +106,11 @@ const TablesSummary = () => {
                   <Grid container rowSpacing={3} columnSpacing={3}>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
-                        name="tableNo"
+                        name="table_number"
                         label="Table Number"
                         size="small"
                         as={TextField}
-                        helperText={<ErrorMessage name="tableNo" />}
+                        helperText={<ErrorMessage name="table_capacity" />}
                         fullWidth
                       />
                     </Grid>
@@ -112,7 +137,7 @@ const TablesSummary = () => {
           </Grid>
           <Grid item xs={4}>
             <DataGrid
-              rows={rows}
+              rows={data || []}
               columns={columns}
               initialState={{
                 pagination: {

@@ -29,7 +29,7 @@ export const restaurantApi = baseApi.injectEndpoints({
       query: (id) => `api/restaurant/restaurants/${id}`,
     }),
     createTable: builder.mutation({
-      query: ({ restaurantId, tableData }) => ({
+      query: (restaurantId, tableData) => ({
         url: `/api/restaurant/restaurants/${restaurantId}/tables/`,
         method: "POST",
         body: tableData,

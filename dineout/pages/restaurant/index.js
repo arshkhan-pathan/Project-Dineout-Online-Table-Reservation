@@ -1,4 +1,5 @@
 import MiniDrawer from "@/components/Dashboard/Drawer";
+import withAuth from "@/hooks/withAuth";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
@@ -74,4 +75,4 @@ const Restaurant = ({}) => {
   );
 };
 
-export default Restaurant;
+export default withAuth(Restaurant, [2], "/restaurant/login");
