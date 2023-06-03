@@ -1,5 +1,5 @@
-import { Grid, Box } from "@mui/material";
-
+import { Grid, Box, Tooltip, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { DataGrid } from "@mui/x-data-grid";
 // packages
 import { TextField, Button } from "@mui/material";
@@ -26,6 +26,22 @@ const validationSchema = Yup.object().shape({
     .integer("Capacity must be an integer"),
 });
 
+
+export const DeleteTable = (params) => {
+  const onDeleteTable = () => {
+    // delete the table
+    console.log('delete table for id: ', params.row.id);
+  }
+
+  return (
+    <Tooltip title="Delete">
+      <IconButton onClick={onDeleteTable}>
+        <DeleteIcon sx={{ color: "red" }} />
+      </IconButton>
+    </Tooltip>
+  );
+}
+
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -48,6 +64,12 @@ const columns = [
     type: "text",
     width: 110,
     editable: false,
+  },
+  {
+    field: 'actions',
+    headerName: "Actions",
+    width: 150,
+    renderCell: DeleteTable
   },
 ];
 
@@ -110,7 +132,7 @@ const TablesSummary = () => {
             >
               {({ values, setFieldValue }) => (
                 <Form>
-                  <Grid container rowSpacing={3} columnSpacing={3}>
+                  <Grid container rowSpacing={2} columnSpacing={3}>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
                         name="table_number"
@@ -132,17 +154,17 @@ const TablesSummary = () => {
                         fullWidth
                       />
                     </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button type="submit" variant="contained" color="primary">
-                      Add
-                    </Button>
+                    <Grid item xs={12}>
+                      <Button type="submit" variant="contained" color="primary">
+                        Add
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Form>
               )}
             </Formik>
           </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Grid item xs={12} sm={6} md={6} lg={8}>
             <DataGrid
               rows={data || []}
               columns={columns}

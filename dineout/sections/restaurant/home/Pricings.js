@@ -1,6 +1,7 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, IconButton, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { DataGrid } from "@mui/x-data-grid";
 import * as Yup from "yup";
@@ -13,6 +14,21 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import Select from "@/components/Select";
 
 // store
+
+export const DeletePricing = (params) => {
+  const onDeletePricing = () => {
+    // delete the dynamic price
+    console.log('delete dynamic price for id: ',params.row.id);
+  }
+
+  return (
+    <Tooltip title="Delete">
+      <IconButton onClick={onDeletePricing}>
+        <DeleteIcon sx={{ color: "red" }} />
+      </IconButton>
+    </Tooltip>
+  );
+}
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -50,11 +66,20 @@ const columns = [
     sortable: false,
     width: 160,
   },
+  {
+    field: 'actions',
+    headerName: 'Actions',
+    width: 150,
+    renderCell: DeletePricing
+  },
 ];
 
 const initialValues = {
+  price_start_time: "",
+  price_end_time: "",
   price_multiplier: "",
   price_offset: "",
+  price_day: "",
 };
 
 // validation schema
@@ -68,6 +93,37 @@ const validationSchema = Yup.object({
     .positive()
     .integer(),
 });
+
+const dayOptions = [
+  {
+    id: 0,
+    name: "Monday",
+  },
+  {
+    id: 1,
+    name: "Tuesday",
+  },
+  {
+    id: 2,
+    name: "Wednesday",
+  },
+  {
+    id: 3,
+    name: "Thursday",
+  },
+  {
+    id: 4,
+    name: "Friday",
+  },
+  {
+    id: 5,
+    name: "Saturday",
+  },
+  {
+    id: 6,
+    name: "Sunday",
+  },
+];
 
 const Pricing = () => {
   const [data, setData] = useState();
@@ -91,13 +147,12 @@ const Pricing = () => {
   const onSubmit = async (values, action) => {
     const pricingData = {
       price_offset: values.price_offset,
-      day_of_week: values.day,
+      day_of_week: values.price_day.id,
       price_multiplier: values.price_multiplier,
       end_time: values.endTime,
       start_time: values.startTime,
     };
     console.log(pricingData);
-
     try {
       await axios.post(
         `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/`,
@@ -172,14 +227,15 @@ const Pricing = () => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="day"
-                        label="Day"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="city" />}
-                        fullWidth
-                      />
+                      <Select
+                              options={dayOptions}
+                              value={values.price_day}
+                              onChange={(values) =>
+                                setFieldValue("price_day", values)
+                              }
+                              placeholder="Day"
+                              isMulti={false}
+                            />
                     </Grid>
                     <Grid item xs={12}>
                       <Button type="submit" variant="contained" color="primary">

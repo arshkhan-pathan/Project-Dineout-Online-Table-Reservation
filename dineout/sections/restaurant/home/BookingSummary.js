@@ -1,4 +1,4 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import Widget from "../../Widget";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
@@ -68,7 +68,7 @@ const BookingSummary = () => {
     <>
       {" "}
       <Box>
-        <Grid container spacing={3}>
+        <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget title={"Todays Bookings"} amount={data?.today_bookings} />
           </Grid>
@@ -87,37 +87,57 @@ const BookingSummary = () => {
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget title={"Past Bookings"} amount={data?.past_bookings} />
           </Grid>
-          <Grid item xs={12}>
-            <DataGrid
-              rows={data?.today_bookings_data || []}
-              columns={columns1}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+          <Grid container item xs={12} spacing={2}>
+            <Grid item xs={12} textAlign="end">
+              <Typography fontWeight="bold">
+                Todays Bookings
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <DataGrid
+                rows={data?.today_bookings_data || []}
+                columns={columns1}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+              />
+            </Grid>
           </Grid>{" "}
-          <Grid item xs={12}>
-            <DataGrid
-              rows={data?.upcoming_bookings_data || []}
-              columns={columns1}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+          <Grid container item xs={12} spacing={2}>
+            <Grid item xs={12} textAlign="end">
+              <Typography fontWeight="bold">
+                Upcomming Bookings
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <DataGrid
+                rows={data?.upcoming_bookings_data || []}
+                columns={columns1}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+              />
+            </Grid>
           </Grid>{" "}
-          <Grid item xs={12}>
+          <Grid container item xs={12} spacing={2}>
+            <Grid item xs={12} textAlign="end">
+              <Typography fontWeight="bold">
+                Past Bookings
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
             <DataGrid
               rows={data?.past_bookings_data || []}
               columns={columns1}
@@ -131,6 +151,7 @@ const BookingSummary = () => {
               pageSizeOptions={[5]}
               disableRowSelectionOnClick
             />
+            </Grid>
           </Grid>
         </Grid>
       </Box>

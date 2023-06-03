@@ -7,7 +7,6 @@ const Select = (props) => {
         <ReactSelect
             getOptionLabel={(option) => option.name}
             getOptionValue={(option) => option.id}
-            
             isMulti
             styles={{
                 option: (props) => ({
