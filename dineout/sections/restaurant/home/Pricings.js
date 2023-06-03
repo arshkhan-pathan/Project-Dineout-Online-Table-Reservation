@@ -1,6 +1,11 @@
 import { Grid, Box } from "@mui/material";
-
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
 import { DataGrid } from "@mui/x-data-grid";
+import * as Yup from "yup";
+
+import axios from "axios";
 // packages
 import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -11,33 +16,39 @@ import Select from "@/components/Select";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
+
   {
-    field: "firstName",
-    headerName: "First name",
+    field: "day_of_week",
+    headerName: "Day",
     width: 150,
-    editable: true,
+    editable: false,
+    // valueGetter: (params) =>
+    //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
   {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
+    field: "start_time",
+    headerName: "Start Time",
     width: 110,
     editable: true,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
+    field: "end_time",
+    headerName: "End Time",
+    sortable: true,
+    width: 160,
+  },
+  {
+    field: "price_multiplier",
+    headerName: "Price Multiplier",
+    sortable: false,
+    width: 160,
+  },
+  {
+    field: "price_offset",
+    headerName: "Price Offset",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
 ];
 
@@ -53,17 +64,77 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
+const initialValues = {
+  price_multiplier: "",
+  price_offset: "",
+};
+
+// validation schema
+const validationSchema = Yup.object({
+  price_offset: Yup.number()
+    .required("Enter Price Offset")
+    .positive()
+    .integer(),
+  price_multiplier: Yup.number()
+    .required("Enter Price Multiplier")
+    .positive()
+    .integer(),
+});
+
 const Pricing = () => {
+  const [data, setData] = useState();
+  const user = useSelector(selectCurrentUser);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/all`
+        );
+
+        setData(response.data);
+      } catch (error) {
+        console.error("API Error:", error);
+      }
+    };
+
+    fetchData();
+  }, [user?.id]);
+
+  const onSubmit = async (values, action) => {
+    const pricingData = {
+      price_offset: values.price_offset,
+      day_of_week: values.day,
+      price_multiplier: values.price_multiplier,
+      end_time: values.endTime,
+      start_time: values.startTime,
+    };
+    console.log(pricingData);
+
+    try {
+      await axios.post(
+        `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/`,
+        pricingData
+      );
+
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/all`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+      action.resetForm();
+    }
+  };
+  console.log(data);
   return (
     <>
-      {" "}
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Formik
-            // initialValues={initialValues}
-            // validationSchema={validationSchema}
-            // onSubmit={onSubmit}
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
             >
               {({ values, setFieldValue }) => (
                 <Form>
@@ -92,7 +163,7 @@ const Pricing = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
-                        name="multiplier"
+                        name="price_multiplier"
                         label="Multiplier"
                         type="number"
                         size="small"
@@ -103,7 +174,7 @@ const Pricing = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
-                        name="offset"
+                        name="price_offset"
                         type="number"
                         label="Offset"
                         size="small"
@@ -134,7 +205,7 @@ const Pricing = () => {
           </Grid>
           <Grid item xs={12}>
             <DataGrid
-              rows={rows}
+              rows={data || []}
               columns={columns}
               initialState={{
                 pagination: {
