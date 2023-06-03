@@ -234,7 +234,7 @@ const Auth = ({
                         component={Link}
                         variant="body2"
                       >
-                        Don't have an account? Sign up
+                        Don&apos;t have an account? Sign up
                       </MuiLink>
                     )}
                   </Grid>
