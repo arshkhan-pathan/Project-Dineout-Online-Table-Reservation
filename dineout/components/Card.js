@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/router';
 
 
-const Card = ({ id, name, locality, rating, banner }) => {
+const Card = ({ id, name, locality, ratings, images }) => {
     const router = useRouter();
 
     return (
@@ -30,28 +30,8 @@ const Card = ({ id, name, locality, rating, banner }) => {
                 <CardMedia
                     component="img"
                     height="140"
-                    image={banner}
+                    image={images[0]?.image}
                     alt="green iguana"
-                // sx={{
-                //   height: 168,
-                //   display: 'inline-block',
-                //   overflow: 'hidden',
-                //   width: 272,
-                //   borderRadius: 0,
-                //   '& img': {
-                //     height: 168,
-                //     width: 272,
-                //     objectFit: 'cover',
-                //     borderRadius: 0,
-                //     overflow: 'hidden',
-                //     display: 'block',
-                //     transition: 'transform 0.6s',
-                //   },
-                //   '&:hover img': {
-                //     transform: 'scale(1.2)',
-                //     transformOrigin: '50% 50%',
-                //   }
-                // }}
                 />
                 <CardContent>
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -59,7 +39,7 @@ const Card = ({ id, name, locality, rating, banner }) => {
                             <Typography component="h4" sx={{ fontWeight: 'bold' }}>{name}</Typography>
                             <Typography sx={{ fontSize: 12 }}>{locality}</Typography>
                         </Box>
-                        <Chip label={rating} color="success" sx={{ borderRadius: 1, height: 25 }} />
+                        <Chip label={ratings} color="success" sx={{ borderRadius: 1, height: 25 }} />
                     </Box>
                 </CardContent>
             </CardActionArea>
