@@ -10,6 +10,9 @@ import axios from "axios";
 
 import Typography from "@mui/material/Typography";
 import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
+import { useGetReviewsQuery } from "@/store/api/restaurant";
+import baseApi from "@/store/api/base";
+
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -18,25 +21,28 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
   ...theme.mixins.toolbar,
 }));
+
 const Reviews = () => {
   const user = useSelector(selectCurrentUser);
-  const [data, setData] = useState();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [selectedFilters, setSelectedFilters] = useState("");
+
+  const onFilterChange = (filter) => {
+    setSelectedFilters(filter);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/reviews`
-        );
+    console.log('selected filter: ', selectedFilters)
+  }, [selectedFilters]);
 
-        setData(response.data);
-      } catch (error) {
-        console.error("API Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [user?.id]);
+  const { data, isError, isLoading, refetch } = useGetReviewsQuery({ id: user?.id, pageNumber, selectedFilters }, { refetchOnMountOrArgChange: true });
   console.log(data);
+
+  const onPageChange = (event, value) => {
+    console.log('on page change ', event, value);
+    setPageNumber(value);
+  }
+
   return (
     <div>
       <PrimarySearchAppBar />
@@ -45,7 +51,7 @@ const Reviews = () => {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <ReviewSummmary reviews={data?.results} count={data?.count} />
+          <ReviewSummmary reviews={data?.results} count={data?.count} onPageChange={onPageChange} selectedFilters={selectedFilters} onFilterChange={onFilterChange} />
         </Box>
       </Box>
     </div>

@@ -35,6 +35,9 @@ export const restaurantApi = baseApi.injectEndpoints({
         body: tableData,
       }),
     }),
+    getReviews: builder.query({
+      query: ({id, pageNumber, selectedFilters}) => `/api/restaurant/restaurants/${id}/reviews?page=${pageNumber}&ordering=${selectedFilters}`,
+    })
   }),
 });
 
@@ -47,4 +50,5 @@ export const {
   useGetRestaurantEarningsQuery,
   useGetRestaurantByIdQuery,
   useCreateTableMutation,
+  useGetReviewsQuery,
 } = restaurantApi;
