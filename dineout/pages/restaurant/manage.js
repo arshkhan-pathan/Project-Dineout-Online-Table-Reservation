@@ -92,6 +92,7 @@ const Manage = () => {
   const { data: typeOptions } = useGetTypesQuery();
   const [createRestaurant] = useCreateRestaurantMutation();
   const { data: restaurantData } = useGetRestaurantByIdQuery(user?.id);
+  const [State, setState] = useState("Add");
 
   useEffect(() => {
     if (restaurantData) {
@@ -113,6 +114,7 @@ const Manage = () => {
         restaurantImages: restaurantData.uploaded_images,
         menuImages: restaurantData.uploaded_imagesuploaded_menuImages,
       };
+      setState("Update");
 
       setInitialValues(formattedRestaurantData);
     }
@@ -408,7 +410,7 @@ const Manage = () => {
                               variant="contained"
                               color="primary"
                             >
-                              Add
+                              {State}
                             </Button>
                           </Grid>
                         </Grid>
