@@ -6,7 +6,10 @@ import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // components
-import { useCreateTableMutation } from "@/store/api/restaurant";
+import {
+  useCreateTableMutation,
+  useGetRestaurantTableQuery,
+} from "@/store/api/restaurant";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -26,12 +29,11 @@ const validationSchema = Yup.object().shape({
     .integer("Capacity must be an integer"),
 });
 
-
 export const DeleteTable = (params) => {
   const onDeleteTable = () => {
     // delete the table
-    console.log('delete table for id: ', params.row.id);
-  }
+    console.log("delete table for id: ", params.row.id);
+  };
 
   return (
     <Tooltip title="Delete">
@@ -40,7 +42,7 @@ export const DeleteTable = (params) => {
       </IconButton>
     </Tooltip>
   );
-}
+};
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -66,32 +68,17 @@ const columns = [
     editable: false,
   },
   {
-    field: 'actions',
+    field: "actions",
     headerName: "Actions",
     width: 150,
-    renderCell: DeleteTable
+    renderCell: DeleteTable,
   },
 ];
 
 const TablesSummary = () => {
-  const [data, setData] = useState();
   const user = useSelector(selectCurrentUser);
   const [createTable] = useCreateTableMutation();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/tables/all`
-        );
-
-        setData(response.data);
-      } catch (error) {
-        console.error("API Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [user?.id]);
+  const { data, refetch } = useGetRestaurantTableQuery(user?.id);
   console.log(data);
 
   const onSubmit = async (values, action) => {
@@ -101,19 +88,13 @@ const TablesSummary = () => {
       table_number: values.table_number,
       capacity: values.capacity,
     };
-    console.log(tableData);
-    // const data = await createTable(4, tableData);
 
+    const payload = { id: user?.id, tableData: tableData };
+    console.log(payload, "payload");
     try {
-      await axios.post(
-        `http://localhost:8000/api/restaurant/restaurants/${user.id}/tables/`,
-        tableData
-      );
+      const data = await createTable(payload);
+      refetch();
       // After successful submission, fetch the updated table data
-      const response = await axios.get(
-        `http://localhost:8000/api/restaurant/restaurants/${user?.id}/tables/all`
-      );
-      setData(response.data);
     } catch (error) {
       console.error(error);
       action.resetForm();

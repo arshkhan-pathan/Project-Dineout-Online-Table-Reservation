@@ -18,8 +18,8 @@ import Select from "@/components/Select";
 export const DeletePricing = (params) => {
   const onDeletePricing = () => {
     // delete the dynamic price
-    console.log('delete dynamic price for id: ',params.row.id);
-  }
+    console.log("delete dynamic price for id: ", params.row.id);
+  };
 
   return (
     <Tooltip title="Delete">
@@ -28,7 +28,7 @@ export const DeletePricing = (params) => {
       </IconButton>
     </Tooltip>
   );
-}
+};
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -67,10 +67,10 @@ const columns = [
     width: 160,
   },
   {
-    field: 'actions',
-    headerName: 'Actions',
+    field: "actions",
+    headerName: "Actions",
     width: 150,
-    renderCell: DeletePricing
+    renderCell: DeletePricing,
   },
 ];
 
@@ -228,14 +228,14 @@ const Pricing = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Select
-                              options={dayOptions}
-                              value={values.price_day}
-                              onChange={(values) =>
-                                setFieldValue("price_day", values)
-                              }
-                              placeholder="Day"
-                              isMulti={false}
-                            />
+                        options={dayOptions}
+                        value={values.price_day}
+                        onChange={(values) =>
+                          setFieldValue("price_day", values)
+                        }
+                        placeholder="Day"
+                        isMulti={false}
+                      />
                     </Grid>
                     <Grid item xs={12}>
                       <Button type="submit" variant="contained" color="primary">
