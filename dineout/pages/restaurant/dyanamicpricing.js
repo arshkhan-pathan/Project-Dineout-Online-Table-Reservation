@@ -3,7 +3,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
-
+import withAuth from "@/hooks/withAuth";
 import Typography from "@mui/material/Typography";
 import Pricing from "@/sections/restaurant/home/Pricings";
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -38,4 +38,4 @@ const DyanamicPrice = () => {
   );
 };
 
-export default DyanamicPrice;
+export default withAuth(DyanamicPrice, [2], "/restaurant/login");

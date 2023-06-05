@@ -7,6 +7,7 @@ import {
   Grid,
   Button,
 } from "@mui/material";
+import withAuth from "@/hooks/withAuth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { styled, useTheme } from "@mui/material/styles";
 import * as Yup from "yup";
@@ -424,4 +425,4 @@ const Manage = () => {
   );
 };
 
-export default Manage;
+export default withAuth(Manage, [2], "/restaurant/login");

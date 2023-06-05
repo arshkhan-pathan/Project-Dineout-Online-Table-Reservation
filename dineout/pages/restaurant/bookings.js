@@ -3,7 +3,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
-
+import withAuth from "@/hooks/withAuth";
 import Typography from "@mui/material/Typography";
 import BookingSummary from "@/sections/restaurant/home/BookingSummary";
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -37,4 +37,4 @@ const Bookings = () => {
   );
 };
 
-export default Bookings;
+export default withAuth(Bookings, [2], "/restaurant/login");

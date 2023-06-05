@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 import Typography from "@mui/material/Typography";
 import TablesSummary from "@/sections/restaurant/home/TablesSummary";
+import withAuth from "@/hooks/withAuth";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -42,4 +43,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default withAuth(Tables, [2], "/restaurant/login");

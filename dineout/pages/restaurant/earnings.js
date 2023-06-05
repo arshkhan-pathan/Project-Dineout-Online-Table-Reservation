@@ -3,8 +3,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
-
-import Typography from "@mui/material/Typography";
+import withAuth from "@/hooks/withAuth";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -29,4 +28,4 @@ const Earnings = () => {
   );
 };
 
-export default Earnings;
+export default withAuth(Earnings, [2], "/restaurant/login");
