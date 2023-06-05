@@ -9,6 +9,7 @@ import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Select from "@/components/Select";
+import { Typography, Divider } from "@mui/material";
 import {
   useGetRestaurantPricingsQuery,
   useCreatePricingMutation,
@@ -234,19 +235,31 @@ const Pricing = () => {
             </Formik>
           </Grid>
           <Grid item xs={12}>
-            <DataGrid
-              rows={data || []}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+            {data?.length > 0 ? (
+              <DataGrid
+                rows={data || []}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+              />
+            ) : (
+              <>
+                {" "}
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">
+                    Rules data not available. Please add a Rule to view.
+                  </Typography>
+                  <Divider />
+                </Grid>
+              </>
+            )}
           </Grid>{" "}
         </Grid>
       </Box>
