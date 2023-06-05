@@ -33,7 +33,15 @@ export const DeletePricing = (params) => {
     </Tooltip>
   );
 };
-
+const daysOfWeek = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
 
@@ -42,6 +50,7 @@ const columns = [
     headerName: "Day",
     width: 150,
     editable: false,
+    valueFormatter: (params) => daysOfWeek[params.value],
     // valueGetter: (params) =>
     //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
@@ -140,16 +149,13 @@ const Pricing = () => {
       price_offset: values.price_offset,
       day_of_week: values.price_day.id,
       price_multiplier: values.price_multiplier,
-      end_time: values.endTime,
-      start_time: values.startTime,
+      end_time: values.price_end_time,
+      start_time: values.price_start_time,
     };
     console.log(pricingData);
     const payload = { id: user?.id, pricingData: pricingData };
     try {
       createPricing(payload);
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/all`
-      );
     } catch (error) {
       console.error(error);
     }
@@ -171,7 +177,7 @@ const Pricing = () => {
                   <Grid container rowSpacing={3} columnSpacing={3}>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
-                        name="startTime"
+                        name="price_start_time"
                         label="Start Time"
                         type="time"
                         size="small"
@@ -182,7 +188,7 @@ const Pricing = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
-                        name="endTime"
+                        name="price_end_time"
                         label="End Time"
                         size="small"
                         type="time"
