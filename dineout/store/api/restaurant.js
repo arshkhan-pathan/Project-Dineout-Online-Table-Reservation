@@ -11,10 +11,10 @@ export const restaurantApi = baseApi.injectEndpoints({
       }),
     }),
     updateRestaurant: builder.mutation({
-      query: ({ credentials, id }) => ({
+      query: ({ data, id }) => ({
         url: `/api/restaurant/restaurants/${id}/`,
         method: "PATCH",
-        body: credentials,
+        body: data,
       }),
     }),
     getTags: builder.query({
@@ -107,4 +107,5 @@ export const {
   useGetRestaurantPricingsQuery,
   useCreatePricingMutation,
   useDeleteRuleMutation,
+  useUpdateRestaurantMutation,
 } = restaurantApi;

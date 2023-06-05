@@ -27,6 +27,7 @@ import {
   useGetTypesQuery,
   useGetRestaurantDataQuery,
   useGetRestaurantByIdQuery,
+  useUpdateRestaurantMutation,
 } from "@/store/api/restaurant";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
@@ -87,6 +88,7 @@ const Manage = () => {
   const [initialValues, setInitialValues] = useState(initialRestaurantValues);
   const router = useRouter();
   const user = useSelector(selectCurrentUser);
+  const [updateRestaurant] = useUpdateRestaurantMutation();
   const { data: tagOptions } = useGetTagsQuery();
   const { data: cuisineOptions } = useGetCuisinesQuery();
   const { data: typeOptions } = useGetTypesQuery();
@@ -195,6 +197,9 @@ const Manage = () => {
     }
     if (State == "Update") {
       console.log(formatedValues);
+      const payload = { id: restaurantData.manager, data: formatedValues };
+      console.log(payload);
+      updateRestaurant(payload);
     }
   };
 
