@@ -25,6 +25,9 @@ export const restaurantApi = baseApi.injectEndpoints({
     getRestaurantEarnings: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}/earnings`,
     }),
+    getRestaurantBookingStats: builder.query({
+      query: (id) => `api/restaurant/restaurants/${id}/bookings/stats`,
+    }),
     getRestaurantById: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}`,
     }),
@@ -36,8 +39,9 @@ export const restaurantApi = baseApi.injectEndpoints({
       }),
     }),
     getReviews: builder.query({
-      query: ({id, pageNumber, selectedFilters}) => `/api/restaurant/restaurants/${id}/reviews?page=${pageNumber}&ordering=${selectedFilters}`,
-    })
+      query: ({ id, pageNumber, selectedFilters }) =>
+        `/api/restaurant/restaurants/${id}/reviews?page=${pageNumber}&ordering=${selectedFilters}`,
+    }),
   }),
 });
 
@@ -51,4 +55,5 @@ export const {
   useGetRestaurantByIdQuery,
   useCreateTableMutation,
   useGetReviewsQuery,
+  useGetRestaurantBookingStatsQuery,
 } = restaurantApi;

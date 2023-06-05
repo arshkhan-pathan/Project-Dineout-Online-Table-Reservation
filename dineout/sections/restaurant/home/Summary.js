@@ -12,27 +12,30 @@ import {
 
 const Summary = ({ data, stats, graph }) => {
   console.log(data);
+  console.log(stats);
 
   return (
     <>
-      {" "}
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget title="Todays Earning" amount={data?.today} />
+            <Widget title="Todays Earning" amount={data?.today || 0} />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget title="Week Earning" amount={data?.last_week || 0} />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget title="Todays Booking" amount={stats?.today_bookings} />
+            <Widget
+              title="Todays Booking"
+              amount={stats?.today_bookings || 0}
+            />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Upcoming Bookings"
-              amount={stats?.upcoming_bookings}
+              amount={stats?.upcoming_bookings || 0}
             />
-          </Grid>{" "}
+          </Grid>
           <Grid item xs={6}>
             <LineChart
               width={500}

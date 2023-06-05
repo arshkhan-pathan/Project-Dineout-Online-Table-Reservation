@@ -7,7 +7,10 @@ import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
-import { useGetRestaurantEarningsQuery } from "@/store/api/restaurant";
+import {
+  useGetRestaurantBookingStatsQuery,
+  useGetRestaurantEarningsQuery,
+} from "@/store/api/restaurant";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -24,34 +27,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 const Restaurant = ({}) => {
   const user = useSelector(selectCurrentUser);
-  const [data, setData] = useState();
-  const [stats, setStats] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const requests = [
-          axios.get(
-            `http://127.0.0.1:8000/api/restaurant/restaurants/${user.id}/earnings/`
-          ),
-          axios.get(
-            `http://127.0.0.1:8000/api/restaurant/restaurants/${user.id}/bookings/stats`
-          ),
-        ];
+  const { data } = useGetRestaurantEarningsQuery(user.id, {
+    refetchOnMountOrArgChange: true,
+  });
 
-        const responses = await Promise.all(requests);
-
-        setData(responses[0].data);
-        setStats(responses[1].data);
-      } catch (error) {
-        console.error("API Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [user?.id]);
-
-  console.log(stats);
+  const stats = useGetRestaurantBookingStatsQuery(user.id, {
+    refetchOnMountOrArgChange: true,
+  });
 
   return (
     <div>
@@ -67,7 +50,7 @@ const Restaurant = ({}) => {
           </Box>
 
           <Box>
-            <Summary data={data} stats={stats} graph={data?.graph} />
+            <Summary data={data} stats={stats.data} graph={data?.graph} />
           </Box>
         </Box>
       </Box>
