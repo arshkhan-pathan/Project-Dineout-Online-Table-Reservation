@@ -151,7 +151,7 @@ const TablesSummary = () => {
             </Formik>
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={8}>
-            {data.length > 0 ? (
+            {data?.length > 0 ? (
               <DataGrid
                 rows={data || []}
                 columns={columns}

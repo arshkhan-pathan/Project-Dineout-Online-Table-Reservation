@@ -19,7 +19,7 @@ const StyledIcon = styled("div")(({ theme }) => ({
   marginBottom: theme.spacing(3),
 }));
 
-export default function AppWidgetSummary({ sx, title, amount }) {
+export default function AppWidgetSummary({ sx, title, amount, icon }) {
   return (
     <Card
       sx={{
@@ -31,7 +31,7 @@ export default function AppWidgetSummary({ sx, title, amount }) {
         ...sx,
       }}
     >
-      <StyledIcon sx={{ fontSize: "20px" }}>Icon</StyledIcon>
+      <StyledIcon sx={{ fontSize: "20px" }}>{icon}</StyledIcon>
 
       <Typography variant="h3" gutterBottom>
         {amount}

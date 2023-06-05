@@ -9,6 +9,10 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ViewWeekIcon from "@mui/icons-material/ViewWeek";
+import TodayIcon from "@mui/icons-material/Today";
+import UpcomingIcon from "@mui/icons-material/Upcoming";
 
 const Summary = ({ data, stats, graph }) => {
   console.log(data);
@@ -19,21 +23,31 @@ const Summary = ({ data, stats, graph }) => {
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget title="Todays Earning" amount={data?.today || 0} />
+            <Widget
+              title="Todays Earning"
+              amount={data?.today || 0}
+              icon={<AttachMoneyIcon />}
+            />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget title="Week Earning" amount={data?.last_week || 0} />
+            <Widget
+              title="Week Earning"
+              amount={data?.last_week || 0}
+              icon={<ViewWeekIcon />}
+            />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Todays Booking"
               amount={stats?.today_bookings || 0}
+              icon={<TodayIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Upcoming Bookings"
               amount={stats?.upcoming_bookings || 0}
+              icon={<UpcomingIcon />}
             />
           </Grid>
           <Grid item xs={6}>
