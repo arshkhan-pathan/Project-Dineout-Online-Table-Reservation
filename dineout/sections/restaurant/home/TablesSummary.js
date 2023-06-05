@@ -102,8 +102,8 @@ const TablesSummary = () => {
       // After successful submission, fetch the updated table data
     } catch (error) {
       console.error(error);
-      action.resetForm();
     }
+    action.resetForm();
   };
   return (
     <>
