@@ -6,7 +6,7 @@ import Navbar from "@/layouts/restaurant/Navbar";
 import Card from "@/components/Card";
 import Filters from "@/sections/user/restaurants/Filters";
 import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Restaurants = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -15,6 +15,10 @@ const Restaurants = () => {
     types: "",
   });
 
+  useEffect(() => {
+    console.log('selectedFilters: ',selectedFilters);
+  }, [selectedFilters]);
+
   const { data, isLoading } = useGetAllRestaurantQuery(selectedFilters, {
     refetchOnMountOrArgChange: true,
   });
@@ -22,7 +26,7 @@ const Restaurants = () => {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: 5 }}>
+      <Container maxWidth="lg" sx={{ my: 5 }}>
         <Grid container spacing={3} sx={{ mt: 1 }}>
           <Grid item xs={3}>
             <Filters
@@ -30,7 +34,7 @@ const Restaurants = () => {
               setSelectedFilters={setSelectedFilters}
             />
           </Grid>
-          <Grid container item xs={9} spacing={2}>
+          <Grid container item xs={9} spacing={2} sx={{height: 'fit-content'}}>
             <Grid item xs={12}>
               <Typography variant="h6" fontWeight="bold">
                 Best Restaurants Near me

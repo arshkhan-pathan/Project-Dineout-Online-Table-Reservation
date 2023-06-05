@@ -16,6 +16,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 // layout
 import Navbar from "@/layouts/restaurant/Navbar";
 import { useGetRestaurantQuery } from "@/store/api/restaurants";
+import Reservation from "@/sections/user/restaurant/Reservation";
 
 const RestaurantInfo = () => {
   const router = useRouter();
@@ -121,9 +122,7 @@ const RestaurantInfo = () => {
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Box>
-              <Typography>Paymemt Options</Typography>
-            </Box>
+            <Reservation />
           </Grid>
         </Grid>
       </Container>

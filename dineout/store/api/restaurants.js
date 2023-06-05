@@ -5,7 +5,7 @@ export const restaurantsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllRestaurant: builder.query({
       query: ({ cuisines, tags, types }) =>
-        `/api/restaurant/restaurants/?cuisines=${cuisines}${tags}${types}`,
+        `/api/restaurant/restaurants/?cuisines=${cuisines}&tags=${tags}&types=${types}`,
     }),
     getRestaurant: builder.query({
       query: (restaurantId) => `api/restaurant/restaurants/id/${restaurantId}/`,
