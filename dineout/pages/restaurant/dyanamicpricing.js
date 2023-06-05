@@ -1,12 +1,11 @@
 import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 
 import Typography from "@mui/material/Typography";
 import Pricing from "@/sections/restaurant/home/Pricings";
-import axios from "axios";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",

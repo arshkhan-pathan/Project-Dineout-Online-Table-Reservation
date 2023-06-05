@@ -5,20 +5,23 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { DataGrid } from "@mui/x-data-grid";
 import * as Yup from "yup";
-
 import axios from "axios";
-// packages
 import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-// components
 import Select from "@/components/Select";
-
-// store
+import {
+  useGetRestaurantPricingsQuery,
+  useCreatePricingMutation,
+  useDeleteRuleMutation,
+} from "@/store/api/restaurant";
 
 export const DeletePricing = (params) => {
+  const user = useSelector(selectCurrentUser);
+  const [deleteRule] = useDeleteRuleMutation();
   const onDeletePricing = () => {
-    // delete the dynamic price
+    const payload = { id: user?.id, ruleId: params.row.id };
     console.log("delete dynamic price for id: ", params.row.id);
+    deleteRule(payload);
   };
 
   return (
@@ -126,24 +129,11 @@ const dayOptions = [
 ];
 
 const Pricing = () => {
-  const [data, setData] = useState();
   const user = useSelector(selectCurrentUser);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/all`
-        );
+  const { data } = useGetRestaurantPricingsQuery(user?.id);
+  const [createPricing] = useCreatePricingMutation();
 
-        setData(response.data);
-      } catch (error) {
-        console.error("API Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [user?.id]);
-
+  console.log(data);
   const onSubmit = async (values, action) => {
     const pricingData = {
       price_offset: values.price_offset,
@@ -153,20 +143,16 @@ const Pricing = () => {
       start_time: values.startTime,
     };
     console.log(pricingData);
+    const payload = { id: user?.id, pricingData: pricingData };
     try {
-      await axios.post(
-        `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/`,
-        pricingData
-      );
-
+      createPricing(payload);
       const response = await axios.get(
         `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/pricingrules/all`
       );
-      setData(response.data);
     } catch (error) {
       console.error(error);
-      action.resetForm();
     }
+    action.resetForm();
   };
   console.log(data);
   return (

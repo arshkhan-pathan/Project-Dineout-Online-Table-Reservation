@@ -5,10 +5,8 @@ import { styled, useTheme } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
-import axios from "axios";
 import Typography from "@mui/material/Typography";
 import TablesSummary from "@/sections/restaurant/home/TablesSummary";
-import { useState, useEffect } from "react";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",

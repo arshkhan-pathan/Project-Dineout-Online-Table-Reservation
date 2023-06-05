@@ -42,7 +42,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 const baseApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({}),
-  tagTypes: ["Tables"],
+  tagTypes: ["Tables", "Rules"],
 });
 
 export default baseApi;
