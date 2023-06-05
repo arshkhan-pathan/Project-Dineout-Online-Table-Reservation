@@ -93,6 +93,7 @@ const Manage = () => {
   const [createRestaurant] = useCreateRestaurantMutation();
   const { data: restaurantData } = useGetRestaurantByIdQuery(user?.id);
   const [State, setState] = useState("Add");
+  console.log(restaurantData?.manager);
 
   useEffect(() => {
     if (restaurantData) {
@@ -111,8 +112,8 @@ const Manage = () => {
         openingTime: restaurantData.opening_time,
         closingTime: restaurantData.closing_time,
         unitCharge: restaurantData.unit_charge,
-        restaurantImages: restaurantData.uploaded_images,
-        menuImages: restaurantData.uploaded_imagesuploaded_menuImages,
+        restaurantImages: [],
+        menuImages: [],
       };
       setState("Update");
 
@@ -150,10 +151,6 @@ const Manage = () => {
 
   const onSubmit = async (values) => {
     // upload images to cloudinary
-    const uploaded_images = await uploadOnCloudinary(values?.restaurantImages);
-    console.log(uploaded_images, "images");
-    const uploaded_menuImages = await uploadOnCloudinary(values?.menuImages);
-    console.log(uploaded_menuImages, "menu");
 
     // formate fields accordingly
     const formatedValues = {
@@ -172,15 +169,32 @@ const Manage = () => {
       cuisines_list: values.cuisines.map((cuisine) => cuisine.id),
       unit_charge: values.unitCharge,
       manager: user.id,
-      uploaded_images,
-      uploaded_menuImages,
+      uploaded_images: [],
+      uploaded_menuImages: [],
     };
+    if (values?.restaurantImages) {
+      const uploaded_images = await uploadOnCloudinary(
+        values?.restaurantImages
+      );
+      console.log(uploaded_images, "images");
+      formatedValues.uploaded_images = uploaded_images;
+    }
 
+    if (values?.menuImages) {
+      const uploaded_menuImages = await uploadOnCloudinary(values?.menuImages);
+      console.log(uploaded_menuImages, "menu");
+      formatedValues.uploaded_menuImages = uploaded_menuImages;
+    }
     // create an new restaurant
-    const response = await createRestaurant(formatedValues);
-    console.log();
-    if (response.data.status == 201) {
-      router.push("/restaurant");
+    if (State == "Add") {
+      const response = await createRestaurant(formatedValues);
+      console.log();
+      if (response.data.status == 201) {
+        router.push("/restaurant");
+      }
+    }
+    if (State == "Update") {
+      console.log(formatedValues);
     }
   };
 

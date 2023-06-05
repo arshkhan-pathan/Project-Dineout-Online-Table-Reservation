@@ -10,6 +10,13 @@ export const restaurantApi = baseApi.injectEndpoints({
         body: credentials,
       }),
     }),
+    updateRestaurant: builder.mutation({
+      query: ({ credentials, id }) => ({
+        url: `/api/restaurant/restaurants/${id}/`,
+        method: "PATCH",
+        body: credentials,
+      }),
+    }),
     getTags: builder.query({
       query: () => "/api/mod/tags",
     }),
