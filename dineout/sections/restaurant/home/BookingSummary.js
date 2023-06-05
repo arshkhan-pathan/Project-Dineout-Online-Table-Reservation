@@ -1,10 +1,10 @@
 import { Grid, Box, Typography } from "@mui/material";
 import Widget from "../../Widget";
 import { DataGrid } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
-import axios from "axios";
+import { useGetRestaurantBookingsDataQuery } from "@/store/api/restaurant";
+import { Divider } from "@mui/material";
 
 const columns1 = [
   { field: "id", headerName: "ID", width: 90 },
@@ -46,24 +46,11 @@ const columns1 = [
 
 const BookingSummary = () => {
   const user = useSelector(selectCurrentUser);
-  const [data, setData] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/restaurant/restaurants/${user?.id}/bookings/data`
-        );
 
-        setData(response.data);
-      } catch (error) {
-        console.error("API Error:", error);
-      }
-    };
-
-    fetchData();
-  }, [user?.id]);
-
-  console.log(data?.today_bookings_data);
+  const { data } = useGetRestaurantBookingsDataQuery(user.id, {
+    refetchOnMountOrArgChange: true,
+  });
+  console.log(data);
   return (
     <>
       {" "}
@@ -88,70 +75,103 @@ const BookingSummary = () => {
             <Widget title={"Past Bookings"} amount={data?.past_bookings} />
           </Grid>
           <Grid container item xs={12} spacing={2}>
-            <Grid item xs={12} textAlign="end">
-              <Typography fontWeight="bold">
-                Todays Bookings
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <DataGrid
-                rows={data?.today_bookings_data || []}
-                columns={columns1}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 5,
-                    },
-                  },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-              />
-            </Grid>
+            {data?.today_bookings_data.length > 0 ? (
+              <>
+                <Grid item xs={12} textAlign="end">
+                  <Typography fontWeight="bold">Todays Bookings</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <DataGrid
+                    rows={data?.today_bookings_data || []}
+                    columns={columns1}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 5,
+                        },
+                      },
+                    }}
+                    pageSizeOptions={[5]}
+                    disableRowSelectionOnClick
+                  />
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">
+                    No Bookings for Today
+                  </Typography>
+                  <Divider />
+                </Grid>
+              </>
+            )}
+          </Grid>
+          <Grid container item xs={12} spacing={2}>
+            {data.upcoming_bookings_data.length > 0 ? (
+              <>
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">Upcoming Bookings</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <DataGrid
+                    rows={data?.upcoming_bookings_data || []}
+                    columns={columns1}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 5,
+                        },
+                      },
+                    }}
+                    pageSizeOptions={[5]}
+                    disableRowSelectionOnClick
+                  />
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">
+                    No Upcoming Bookings to Show
+                  </Typography>
+                  <Divider />
+                </Grid>
+              </>
+            )}
           </Grid>{" "}
           <Grid container item xs={12} spacing={2}>
-            <Grid item xs={12} textAlign="end">
-              <Typography fontWeight="bold">
-                Upcomming Bookings
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <DataGrid
-                rows={data?.upcoming_bookings_data || []}
-                columns={columns1}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 5,
-                    },
-                  },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-              />
-            </Grid>
-          </Grid>{" "}
-          <Grid container item xs={12} spacing={2}>
-            <Grid item xs={12} textAlign="end">
-              <Typography fontWeight="bold">
-                Past Bookings
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-            <DataGrid
-              rows={data?.past_bookings_data || []}
-              columns={columns1}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
-                  },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
-            </Grid>
+            {data.past_bookings_data.length > 0 ? (
+              <>
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">Past Bookings</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <DataGrid
+                    rows={data?.past_bookings_data || []}
+                    columns={columns1}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 5,
+                        },
+                      },
+                    }}
+                    pageSizeOptions={[5]}
+                    disableRowSelectionOnClick
+                  />
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">
+                    No Past Bookings Data to Show
+                  </Typography>
+                  <Divider />
+                </Grid>
+              </>
+            )}
           </Grid>
         </Grid>
       </Box>

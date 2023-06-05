@@ -2,8 +2,7 @@ import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import withAuth from "@/hooks/withAuth";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { styled, useTheme } from "@mui/material/styles";
-import { Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
@@ -11,9 +10,6 @@ import {
   useGetRestaurantBookingStatsQuery,
   useGetRestaurantEarningsQuery,
 } from "@/store/api/restaurant";
-import axios from "axios";
-import { useState, useEffect } from "react";
-
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import Summary from "@/sections/restaurant/home/Summary";
 

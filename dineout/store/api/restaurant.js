@@ -28,6 +28,9 @@ export const restaurantApi = baseApi.injectEndpoints({
     getRestaurantBookingStats: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}/bookings/stats`,
     }),
+    getRestaurantBookingsData: builder.query({
+      query: (id) => `api/restaurant/restaurants/${id}/bookings/data`,
+    }),
     getRestaurantById: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}`,
     }),
@@ -56,4 +59,5 @@ export const {
   useCreateTableMutation,
   useGetReviewsQuery,
   useGetRestaurantBookingStatsQuery,
+  useGetRestaurantBookingsDataQuery,
 } = restaurantApi;
