@@ -12,8 +12,10 @@ import {
 } from "@/store/api/restaurant";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useDeleteTableMutation } from "@/store/api/restaurant";
+import { Typography } from "@mui/material";
+import { Divider } from "@mui/material";
+
 // store
 
 const initialValues = {
@@ -30,9 +32,12 @@ const validationSchema = Yup.object().shape({
 });
 
 export const DeleteTable = (params) => {
+  const user = useSelector(selectCurrentUser);
+  const [deleteTable, { isLoading }] = useDeleteTableMutation();
   const onDeleteTable = () => {
-    // delete the table
     console.log("delete table for id: ", params.row.id);
+    const payload = { id: user?.id, tableId: params.row.id };
+    deleteTable(payload);
   };
 
   return (
@@ -78,7 +83,7 @@ const columns = [
 const TablesSummary = () => {
   const user = useSelector(selectCurrentUser);
   const [createTable] = useCreateTableMutation();
-  const { data, refetch } = useGetRestaurantTableQuery(user?.id);
+  const { data } = useGetRestaurantTableQuery(user?.id);
   console.log(data);
 
   const onSubmit = async (values, action) => {
@@ -93,7 +98,7 @@ const TablesSummary = () => {
     console.log(payload, "payload");
     try {
       const data = await createTable(payload);
-      refetch();
+
       // After successful submission, fetch the updated table data
     } catch (error) {
       console.error(error);
@@ -146,19 +151,31 @@ const TablesSummary = () => {
             </Formik>
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={8}>
-            <DataGrid
-              rows={data || []}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+            {data.length > 0 ? (
+              <DataGrid
+                rows={data || []}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+              />
+            ) : (
+              <>
+                {" "}
+                <Grid item xs={12} textAlign="start">
+                  <Typography fontWeight="bold">
+                    Table data not available. Please add a table to view.
+                  </Typography>
+                  <Divider />
+                </Grid>
+              </>
+            )}
           </Grid>{" "}
         </Grid>
       </Box>

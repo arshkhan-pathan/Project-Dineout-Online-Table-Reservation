@@ -39,18 +39,26 @@ export const restaurantApi = baseApi.injectEndpoints({
         url: `/api/restaurant/restaurants/${id}/tables/`,
         method: "POST",
         body: tableData,
-        providesTags: ["Tables"],
       }),
+      invalidatesTags: ["Tables"],
     }),
+
     getRestaurantTable: builder.query({
       query: (id) => `/api/restaurant/restaurants/${id}/tables/all`,
       providesTags: ["Tables"],
     }),
+    deleteTable: builder.mutation({
+      query: ({ id, tableId }) => ({
+        url: `/api/restaurant/restaurants/${id}/tables/${tableId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Tables"],
+    }),
+
     getReviews: builder.query({
       query: ({ id, pageNumber, selectedFilters }) =>
         `/api/restaurant/restaurants/${id}/reviews?page=${pageNumber}&ordering=${selectedFilters}`,
     }),
-    invalidatesTags: ["Tables"],
   }),
 });
 
@@ -67,4 +75,5 @@ export const {
   useGetRestaurantBookingStatsQuery,
   useGetRestaurantBookingsDataQuery,
   useGetRestaurantTableQuery,
+  useDeleteTableMutation,
 } = restaurantApi;
