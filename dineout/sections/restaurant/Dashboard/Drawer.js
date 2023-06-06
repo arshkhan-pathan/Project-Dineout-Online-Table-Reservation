@@ -98,7 +98,13 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          <Link href={"/restaurant"} style={{ textDecoration: "none" }}>
+          <Link
+            style={{
+              textDecoration: "none",
+              color: router.pathname === "/restaurant" ? "red" : "inherit",
+            }}
+            href="/restaurant"
+          >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -120,140 +126,163 @@ export default function MiniDrawer() {
               </ListItemButton>
             </ListItem>
           </Link>
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              router.push("/restaurant/bookings");
+          <Link
+            style={{
+              textDecoration: "none",
+              color:
+                router.pathname === "/restaurant/bookings" ? "red" : "inherit",
             }}
+            href="/restaurant/bookings"
           >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Bookings" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              router.push("/restaurant/dyanamicpricing");
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Bookings"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color:
+                router.pathname === "/restaurant/dyanamicpricing"
+                  ? "red"
+                  : "inherit",
             }}
+            href="/restaurant/dyanamicpricing"
           >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Dyanamic Pricing"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              router.push("/restaurant/tables");
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Dyanamic Pricing"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color:
+                router.pathname === "/restaurant/tables" ? "red" : "inherit",
             }}
+            href="/restaurant/tables"
           >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Tables" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              router.push("/restaurant/reviews");
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Tables" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color:
+                router.pathname === "/restaurant/reviews" ? "red" : "inherit",
             }}
+            href="/restaurant/reviews"
           >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Reviews" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          {/* TEMT */}
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              router.push("/restaurant/manage");
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Reviews"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color:
+                router.pathname === "/restaurant/manage" ? "red" : "inherit",
             }}
+            href="/restaurant/manage"
+            prefetch
           >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Manage" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Manage" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </Box>
