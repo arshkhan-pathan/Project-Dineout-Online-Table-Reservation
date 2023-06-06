@@ -69,32 +69,37 @@ const FoodMenu = ({ menu }) => {
     <>
       <Wrapper>
         <h4>Menu</h4>
-        <div>
-          <Image
-            src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/m/h/m6256-16463800436221c40b629e9.jpg?tr=tr:n-xlarge"
-            height={50}
-            width={50}
-            alt="Image"
-            onClick={handleOpen}
-          />
+        {menu &&
+          menu.map((image) => {
+            return (
+              <div>
+                <Image
+                  src={image.image}
+                  height={50}
+                  width={50}
+                  alt="Image"
+                  onClick={handleOpen}
+                />
 
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Image
-                src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/m/h/m6256-16463800436221c40b629e9.jpg?tr=tr:n-xlarge"
-                height={550}
-                width={500}
-                alt="Image"
-                onClick={handleOpen}
-              />
-            </Box>
-          </Modal>
-        </div>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Image
+                      src={image.image}
+                      height={550}
+                      width={500}
+                      alt="Image"
+                      onClick={handleOpen}
+                    />
+                  </Box>
+                </Modal>
+              </div>
+            );
+          })}
       </Wrapper>
     </>
   );
