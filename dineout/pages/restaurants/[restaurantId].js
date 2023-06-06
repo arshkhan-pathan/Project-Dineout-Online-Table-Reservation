@@ -21,6 +21,7 @@ import Reservation from "@/sections/user/restaurant/Reservation";
 const RestaurantInfo = () => {
   const router = useRouter();
   const { restaurantId } = router.query;
+
   console.log(restaurantId);
   let { data } = useGetRestaurantQuery(restaurantId, {
     refetchOnMountOrArgChange: true,
