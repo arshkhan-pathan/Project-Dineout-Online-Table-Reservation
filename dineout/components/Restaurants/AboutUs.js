@@ -86,6 +86,7 @@ const DetailsWrapper = styled.div`
           line-height: 20px;
           color: #ac8e48;
           font-weight: 700 !important;
+          margin: initial;
         }
       }
     }

@@ -19,6 +19,10 @@ import Navbar from "@/layouts/restaurant/Navbar";
 import { useGetRestaurantQuery } from "@/store/api/restaurants";
 import Reservation from "@/sections/user/restaurant/Reservation";
 import AboutUs from "@/components/Restaurants/AboutUs";
+import FoodMenu from "@/components/Restaurants/FoodMenu";
+import SubMenu from "@/components/Restaurants/Submenu";
+import { FoodBankTwoTone } from "@mui/icons-material";
+import Footer from "@/components/Footer";
 const Wrapper = styled.div`
   width: 100vw;
   padding: 26px 10.56% 48px;
@@ -46,153 +50,6 @@ const Left = styled.div`
   > div {
     background-color: #ffffff;
     border-radius: 4px;
-  }
-`;
-
-const Details = styled.div`
-  .restaurant__mainImg--parent {
-    width: 100%;
-    height: 430px;
-    overflow: hidden;
-    .leftArrow {
-      width: 80px;
-      height: 80px;
-      position: relative;
-      top: 156px;
-      left: -30px;
-      border-radius: 50px;
-      background-color: red;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #333333;
-    }
-    .rightArrow {
-      width: 80px;
-      height: 80px;
-      position: relative;
-      top: 80px;
-      left: 660px;
-      border-radius: 50px;
-      background: #333333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    > img {
-      width: 100%;
-      position: static;
-      margin-top: -160px;
-      border-radius: 4px 4px 0 0;
-    }
-  }
-
-  .restaurant__details {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    position: relative;
-  }
-
-  .restaurant__details--left {
-    > h2 {
-      color: #333333;
-      font-weight: 700;
-      line-height: 30px;
-      font-size: 24px;
-    }
-  }
-
-  .restaurant__details--sections {
-    display: flex;
-    flex-direction: row;
-    margin-top: 16px;
-    align-items: center;
-
-    > p,
-    > span {
-      font-size: 14px;
-      weight: 400;
-      line-height: 20px;
-    }
-
-    > span {
-      margin: 0 5px;
-    }
-
-    .restaurant__timing {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 7px;
-
-      > span {
-        &:nth-child(1) {
-          color: #3595ff;
-        }
-      }
-      > img {
-        height: 9.3px;
-        weight: 5.49px;
-      }
-    }
-  }
-
-  .direction {
-    display: flex;
-    flex-direction: row;
-    color: #3595ff;
-    line-height: 20px;
-    font-size: 14px;
-    font-weight: 700;
-    margin-left: 7px;
-  }
-
-  .restaurant__details--right {
-    > .restaurant__details--sections {
-      background-color: #51ba64;
-      height: 46px;
-      width: 64px;
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0px;
-      right: 16px;
-      border-radius: 2px;
-
-      > p,
-      > span {
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 26px;
-      }
-      > p {
-        margin-left: 10px;
-      }
-      > span {
-        margin-right: 10px;
-      }
-    }
-
-    > div {
-      &:nth-child(2) {
-        position: absolute;
-        top: 94px;
-        right: 16px;
-        color: #3595ff;
-        text-decoration: underline dotted #3595ff;
-        text-underline-position: under;
-        text-decoration-thickness: 2px;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 20px;
-      }
-    }
   }
 `;
 
@@ -308,11 +165,13 @@ const RestaurantInfo = () => {
       <Wrapper>
         <Main>
           <Left>
-            <Details> </Details>
+            <SubMenu />
+            <FoodMenu />
             <AboutUs />
           </Left>
         </Main>
       </Wrapper>
+      <Footer></Footer>
     </>
   );
 };

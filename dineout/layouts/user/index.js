@@ -1,9 +1,9 @@
 //
-import Footer from "./Footer";
 import Head from "next/head";
 import Navbar from "./navbar";
 import Banner from "@/sections/user/home/Banner";
 import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
 const UserLayout = ({ title, keywords, description, children }) => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const UserLayout = ({ title, keywords, description, children }) => {
       <Navbar />
       {router.pathname === "/" && <Banner />}
       <main>{children}</main>
-      <Footer />
+      <Footer></Footer>
     </div>
   );
 };
