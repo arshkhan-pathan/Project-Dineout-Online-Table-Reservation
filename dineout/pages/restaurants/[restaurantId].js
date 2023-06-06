@@ -21,7 +21,6 @@ import Reservation from "@/sections/user/restaurant/Reservation";
 import AboutUs from "@/components/Restaurants/AboutUs";
 import FoodMenu from "@/components/Restaurants/FoodMenu";
 import SubMenu from "@/components/Restaurants/Submenu";
-import { FoodBankTwoTone } from "@mui/icons-material";
 import Footer from "@/components/Footer";
 const Wrapper = styled.div`
   width: 100vw;
@@ -62,7 +61,7 @@ const RestaurantInfo = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log(data);
+  // console.log(data);
 
   const breadcrumbs = [
     <Typography sx={{ fontSize: 14 }} key="1" color="text.disabled">
@@ -166,8 +165,14 @@ const RestaurantInfo = () => {
         <Main>
           <Left>
             <SubMenu />
-            <FoodMenu />
-            <AboutUs />
+            <FoodMenu menu={data?.menuImages} />
+            <AboutUs
+              cuisines={data?.cuisines}
+              types={data?.types}
+              charge={data?.unit_charge}
+              average={data?.avg_cost}
+              tags={data?.tags}
+            />
           </Left>
         </Main>
       </Wrapper>

@@ -114,7 +114,10 @@ const MiniCard = styled.div`
   }
 `;
 
-const AboutUs = ({ data }) => {
+const AboutUs = ({ cuisines, data, types, charge, average, tags }) => {
+  let cusineString = cuisines?.map((cusine) => cusine.name).join(", ");
+  let typeString = types?.map((type) => type.name).join(", ");
+  console.log(cusineString, typeString);
   return (
     <>
       <Wrapper>
@@ -126,31 +129,28 @@ const AboutUs = ({ data }) => {
             <Image src={cuisinImg} alt="cuisinImg" />
             <div className="details__section--right">
               <h4>CUISINE</h4>
-              <p>Italian, Continental</p>
+              <p>{cusineString}</p>
             </div>
           </div>
           <div className="details__sections">
             <Image src={typeImg} alt="typeImg" />
             <div className="details__section--right">
               <h4>TYPE</h4>
-              <p>
-                Cafe, Dineout Pay, Safe To Eat Out, Kolkata Operational, Hottest
-                in Town
-              </p>
+              <p>{typeString}</p>
             </div>
           </div>
           <div className="details__sections">
             <Image src={bestsellingImg} alt="bestsellingImg" />
             <div className="details__section--right">
-              <h4>BESTSELLING ITEMS</h4>
-              <p>Ceaser Salad, Pizza, Barbeque Chicken</p>
+              <h4>BOOKING PER PERSON COST</h4>
+              <p>{charge} ₹</p>
             </div>
           </div>
           <div className="details__sections">
             <Image src={avgcostImg} alt="avgcostImg" />
             <div className="details__section--right">
               <h4>AVERAGE COST</h4>
-              <p>1,000 for Two People</p>
+              <p>{average} ₹ for Two People</p>
             </div>
           </div>
           <div className="details__sections--last">
@@ -159,38 +159,20 @@ const AboutUs = ({ data }) => {
               <h4>FACILITIES & FEATURES</h4>
             </div>
             <div className="lastDetails__section--cards">
-              <MiniCard>
-                <Image src={smokingImg} alt="smokingImg" />
-                <p>Smoking Area</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={airImg} alt="airImg" />
-                <p>Air Conditioned</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={homeImg} alt="homeImg" />
-                <p>Home Delivery</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={parkingImg} alt="parkingImg" />
-                <p>Parking</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={takeawayImg} alt="takeawayImg" />
-                <p>Take Away</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={cardImg} alt="cardImg" />
-                <p>Cards Accepted</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={outdoorImg} alt="outdoorImg" />
-                <p>Outdoor Seating</p>
-              </MiniCard>
-              <MiniCard>
-                <Image src={walletImg} alt="walletImg" />
-                <p>Wallet Accepted</p>
-              </MiniCard>
+              {tags &&
+                tags.map((tag) => {
+                  return (
+                    <MiniCard>
+                      <Image
+                        src={tag.image}
+                        width={25}
+                        height={25}
+                        alt={tag.name}
+                      />
+                      <p>{tag.name}</p>
+                    </MiniCard>
+                  );
+                })}
             </div>
           </div>
         </DetailsWrapper>

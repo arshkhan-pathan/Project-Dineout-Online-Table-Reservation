@@ -1,5 +1,8 @@
 import styled from "styled-components";
-
+import Modal from "@mui/material/Modal";
+import { useState } from "react";
+import Image from "next/image";
+import { Box } from "@mui/material";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,21 +49,51 @@ const Wrapper = styled.div`
   }
 `;
 
-const FoodMenu = () => {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
+const FoodMenu = ({ menu }) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <>
       <Wrapper>
         <h4>Menu</h4>
-        <div className="foodMenu__parent">
-          <img
-            src={
-              "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/f/c/m60262-1649050098624a81f2ebbe4.jpg?tr=tr:n-xlarge"
-            }
-            alt="menuImg"
+        <div>
+          <Image
+            src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/m/h/m6256-16463800436221c40b629e9.jpg?tr=tr:n-xlarge"
+            height={50}
+            width={50}
+            alt="Image"
+            onClick={handleOpen}
           />
-          <div>
-            <p>Menu(19)</p>
-          </div>
+
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Image
+                src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/m/h/m6256-16463800436221c40b629e9.jpg?tr=tr:n-xlarge"
+                height={550}
+                width={500}
+                alt="Image"
+                onClick={handleOpen}
+              />
+            </Box>
+          </Modal>
         </div>
       </Wrapper>
     </>
