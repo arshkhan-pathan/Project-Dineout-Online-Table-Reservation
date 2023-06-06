@@ -1,10 +1,15 @@
 import Axios from "axios";
 import React, { useState } from "react";
 
-export default function Payment() {
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
-
+export default function Payment({
+  restaurantId,
+  start_time,
+  end_time,
+  userId,
+  date,
+  guests,
+  table,
+}) {
   // this function will handel payment when user submit his/her money
   // and it will confim if payment is successfull or not
   const handlePaymentSuccess = async (response) => {
@@ -25,8 +30,6 @@ export default function Payment() {
       })
         .then((res) => {
           console.log("Everything is OK!");
-          setName("");
-          setAmount("");
         })
         .catch((err) => {
           console.log(err);
@@ -46,12 +49,7 @@ export default function Payment() {
   const showRazorpay = async () => {
     const res = await loadScript();
 
-    let bodyData = new FormData();
-
     // we will pass the amount and product name to the backend using form data
-    bodyData.append("amount", amount.toString());
-    bodyData.append("name", name);
-    console.log(bodyData);
 
     const data = await Axios({
       url: `http://127.0.0.1:8000/api/restaurant/pay/`,
@@ -61,17 +59,16 @@ export default function Payment() {
         "Content-Type": "application/json",
       },
       data: {
-        id: 13,
-        date: "2023-05-28",
-        start_time: "21:35:00",
-        end_time: "22:35:00",
-        guests: 4,
+        date: date,
+        start_time: start_time,
+        end_time: end_time,
+        guests: guests,
         additional_details: "",
         amount: 100,
         isPaid: false,
-        customer: 2,
-        restaurant: 13,
-        table: 6,
+        customer: userId,
+        restaurant: restaurantId,
+        table: table,
       },
     }).then((res) => {
       return res;
@@ -113,34 +110,8 @@ export default function Payment() {
   };
 
   return (
-    <div className="container" style={{ marginTop: "20vh" }}>
-      <form>
-        <h1>Payment page</h1>
-
-        <div className="form-group">
-          <label htmlFor="name">Product name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Amount</label>
-          <input
-            type="text"
-            className="form-control"
-            id="amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-      </form>
-      <button onClick={showRazorpay} className="btn btn-primary btn-block">
-        Pay with razorpay
-      </button>
-    </div>
+    <button onClick={showRazorpay} className="btn btn-primary btn-block">
+      Pay with razorpay
+    </button>
   );
 }

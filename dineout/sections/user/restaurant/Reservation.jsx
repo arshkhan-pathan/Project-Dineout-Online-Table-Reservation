@@ -14,6 +14,7 @@ import { useCheckAvailibilityQuery } from "@/store/api/restaurants";
 import { useRouter } from "next/router";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import Payment from "@/components/Payment";
 
 // styles
 const StyledWrapper = styled(Box)(({ theme }) => ({
@@ -63,7 +64,7 @@ const Reservation = () => {
   const handleChipClick = (item) => {
     setSelectedChip(item);
     // Perform any additional actions with the selected item
-    console.log("Selected Chip:", item);
+    console.log("Selected Chip:", item[0][0]);
   };
   const { data: slots, refetch } = useCheckAvailibilityQuery(
     {
@@ -176,6 +177,17 @@ const Reservation = () => {
         >
           Continue
         </Button>
+        {restaurantId && selectedChip && selectedDate && (
+          <Payment
+            restaurantId={restaurantId}
+            start_time={selectedChip[0][0]}
+            end_time={selectedChip[0][1]}
+            userId={5}
+            date={selectedDate}
+            guests={guests}
+            table={selectedChip[1][0]}
+          ></Payment>
+        )}
       </StyledFooter>
     </StyledWrapper>
   );
