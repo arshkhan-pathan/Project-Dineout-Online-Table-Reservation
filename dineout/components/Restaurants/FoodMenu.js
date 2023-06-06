@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import Image from "next/image";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,7 +68,8 @@ const FoodMenu = ({ menu }) => {
   return (
     <>
       <Wrapper>
-        <h4>Menu</h4>
+        <Typography variant="h4" gutterBottom>Menu</Typography>
+        <Box>
         {menu &&
           menu.map((image) => {
             return (
@@ -100,6 +101,7 @@ const FoodMenu = ({ menu }) => {
               </div>
             );
           })}
+          </Box>
       </Wrapper>
     </>
   );

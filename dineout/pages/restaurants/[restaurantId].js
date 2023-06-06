@@ -10,8 +10,10 @@ import {
   CardMedia,
   Typography,
   Box,
+  Button,
   Breadcrumbs,
   Chip,
+  Tooltip,
 } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 // layout
@@ -23,9 +25,7 @@ import FoodMenu from "@/components/Restaurants/FoodMenu";
 import SubMenu from "@/components/Restaurants/Submenu";
 import Footer from "@/components/Footer";
 const Wrapper = styled.div`
-  width: 100vw;
   padding: 26px 10.56% 48px;
-  background-color: #e5e5e5;
   color: #797979;
   display: flex;
   flex-direction: column;
@@ -36,11 +36,11 @@ const Main = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1.143vw;
-  margin: 30px 0px 24px;
+  margin: 18px 0px 24px;
 `;
 
 const Left = styled.div`
-  width: 52.2vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -89,6 +89,7 @@ const RestaurantInfo = () => {
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
+          sx={{ marginTop: '35px', marginBottom: '8px' }}
         >
           {breadcrumbs}
         </Breadcrumbs>
@@ -96,7 +97,7 @@ const RestaurantInfo = () => {
           <Grid item xs={12} md={8}>
             <Box>
               <Card elevation={0}>
-                <CardContent>
+                <CardContent sx={{ padding: 0 }}>
                   <Slider
                     {...settings}
                     style={{
@@ -127,6 +128,7 @@ const RestaurantInfo = () => {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       alignItems: "center",
+                      paddingInline: '15px',
                     }}
                   >
                     <Box>
@@ -137,9 +139,18 @@ const RestaurantInfo = () => {
                       >
                         {data?.name}
                       </Typography>
-                      <Typography sx={{ fontSize: 12 }}>
-                        {data?.locality},{data?.address} , {data?.city}
+                      <Typography variant="body2" sx={{ color: '#696969' }}>
+                        {data?.locality} | {data?.address} | {data?.city}
                       </Typography>
+
+                      <Typography variant="body2" sx={{ color: '#696969' }}>
+                        Time: {" "}
+                        <Tooltip title="kkkkk" arrow>
+                          <Button variant="text" sx={{ textTransform: 'capitalize' }}>Opens at 12:00 PM</Button>
+                        </Tooltip>
+                      </Typography>
+
+
                     </Box>
                     <Chip
                       label={data?.ratings}
@@ -161,21 +172,25 @@ const RestaurantInfo = () => {
           </Grid>
         </Grid>
       </Container>
-      <Wrapper>
-        <Main>
-          <Left>
-            <SubMenu />
-            <FoodMenu menu={data?.menuImages} />
-            <AboutUs
-              cuisines={data?.cuisines}
-              types={data?.types}
-              charge={data?.unit_charge}
-              average={data?.avg_cost}
-              tags={data?.tags}
-            />
-          </Left>
-        </Main>
-      </Wrapper>
+      <Container maxWidth="lg">
+        <Grid container>
+          <Grid item xs={12} md={8}>
+            <Main>
+              <Left>
+                <SubMenu />
+                <FoodMenu menu={data?.menuImages} />
+                <AboutUs
+                  cuisines={data?.cuisines}
+                  types={data?.types}
+                  charge={data?.unit_charge}
+                  average={data?.avg_cost}
+                  tags={data?.tags}
+                />
+              </Left>
+            </Main>
+          </Grid>
+        </Grid>
+      </Container>
       <Footer></Footer>
     </>
   );

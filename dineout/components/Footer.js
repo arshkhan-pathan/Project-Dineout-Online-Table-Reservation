@@ -9,6 +9,7 @@ import google from "../assets/images/Google.png";
 import Image from "next/image";
 
 const FooterStyle = styled.div`
+  position: relative;
   .container-heading-second {
     display: flex;
     flex-direction: column;
