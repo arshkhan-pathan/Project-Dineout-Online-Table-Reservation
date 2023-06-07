@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import classes from "@/styles/Navbar.module.css";
 //
 import Login from "./LoginButton";
-import { selectCurrentUser, selectCurrentToken } from "@/store/slices/auth.js";
+import { selectCurrentUser } from "@/store/slices/auth.js";
 import Profile from "./profile";
 import { useRouter } from "next/router";
 

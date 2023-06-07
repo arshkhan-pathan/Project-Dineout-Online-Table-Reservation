@@ -2,6 +2,7 @@
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 // store
 import { useRestaurantLoginMutation } from "@/store/api/auth";
 import { setCredentials } from "@/store/slices/auth";
@@ -36,10 +37,11 @@ const Login = () => {
       if (response && response.data.statusCode == 200) {
         const { user, ...rest } = response.data;
         dispatch(setCredentials({ user: user, token: rest }));
+        toast.success("Succesfully Authenticated");
         router.push("/restaurant");
       }
     } catch (error) {
-      console.error(error);
+      toast.error("Invalid Credentials Provided or Invalid Role");
     }
   };
   return (

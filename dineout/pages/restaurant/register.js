@@ -8,6 +8,7 @@ import { setCredentials } from "@/store/slices/auth";
 // components
 import Auth from "@/components/Auth";
 import RestaurantLayout from "@/layouts/restaurant";
+import { toast } from "react-hot-toast";
 
 const initialValues = {
   name: "",
@@ -48,6 +49,7 @@ const Register = () => {
         const { data } = response;
         const { user, access } = data;
         dispatch(setCredentials({ user: user, token: access }));
+        toast.success("Signed Up Successfully!!");
         router.push("/restaurant");
       }
     } catch (error) {

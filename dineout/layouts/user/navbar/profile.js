@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import { useDispatch } from "react-redux";
-
+import { toast } from "react-hot-toast";
 import Avatar from "@mui/material/Avatar";
 
 import Tooltip from "@mui/material/Tooltip";
@@ -17,7 +17,9 @@ const Profile = () => {
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(logOut());
-    console.log("clal");
+    toast("Logout Sucess!", {
+      icon: "👏",
+    });
   };
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
