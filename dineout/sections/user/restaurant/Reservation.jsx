@@ -1,5 +1,5 @@
 // packages
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -13,7 +13,6 @@ import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
 import { useCheckAvailibilityQuery } from "@/store/api/restaurants";
 import { useRouter } from "next/router";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import Payment from "@/components/Payment";
 
 // styles
