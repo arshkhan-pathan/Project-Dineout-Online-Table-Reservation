@@ -154,7 +154,7 @@ const AboutUs = ({ cuisines, data, types, charge, average, tags }) => {
               {tags &&
                 tags.map((tag) => {
                   return (
-                    <MiniCard>
+                    <MiniCard key={Math.random()}>
                       <Image
                         src={tag.image}
                         width={25}

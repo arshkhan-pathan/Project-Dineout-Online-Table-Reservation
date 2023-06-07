@@ -68,40 +68,42 @@ const FoodMenu = ({ menu }) => {
   return (
     <>
       <Wrapper>
-        <Typography variant="h4" gutterBottom>Menu</Typography>
+        <Typography variant="h4" gutterBottom>
+          Menu
+        </Typography>
         <Box>
-        {menu &&
-          menu.map((image) => {
-            return (
-              <div>
-                <Image
-                  src={image.image}
-                  height={50}
-                  width={50}
-                  alt="Image"
-                  onClick={handleOpen}
-                />
+          {menu &&
+            menu.map((image) => {
+              return (
+                <div key={Math.random()}>
+                  <Image
+                    src={image.image}
+                    height={50}
+                    width={50}
+                    alt="Image"
+                    onClick={handleOpen}
+                  />
 
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Image
-                      src={image.image}
-                      height={550}
-                      width={500}
-                      alt="Image"
-                      onClick={handleOpen}
-                    />
-                  </Box>
-                </Modal>
-              </div>
-            );
-          })}
-          </Box>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <Image
+                        src={image.image}
+                        height={550}
+                        width={500}
+                        alt="Image"
+                        onClick={handleOpen}
+                      />
+                    </Box>
+                  </Modal>
+                </div>
+              );
+            })}
+        </Box>
       </Wrapper>
     </>
   );
