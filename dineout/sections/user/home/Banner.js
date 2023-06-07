@@ -21,7 +21,7 @@ const Banner = () => {
             <img
               className={classes.searchLogo}
               style={{ fontSize: "20px" }}
-              src="serchlogo.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq4CMFkGyGVrReg7zs1ZyyVszBnPZGWbASWC9QzZnE&s"
               alt=""
             />
           </div>

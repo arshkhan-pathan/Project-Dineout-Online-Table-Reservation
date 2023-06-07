@@ -13,7 +13,7 @@ export const restaurantApi = baseApi.injectEndpoints({
     updateRestaurant: builder.mutation({
       query: ({ data, id }) => ({
         url: `/api/restaurant/restaurants/${id}/`,
-        method: "PATCH",
+        method: "PUT",
         body: data,
       }),
     }),
