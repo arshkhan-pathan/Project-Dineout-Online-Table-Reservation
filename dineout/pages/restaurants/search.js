@@ -31,7 +31,7 @@ const SearchPage = () => {
     {
       selectedFilters,
       page: pageNumber,
-      search: encodeURIComponent(q?.replace(/\s+/g, "+")),
+      search: encodeURIComponent(q),
     },
     {
       refetchOnMountOrArgChange: true,
