@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 // store
 import { setCredentials } from "@/store/slices/auth";
 import { useLoginMutation } from "@/store/api/auth";
@@ -40,20 +41,11 @@ const Auth = ({ onClose }) => {
     try {
       const user = await login({ email, password: values.password }).unwrap();
       dispatch(setCredentials({ ...user }));
+      toast.success("Successfully Authenticated!");
       console.log(user);
       onClose();
     } catch (err) {
-      if (!err?.status) {
-        // isLoading: true until timeout occurs
-        setFieldError("No Server Response");
-      } else if (err.status === 400) {
-        setFieldError("Missing Username or Password");
-      } else if (err.status === 401) {
-        setFieldError("Unauthorized Incorrect Passowrd");
-      } else {
-        setFieldError("Login Failed");
-        console.log(err);
-      }
+      toast.error("Invalid Credentials");
     }
   };
 
@@ -72,18 +64,19 @@ const Auth = ({ onClose }) => {
         console.log(response);
         if (response.status == 201) {
           console.log("success");
-
+          toast.success("Successfully Authenticated!");
           onClose();
         }
       })
       .catch(function (error) {
         console.log(error);
+        toast.error("Some Problem Occured!1");
       });
   };
 
   const onSendEmail = (values) => {
     // Send Request to Backend For password Reset
-    axios
+    const get = axios
       .post("http://127.0.0.1:8000/auth/users/reset_password/", {
         email: values.email,
       })
@@ -93,6 +86,11 @@ const Auth = ({ onClose }) => {
       .catch(function (error) {
         console.log(error);
       });
+    toast.promise(get, {
+      loading: "Wait Chef is Sending You Reset Link",
+      success: "Please Check Your Mail For Resting Password",
+      error: "Error when fetching",
+    });
   };
 
   if (authPage === "login")
