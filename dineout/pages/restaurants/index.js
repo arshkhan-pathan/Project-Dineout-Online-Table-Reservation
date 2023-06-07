@@ -8,6 +8,7 @@ import Filters from "@/sections/user/restaurants/Filters";
 import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
+import { Pagination } from "@mui/material";
 
 const Restaurants = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -15,14 +16,22 @@ const Restaurants = () => {
     tags: "",
     types: "",
   });
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     console.log("selectedFilters: ", selectedFilters);
   }, [selectedFilters]);
 
-  const { data, isLoading } = useGetAllRestaurantQuery(selectedFilters, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading } = useGetAllRestaurantQuery(
+    { selectedFilters, page: pageNumber },
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+  const onPageChange = (event, value) => {
+    console.log("on page change ", value);
+    setPageNumber(value);
+  };
 
   return (
     <>
@@ -54,6 +63,7 @@ const Restaurants = () => {
                     <Card {...restaurant} />
                   </Grid>
                 ))}
+            <Pagination count={Math.ceil(10 / 9)} onChange={onPageChange} />
           </Grid>
         </Grid>
       </Container>
