@@ -93,7 +93,9 @@ const Manage = () => {
   const { data: cuisineOptions } = useGetCuisinesQuery();
   const { data: typeOptions } = useGetTypesQuery();
   const [createRestaurant] = useCreateRestaurantMutation();
-  const { data: restaurantData } = useGetRestaurantByIdQuery(user?.id);
+  const { data: restaurantData } = useGetRestaurantByIdQuery(user?.id, {
+    refetchOnMountOrArgChange: true,
+  });
   const [State, setState] = useState("Add");
   console.log(restaurantData?.manager);
 

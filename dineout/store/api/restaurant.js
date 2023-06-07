@@ -16,6 +16,7 @@ export const restaurantApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
+      invalidatesTags: ["RestaurantData"],
     }),
     getTags: builder.query({
       query: () => "/api/mod/tags",
@@ -40,6 +41,7 @@ export const restaurantApi = baseApi.injectEndpoints({
     }),
     getRestaurantById: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}`,
+      providesTags: ["RestaurantData"],
     }),
     createTable: builder.mutation({
       query: ({ id, tableData }) => ({
