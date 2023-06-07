@@ -16,6 +16,8 @@ import {
   Tooltip,
 } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
 // layout
 import Navbar from "@/layouts/restaurant/Navbar";
 import { useGetRestaurantQuery } from "@/store/api/restaurants";
@@ -56,6 +58,7 @@ const Left = styled.div`
 const RestaurantInfo = () => {
   const router = useRouter();
   const { restaurantId } = router.query;
+  const user = useSelector(selectCurrentUser);
 
   console.log(restaurantId);
   let { data } = useGetRestaurantQuery(restaurantId, {
@@ -170,7 +173,7 @@ const RestaurantInfo = () => {
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Reservation />
+            <Reservation user={user} />
           </Grid>
         </Grid>
       </Container>

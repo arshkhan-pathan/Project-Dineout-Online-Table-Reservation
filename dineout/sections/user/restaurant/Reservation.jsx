@@ -204,38 +204,6 @@ const Reservation = () => {
         </Box>
       </StyledContent>{" "}
       <StyledFooter>
-        {restaurantId && selectedChip && selectedDate && guests > 0 ? (
-          <Button
-            variant="contained"
-            fullWidth
-            size="large"
-            color="primary"
-            sx={{
-              color: "white",
-              textTransform: "capitalize",
-              fontSize: "16px",
-              fontWeight: "bold",
-            }}
-          >
-            Continue
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            fullWidth
-            size="large"
-            color="primary"
-            sx={{
-              color: "white",
-              textTransform: "capitalize",
-              fontSize: "16px",
-              fontWeight: "bold",
-            }}
-            disabled // Add the disabled attribute
-          >
-            Continue
-          </Button>
-        )}
         {restaurantId && selectedChip && selectedDate && (
           <Payment
             restaurantId={restaurantId}

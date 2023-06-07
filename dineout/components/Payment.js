@@ -1,6 +1,11 @@
 import Axios from "axios";
 import React, { useState } from "react";
-
+import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
+import useToggle from "@/hooks/useToggle";
+import Modal from "@/components/Modal";
+import Auth from "@/layouts/user/navbar/Auth";
 export default function Payment({
   restaurantId,
   start_time,
@@ -10,8 +15,9 @@ export default function Payment({
   guests,
   table,
 }) {
-  // this function will handel payment when user submit his/her money
-  // and it will confim if payment is successfull or not
+  const { isOpen, onOpen, onClose } = useToggle();
+  console.log(isOpen);
+  const user = useSelector(selectCurrentUser);
   const handlePaymentSuccess = async (response) => {
     try {
       let bodyData = new FormData();
@@ -110,8 +116,28 @@ export default function Payment({
   };
 
   return (
-    <button onClick={showRazorpay} className="btn btn-primary btn-block">
-      Pay with razorpay
-    </button>
+    <>
+      {" "}
+      <Button
+        variant="contained"
+        fullWidth
+        size="large"
+        color="primary"
+        onClick={user ? showRazorpay : onOpen}
+        sx={{
+          color: "white",
+          textTransform: "capitalize",
+          fontSize: "16px",
+          fontWeight: "bold",
+        }}
+      >
+        Continue
+      </Button>
+      {isOpen && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <Auth onClose={onClose} />
+        </Modal>
+      )}
+    </>
   );
 }
