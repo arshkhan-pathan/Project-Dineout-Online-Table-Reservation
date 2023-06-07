@@ -4,14 +4,6 @@ import typeImg from "../../assets/images/type.svg";
 import bestsellingImg from "../../assets/images/bestselling.svg";
 import avgcostImg from "../../assets/images/avgcost.svg";
 import facilityImg from "../../assets/images/facilities.svg";
-import smokingImg from "../../assets/images/smoking.svg";
-import airImg from "../../assets/images/snowflake.svg";
-import homeImg from "../../assets/images/homedelivery.svg";
-import parkingImg from "../../assets/images/parking.svg";
-import takeawayImg from "../../assets/images/takeaway.svg";
-import cardImg from "../../assets/images/card.svg";
-import outdoorImg from "../../assets/images/outdoor.svg";
-import walletImg from "../../assets/images/wallet.svg";
 import Image from "next/image";
 
 const Wrapper = styled.div`

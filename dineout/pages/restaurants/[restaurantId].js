@@ -24,6 +24,7 @@ import AboutUs from "@/components/Restaurants/AboutUs";
 import FoodMenu from "@/components/Restaurants/FoodMenu";
 import SubMenu from "@/components/Restaurants/Submenu";
 import Footer from "@/components/Footer";
+import ReviewSection from "@/components/Restaurants/ReviewSection";
 const Wrapper = styled.div`
   padding: 26px 10.56% 48px;
   color: #797979;
@@ -68,7 +69,7 @@ const RestaurantInfo = () => {
       Restaurants
     </Typography>,
     <Typography sx={{ fontSize: 14 }} key="2" color="text.primary">
-      {restaurantId}
+      {data?.name}
     </Typography>,
   ];
 
@@ -89,7 +90,7 @@ const RestaurantInfo = () => {
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
-          sx={{ marginTop: '35px', marginBottom: '8px' }}
+          sx={{ marginTop: "35px", marginBottom: "8px" }}
         >
           {breadcrumbs}
         </Breadcrumbs>
@@ -128,7 +129,7 @@ const RestaurantInfo = () => {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      paddingInline: '15px',
+                      paddingInline: "15px",
                     }}
                   >
                     <Box>
@@ -139,18 +140,19 @@ const RestaurantInfo = () => {
                       >
                         {data?.name}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: '#696969' }}>
-                        {data?.locality} | {data?.address} | {data?.city}
+                      <Typography variant="body2" sx={{ color: "#696969" }}>
+                        {data?.address} | {data?.locality} | {data?.city}
                       </Typography>
 
-                      <Typography variant="body2" sx={{ color: '#696969' }}>
-                        Time: {" "}
-                        <Tooltip title="kkkkk" arrow>
-                          <Button variant="text" sx={{ textTransform: 'capitalize' }}>Opens at 12:00 PM</Button>
-                        </Tooltip>
+                      <Typography variant="body2" sx={{ color: "#696969" }}>
+                        Time:{" "}
+                        <Button
+                          variant="text"
+                          sx={{ textTransform: "capitalize" }}
+                        >
+                          Opens at {data?.opening_time}
+                        </Button>
                       </Typography>
-
-
                     </Box>
                     <Chip
                       label={data?.ratings}
@@ -186,6 +188,8 @@ const RestaurantInfo = () => {
                   average={data?.avg_cost}
                   tags={data?.tags}
                 />
+                <ReviewSection reviews={data?.reviews}></ReviewSection>
+                <></>
               </Left>
             </Main>
           </Grid>
