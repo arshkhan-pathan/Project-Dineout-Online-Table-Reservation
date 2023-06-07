@@ -11,8 +11,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { logOut } from "@/store/slices/auth";
 
-const settings = ["Profile", "Logout"];
-
 const Profile = () => {
   const dispatch = useDispatch();
   const logout = () => {
@@ -21,15 +19,10 @@ const Profile = () => {
       icon: "👏",
     });
   };
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -38,12 +31,12 @@ const Profile = () => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open Profile settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} size="small" edge="end">
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{width: '37px', height: '37px'}}/>
         </IconButton>
       </Tooltip>
       <Menu
-        sx={{ mt: "45px" }}
+        sx={{ mt: "45px", "& .MuiList-root": { width: '150px'} }}
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
@@ -58,12 +51,12 @@ const Profile = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem key="profile" onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">Profile</Typography>
+        <MenuItem key="profile" onClick={handleCloseUserMenu} sx={{padding: '10px'}}>
+          <Typography fontWeight="bold" textAlign="start">Profile</Typography>
         </MenuItem>
 
-        <MenuItem key="Logout" onClick={logout}>
-          <Typography textAlign="center">Logout</Typography>
+        <MenuItem key="Logout" onClick={logout} sx={{padding: '10px'}}>
+          <Typography fontWeight="bold" textAlign="start">Logout</Typography>
         </MenuItem>
       </Menu>
     </Box>

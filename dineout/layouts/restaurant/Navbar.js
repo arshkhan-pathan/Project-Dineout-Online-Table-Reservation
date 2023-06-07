@@ -44,6 +44,7 @@ const Navbar = () => {
           <div className={classes.search_button}>
             <button>Search</button>
           </div>
+
         </div>
         <div className={classes.horizontal_line}></div>
         <div className={classes.header_section2}>

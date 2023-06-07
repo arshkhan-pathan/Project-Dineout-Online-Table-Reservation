@@ -8,13 +8,41 @@ import Login from "./LoginButton";
 import { selectCurrentUser } from "@/store/slices/auth.js";
 import Profile from "./profile";
 import { useRouter } from "next/router";
+import Select from "@/components/Select";
+
+const locations = [
+  {
+    id: 'delhi',
+    name: 'Delhi',
+  },
+  {
+    id: 'mumbai',
+    name: 'Mumbai',
+  },
+  {
+    id: 'banglore',
+    name: 'Banglore',
+  },
+  {
+    id: 'surat',
+    name: 'Surat',
+  },
+  {
+    id: 'pune',
+    name: 'Pune',
+  },
+  {
+    id: 'rajasthan',
+    name: 'Rajasthan',
+  },
+];
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
   const router = useRouter();
   console.log(router.pathname);
   return (
-    <header id="header" className={classes.header}>
+    <header id="header">
       <div id="nav" className={classes.nav}>
         <div id="logo" className={classes.logo}>
           <Link legacyBehavior href="/">
@@ -37,16 +65,13 @@ const Navbar = () => {
               className={classes.loc}
             />
           </div>
-          <select
+          <Select
             className={classes.cityselect}
-            name=""
-            aria-placeholder="Please type a location"
-          >
-            <option id="Delhi">Delhi</option>
-            <option value="Rajauri Garden">Mumbai</option>
-            <option value="Sector 29, Gurgaon">Pune</option>
-            <option value="DLF Cyber City, Gurgaon">Benglore</option>
-          </select>
+            options={locations} 
+            placeholder="Please type a location" 
+            isMulti={false} 
+            styles={{width: '100%'}} 
+          />
         </div>
 
         <div id="con" className={classes.con}>
