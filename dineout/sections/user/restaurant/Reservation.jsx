@@ -80,9 +80,12 @@ const Reservation = () => {
 
   const onGuestIncrement = () => {
     setGuests((prev) => prev + 1);
+    setSelectedChip(null);
   };
-  const onGuestDecrement = () =>
+  const onGuestDecrement = () => {
     setGuests((prev) => (prev === 0 ? prev : prev - 1));
+    setSelectedChip(null);
+  };
 
   const today = new Date();
   const oneMonthFromNow = new Date();
@@ -203,7 +206,7 @@ const Reservation = () => {
         </Box>
       </StyledContent>
       <StyledFooter>
-        {restaurantId && selectedChip && selectedDate && (
+        {restaurantId && selectedChip && selectedDate && guests > 0 && (
           <Payment
             restaurantId={restaurantId}
             start_time={selectedChip[0][0]}

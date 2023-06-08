@@ -6,6 +6,7 @@ import { selectCurrentUser } from "@/store/slices/auth";
 import useToggle from "@/hooks/useToggle";
 import Modal from "@/components/Modal";
 import Auth from "@/layouts/user/navbar/Auth";
+import { toast } from "react-hot-toast";
 export default function Payment({
   restaurantId,
   start_time,
@@ -35,9 +36,11 @@ export default function Payment({
       })
         .then((res) => {
           console.log("Everything is OK!");
+          toast.success("🎉 Your Booking Is Confimed");
         })
         .catch((err) => {
           console.log(err);
+          toast.error("❌ Something Went Wrong");
         });
     } catch (error) {
       console.log(console.error());
