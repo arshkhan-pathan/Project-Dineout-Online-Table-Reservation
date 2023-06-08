@@ -2,9 +2,12 @@
 import classes from "@/styles/NavbarSecondary.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
 
 const Navbar = () => {
   const router = useRouter();
+  const user = useSelector(selectCurrentUser);
   return (
     <div className={classes.body}>
       <div className={classes.inner_page_header}>
@@ -65,17 +68,19 @@ const Navbar = () => {
                 Restaurants
               </p>
             </Link>
-            <Link href="/restaurant/login" legacyBehavior>
-              <p
-                className={
-                  router.pathname == "/restaurant/login"
-                    ? classes.pActive
-                    : classes.p
-                }
-              >
-                Restaurant Login
-              </p>
-            </Link>
+            {!user && (
+              <Link href="/restaurant/login" legacyBehavior>
+                <p
+                  className={
+                    router.pathname == "/restaurant/login"
+                      ? classes.pActive
+                      : classes.p
+                  }
+                >
+                  Restaurant Login
+                </p>
+              </Link>
+            )}
           </div>
         </div>
       </div>
