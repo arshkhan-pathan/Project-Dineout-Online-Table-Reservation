@@ -121,22 +121,54 @@ function index() {
         sx={{ minHeight: "100vh" }}
       >
         <Grid item xs={3}>
-          <h1>Upcoming Bookings</h1>
-          <Box sx={{ height: 300, width: "100%" }}>
-            <DataGrid
-              rows={data?.upcoming_bookings || []}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+          {data?.upcoming_bookings.length > 0 ? (
+            <h1>Upcoming Bookings</h1>
+          ) : (
+            <h1>No Upcoming Bookings to show</h1>
+          )}
+          {data?.upcoming_bookings.length > 0 && (
+            <Box sx={{ height: 300, width: "100%" }}>
+              <DataGrid
+                rows={data?.upcoming_bookings || []}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
-          </Box>
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+              />
+            </Box>
+          )}
+        </Grid>
+        <Grid item xs={3}>
+          {data?.past_bookings?.length > 0 ? (
+            <>
+              <h1>Past Bookings</h1>
+              <Box sx={{ height: 300, width: "100%" }}>
+                <DataGrid
+                  rows={data?.past_bookings || []}
+                  columns={columns}
+                  initialState={{
+                    pagination: {
+                      paginationModel: {
+                        pageSize: 5,
+                      },
+                    },
+                  }}
+                  pageSizeOptions={[5]}
+                  disableRowSelectionOnClick
+                />
+              </Box>
+            </>
+          ) : (
+            <>
+              <h1>No Past Bookings to show</h1>
+            </>
+          )}
         </Grid>
       </Grid>
     </UserLayout>
