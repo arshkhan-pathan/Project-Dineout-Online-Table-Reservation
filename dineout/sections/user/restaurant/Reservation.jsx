@@ -163,7 +163,7 @@ const Reservation = () => {
               }}
             >
               <Typography sx={{ fontWeight: "bold" }} variant="body2">
-                Guests:{" "}
+                Guests:
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                 <IconButton onClick={onGuestDecrement} size="small">
@@ -201,7 +201,7 @@ const Reservation = () => {
               ))}
           </Grid>
         </Box>
-      </StyledContent>{" "}
+      </StyledContent>
       <StyledFooter>
         {restaurantId && selectedChip && selectedDate && (
           <Payment

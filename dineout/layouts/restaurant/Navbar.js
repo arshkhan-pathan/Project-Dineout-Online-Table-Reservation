@@ -44,7 +44,6 @@ const Navbar = () => {
           <div className={classes.search_button}>
             <button>Search</button>
           </div>
-
         </div>
         <div className={classes.horizontal_line}></div>
         <div className={classes.header_section2}>
@@ -54,7 +53,7 @@ const Navbar = () => {
             </Link>
             <Link href="/restaurant/manage" legacyBehavior>
               <p className={classes.p}>Book a Table</p>
-            </Link>{" "}
+            </Link>
             <Link href="/restaurants" legacyBehavior>
               <p
                 className={
@@ -65,7 +64,7 @@ const Navbar = () => {
               >
                 Restaurants
               </p>
-            </Link>{" "}
+            </Link>
             <Link href="/restaurant/login" legacyBehavior>
               <p
                 className={
@@ -76,7 +75,7 @@ const Navbar = () => {
               >
                 Restaurant Login
               </p>
-            </Link>{" "}
+            </Link>
           </div>
         </div>
       </div>

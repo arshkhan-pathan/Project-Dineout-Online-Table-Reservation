@@ -257,7 +257,6 @@ const Pricing = () => {
               />
             ) : (
               <>
-                {" "}
                 <Grid item xs={12} textAlign="start">
                   <Typography fontWeight="bold">
                     Rules data not available. Please add a Rule to view.
@@ -266,7 +265,7 @@ const Pricing = () => {
                 </Grid>
               </>
             )}
-          </Grid>{" "}
+          </Grid>
         </Grid>
       </Box>
     </>

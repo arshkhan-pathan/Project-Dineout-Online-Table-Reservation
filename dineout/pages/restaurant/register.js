@@ -59,7 +59,6 @@ const Register = () => {
 
   return (
     <>
-      {" "}
       <Auth
         initialValues={initialValues}
         validationSchema={validationSchema}

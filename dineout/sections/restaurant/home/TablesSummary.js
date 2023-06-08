@@ -107,7 +107,6 @@ const TablesSummary = () => {
   };
   return (
     <>
-      {" "}
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>
@@ -167,7 +166,6 @@ const TablesSummary = () => {
               />
             ) : (
               <>
-                {" "}
                 <Grid item xs={12} textAlign="start">
                   <Typography fontWeight="bold">
                     Table data not available. Please add a table to view.
@@ -176,7 +174,7 @@ const TablesSummary = () => {
                 </Grid>
               </>
             )}
-          </Grid>{" "}
+          </Grid>
         </Grid>
       </Box>
     </>

@@ -57,7 +57,6 @@ const BookingSummary = () => {
   console.log(data);
   return (
     <>
-      {" "}
       <Box>
         <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
@@ -153,7 +152,7 @@ const BookingSummary = () => {
                 </Grid>
               </>
             )}
-          </Grid>{" "}
+          </Grid>
           <Grid container item xs={12} spacing={2}>
             {data?.past_bookings_data.length > 0 ? (
               <>

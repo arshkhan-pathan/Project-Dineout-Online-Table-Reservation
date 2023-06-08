@@ -117,7 +117,6 @@ export default function Payment({
 
   return (
     <>
-      {" "}
       <Button
         variant="contained"
         fullWidth

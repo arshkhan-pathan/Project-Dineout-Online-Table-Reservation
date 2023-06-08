@@ -148,7 +148,7 @@ const RestaurantInfo = () => {
                       </Typography>
 
                       <Typography variant="body2" sx={{ color: "#696969" }}>
-                        Time:{" "}
+                        Time:
                         <Button
                           variant="text"
                           sx={{ textTransform: "capitalize" }}

@@ -207,7 +207,6 @@ const Manage = () => {
 
   return (
     <>
-      {" "}
       <PrimarySearchAppBar />
       <Box sx={{ display: "flex" }}>
         <MiniDrawer />
