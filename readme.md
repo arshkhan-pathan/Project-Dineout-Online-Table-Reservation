@@ -1,47 +1,24 @@
 - ## Todo
 
-  - Recreate Backend apis
-  - add link component to drawer
-  - sort tag search bookings , reviews
-  - add image fields in Restaurant add , multiple select
-  - Protect routes with roles
-  - Refine Manager code
-  - add put method
-  - delete render method
-
-- ## Frontend
-
-  - Understand Code
-  - Get user state
-  - understand redux
-  - understand admin template
-  - create flow
+- Improve color on frontend page
+- Fix Pagination
+- Add User button on Secondary Navbar
+- Feautured And Near API
+- Fix Folder Structure
+- new state for non users role?
+- User Profile Page
+- Add Reviw on Restaurant Page
 
 - ## Backend
 - Admin Routes
   - Give Permisson To routes
   - Tag types Cuisines
-- Shift manager Logins Logic to separate Folder
 - Handle Unpaid Booking Deletions after 7 min
 
 ## Restauarant Dashboard
 
 - Basic Information
-- Edit Restaurant
-- Past Bookings
-- Todays Bookings
-- Future Bookings
-- Earning this month
-- Earning is Week
-- Earning Today
-- Add Dayanmic Price
-- Veiw Booking Details
-- Add Tables
 - AddBest seller
-- Reviews
-- Table Avilibility
-- optional End time start time
-- optional Menu Image
 
 - ## Admin Dashboard
 
@@ -67,7 +44,6 @@
 - Implement social authentication using the tutorial [here](https://www.youtube.com/watch?v=KiJFHBQ44sw&list=PLJRGQoqpRwdfoa9591BcUS6NmMpZcvFsM&index=10&t=150s)
 - Implement restaurant registration
 - Use PostgreSQL for database
-- Create a restaurant profile form
 - Implement a restaurant API
 - Implement scroll on navbar
 - Improve Djoser email templates

@@ -1,9 +1,8 @@
-import Payment from "@/components/Payment";
-
+import UserProfile from "@/components/User/UserProfile";
 import React from "react";
 
 function test() {
-  return <Payment></Payment>;
+  return <UserProfile></UserProfile>;
 }
 
 export default test;

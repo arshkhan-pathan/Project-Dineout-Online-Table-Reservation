@@ -63,10 +63,23 @@ const Restaurants = () => {
                     <Card {...restaurant} />
                   </Grid>
                 ))}
-            <Pagination
-              count={Math.ceil(data?.count / 12)}
-              onChange={onPageChange}
-            />
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ minHeight: "100vh" }}
+            >
+              <Grid item xs={12} alignItems="center">
+                <div>
+                  <Pagination
+                    count={Math.ceil(data?.count / 12)}
+                    onChange={onPageChange}
+                  />
+                </div>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
