@@ -9,6 +9,8 @@
 - User Profile Page
 - Add Reviw on Restaurant Page
 - IMPROVE BOOKINGS LOGIC + cANCELLATION
+- Featured Api
+- Dropbox Get it working
 
 - ## Backend
 - Admin Routes
