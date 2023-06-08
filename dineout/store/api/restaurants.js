@@ -19,6 +19,9 @@ export const restaurantsApi = baseApi.injectEndpoints({
       query: ({ restaurantId, date, num_guest }) =>
         `/api/restaurant/availibility/?date=${date}&num_guests=${num_guest}&restaurant_id=${restaurantId}`,
     }),
+    getUserProfile: builder.query({
+      query: (userId) => `/api/restaurant/users/${userId}/`,
+    }),
   }),
 });
 
@@ -26,4 +29,5 @@ export const {
   useGetAllRestaurantQuery,
   useGetRestaurantQuery,
   useCheckAvailibilityQuery,
+  useGetUserProfileQuery,
 } = restaurantsApi;

@@ -11,7 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { logOut } from "@/store/slices/auth";
 
-const Profile = () => {
+const Profile = ({ image }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const logout = () => {
@@ -46,7 +46,7 @@ const Profile = () => {
         >
           <Avatar
             alt="Remy Sharp"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT57fZABNxiIJYw1GMNQfkDrP2pz9dB7intQ1u7aG7le7TpLNqde9vAXMKGwO2qv2FXvvs&usqp=CAU"
+            src={image}
             sx={{ width: "37px", height: "37px" }}
           />
         </IconButton>

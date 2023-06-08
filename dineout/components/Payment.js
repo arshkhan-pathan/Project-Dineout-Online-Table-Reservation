@@ -16,7 +16,6 @@ export default function Payment({
   table,
 }) {
   const { isOpen, onOpen, onClose } = useToggle();
-  console.log(isOpen);
   const user = useSelector(selectCurrentUser);
   const handlePaymentSuccess = async (response) => {
     try {
@@ -72,7 +71,7 @@ export default function Payment({
         additional_details: "",
         amount: 100,
         isPaid: false,
-        customer: userId,
+        customer: user?.id,
         restaurant: restaurantId,
         table: table,
       },

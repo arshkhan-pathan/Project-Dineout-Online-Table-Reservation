@@ -208,7 +208,6 @@ const Reservation = () => {
             restaurantId={restaurantId}
             start_time={selectedChip[0][0]}
             end_time={selectedChip[0][1]}
-            userId={5}
             date={selectedDate}
             guests={guests}
             table={selectedChip[1][0]}

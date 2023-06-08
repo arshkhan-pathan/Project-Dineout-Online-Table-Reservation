@@ -12,28 +12,28 @@ import Select from "@/components/Select";
 
 const locations = [
   {
-    id: 'delhi',
-    name: 'Delhi',
+    id: "delhi",
+    name: "Delhi",
   },
   {
-    id: 'mumbai',
-    name: 'Mumbai',
+    id: "mumbai",
+    name: "Mumbai",
   },
   {
-    id: 'banglore',
-    name: 'Banglore',
+    id: "banglore",
+    name: "Banglore",
   },
   {
-    id: 'surat',
-    name: 'Surat',
+    id: "surat",
+    name: "Surat",
   },
   {
-    id: 'pune',
-    name: 'Pune',
+    id: "pune",
+    name: "Pune",
   },
   {
-    id: 'rajasthan',
-    name: 'Rajasthan',
+    id: "rajasthan",
+    name: "Rajasthan",
   },
 ];
 
@@ -67,10 +67,10 @@ const Navbar = () => {
           </div>
           <Select
             className={classes.cityselect}
-            options={locations} 
-            placeholder="Please type a location" 
-            isMulti={false} 
-            styles={{width: '100%'}} 
+            options={locations}
+            placeholder="Please type a location"
+            isMulti={false}
+            styles={{ width: "100%" }}
           />
         </div>
 
@@ -101,7 +101,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        {!user ? <Login /> : <Profile />}
+        {!user ? <Login /> : <Profile image={user?.image} />}
       </div>
       {console.log(user)}
     </header>
