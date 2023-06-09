@@ -103,7 +103,7 @@ const Auth = ({
           <Typography variant="h5" sx={{ px: 5, mt: 10, mb: 5 }}>
             Hi, Welcome Back
           </Typography>
-          <Image src={illustrationImage} alt="login" width="650" />
+          <Image src={illustrationImage} alt="login" width="650" style={{width: '100%', objectFit: "contain"}}/>
         </StyledSection>
       )}
       <Container component="main" maxWidth="xs">

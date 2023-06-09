@@ -12,28 +12,16 @@ import Select from "@/components/Select";
 
 const locations = [
   {
-    id: "delhi",
-    name: "Delhi",
+    id: "Adajan",
+    name: "Adajan",
   },
   {
-    id: "mumbai",
-    name: "Mumbai",
+    id: "Vesu",
+    name: "Vesu",
   },
   {
-    id: "banglore",
-    name: "Banglore",
-  },
-  {
-    id: "surat",
-    name: "Surat",
-  },
-  {
-    id: "pune",
-    name: "Pune",
-  },
-  {
-    id: "rajasthan",
-    name: "Rajasthan",
+    id: "Varachha",
+    name: "Varachha",
   },
 ];
 
