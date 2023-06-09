@@ -97,7 +97,7 @@ export default function MiniDrawer() {
               textDecoration: "none",
               color: router.pathname === "/admin/dashboard" ? "red" : "inherit",
             }}
-            href="/restaurant"
+            href="/admin/dashboard"
           >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
@@ -125,7 +125,7 @@ export default function MiniDrawer() {
               textDecoration: "none",
               color: router.pathname === "/admin/home" ? "red" : "inherit",
             }}
-            href="/restaurant/requests"
+            href="/admin/requests"
           >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
