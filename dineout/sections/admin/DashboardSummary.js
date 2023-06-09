@@ -14,7 +14,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
-const DashboardSummary = ({}) => {
+const DashboardSummary = ({ data }) => {
   //   console.log(data);
   //   console.log(stats);
 
@@ -25,28 +25,28 @@ const DashboardSummary = ({}) => {
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="New Users This Week"
-              amount="100"
+              amount={data?.new_users_count}
               icon={<PeopleIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Total Users Registered"
-              amount="100"
+              amount={data?.total_users_count}
               icon={<GroupAddIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Total Restaurants"
-              amount="100"
+              amount={data?.verified_restaurants_count}
               icon={<RestaurantIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Pending Restarurant"
-              amount="100"
+              amount={data?.unverified_restaurants_count}
               icon={<HourglassEmptyIcon />}
             />
           </Grid>
@@ -54,6 +54,7 @@ const DashboardSummary = ({}) => {
             <LineChart
               width={500}
               height={300}
+              data={data?.bookings_graph_data}
               margin={{
                 top: 5,
                 right: 30,
@@ -68,9 +69,10 @@ const DashboardSummary = ({}) => {
               <Legend />
               <Line
                 type="monotone"
-                dataKey="total_earnings"
+                dataKey="count"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
+                name="Bookings Count"
               />
             </LineChart>
           </Grid>
@@ -78,6 +80,7 @@ const DashboardSummary = ({}) => {
             <LineChart
               width={500}
               height={300}
+              data={data?.new_users_graph_data}
               margin={{
                 top: 5,
                 right: 30,
@@ -86,13 +89,14 @@ const DashboardSummary = ({}) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
+              <XAxis dataKey="date_joined__date" />
+              <YAxis></YAxis>
               <Tooltip />
               <Legend />
               <Line
                 type="monotone"
-                dataKey="total_bookings"
+                dataKey="count"
+                name="User Count"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />

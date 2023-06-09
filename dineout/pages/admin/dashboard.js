@@ -2,8 +2,10 @@ import React from "react";
 import AdminLayout from "@/layouts/admin";
 import { Box, Typography } from "@mui/material";
 import DashboardSummary from "@/sections/admin/DashboardSummary";
+import { useGetStatsQuery } from "@/store/api/admin";
 
 function dashboard() {
+  const { data } = useGetStatsQuery();
   return (
     <>
       <AdminLayout>
@@ -14,7 +16,7 @@ function dashboard() {
         </Box>
 
         <Box>
-          <DashboardSummary></DashboardSummary>
+          <DashboardSummary data={data}></DashboardSummary>
         </Box>
       </AdminLayout>
     </>
