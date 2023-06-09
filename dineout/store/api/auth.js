@@ -24,6 +24,13 @@ export const authApi = baseApi.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    adminLogin: builder.mutation({
+      query: (credentials) => ({
+        url: "/api/admin/login",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
   }),
 });
 
@@ -31,4 +38,5 @@ export const {
   useLoginMutation,
   useRestaurantRegisterMutation,
   useRestaurantLoginMutation,
+  useAdminLoginMutation,
 } = authApi;
