@@ -1,18 +1,15 @@
 //
-import Footer from '../user/Footer';
-import Navbar from '../user/navbar';
 
-
+import MiniDrawer from "./Drawer";
+import PrimarySearchAppBar from "./Appbar";
 const AdminLayout = ({ children }) => {
-    return (
-        <>
-            <Navbar />
-            <main>
-                {children}
-            </main>
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <PrimarySearchAppBar />
+      <MiniDrawer />
+      <main>{children}</main>
+    </>
+  );
 };
 
 export default AdminLayout;

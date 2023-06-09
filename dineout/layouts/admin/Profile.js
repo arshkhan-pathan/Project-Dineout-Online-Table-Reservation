@@ -68,15 +68,15 @@ const Profile = ({ image }) => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem
-          key="profile"
-          onClick={handleProfileCloseUserMenu}
-          sx={{ padding: "10px" }}
-        >
-          <Typography fontWeight="bold" textAlign="start">
-            Profile
-          </Typography>
-        </MenuItem>
+        {/* <MenuItem
+            key="profile"
+            onClick={handleProfileCloseUserMenu}
+            sx={{ padding: "10px" }}
+            >
+            <Typography fontWeight="bold" textAlign="start">
+                Profile
+            </Typography>
+            </MenuItem> */}
 
         <MenuItem key="Logout" onClick={logout} sx={{ padding: "10px" }}>
           <Typography fontWeight="bold" textAlign="start">
