@@ -113,15 +113,15 @@ function tags() {
     <>
       <AdminLayout>
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
             Add Tags, Types and Cuisines
           </Typography>
           <Divider />
         </Box>
 
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} lg={6}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6} lg={12}>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
               Types
             </Typography>
             <TagsCuisineForm
@@ -135,8 +135,8 @@ function tags() {
               columns={columns}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={6}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          <Grid item xs={12} sm={6} lg={12}>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
               Cuisines
             </Typography>
             <TagsCuisineForm
@@ -151,7 +151,7 @@ function tags() {
             />
           </Grid>{" "}
           <Grid item xs={12} sm={12} lg={12}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
               Tags
             </Typography>
             <Formik
@@ -187,21 +187,23 @@ function tags() {
                         Add
                       </Button>
                     </Grid>
-                    <Box sx={{ height: 400, width: "40%" }}>
-                      <DataGrid
-                        rows={rows}
-                        columns={columns}
-                        initialState={{
-                          pagination: {
-                            paginationModel: {
-                              pageSize: 5,
+                    <Grid item xs={12}>
+                      <Box sx={{ height: 400, width: "100%" }}>
+                        <DataGrid
+                          rows={rows}
+                          columns={columns}
+                          initialState={{
+                            pagination: {
+                              paginationModel: {
+                                pageSize: 5,
+                              },
                             },
-                          },
-                        }}
-                        pageSizeOptions={[5]}
-                        disableRowSelectionOnClick
-                      />
-                    </Box>
+                          }}
+                          pageSizeOptions={[5]}
+                          disableRowSelectionOnClick
+                        />
+                      </Box>
+                    </Grid>
                   </Grid>
                 </Form>
               )}

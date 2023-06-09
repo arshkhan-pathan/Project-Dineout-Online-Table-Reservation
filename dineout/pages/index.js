@@ -1,6 +1,6 @@
 // packages
 import Slider from "react-slick";
-import { Box, Container, Typography, Grid } from "@mui/material";
+import { Box, Container, Typography, Grid, IconButton } from "@mui/material";
 // layouts
 import UserLayout from "@/layouts/user";
 // store
@@ -9,65 +9,86 @@ import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
 import Card from "@/components/Card";
 import { useEffect } from "react";
 
+const arrowSx = {
+  display: "block",
+  background: "#ff645a",
+  padding: 1,
+  borderRadius: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  "&:hover": {
+    background: 'red'
+  }
+};
+
+const NextArrow = (props) => {
+  const { className, style, onClick } = props;
+  const isDisabled = className.includes('slick-disabled');
+  return (
+    <Box
+      className={className}
+      sx={{ ...style, ...arrowSx, right: '-40px', display: isDisabled ? 'none' : 'flex' }}
+      onClick={onClick}
+    />
+  );
+}
+
+const PrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  const isDisabled = className.includes('slick-disabled');
+  return (
+    <Box
+      className={className}
+      sx={{ ...style, ...arrowSx, left: '-40px', display: isDisabled ? 'none' : 'flex' }}
+      onClick={onClick}
+    />
+  );
+}
+
 const settings = {
-  infinite: true,
+  infinite: false,
   speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />
 };
 
 const Home = () => {
-  const { data: allRestaurans, isLoading } = useGetAllRestaurantQuery({ refetchOnMountOrArgChange: true });
+  const selectedFilters = {
+    cuisines: "",
+    tags: "",
+    types: "",
+  };
+
+  const { data: allRestaurans, isLoading } = useGetAllRestaurantQuery({ selectedFilters, page: 1 }, { refetchOnMountOrArgChange: true });
+
+  useEffect(() => {
+    console.log('dddd', allRestaurans);
+  }, [allRestaurans])
 
   return (
     <UserLayout>
-      <Box sx={{mt: 4}}>
+      <Box sx={{ mt: 4 }}>
         <Container maxWidth="lg">
-          <Grid container xs={12} sx={{ height: "fit-content" }}>
+          <Grid container xs={12} sx={{
+            height: "fit-content",
+            "& .slick-track": {
+              display: 'flex',
+              gap: '15px',
+            }
+          }}>
             <Grid item xs={12}>
               <Typography variant="h6" fontWeight="bold">
                 Restaurants Near You
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Slider {...settings}> 
+              <Slider {...settings}>
                 {allRestaurans?.results?.map((restaurant) => (
-                    <Card key={restaurant.id} {...restaurant} />
+                  <Card key={restaurant.id} {...restaurant} />
                 ))}
               </Slider>
-
-              <div>
-        <h2> Multiple items </h2>
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
-        </Slider>
-      </div>
             </Grid>
           </Grid>
         </Container>

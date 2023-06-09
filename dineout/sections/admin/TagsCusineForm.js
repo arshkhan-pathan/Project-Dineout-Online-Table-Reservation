@@ -22,7 +22,7 @@ export const TagsCuisineForm = ({
     {({ values, setFieldValue }) => (
       <Form>
         <Grid container rowSpacing={2} columnSpacing={3}>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Grid item xs={4}>
             <Field
               name={name}
               label={label}
@@ -38,21 +38,24 @@ export const TagsCuisineForm = ({
               {buttonText}
             </Button>
           </Grid>
-          <Box sx={{ height: 400, width: "40%" }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+          <Grid item xs={12}>
+
+            <Box sx={{ height: 400, width: "100%" }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              pageSizeOptions={[5]}
-              disableRowSelectionOnClick
-            />
-          </Box>
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+              />
+            </Box>
+          </Grid>
         </Grid>
       </Form>
     )}

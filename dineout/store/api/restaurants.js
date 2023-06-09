@@ -5,7 +5,7 @@ export const restaurantsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllRestaurant: builder.query({
       query: ({ selectedFilters, page, search }) => {
-        let queryUrl = `/api/restaurant/restaurants/?cuisines=${selectedFilters.cuisines}&tags=${selectedFilters.tags}&types=${selectedFilters.types}&page=${page}`;
+        let queryUrl = `/api/restaurant/restaurants/?cuisines=${selectedFilters?.cuisines}&tags=${selectedFilters?.tags}&types=${selectedFilters?.types}&page=${page}`;
         if (search) {
           queryUrl += `&search=${search}`;
         }

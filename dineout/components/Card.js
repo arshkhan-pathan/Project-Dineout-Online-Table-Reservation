@@ -7,8 +7,27 @@ import {
     CardContent,
     Typography,
     Chip,
+    Tooltip,
 } from '@mui/material';
 import { useRouter } from 'next/router';
+
+const MAX_WORDS = 5;
+const RenderTitle = ({ title }) => {
+    const words = title.split(' ');
+    if (words.length <= MAX_WORDS) {
+        return (
+            <Typography component="h4" sx={{ fontWeight: 'bold' }}>{title}</Typography>
+        );
+    } else {
+        const truncatedTitle = words.slice(0, MAX_WORDS).join(' ');
+
+        return (
+            <Tooltip title={title} placement='bottom-end' arrow>
+                <Typography component="h4" sx={{ fontWeight: 'bold' }}>{truncatedTitle + '...'}</Typography>
+            </Tooltip>
+        );
+    }
+}
 
 
 const Card = ({ id, name, locality, ratings, images }) => {
@@ -36,7 +55,7 @@ const Card = ({ id, name, locality, ratings, images }) => {
                 <CardContent>
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Box>
-                            <Typography component="h4" sx={{ fontWeight: 'bold' }}>{name}</Typography>
+                            <RenderTitle title={name} />
                             <Typography sx={{ fontSize: 12 }}>{locality}</Typography>
                         </Box>
                         <Chip label={ratings} color="success" sx={{ borderRadius: 1, height: 25 }} />
