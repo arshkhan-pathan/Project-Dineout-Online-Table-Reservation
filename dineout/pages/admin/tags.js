@@ -1,34 +1,132 @@
 import AdminLayout from "@/layouts/admin";
 import React from "react";
-import { Box, Typography, Grid, Divider } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  Divider,
+  Tooltip,
+  IconButton,
+} from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { TagsCuisineForm } from "@/sections/admin/TagsCusineForm";
 
-const columns = [
+export const DeleteTypes = (params) => {
+  const [deleteTypes] = useDeleteTypesMutation();
+  const onDeleteTypes = () => {
+    console.log("delete table for id: ", params.row.id);
+    deleteTypes(params.row.id);
+  };
+
+  return (
+    <Tooltip title="Delete">
+      <IconButton onClick={onDeleteTypes}>
+        <DeleteIcon sx={{ color: "red" }} />
+      </IconButton>
+    </Tooltip>
+  );
+};
+
+export const DeleteCuisines = (params) => {
+  const [deleteCuisine] = useDeleteCuisineMutation();
+  const onDeleteCuisines = () => {
+    console.log("delete table for id: ", params.row.id);
+    console.log(params.row.id);
+    deleteCuisine(params.row.id);
+  };
+
+  return (
+    <Tooltip title="Delete">
+      <IconButton onClick={onDeleteCuisines}>
+        <DeleteIcon sx={{ color: "red" }} />
+      </IconButton>
+    </Tooltip>
+  );
+};
+
+export const DeleteTags = (params) => {
+  const [deleteTags] = useDeleteTagsMutation();
+  const onDeleteTags = () => {
+    console.log("delete table for id: ", params.row.id);
+    console.log(params.row.id);
+    deleteTags(params.row.id);
+  };
+
+  return (
+    <Tooltip title="Delete">
+      <IconButton onClick={onDeleteTags}>
+        <DeleteIcon sx={{ color: "red" }} />
+      </IconButton>
+    </Tooltip>
+  );
+};
+
+const columnsTypes = [
+  { field: "id", headerName: "ID", width: 200 },
+  {
+    field: "name",
+    headerName: "Types",
+    width: 300,
+    editable: true,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 300,
+    renderCell: DeleteTypes,
+  },
+];
+const columnsCusinies = [
+  { field: "id", headerName: "ID", width: 200 },
+  {
+    field: "name",
+    headerName: "Cuisnies",
+    width: 300,
+    editable: true,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 300,
+    renderCell: DeleteCuisines,
+  },
+];
+const columnsTags = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "firstName",
-    headerName: "First name",
-    width: 100,
+    field: "name",
+    headerName: "Tags",
+    width: 250,
     editable: true,
+  },
+  {
+    field: "image",
+    headerName: "Image Url",
+    width: 600,
+    editable: true,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 150,
+    renderCell: DeleteTags,
   },
 ];
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
-
 import * as Yup from "yup";
+import {
+  useCreateCuisineMutation,
+  useCreateTagsMutation,
+  useCreateTypesMutation,
+  useDeleteCuisineMutation,
+  useDeleteTagsMutation,
+  useDeleteTypesMutation,
+  useGetTagTypeCuisineQuery,
+} from "@/store/api/admin";
+import { useCreateTableMutation } from "@/store/api/restaurant";
 
 const cuisineInitialValues = {
   cuisine: "",
@@ -60,53 +158,43 @@ const cuisineValidationSchema = Yup.object().shape({
 });
 
 function tags() {
-  const onSubmit = async (values, action) => {
-    // console.log(values);
-
-    const tableData = {
-      table_number: values.table_number,
-      capacity: values.capacity,
-    };
-
-    const payload = { id: user?.id, tableData: tableData };
-    console.log(payload, "payload");
-    try {
-      const data = await createTable(payload);
-
-      // After successful submission, fetch the updated table data
-    } catch (error) {
-      console.error(error);
-    }
-    action.resetForm();
-  };
-
   // Cusines Submit Handler
+  const { data } = useGetTagTypeCuisineQuery("s", {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const [createTypes] = useCreateTypesMutation();
+  const [createCuisine] = useCreateCuisineMutation();
+  const [createTag] = useCreateTagsMutation();
 
   const cusineSubmitHandler = async (values, action) => {
     const cusinesData = {
-      cuisines: values.cuisine,
+      name: values.cuisine,
     };
 
     console.log(cusinesData);
+    createCuisine(cusinesData);
     action.resetForm();
   };
 
   const tagsSubmitHandler = async (values, action) => {
     const tagData = {
-      tag: values.tag,
+      name: values.tag,
       image: values.image,
     };
 
     console.log(tagData);
+    createTag(tagData);
     action.resetForm();
   };
 
   const typesSubmitHandler = async (values, action) => {
     const typesData = {
-      types: values.type,
+      name: values.type,
     };
 
-    console.log(typesData);
+    console.log(typesData, "Types");
+    createTypes(typesData);
     action.resetForm();
   };
   return (
@@ -124,6 +212,7 @@ function tags() {
             <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
               Types
             </Typography>
+
             <TagsCuisineForm
               initialValues={typeInitialValues}
               validationSchema={typeValidationSchema}
@@ -131,8 +220,8 @@ function tags() {
               label="Types"
               name="type"
               buttonText="Add"
-              rows={rows}
-              columns={columns}
+              rows={data?.types || []}
+              columns={columnsTypes}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={12}>
@@ -146,10 +235,10 @@ function tags() {
               label="Cuisnes"
               name="cuisine"
               buttonText="Add"
-              rows={rows}
-              columns={columns}
+              rows={data?.cuisines || []}
+              columns={columnsCusinies}
             />
-          </Grid>{" "}
+          </Grid>
           <Grid item xs={12} sm={12} lg={12}>
             <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
               Tags
@@ -171,7 +260,7 @@ function tags() {
                         helperText={<ErrorMessage name="tag" />}
                         fullWidth
                       />
-                    </Grid>{" "}
+                    </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Field
                         name="image"
@@ -181,7 +270,7 @@ function tags() {
                         helperText={<ErrorMessage name="name" />}
                         fullWidth
                       />
-                    </Grid>{" "}
+                    </Grid>
                     <Grid item xs={12}>
                       <Button type="submit" variant="contained" color="primary">
                         Add
@@ -190,8 +279,8 @@ function tags() {
                     <Grid item xs={12}>
                       <Box sx={{ height: 400, width: "100%" }}>
                         <DataGrid
-                          rows={rows}
-                          columns={columns}
+                          rows={data?.tags || []}
+                          columns={columnsTags}
                           initialState={{
                             pagination: {
                               paginationModel: {

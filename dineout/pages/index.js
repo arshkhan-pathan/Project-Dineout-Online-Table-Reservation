@@ -14,36 +14,46 @@ const arrowSx = {
   background: "#ff645a",
   padding: 1,
   borderRadius: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
+  alignItems: "center",
+  justifyContent: "center",
   "&:hover": {
-    background: 'red'
-  }
+    background: "red",
+  },
 };
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
-  const isDisabled = className.includes('slick-disabled');
+  const isDisabled = className.includes("slick-disabled");
   return (
     <Box
       className={className}
-      sx={{ ...style, ...arrowSx, right: '-40px', display: isDisabled ? 'none' : 'flex' }}
+      sx={{
+        ...style,
+        ...arrowSx,
+        right: "-40px",
+        display: isDisabled ? "none" : "flex",
+      }}
       onClick={onClick}
     />
   );
-}
+};
 
 const PrevArrow = (props) => {
   const { className, style, onClick } = props;
-  const isDisabled = className.includes('slick-disabled');
+  const isDisabled = className.includes("slick-disabled");
   return (
     <Box
       className={className}
-      sx={{ ...style, ...arrowSx, left: '-40px', display: isDisabled ? 'none' : 'flex' }}
+      sx={{
+        ...style,
+        ...arrowSx,
+        left: "-40px",
+        display: isDisabled ? "none" : "flex",
+      }}
       onClick={onClick}
     />
   );
-}
+};
 
 const settings = {
   infinite: false,
@@ -51,7 +61,7 @@ const settings = {
   slidesToShow: 4,
   slidesToScroll: 4,
   nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />
+  prevArrow: <PrevArrow />,
 };
 
 const Home = () => {
@@ -61,23 +71,30 @@ const Home = () => {
     types: "",
   };
 
-  const { data: allRestaurans, isLoading } = useGetAllRestaurantQuery({ selectedFilters, page: 1 }, { refetchOnMountOrArgChange: true });
+  const { data: allRestaurans, isLoading } = useGetAllRestaurantQuery(
+    { selectedFilters, page: 1 },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
-    console.log('dddd', allRestaurans);
-  }, [allRestaurans])
+    console.log("dddd", allRestaurans);
+  }, [allRestaurans]);
 
   return (
     <UserLayout>
       <Box sx={{ mt: 4 }}>
         <Container maxWidth="lg">
-          <Grid container xs={12} sx={{
-            height: "fit-content",
-            "& .slick-track": {
-              display: 'flex',
-              gap: '15px',
-            }
-          }}>
+          <Grid
+            container
+            xs={12}
+            sx={{
+              height: "fit-content",
+              "& .slick-track": {
+                display: "flex",
+                gap: "15px",
+              },
+            }}
+          >
             <Grid item xs={12}>
               <Typography variant="h6" fontWeight="bold">
                 Restaurants Near You
