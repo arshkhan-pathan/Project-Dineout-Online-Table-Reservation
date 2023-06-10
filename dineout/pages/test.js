@@ -1,9 +1,8 @@
-import Navbar from "@/components/Test/navbar";
-import UserProfile from "@/components/User/UserProfile";
+import FillerButtons from "@/components/FillerButtons";
 import React from "react";
 
 function test() {
-  return <Navbar></Navbar>;
+  return <FillerButtons></FillerButtons>;
 }
 
 export default test;

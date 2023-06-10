@@ -8,6 +8,7 @@ import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
 // components
 import Card from "@/components/Card";
 import { useEffect } from "react";
+import FillerButtons from "@/components/FillerButtons";
 
 const arrowSx = {
   display: "block",
@@ -108,6 +109,7 @@ const Home = () => {
               </Slider>
             </Grid>
           </Grid>
+          <FillerButtons></FillerButtons>
         </Container>
       </Box>
     </UserLayout>
