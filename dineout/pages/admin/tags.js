@@ -13,6 +13,16 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { TagsCuisineForm } from "@/sections/admin/TagsCusineForm";
+import {
+  useCreateCuisineMutation,
+  useCreateTagsMutation,
+  useCreateTypesMutation,
+  useDeleteCuisineMutation,
+  useDeleteTagsMutation,
+  useDeleteTypesMutation,
+  useGetTagTypeCuisineQuery,
+} from "@/store/api/admin";
+import * as Yup from "yup";
 
 export const DeleteTypes = (params) => {
   const [deleteTypes] = useDeleteTypesMutation();
@@ -70,7 +80,7 @@ const columnsTypes = [
     field: "name",
     headerName: "Types",
     width: 300,
-    editable: true,
+    editable: false,
   },
   {
     field: "actions",
@@ -85,7 +95,7 @@ const columnsCusinies = [
     field: "name",
     headerName: "Cuisnies",
     width: 300,
-    editable: true,
+    editable: false,
   },
   {
     field: "actions",
@@ -100,13 +110,13 @@ const columnsTags = [
     field: "name",
     headerName: "Tags",
     width: 250,
-    editable: true,
+    editable: false,
   },
   {
     field: "image",
     headerName: "Image Url",
     width: 600,
-    editable: true,
+    editable: false,
   },
   {
     field: "actions",
@@ -115,18 +125,6 @@ const columnsTags = [
     renderCell: DeleteTags,
   },
 ];
-
-import * as Yup from "yup";
-import {
-  useCreateCuisineMutation,
-  useCreateTagsMutation,
-  useCreateTypesMutation,
-  useDeleteCuisineMutation,
-  useDeleteTagsMutation,
-  useDeleteTypesMutation,
-  useGetTagTypeCuisineQuery,
-} from "@/store/api/admin";
-import { useCreateTableMutation } from "@/store/api/restaurant";
 
 const cuisineInitialValues = {
   cuisine: "",

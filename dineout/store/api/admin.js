@@ -55,6 +55,18 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["TagsTypesCuisnes"],
     }),
+    getPendingRestaurants: builder.query({
+      query: () => "/api/mod/pendingrestaurants/",
+      providesTags: ["PendingRestaurant"],
+    }),
+    approvePendingRestaurant: builder.mutation({
+      query: (id) => `/api/mod/pendingrestaurants/${id}/approve`,
+      invalidatesTags: ["PendingRestaurant"],
+    }),
+    deletePendingRestaurant: builder.mutation({
+      query: (id) => `/api/mod/pendingrestaurants/${id}/delete`,
+      invalidatesTags: ["PendingRestaurant"],
+    }),
   }),
 });
 
@@ -67,4 +79,7 @@ export const {
   useDeleteCuisineMutation,
   useCreateTagsMutation,
   useDeleteTagsMutation,
+  useGetPendingRestaurantsQuery,
+  useApprovePendingRestaurantMutation,
+  useDeletePendingRestaurantMutation,
 } = adminApi;
