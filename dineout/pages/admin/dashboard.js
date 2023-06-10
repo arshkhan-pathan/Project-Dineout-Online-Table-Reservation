@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import DashboardSummary from "@/sections/admin/DashboardSummary";
 import { useGetStatsQuery } from "@/store/api/admin";
 
-function dashboard() {
+function Dashboard() {
   const { data } = useGetStatsQuery();
   return (
     <>
@@ -23,4 +23,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default Dashboard;

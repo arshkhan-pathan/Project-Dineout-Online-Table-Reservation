@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
     .required("Please enter your new password"),
 });
 
-function index() {
+function Index() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [login] = useAdminLoginMutation();
@@ -55,4 +55,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

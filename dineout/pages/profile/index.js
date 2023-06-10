@@ -72,7 +72,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-function index() {
+function Index() {
   // Fetch user Profile By its ID
   const user = useSelector(selectCurrentUser);
   console.log(user);
@@ -175,4 +175,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

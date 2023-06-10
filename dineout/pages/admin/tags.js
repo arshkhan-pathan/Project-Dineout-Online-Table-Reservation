@@ -155,7 +155,7 @@ const cuisineValidationSchema = Yup.object().shape({
   cuisine: Yup.string().required("Cuisine is required"),
 });
 
-function tags() {
+function Tags() {
   // Cusines Submit Handler
   const { data } = useGetTagTypeCuisineQuery("s", {
     refetchOnMountOrArgChange: true,
@@ -302,4 +302,4 @@ function tags() {
   );
 }
 
-export default tags;
+export default Tags;

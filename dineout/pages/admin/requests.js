@@ -8,7 +8,7 @@ import {
   useRequestStatsQuery,
 } from "@/store/api/admin";
 
-function requests() {
+function Requests() {
   const { data } = useGetPendingRestaurantsQuery("arsh", {
     refetchOnMountOrArgChange: true,
   });
@@ -29,4 +29,4 @@ function requests() {
   );
 }
 
-export default requests;
+export default Requests;
