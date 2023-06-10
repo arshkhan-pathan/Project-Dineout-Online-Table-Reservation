@@ -2,12 +2,18 @@ import React from "react";
 import AdminLayout from "@/layouts/admin";
 import { Box, Typography } from "@mui/material";
 import PendingSummary from "@/sections/admin/PendingSummary";
-import { useGetPendingRestaurantsQuery } from "@/store/api/admin";
+import {
+  useGetPendingRestaurantsQuery,
+  useGetStatsQuery,
+  useRequestStatsQuery,
+} from "@/store/api/admin";
 
 function requests() {
   const { data } = useGetPendingRestaurantsQuery("arsh", {
     refetchOnMountOrArgChange: true,
   });
+
+  const { data: stats } = useRequestStatsQuery();
 
   return (
     <AdminLayout>
@@ -17,7 +23,7 @@ function requests() {
         </Typography>
       </Box>
       <Box>
-        <PendingSummary data={data}></PendingSummary>
+        <PendingSummary data={data} stats={stats}></PendingSummary>
       </Box>
     </AdminLayout>
   );

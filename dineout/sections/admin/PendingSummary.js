@@ -89,7 +89,8 @@ const columns = [
   },
 ];
 
-function PendingSummary({ data }) {
+function PendingSummary({ data, stats }) {
+  console.log(stats, "stats");
   return (
     <>
       {" "}
@@ -97,22 +98,22 @@ function PendingSummary({ data }) {
         <Grid container spacing={5}>
           <Grid item xs={12} md={6} lg={4} xl={4}>
             <Widget
-              title={"Todays Bookings"}
-              amount="100"
+              title={"Total Pending Restaurants"}
+              amount={stats?.total_pending_restaurants}
               icon={<TodayIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4} xl={4}>
             <Widget
-              title={"Upcoming Bookings"}
-              amount="100"
+              title={"New Restaurants Request"}
+              amount={stats?.new_restaurants_today}
               icon={<UpcomingIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4} xl={4}>
             <Widget
-              title={"Bookings this Month"}
-              amount="100"
+              title={"Total Verified Restaurants"}
+              amount={stats?.total_verified_restaurants}
               icon={<CalendarMonthIcon />}
             />
           </Grid>
