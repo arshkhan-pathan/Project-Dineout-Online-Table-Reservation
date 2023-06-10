@@ -12,6 +12,7 @@ import {
 } from "@/store/api/restaurant";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import Summary from "@/sections/restaurant/home/Summary";
+import RestaurantLayout from "@/layouts/restaurant";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -33,24 +34,16 @@ const Restaurant = ({}) => {
   });
 
   return (
-    <div>
-      <PrimarySearchAppBar />
-      <Box sx={{ display: "flex" }}>
-        <MiniDrawer />
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-              Hello {user?.name}
-            </Typography>
-          </Box>
-
-          <Box>
-            <Summary data={data} stats={stats.data} graph={data?.graph} />
-          </Box>
-        </Box>
+    <RestaurantLayout>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          Hello {user?.name}
+        </Typography>
       </Box>
-    </div>
+      <Box>
+        <Summary data={data} stats={stats.data} graph={data?.graph} />
+      </Box>
+    </RestaurantLayout>
   );
 };
 

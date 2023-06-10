@@ -6,12 +6,9 @@ import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
-import axios from "axios";
 import withAuth from "@/hooks/withAuth";
-import Typography from "@mui/material/Typography";
 import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
 import { useGetReviewsQuery } from "@/store/api/restaurant";
-import baseApi from "@/store/api/base";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
