@@ -9,6 +9,7 @@ import { selectCurrentUser } from "@/store/slices/auth.js";
 import Profile from "./profile";
 import { useRouter } from "next/router";
 import Select from "@/components/Select";
+import { useState } from "react";
 
 const locations = [
   {
@@ -27,7 +28,16 @@ const locations = [
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
+  const [selectedValue, setSelectedValue] = useState(null);
+
   const router = useRouter();
+
+  const handleSelectChange = (selectedOption) => {
+    console.log('Selected value:', selectedOption);
+    setSelectedValue(selectedOption);
+  };
+  const defaultValue = locations.find((option) => option.id === "Adajan");
+
   console.log(router.pathname);
   return (
     <header id="header">
@@ -59,6 +69,10 @@ const Navbar = () => {
             placeholder="Please type a location"
             isMulti={false}
             styles={{ width: "100%" }}
+            value={selectedValue || defaultValue}
+            onChange={handleSelectChange}
+         
+          
           />
         </div>
 
