@@ -5,7 +5,7 @@
 - Add User button on Secondary Navbar
 - Feautured And Near API
 - Fix Folder Structure
-- new state for non users role?
+- new state for non users role?.
 - User Profile Page
 - Add Reviw on Restaurant Page
 - IMPROVE BOOKINGS LOGIC + cANCELLATION
