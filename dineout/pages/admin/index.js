@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 // store
 import { useAdminLoginMutation } from "@/store/api/auth";
-import { setCredentials } from "@/store/slices/auth";
+import { selectCurrentUser, setCredentials } from "@/store/slices/auth";
 // components
 import AdminAuth from "@/sections/admin/AdminAuth";
 
@@ -27,6 +27,10 @@ function Index() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [login] = useAdminLoginMutation();
+  const user=useSelector(selectCurrentUser)
+  if (user) {
+    router.push("/admin/dashboard")
+  }
   const onSubmit = async (values) => {
     try {
       const response = await login(values);

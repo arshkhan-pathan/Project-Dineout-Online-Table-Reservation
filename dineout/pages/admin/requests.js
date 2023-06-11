@@ -4,9 +4,9 @@ import { Box, Typography } from "@mui/material";
 import PendingSummary from "@/sections/admin/PendingSummary";
 import {
   useGetPendingRestaurantsQuery,
-  useGetStatsQuery,
   useRequestStatsQuery,
 } from "@/store/api/admin";
+import withAuth from "@/hooks/withAuth";
 
 function Requests() {
   const { data } = useGetPendingRestaurantsQuery("arsh", {
@@ -29,4 +29,4 @@ function Requests() {
   );
 }
 
-export default Requests;
+export default withAuth( Requests,[1],"/admin");

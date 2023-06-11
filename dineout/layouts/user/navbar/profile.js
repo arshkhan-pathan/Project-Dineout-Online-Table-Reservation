@@ -10,10 +10,13 @@ import Router, { useRouter } from "next/router";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { logOut } from "@/store/slices/auth";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
 
 const Profile = ({ image }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const user=useSelector(selectCurrentUser)
   const logout = () => {
     dispatch(logOut());
     toast("Logout Sucess!", {
@@ -32,7 +35,16 @@ const Profile = ({ image }) => {
   };
 
   const handleProfileCloseUserMenu = () => {
-    router.push("/profile");
+    if (user) {
+      if (user.role == 1) {
+        
+        router.push('/admin/dashboard');
+      } else if (user.role == 2) {
+        router.push('/restaurant');
+      } else if (user.role == 3) {
+        router.push('/profile');
+      }
+    }
     setAnchorElUser(null);
   };
 

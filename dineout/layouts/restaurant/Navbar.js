@@ -45,6 +45,16 @@ const Navbar = () => {
 
   }; 
 
+  const getRedirectLink=() => {
+    const role=user?.role;
+    if (role == 1) {
+      router.push('/admin');
+    } else if (role == 2) {
+      router.push('/restaurant');
+    } else if (role == 3) {
+      router.push('/profile');
+    }
+  }
   
   
   const handleSearchChange = (e) => {
@@ -129,6 +139,19 @@ const Navbar = () => {
                   Restaurant Login
                 </p>
               </Link>
+            )}
+
+{user && (
+                <p onClick={getRedirectLink}
+                  className={
+                    router.pathname == "/restaurant/login"
+                      ? classes.pActive
+                      : classes.p
+                  }
+                >
+                  Profile
+                </p>
+              
             )}
           </div>
         </div>
