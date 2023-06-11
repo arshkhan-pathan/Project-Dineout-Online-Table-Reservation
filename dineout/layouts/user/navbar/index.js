@@ -10,7 +10,7 @@ import Profile from "./profile";
 import { useRouter } from "next/router";
 import Select from "@/components/Select";
 import { useState } from "react";
-import { setLocation } from "@/store/slices/restaurantSlice";
+import { selectCurrentLocation, setLocation } from "@/store/slices/restaurantSlice";
 
 const locations = [
   {
@@ -40,7 +40,7 @@ const Navbar = () => {
 
   };
   const defaultValue = locations.find((option) => option.id === "Adajan");
-
+  const storeValue=useSelector(selectCurrentLocation);
   console.log(router.pathname);
   return (
     <header id="header">
@@ -72,7 +72,7 @@ const Navbar = () => {
             placeholder="Please type a location"
             isMulti={false}
             styles={{ width: "100%" }}
-            value={selectedValue || defaultValue}
+            value={selectedValue || storeValue ||defaultValue}
             onChange={handleSelectChange}
          
           
