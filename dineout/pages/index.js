@@ -69,6 +69,7 @@ const settings = {
 
 const Home = () => {
   const selectedLocation=useSelector(selectCurrentLocation);
+  console.log(selectedLocation)
   const selectedFilters = {
     cuisines: "",
     tags: "",
@@ -82,6 +83,7 @@ const Home = () => {
 
   useEffect(() => {
     console.log("dddd", allRestaurans);
+    
   }, [allRestaurans]);
 
   return (

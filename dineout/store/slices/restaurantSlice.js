@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const locationSlice = createSlice({
   name: 'location',
-  initialState: '',
+  initialState:  { name: '' },
   reducers: {
-    setLocation: (state, action) => {
-      state = action.payload;
-    },
+    setLocation: (state, action) =>   {
+      return { ...state, name: action.payload.name };
+    }
   },
 });
 
 export const { setLocation } = locationSlice.actions;
 export const selectCurrentLocation=(state)=>state.location;
-export default locationSlice.reducer;
+export default locationSlice.reducer;   
