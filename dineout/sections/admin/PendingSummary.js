@@ -184,25 +184,10 @@ function PendingSummary({ data, stats }) {
                 {data.find((item) => item.id === selectedRestaurantId)?.name}
               </Typography>
               <Typography variant="body1" component="h3">
-                Locality:
+                Manager Name :
                 {
                   data.find((item) => item.id === selectedRestaurantId)
-                    ?.locality
-                }
-              </Typography>
-              <Typography variant="body1" component="h3">
-                Address:
-                {data.find((item) => item.id === selectedRestaurantId)?.address}
-              </Typography>
-              <Typography variant="body1" component="h3">
-                City:
-                {data.find((item) => item.id === selectedRestaurantId)?.city}
-              </Typography>
-              <Typography variant="body1" component="h3">
-                Phone Number:
-                {
-                  data.find((item) => item.id === selectedRestaurantId)
-                    ?.phone_number
+                    ?.manager_name
                 }
               </Typography>
               <Typography variant="body1" component="h3">
@@ -211,6 +196,35 @@ function PendingSummary({ data, stats }) {
                   data.find((item) => item.id === selectedRestaurantId)
                     ?.description
                 }
+              </Typography>
+              <Typography variant="body1" component="h3">
+                Average Cost:
+                {
+                  data.find((item) => item.id === selectedRestaurantId)
+                    ?.avg_cost
+                }
+              </Typography>
+              <Typography variant="body1" component="h3">
+                Opening Time :
+                {
+                  data.find((item) => item.id === selectedRestaurantId)
+                    ?.opening_time
+                }
+              </Typography>
+              <Typography variant="body1" component="h3">
+                Closing Time:
+                {
+                  data.find((item) => item.id === selectedRestaurantId)
+                    ?.closing_time
+                }
+              </Typography>
+              <Typography variant="body1" component="h3">
+                Per Person Charge:
+                {
+                  data.find((item) => item.id === selectedRestaurantId)
+                    ?.unit_charge
+                }
+                Rs
               </Typography>
               <Typography variant="body1" component="h3">
                 Tags:
