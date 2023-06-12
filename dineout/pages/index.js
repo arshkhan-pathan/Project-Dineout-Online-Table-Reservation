@@ -91,10 +91,10 @@ const Home = () => {
     { refetchOnMountOrArgChange: true }
   );
 
-  useEffect(() => {
-    console.log("dddd", allRestaurans);
-    console.log(featuredRestaurant, "ddddddddddddddddddddddd");
-  }, [allRestaurans, featuredRestaurant]);
+  // useEffect(() => {
+  //   console.log("dddd", allRestaurans);
+  //   console.log(featuredRestaurant, "ddddddddddddddddddddddd");
+  // }, [allRestaurans, featuredRestaurant]);
 
   return (
     <UserLayout>

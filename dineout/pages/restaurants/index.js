@@ -9,19 +9,25 @@ import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
 
 const Restaurants = () => {
+  const location = useSelector(selectCurrentLocation);
   const [selectedFilters, setSelectedFilters] = useState({
     cuisines: "",
     tags: "",
     types: "",
-    location: "",
+    location: location.name,
   });
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    console.log("selectedFilters: ", selectedFilters);
-  }, [selectedFilters]);
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      location: location.name,
+    }));
+  }, [location]);
 
   const { data, isLoading } = useGetAllRestaurantQuery(
     { selectedFilters, page: pageNumber },

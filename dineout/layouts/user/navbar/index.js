@@ -60,14 +60,6 @@ const Navbar = () => {
           </Link>
         </div>
         <div id="city" className={classes.city}>
-          <div id="location" className={classes.location}>
-            <img
-              id="loc"
-              src="location_logo.png"
-              alt=""
-              className={classes.loc}
-            />
-          </div>
           <Select
             className={classes.cityselect}
             options={locations}

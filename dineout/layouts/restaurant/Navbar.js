@@ -19,8 +19,8 @@ const locations = [
     name: "Vesu",
   },
   {
-    id: "Varachha",
-    name: "Varachha",
+    id: "Varacha",
+    name: "Varacha",
   },
 ];
 
