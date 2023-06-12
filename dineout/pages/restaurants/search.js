@@ -20,15 +20,11 @@ const SearchPage = () => {
     cuisines: "",
     tags: "",
     types: "",
-    locality: "",
+    location: "",
   });
   const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    console.log("selectedFilters: ", selectedFilters);
-  }, [selectedFilters]);
-
-  const { data, isLoading } = useGetAllRestaurantQuery(
+  const { data, isLoading, refetch } = useGetAllRestaurantQuery(
     {
       selectedFilters,
       page: pageNumber,
@@ -42,6 +38,9 @@ const SearchPage = () => {
     console.log("on page change ", value);
     setPageNumber(value);
   };
+  useEffect(() => {
+    console.log("selectedFilters: ", selectedFilters);
+  }, [selectedFilters]);
 
   return (
     <>
