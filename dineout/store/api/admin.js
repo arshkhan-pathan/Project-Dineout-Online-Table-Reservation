@@ -71,6 +71,10 @@ export const adminApi = baseApi.injectEndpoints({
       query: () => `/api/mod/requeststats`,
       providesTags: ["PendingRestaurant"],
     }),
+    featuredRestaurants: builder.query({
+      query: () => `/api/restaurant/restaurants/featured`,
+      providesTags: ["PendingRestaurant"],
+    }),
   }),
 });
 
@@ -87,4 +91,5 @@ export const {
   useApprovePendingRestaurantMutation,
   useDeletePendingRestaurantMutation,
   useRequestStatsQuery,
+  useFeaturedRestaurantsQuery,
 } = adminApi;

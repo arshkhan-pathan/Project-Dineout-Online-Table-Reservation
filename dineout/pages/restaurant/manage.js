@@ -194,7 +194,6 @@ const Manage = () => {
   return (
     <>
       <RestaurantLayout>
-        {" "}
         <Box sx={{ my: 5 }}>
           <Container maxWidth="xl">
             <Box>
