@@ -184,11 +184,12 @@ function PendingSummary({ data, stats }) {
                 {data.find((item) => item.id === selectedRestaurantId)?.name}
               </Typography>
               <Typography variant="body1" component="h3">
-                Manager Name :
+                Manager Name:
                 {
                   data.find((item) => item.id === selectedRestaurantId)
-                    ?.manager_name
-                }
+                    ?.unit_charge
+                }{" "}
+                Rs
               </Typography>
               <Typography variant="body1" component="h3">
                 Description:
@@ -223,9 +224,9 @@ function PendingSummary({ data, stats }) {
                 {
                   data.find((item) => item.id === selectedRestaurantId)
                     ?.unit_charge
-                }
+                }{" "}
                 Rs
-              </Typography>
+              </Typography>{" "}
               <Typography variant="body1" component="h3">
                 Tags:
                 {data
