@@ -73,7 +73,19 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     featuredRestaurants: builder.query({
       query: () => `/api/restaurant/restaurants/featured`,
-      providesTags: ["PendingRestaurant"],
+      providesTags: ["Featured"],
+    }),
+    allRestaurants: builder.query({
+      query: () => `/api/restaurant/restaurants/all`,
+      providesTags: ["Featured"],
+    }),
+    approveFeaturedRestaurant: builder.mutation({
+      query: (id) => `/api/restaurant/restaurants/featured/add/${id}`,
+      invalidatesTags: ["Featured"],
+    }),
+    deleteFeaturedRestaurant: builder.mutation({
+      query: (id) => `/api/restaurant/restaurants/featured/remove/${id}`,
+      invalidatesTags: ["Featured"],
     }),
   }),
 });
@@ -92,4 +104,7 @@ export const {
   useDeletePendingRestaurantMutation,
   useRequestStatsQuery,
   useFeaturedRestaurantsQuery,
+  useAllRestaurantsQuery,
+  useApproveFeaturedRestaurantMutation,
+  useDeleteFeaturedRestaurantMutation,
 } = adminApi;

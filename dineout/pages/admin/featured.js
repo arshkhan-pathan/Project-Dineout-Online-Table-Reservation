@@ -3,10 +3,17 @@ import AdminLayout from "@/layouts/admin";
 import FeaturedSummary from "@/sections/admin/FeaturedSummary";
 import { Box, Typography } from "@mui/material";
 import { useGetFeaturedRestaurantQuery } from "@/store/api/restaurants";
-import { useFeaturedRestaurantsQuery } from "@/store/api/admin";
+import {
+  useAllRestaurantsQuery,
+  useFeaturedRestaurantsQuery,
+} from "@/store/api/admin";
 
 function featured() {
   const { data } = useFeaturedRestaurantsQuery("a", {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { data: allRestaurants } = useAllRestaurantsQuery("a", {
     refetchOnMountOrArgChange: true,
   });
   console.log(data);
@@ -18,7 +25,10 @@ function featured() {
         </Typography>
       </Box>
       <Box>
-        <FeaturedSummary data={data}></FeaturedSummary>
+        <FeaturedSummary
+          data={data}
+          allRestaurants={allRestaurants}
+        ></FeaturedSummary>
       </Box>
     </AdminLayout>
   );
