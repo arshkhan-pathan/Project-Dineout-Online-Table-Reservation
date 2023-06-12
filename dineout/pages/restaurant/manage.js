@@ -7,7 +7,7 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import withAuth from "@/hooks/withAuth";
+import withAuth from "@/HOC/withAuth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";

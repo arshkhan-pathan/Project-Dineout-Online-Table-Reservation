@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import withAuth from "@/hooks/withAuth";
+import withAuth from "@/HOC/withAuth";
 import Typography from "@mui/material/Typography";
 import BookingSummary from "@/sections/restaurant/home/BookingSummary";
 import RestaurantLayout from "@/layouts/restaurant";

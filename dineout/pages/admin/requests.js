@@ -6,7 +6,7 @@ import {
   useGetPendingRestaurantsQuery,
   useRequestStatsQuery,
 } from "@/store/api/admin";
-import withAuth from "@/hooks/withAuth";
+import withAuth from "@/HOC/withAuth";
 
 function Requests() {
   const { data } = useGetPendingRestaurantsQuery("arsh", {
@@ -29,4 +29,4 @@ function Requests() {
   );
 }
 
-export default withAuth( Requests,[1],"/admin");
+export default withAuth(Requests, ["1"], "/admin");

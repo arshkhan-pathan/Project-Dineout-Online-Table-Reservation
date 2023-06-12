@@ -82,8 +82,6 @@ const SearchPage = () => {
       <Footer></Footer>
     </>
   );
-
-  return <div>{q}</div>;
 };
 
 export default SearchPage;

@@ -3,9 +3,7 @@ import AdminLayout from "@/layouts/admin";
 import { Box, Typography } from "@mui/material";
 import DashboardSummary from "@/sections/admin/DashboardSummary";
 import { useGetStatsQuery } from "@/store/api/admin";
-import withAuth from "@/hooks/withAuth";
-
-
+import withAuth from "@/HOC/withAuth";
 
 function Dashboard() {
   const { data } = useGetStatsQuery();
@@ -26,4 +24,4 @@ function Dashboard() {
   );
 }
 
-export default withAuth(Dashboard,[1],"/admin");
+export default withAuth(Dashboard, ["1"], "/admin");

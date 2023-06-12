@@ -6,7 +6,7 @@ import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
-import withAuth from "@/hooks/withAuth";
+import withAuth from "@/HOC/withAuth";
 import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
 import { useGetReviewsQuery } from "@/store/api/restaurant";
 

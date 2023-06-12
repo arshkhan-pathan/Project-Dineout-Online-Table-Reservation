@@ -23,7 +23,7 @@ import {
   useGetTagTypeCuisineQuery,
 } from "@/store/api/admin";
 import * as Yup from "yup";
-import withAuth from "@/hooks/withAuth";
+import withAuth from "@/HOC/withAuth";
 
 export const DeleteTypes = (params) => {
   const [deleteTypes] = useDeleteTypesMutation();
@@ -303,4 +303,4 @@ function Tags() {
   );
 }
 
-export default withAuth(Tags,["1"],"/admin");
+export default withAuth(Tags, ["1"], "/admin");
