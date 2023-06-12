@@ -7,7 +7,7 @@ export const restaurantsApi = baseApi.injectEndpoints({
       query: ({ selectedFilters, page, search }) => {
         let queryUrl = `/api/restaurant/restaurants/?cuisines=${selectedFilters?.cuisines}&tags=${selectedFilters?.tags}&types=${selectedFilters?.types}&locality=${selectedFilters?.location}&page=${page}`;
         if (search) {
-          queryUrl += `&search=${search}`;
+          queryUrl = `/api/restaurant/restaurants?search=${search}`;
         }
         return queryUrl;
       },

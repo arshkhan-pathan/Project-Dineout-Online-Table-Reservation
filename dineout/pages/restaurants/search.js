@@ -20,6 +20,7 @@ const SearchPage = () => {
     cuisines: "",
     tags: "",
     types: "",
+    locality: "",
   });
   const [pageNumber, setPageNumber] = useState(1);
 
