@@ -4,7 +4,10 @@ import { Box, Container, Typography, Grid, IconButton } from "@mui/material";
 // layouts
 import UserLayout from "@/layouts/user";
 // store
-import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
+import {
+  useGetAllRestaurantQuery,
+  useGetFeaturedRestaurantQuery,
+} from "@/store/api/restaurants";
 // components
 import Card from "@/components/Card";
 import { useEffect } from "react";
@@ -83,9 +86,15 @@ const Home = () => {
     { refetchOnMountOrArgChange: true }
   );
 
+  const { data: featuredRestaurant } = useGetFeaturedRestaurantQuery(
+    { selectedFilters },
+    { refetchOnMountOrArgChange: true }
+  );
+
   useEffect(() => {
     console.log("dddd", allRestaurans);
-  }, [allRestaurans]);
+    console.log(featuredRestaurant, "ddddddddddddddddddddddd");
+  }, [allRestaurans, featuredRestaurant]);
 
   return (
     <UserLayout>
@@ -99,6 +108,7 @@ const Home = () => {
               "& .slick-track": {
                 display: "flex",
                 gap: "15px",
+                marginLeft: "0px",
               },
             }}
           >
@@ -131,6 +141,7 @@ const Home = () => {
               "& .slick-track": {
                 display: "flex",
                 gap: "15px",
+                marginLeft: "0px",
               },
             }}
           >
@@ -145,7 +156,7 @@ const Home = () => {
             </Grid>
             <Grid item xs={12}>
               <Slider {...settings}>
-                {allRestaurans?.results?.map((restaurant) => (
+                {featuredRestaurant?.map((restaurant) => (
                   <Card key={restaurant.id} {...restaurant} />
                 ))}
               </Slider>

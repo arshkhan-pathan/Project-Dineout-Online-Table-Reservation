@@ -15,6 +15,10 @@ export const restaurantsApi = baseApi.injectEndpoints({
     getRestaurant: builder.query({
       query: (restaurantId) => `api/restaurant/restaurants/id/${restaurantId}/`,
     }),
+    getFeaturedRestaurant: builder.query({
+      query: ({ selectedFilters }) =>
+        `api/restaurant/restaurants/featured?locality=${selectedFilters?.location}`,
+    }),
     checkAvailibility: builder.query({
       query: ({ restaurantId, date, num_guest }) =>
         `/api/restaurant/availibility/?date=${date}&num_guests=${num_guest}&restaurant_id=${restaurantId}`,
@@ -30,4 +34,5 @@ export const {
   useGetRestaurantQuery,
   useCheckAvailibilityQuery,
   useGetUserProfileQuery,
+  useGetFeaturedRestaurantQuery,
 } = restaurantsApi;
