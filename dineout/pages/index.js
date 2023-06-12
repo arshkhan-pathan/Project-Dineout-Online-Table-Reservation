@@ -68,13 +68,15 @@ const settings = {
 };
 
 const Home = () => {
-  const selectedLocation=useSelector(selectCurrentLocation);
-  console.log(selectedLocation)
+  const selectedLocation = useSelector(selectCurrentLocation);
+  console.log(selectedLocation);
   const selectedFilters = {
     cuisines: "",
     tags: "",
     types: "",
+    location: selectedLocation.name,
   };
+  console.log(selectedFilters);
 
   const { data: allRestaurans, isLoading } = useGetAllRestaurantQuery(
     { selectedFilters, page: 1 },
@@ -83,7 +85,6 @@ const Home = () => {
 
   useEffect(() => {
     console.log("dddd", allRestaurans);
-    
   }, [allRestaurans]);
 
   return (
@@ -102,8 +103,44 @@ const Home = () => {
             }}
           >
             <Grid item xs={12}>
-              <Typography variant="h6" fontWeight="bold">
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                sx={{ marginBottom: "20px" }}
+              >
                 Restaurants Near You
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Slider {...settings}>
+                {allRestaurans?.results?.map((restaurant) => (
+                  <Card key={restaurant.id} {...restaurant} />
+                ))}
+              </Slider>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      <Box sx={{ mt: 4 }}>
+        <Container maxWidth="lg">
+          <Grid
+            container
+            xs={12}
+            sx={{
+              height: "fit-content",
+              "& .slick-track": {
+                display: "flex",
+                gap: "15px",
+              },
+            }}
+          >
+            <Grid item xs={12}>
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                sx={{ marginBottom: "20px" }}
+              >
+                Featured Restaurants
               </Typography>
             </Grid>
             <Grid item xs={12}>

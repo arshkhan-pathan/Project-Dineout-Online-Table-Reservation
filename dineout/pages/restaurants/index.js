@@ -15,6 +15,7 @@ const Restaurants = () => {
     cuisines: "",
     tags: "",
     types: "",
+    location: "",
   });
   const [pageNumber, setPageNumber] = useState(1);
 

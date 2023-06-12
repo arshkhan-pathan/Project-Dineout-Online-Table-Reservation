@@ -6,7 +6,7 @@ import { Avatar } from "@mui/material";
 
 function FillerButtons() {
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={3}>
@@ -15,13 +15,14 @@ function FillerButtons() {
               variant="contained"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686552553/icons/1553738_ffqead.png"
                   }
                 />
               }
             >
-              Filters
+              Bar
             </Button>
           </Grid>
           <Grid item xs={3}>
@@ -31,13 +32,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/parking_ns6bha.jpg"
                   }
                 />
               }
             >
-              Filters
+              Parking
             </Button>
           </Grid>
           <Grid item xs={3}>
@@ -47,13 +49,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/delivery_qpm6md.png"
                   }
                 />
               }
             >
-              Filters
+              Home Delivery
             </Button>
           </Grid>
           <Grid item xs={3}>
@@ -63,13 +66,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/performance_tmlg0j.png"
                   }
                 />
               }
             >
-              Filters
+              Live Performance
             </Button>
           </Grid>
           <Grid item xs={3}>
@@ -79,13 +83,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/cards_pochqv.png"
                   }
                 />
               }
             >
-              Filters
+              Cards Accepted
             </Button>
           </Grid>
           <Grid item xs={3}>
@@ -95,13 +100,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/air_jaswkf.png"
                   }
                 />
               }
             >
-              Filters
+              Air Condition
             </Button>
           </Grid>{" "}
           <Grid item xs={3}>
@@ -111,13 +117,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686552030/icons/outdoor_eopfwg.png"
                   }
                 />
               }
             >
-              Filters
+              Outdoors
             </Button>
           </Grid>{" "}
           <Grid item xs={3}>
@@ -127,13 +134,14 @@ function FillerButtons() {
               color="primary"
               startIcon={
                 <Avatar
+                  variant="square"
                   src={
-                    "https://im1.dineout.co.in/images/uploads/misc/2020/May/8/bffet.png"
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686552028/icons/valet_rline2.png"
                   }
                 />
               }
             >
-              Filters
+              Valet Parking
             </Button>
           </Grid>
         </Grid>
