@@ -9,6 +9,8 @@ import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
 import Card from "@/components/Card";
 import { useEffect } from "react";
 import FillerButtons from "@/components/FillerButtons";
+import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
+import { useSelector } from "react-redux";
 
 const arrowSx = {
   display: "block",
@@ -66,6 +68,8 @@ const settings = {
 };
 
 const Home = () => {
+  const selectedLocation=useSelector(selectCurrentLocation);
+  console.log(selectedLocation)
   const selectedFilters = {
     cuisines: "",
     tags: "",
@@ -79,6 +83,7 @@ const Home = () => {
 
   useEffect(() => {
     console.log("dddd", allRestaurans);
+    
   }, [allRestaurans]);
 
   return (

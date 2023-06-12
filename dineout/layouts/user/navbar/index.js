@@ -1,6 +1,6 @@
 // packages
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // css
 import classes from "@/styles/Navbar.module.css";
 //
@@ -9,6 +9,8 @@ import { selectCurrentUser } from "@/store/slices/auth.js";
 import Profile from "./profile";
 import { useRouter } from "next/router";
 import Select from "@/components/Select";
+import { useState } from "react";
+import { selectCurrentLocation, setLocation } from "@/store/slices/restaurantSlice";
 
 const locations = [
   {
@@ -27,7 +29,18 @@ const locations = [
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
+  const [selectedValue, setSelectedValue] = useState(null);
+  const dispatch=useDispatch()
   const router = useRouter();
+
+  const handleSelectChange = (selectedOption) => {
+    console.log('Selected value:', selectedOption);
+    setSelectedValue(selectedOption);
+    dispatch(setLocation(selectedOption));
+
+  };
+  const defaultValue = locations.find((option) => option.id === "Adajan");
+  const storeValue=useSelector(selectCurrentLocation);
   console.log(router.pathname);
   return (
     <header id="header">
@@ -59,6 +72,10 @@ const Navbar = () => {
             placeholder="Please type a location"
             isMulti={false}
             styles={{ width: "100%" }}
+            value={selectedValue || storeValue ||defaultValue}
+            onChange={handleSelectChange}
+         
+          
           />
         </div>
 

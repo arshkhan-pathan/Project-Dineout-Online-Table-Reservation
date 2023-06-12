@@ -2,12 +2,69 @@
 import classes from "@/styles/NavbarSecondary.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "@/store/slices/auth";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "@/components/Select";
+import { useState } from "react";
+import { setLocation } from "@/store/slices/restaurantSlice";
+import { selectCurrentUser } from "@/store/slices/auth.js";
+import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
+
+
+const locations = [
+  {
+    id: "Adajan",
+    name: "Adajan",
+  },
+  {
+    id: "Vesu",
+    name: "Vesu",
+  },
+  {
+    id: "Varachha",
+    name: "Varachha",
+  },
+];
 
 const Navbar = () => {
   const router = useRouter();
   const user = useSelector(selectCurrentUser);
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const dispatch=useDispatch()
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const search =searchQuery;
+    console.log(encodeURIComponent(search));
+    router.push(`restaurants/search?q=${encodeURIComponent(search)}`);
+  };
+
+  const handleSelectChange = (selectedOption) => {
+    console.log('Selected value:', selectedOption);
+    setSelectedValue(selectedOption);
+    dispatch(setLocation(selectedOption));
+
+  }; 
+
+  const getRedirectLink=() => {
+    const role=user?.role;
+    if (role == 1) {
+      router.push('/admin');
+    } else if (role == 2) {
+      router.push('/restaurant');
+    } else if (role == 3) {
+      router.push('/profile');
+    }
+  }
+  
+  
+  const handleSearchChange = (e) => {
+    console.log('query value:', e.target.value);
+    setSearchQuery(e.target.value)
+
+  };
+
+  const selectedLocationValue=useSelector(selectCurrentLocation)
+
   return (
     <div className={classes.body}>
       <div className={classes.inner_page_header}>
@@ -25,27 +82,29 @@ const Navbar = () => {
 
           <div className={classes.location_section}>
             <i className="fas fa-map-marker-alt"></i>
-            <select
-              name=""
-              id="select_location"
-              className={classes.select_location}
-            >
-              <option value="hyderabad">Hyderabad</option>
-              <option value="delhi">Dehli</option>
-              <option value="mumbai">Mumbai</option>
-              <option value="chennai">Chennai</option>
-              <option value="kolkata">Kolkata</option>
-            </select>
+        
+            <Select
+           
+            options={locations}
+            placeholder="Please type a location"
+            isMulti={false}
+            styles={{ width: "100%" }}
+            value={selectedValue || selectedLocationValue }
+            onChange={handleSelectChange}
+         
+          
+          />
           </div>
           <div className={classes.search_section}>
             <i className={classes.fa_search}></i>
             <input
               type="text"
+              onChange={handleSearchChange}
               placeholder="Search restaurants, Offers, Deals or Events... "
             />
           </div>
           <div className={classes.search_button}>
-            <button>Search</button>
+            <button onClick={handleSearchSubmit}>Search</button>
           </div>
         </div>
         <div className={classes.horizontal_line}></div>
@@ -80,6 +139,19 @@ const Navbar = () => {
                   Restaurant Login
                 </p>
               </Link>
+            )}
+
+{user && (
+                <p onClick={getRedirectLink}
+                  className={
+                    router.pathname == "/restaurant/login"
+                      ? classes.pActive
+                      : classes.p
+                  }
+                >
+                  Profile
+                </p>
+              
             )}
           </div>
         </div>
