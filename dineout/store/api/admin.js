@@ -87,6 +87,10 @@ export const adminApi = baseApi.injectEndpoints({
       query: (id) => `/api/mod/restaurant/featured/remove/${id}`,
       invalidatesTags: ["Featured"],
     }),
+    restaurantStats: builder.query({
+      query: () => `/api/restaurant/restaurant-stats/`,
+      providesTags: ["Featured"],
+    }),
   }),
 });
 
@@ -107,4 +111,5 @@ export const {
   useAllRestaurantsQuery,
   useApproveFeaturedRestaurantMutation,
   useDeleteFeaturedRestaurantMutation,
+  useRestaurantStatsQuery,
 } = adminApi;

@@ -1,6 +1,5 @@
 import React from "react";
 import Widget from "../Widget";
-import { TrackChanges } from "@mui/icons-material";
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Grid, Typography, Button } from "@mui/material";
@@ -14,8 +13,10 @@ import {
   useApproveFeaturedRestaurantMutation,
   useDeleteFeaturedRestaurantMutation,
 } from "@/store/api/admin";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import StarIcon from "@mui/icons-material/Star";
 
-function FeaturedSummary({ data, allRestaurants }) {
+function FeaturedSummary({ data, allRestaurants, stats }) {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalChildOpen, setIsModalChildOpen] = useState(false);
@@ -175,15 +176,15 @@ function FeaturedSummary({ data, allRestaurants }) {
         <Grid item xs={12} md={6} lg={3} xl={3}>
           <Widget
             title="Total Restaurants"
-            amount={100}
-            icon={<TrackChanges />}
+            amount={stats?.total_restaurants}
+            icon={<StorefrontIcon />}
           />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
           <Widget
             title="Total Featured Restaurants"
-            amount={100}
-            icon={<TrackChanges />}
+            amount={stats?.total_featured}
+            icon={<StarIcon />}
           />
         </Grid>
       </Grid>

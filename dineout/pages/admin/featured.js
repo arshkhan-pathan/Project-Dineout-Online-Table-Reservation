@@ -6,6 +6,7 @@ import { useGetFeaturedRestaurantQuery } from "@/store/api/restaurants";
 import {
   useAllRestaurantsQuery,
   useFeaturedRestaurantsQuery,
+  useRestaurantStatsQuery,
 } from "@/store/api/admin";
 
 function featured() {
@@ -14,6 +15,10 @@ function featured() {
   });
 
   const { data: allRestaurants } = useAllRestaurantsQuery("a", {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { data: stats } = useRestaurantStatsQuery("a", {
     refetchOnMountOrArgChange: true,
   });
   console.log(data);
@@ -28,6 +33,7 @@ function featured() {
         <FeaturedSummary
           data={data}
           allRestaurants={allRestaurants}
+          stats={stats}
         ></FeaturedSummary>
       </Box>
     </AdminLayout>
