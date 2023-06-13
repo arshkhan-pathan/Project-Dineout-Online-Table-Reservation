@@ -10,6 +10,10 @@ import Image from "next/image";
 import { Tooltip, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import {
+  useApproveFeaturedRestaurantMutation,
+  useDeleteFeaturedRestaurantMutation,
+} from "@/store/api/admin";
 
 function FeaturedSummary({ data, allRestaurants }) {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
@@ -40,14 +44,16 @@ function FeaturedSummary({ data, allRestaurants }) {
     );
   };
 
-  const deleteTable = (params) => {
-    const onDeleteTable = () => {
+  const removeFeatured = (params) => {
+    const [deleteFeaturedRestaurant] = useDeleteFeaturedRestaurantMutation();
+    const onRemoveFeatured = () => {
       console.log("Delete table for id: ", params.row.id);
+      deleteFeaturedRestaurant(params.row.id);
     };
 
     return (
       <Tooltip title="Delete">
-        <IconButton onClick={onDeleteTable}>
+        <IconButton onClick={onRemoveFeatured}>
           <CloseIcon sx={{ color: "red " }} />
         </IconButton>
       </Tooltip>
@@ -55,8 +61,10 @@ function FeaturedSummary({ data, allRestaurants }) {
   };
 
   const approveTable = (params) => {
+    const [approveFeaturedRestaurant] = useApproveFeaturedRestaurantMutation();
     const onApproveTable = () => {
       console.log("Approve table for id: ", params.row.id);
+      approveFeaturedRestaurant(params.row.id);
     };
 
     return (
@@ -110,7 +118,7 @@ function FeaturedSummary({ data, allRestaurants }) {
       field: "Delete",
       headerName: "Delete",
       width: 150,
-      renderCell: deleteTable,
+      renderCell: removeFeatured,
     },
   ];
 

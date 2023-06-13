@@ -80,11 +80,11 @@ export const adminApi = baseApi.injectEndpoints({
       providesTags: ["Featured"],
     }),
     approveFeaturedRestaurant: builder.mutation({
-      query: (id) => `/api/restaurant/restaurants/featured/add/${id}`,
+      query: (id) => `/api/mod/restaurant/featured/add/${id}`,
       invalidatesTags: ["Featured"],
     }),
     deleteFeaturedRestaurant: builder.mutation({
-      query: (id) => `/api/restaurant/restaurants/featured/remove/${id}`,
+      query: (id) => `/api/mod/restaurant/featured/remove/${id}`,
       invalidatesTags: ["Featured"],
     }),
   }),
