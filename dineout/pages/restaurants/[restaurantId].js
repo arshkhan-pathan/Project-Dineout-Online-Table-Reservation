@@ -7,7 +7,6 @@ import {
   Grid,
   Card,
   CardContent,
-  CardMedia,
   Typography,
   Box,
   Button,
@@ -27,6 +26,8 @@ import FoodMenu from "@/components/Restaurants/FoodMenu";
 import SubMenu from "@/components/Restaurants/Submenu";
 import Footer from "@/components/Footer";
 import ReviewSection from "@/components/Restaurants/ReviewSection";
+import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
+import { useState } from "react";
 const Wrapper = styled.div`
   padding: 26px 10.56% 48px;
   color: #797979;
@@ -58,7 +59,15 @@ const Left = styled.div`
 const RestaurantInfo = () => {
   const router = useRouter();
   const { restaurantId } = router.query;
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0);
   const user = useSelector(selectCurrentUser);
+
+  const handleReviewSubmit = () => {
+    console.log("Review submitted:", reviewText, "Rating:", rating);
+    setReviewText("");
+    setRating(0);
+  };
 
   console.log(restaurantId);
   let { data } = useGetRestaurantQuery(restaurantId, {
@@ -191,6 +200,13 @@ const RestaurantInfo = () => {
                   average={data?.avg_cost}
                   tags={data?.tags}
                 />
+                <ReviewComponent
+                  rating={rating}
+                  reviewText={reviewText}
+                  setRating={setRating}
+                  setReviewText={setReviewText}
+                  handleReviewSubmit={handleReviewSubmit}
+                ></ReviewComponent>
                 <ReviewSection reviews={data?.reviews}></ReviewSection>
                 <></>
               </Left>
