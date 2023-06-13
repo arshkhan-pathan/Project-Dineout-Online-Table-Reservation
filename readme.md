@@ -1,15 +1,11 @@
 - ## Todo
 
-- Improve color on frontend page
+- Prevent Non User Roles From Making Reservation
 - Fix Pagination
-- Add User button on Secondary Navbar
-- Feautured And Near API
 - Fix Folder Structure
-- new state for non users role?.
 - User Profile Page
 - Add Reviw on Restaurant Page
 - IMPROVE BOOKINGS LOGIC + cANCELLATION
-- Featured Api
 - Dropbox Get it working
 
 - ## Backend
@@ -24,21 +20,13 @@
 
 - ## Admin Dashboard
 
-  - Total Users
-  - Total Restaurants
-  - Pending Restauarants
-  - New Users This Month
-  - New restaurants this Month
   - Restauarant Performances Analytics
-  - CRUD - Tags / Types / Cuisines
 
 - ## Authentication
 
 - Implement forgot password page
 - Fix authentication from frontend
-- Persist authentication using local storage
 - Refactor login page content
-- Change login API from tokenpair to custom
 - Improve login.
 
 # General
