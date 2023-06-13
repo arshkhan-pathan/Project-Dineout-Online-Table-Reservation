@@ -153,6 +153,7 @@ const TablesSummary = () => {
             {data?.length > 0 ? (
               <DataGrid
                 rows={data || []}
+                autoHeight
                 columns={columns}
                 initialState={{
                   pagination: {

@@ -14,6 +14,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import MuiAppBar from "@mui/material/AppBar";
 import { logOut } from "@/store/slices/auth";
+import { useDispatch } from "react-redux";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -34,6 +35,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function PrimarySearchAppBar() {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -49,7 +51,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const logoutClose = () => {
-    logOut();
+    dispatch(logOut());
     setMobileMoreAnchorEl(null);
   };
 

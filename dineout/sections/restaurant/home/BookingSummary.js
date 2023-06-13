@@ -90,12 +90,13 @@ const BookingSummary = () => {
           <Grid container item xs={12} spacing={2}>
             {data?.today_bookings_data.length > 0 ? (
               <>
-                <Grid item xs={12} textAlign="end">
+                <Grid item xs={12}>
                   <Typography fontWeight="bold">Todays Bookings</Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <DataGrid
                     rows={data?.today_bookings_data || []}
+                    autoHeight
                     columns={columns1}
                     initialState={{
                       pagination: {
@@ -128,6 +129,7 @@ const BookingSummary = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <DataGrid
+                    autoHeight
                     rows={data?.upcoming_bookings_data || []}
                     columns={columns1}
                     initialState={{
@@ -161,6 +163,7 @@ const BookingSummary = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <DataGrid
+                    autoHeight
                     rows={data?.past_bookings_data || []}
                     columns={columns1}
                     initialState={{

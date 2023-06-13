@@ -1,3 +1,9 @@
+- ## Today
+
+  - Manage page Menu Image Opening Closing Title
+  - User Page
+  - Admin Page
+
 - ## Todo
 
 - Prevent Non User Roles From Making Reservation

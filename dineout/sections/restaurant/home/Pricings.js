@@ -243,6 +243,7 @@ const Pricing = () => {
           <Grid item xs={12}>
             {data?.length > 0 ? (
               <DataGrid
+                autoHeight
                 rows={data || []}
                 columns={columns}
                 initialState={{
