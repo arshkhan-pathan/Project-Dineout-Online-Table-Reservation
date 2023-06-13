@@ -120,6 +120,7 @@ function Index() {
               <DataGrid
                 rows={data?.upcoming_bookings || []}
                 columns={columns}
+                autoHeight
                 initialState={{
                   pagination: {
                     paginationModel: {
@@ -141,6 +142,7 @@ function Index() {
                 <DataGrid
                   rows={data?.past_bookings || []}
                   columns={columns}
+                  autoHeight
                   initialState={{
                     pagination: {
                       paginationModel: {
