@@ -14,6 +14,7 @@ export const restaurantsApi = baseApi.injectEndpoints({
     }),
     getRestaurant: builder.query({
       query: (restaurantId) => `api/restaurant/restaurants/id/${restaurantId}/`,
+      providesTags: ["Restaurant"],
     }),
     getFeaturedRestaurant: builder.query({
       query: ({ selectedFilters }) =>
@@ -26,6 +27,14 @@ export const restaurantsApi = baseApi.injectEndpoints({
     getUserProfile: builder.query({
       query: (userId) => `/api/restaurant/users/${userId}/`,
     }),
+    createReview: builder.mutation({
+      query: (reviewData) => ({
+        url: `/api/restaurant/addreview/`,
+        method: "POST",
+        body: reviewData,
+      }),
+      invalidatesTags: ["Restaurant"],
+    }),
   }),
 });
 
@@ -35,4 +44,5 @@ export const {
   useCheckAvailibilityQuery,
   useGetUserProfileQuery,
   useGetFeaturedRestaurantQuery,
+  useCreateReviewMutation,
 } = restaurantsApi;

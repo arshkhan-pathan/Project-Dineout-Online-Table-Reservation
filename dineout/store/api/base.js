@@ -49,6 +49,7 @@ const baseApi = createApi({
     "TagsTypesCuisnes",
     "PendingRestaurant",
     "Featured",
+    "Restaurant",
   ],
 });
 

@@ -19,7 +19,10 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 // layout
 import Navbar from "@/layouts/restaurant/Navbar";
-import { useGetRestaurantQuery } from "@/store/api/restaurants";
+import {
+  useCreateReviewMutation,
+  useGetRestaurantQuery,
+} from "@/store/api/restaurants";
 import Reservation from "@/sections/user/restaurant/Reservation";
 import AboutUs from "@/components/Restaurants/AboutUs";
 import FoodMenu from "@/components/Restaurants/FoodMenu";
@@ -28,6 +31,7 @@ import Footer from "@/components/Footer";
 import ReviewSection from "@/components/Restaurants/ReviewSection";
 import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 const Wrapper = styled.div`
   padding: 26px 10.56% 48px;
   color: #797979;
@@ -62,9 +66,30 @@ const RestaurantInfo = () => {
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const user = useSelector(selectCurrentUser);
+  const [createReview] = useCreateReviewMutation();
 
-  const handleReviewSubmit = () => {
+  const handleReviewSubmit = async () => {
     console.log("Review submitted:", reviewText, "Rating:", rating);
+    const data = {
+      rating: rating,
+      comment: reviewText,
+      restaurant: restaurantId,
+      user: user?.id,
+    };
+    try {
+      const review = await createReview(data).unwrap();
+      console.log(review);
+      toast.success("Review Created Successfully");
+    } catch (err) {
+      if (err.data.non_field_errors) {
+        toast.error("You Have already given a Review");
+      } else if (!user) {
+        toast.error("Sign In to Create Review");
+      } else {
+        toast.error("Review Creation Failed");
+      }
+      console.log(err);
+    }
     setReviewText("");
     setRating(0);
   };
