@@ -381,12 +381,15 @@ function FeaturedSummary({ data, allRestaurants }) {
             </Typography>
             <Typography variant="h5" component="h3">
               Restaurant Name:
-              {data.find((item) => item.id === selectedRestaurantId)?.name}
+              {
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
+                  ?.name
+              }
             </Typography>
             <Typography variant="body1" component="h3">
               Manager Name:
               {
-                data.find((item) => item.id === selectedRestaurantId)
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
                   ?.unit_charge
               }
               Rs
@@ -394,53 +397,56 @@ function FeaturedSummary({ data, allRestaurants }) {
             <Typography variant="body1" component="h3">
               Description:
               {
-                data.find((item) => item.id === selectedRestaurantId)
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
                   ?.description
               }
             </Typography>
             <Typography variant="body1" component="h3">
               Average Cost:
-              {data.find((item) => item.id === selectedRestaurantId)?.avg_cost}
+              {
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
+                  ?.avg_cost
+              }
             </Typography>
             <Typography variant="body1" component="h3">
               Opening Time :
               {
-                data.find((item) => item.id === selectedRestaurantId)
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
                   ?.opening_time
               }
             </Typography>
             <Typography variant="body1" component="h3">
               Closing Time:
               {
-                data.find((item) => item.id === selectedRestaurantId)
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
                   ?.closing_time
               }
             </Typography>
             <Typography variant="body1" component="h3">
               Per Person Charge:
               {
-                data.find((item) => item.id === selectedRestaurantId)
+                allRestaurants.find((item) => item.id === selectedRestaurantId)
                   ?.unit_charge
               }
               Rs
             </Typography>
             <Typography variant="body1" component="h3">
               Tags:
-              {data
+              {allRestaurants
                 .find((item) => item.id === selectedRestaurantId)
                 ?.tags.map((tag) => tag.name)
                 .join(", ")}
             </Typography>
             <Typography variant="body1" component="h3">
               Cuisines:
-              {data
+              {allRestaurants
                 .find((item) => item.id === selectedRestaurantId)
                 ?.cuisines.map((cuisine) => cuisine.name)
                 .join(", ")}
             </Typography>
             <Typography variant="body1" component="h3">
               Types:
-              {data
+              {allRestaurants
                 .find((item) => item.id === selectedRestaurantId)
                 ?.types.map((type) => type.name)
                 .join(", ")}
@@ -449,7 +455,7 @@ function FeaturedSummary({ data, allRestaurants }) {
               Images:
             </Typography>
             <Box display="flex" justifyContent="flex-start" flexWrap="wrap">
-              {data
+              {allRestaurants
                 .find((item) => item.id === selectedRestaurantId)
                 ?.images.map((image) => (
                   <img
@@ -472,7 +478,7 @@ function FeaturedSummary({ data, allRestaurants }) {
               Menu Images:
             </Typography>
             <Box display="flex" justifyContent="flex-start" flexWrap="wrap">
-              {data
+              {allRestaurants
                 .find((item) => item.id === selectedRestaurantId)
                 ?.menuImages.map((image) => (
                   <img
