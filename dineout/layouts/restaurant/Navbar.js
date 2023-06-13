@@ -34,7 +34,7 @@ const Navbar = () => {
     event.preventDefault();
     const search = searchQuery;
     console.log(encodeURIComponent(search));
-    router.push(`search?q=${encodeURIComponent(search)}`);
+    router.push(`/restaurants/search?q=${encodeURIComponent(search)}`);
   };
 
   const handleSelectChange = (selectedOption) => {
