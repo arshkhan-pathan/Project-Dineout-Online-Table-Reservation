@@ -67,7 +67,7 @@ const Restaurants = () => {
               ? "loading..."
               : data?.results?.map((restaurant) => (
                   <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
-                    <Card {...restaurant} />
+                    <Card {...restaurant} showExtra={true} />
                   </Grid>
                 ))}
             <Grid
