@@ -13,6 +13,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useRouter } from "next/router";
 import MuiAppBar from "@mui/material/AppBar";
@@ -120,6 +121,7 @@ export default function MiniDrawer() {
               </ListItemButton>
             </ListItem>
           </Link>
+          <ListSubheader sx={{fontWeight: 'bold'}}>Restaurant</ListSubheader>
           <Link
             style={{
               textDecoration: "none",
@@ -145,7 +147,7 @@ export default function MiniDrawer() {
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Pending Restaurants"
+                  primary="Pending"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
@@ -179,7 +181,7 @@ export default function MiniDrawer() {
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Restaurants Performance"
+                  primary="Performance"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
@@ -211,7 +213,7 @@ export default function MiniDrawer() {
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Details-CRUD"
+                  primary="Details"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
@@ -243,7 +245,7 @@ export default function MiniDrawer() {
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Featured Restaurant"
+                  primary="Featured"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>

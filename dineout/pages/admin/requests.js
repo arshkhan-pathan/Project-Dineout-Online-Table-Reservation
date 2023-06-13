@@ -17,12 +17,11 @@ function Requests() {
 
   return (
     <AdminLayout>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+      <Box>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
           Pending Restaurants
         </Typography>
-      </Box>
-      <Box>
+
         <PendingSummary data={data} stats={stats}></PendingSummary>
       </Box>
     </AdminLayout>

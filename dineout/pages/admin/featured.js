@@ -24,17 +24,16 @@ function featured() {
   console.log(data);
   return (
     <AdminLayout>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+      <Box>
+        <Typography variant="h5" fontWeight="bold" gutterBottom>
           Featured
         </Typography>
-      </Box>
-      <Box>
+
         <FeaturedSummary
           data={data}
           allRestaurants={allRestaurants}
           stats={stats}
-        ></FeaturedSummary>
+        />
       </Box>
     </AdminLayout>
   );

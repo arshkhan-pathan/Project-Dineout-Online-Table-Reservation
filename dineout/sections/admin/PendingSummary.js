@@ -157,8 +157,7 @@ function PendingSummary({ data, stats }) {
           </Grid>
         </Grid>
         {""}
-        <Box sx={{ height: 400, width: "100%" }}>
-          <Typography>Pending Restaurants</Typography>
+        <Box sx={{ height: 400, width: "100%", mt: 3 }}>
           <DataGrid
             rows={data || []}
             columns={columns}

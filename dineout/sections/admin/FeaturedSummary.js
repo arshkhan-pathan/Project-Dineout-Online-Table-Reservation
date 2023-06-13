@@ -188,8 +188,7 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
           />
         </Grid>
       </Grid>
-      <Box sx={{ height: 400, width: "100%" }}>
-        <Typography>Featured Restaurants</Typography>
+      <Box sx={{ height: 400, width: "100%", my: 3 }}>
         <DataGrid
           rows={data || []}
           columns={columns}
@@ -359,7 +358,7 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
         </Box>
       </MuiModal>{" "}
       <Box sx={{ height: 400, width: "100%" }}>
-        <Typography>All Restaurants</Typography>
+        <Typography gutterBottom fontWeight="bold">All Restaurants</Typography>
         <DataGrid
           rows={allRestaurants || []}
           columns={columns1}

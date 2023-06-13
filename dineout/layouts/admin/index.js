@@ -19,7 +19,7 @@ const AdminLayout = ({ children }) => {
         <PrimarySearchAppBar />
         <Box sx={{ display: "flex" }}>
           <MiniDrawer />
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: 'auto' }}>
             <DrawerHeader />
             {children}
           </Box>
