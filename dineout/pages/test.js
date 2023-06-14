@@ -1,8 +1,8 @@
-import FillerButtons from "@/components/FillerButtons";
 import React from "react";
+import EditProfile from "@/sections/user/profile/EditProfile";
 
 function test() {
-  return <FillerButtons></FillerButtons>;
+  return <EditProfile></EditProfile>;
 }
 
 export default test;
