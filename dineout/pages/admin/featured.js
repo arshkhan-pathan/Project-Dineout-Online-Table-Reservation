@@ -2,7 +2,6 @@ import React from "react";
 import AdminLayout from "@/layouts/admin";
 import FeaturedSummary from "@/sections/admin/FeaturedSummary";
 import { Box, Typography } from "@mui/material";
-import { useGetFeaturedRestaurantQuery } from "@/store/api/restaurants";
 import {
   useAllRestaurantsQuery,
   useFeaturedRestaurantsQuery,

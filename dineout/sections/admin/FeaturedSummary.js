@@ -1,7 +1,7 @@
 import React from "react";
 import Widget from "../Widget";
 import { useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
   Box,
   Grid,
@@ -243,6 +243,15 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
         </Typography>
         <DataGrid
           autoHeight
+          slots={{
+            toolbar: GridToolbar,
+          }}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
           rows={allRestaurants || []}
           columns={columns1}
           initialState={{
@@ -252,6 +261,9 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
               },
             },
           }}
+          disableColumnFilter
+          disableColumnSelector
+          disableDensitySelector
           pageSizeOptions={[5]}
           disableRowSelectionOnClick
         />
