@@ -17,17 +17,22 @@ import {
   IconButton,
 } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import StarIcon from "@mui/icons-material/Star";
-import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import baseApi from "@/store/api/base";
 
 function PerformanceSummary({ data }) {
+  const dispatch = useDispatch();
+  const [performanceData, setPerformanceData] = useState("");
+
   const viewPerformance = (params) => {
     const rowData = params.row;
 
-    const onViewPerformance = () => {
+    const onViewPerformance = async () => {
       console.log("Approve table for id: ", rowData.id);
+      const { status, data, error, refetch } = await dispatch(
+        baseApi.endpoints.restaurantDataStats.initiate(rowData.id)
+      );
+      setPerformanceData(data);
     };
 
     return (
@@ -113,29 +118,29 @@ function PerformanceSummary({ data }) {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
-              title="New Users This Week"
-              amount={data?.new_users_count}
+              title="Todays Earning"
+              amount={performanceData?.today_earnings || 0}
               icon={<PeopleIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
-              title="Total Users Registered"
-              amount={data?.total_users_count}
+              title="Past Week Earning"
+              amount={performanceData?.last_week_earnings || 0}
               icon={<GroupAddIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
-              title="Total Restaurants"
-              amount={data?.verified_restaurants_count}
+              title="Last Month Earnings"
+              amount={performanceData?.last_month_earnings || 0}
               icon={<RestaurantIcon />}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
-              title="Pending Restarurant"
-              amount={data?.unverified_restaurants_count}
+              title="Bookings this Week"
+              amount={100}
               icon={<HourglassEmptyIcon />}
             />
           </Grid>
@@ -143,7 +148,7 @@ function PerformanceSummary({ data }) {
             <LineChart
               width={500}
               height={300}
-              data={data?.bookings_graph_data}
+              data={performanceData?.earnings_graph}
               margin={{
                 top: 5,
                 right: 30,
@@ -158,7 +163,7 @@ function PerformanceSummary({ data }) {
               <Legend />
               <Line
                 type="monotone"
-                dataKey="count"
+                dataKey="total_bookings"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
                 name="Bookings Count"
@@ -169,7 +174,7 @@ function PerformanceSummary({ data }) {
             <LineChart
               width={500}
               height={300}
-              data={data?.new_users_graph_data}
+              data={performanceData?.earnings_graph}
               margin={{
                 top: 5,
                 right: 30,
@@ -178,14 +183,14 @@ function PerformanceSummary({ data }) {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date_joined__date" />
+              <XAxis dataKey="date" />
               <YAxis></YAxis>
               <Tooltip />
               <Legend />
               <Line
                 type="monotone"
-                dataKey="count"
-                name="User Count"
+                dataKey="total_earnings"
+                name="Total Earnings"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />
