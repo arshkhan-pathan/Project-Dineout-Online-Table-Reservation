@@ -1,18 +1,26 @@
 import UserLayout from "@/layouts/user";
 import React from "react";
-import { Card, CardContent, Typography, Avatar, Grid } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Avatar,
+  Grid,
+  Button,
+} from "@mui/material";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import withAuth from "@/HOC/withAuth";
+import CardActions from "@mui/material/CardActions";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
 
   {
-    field: "restaurant",
+    field: "restaurant_name",
     headerName: "Restaurant Name",
     width: 150,
     editable: false,
@@ -29,14 +37,14 @@ const columns = [
     field: "start_time",
     headerName: "Time",
 
-    width: 150,
+    width: 100,
     editable: false,
   },
   {
     field: "end_time",
     headerName: "End Time",
 
-    width: 150,
+    width: 100,
     editable: false,
   },
   {
@@ -97,6 +105,10 @@ function Index() {
             </Typography>
             {/* Additional fields or information can be added here */}
           </CardContent>
+          <CardActions>
+            <Button size="small">Edit</Button>
+            <Button size="small">Change Password</Button>
+          </CardActions>
         </Card>
         <Grid>{/* Add more components or content here */}</Grid>
       </div>
