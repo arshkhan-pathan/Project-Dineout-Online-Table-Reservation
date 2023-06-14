@@ -1,22 +1,12 @@
 import React from "react";
 import Widget from "../Widget";
+import { TrackChanges } from "@mui/icons-material";
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Grid, Typography, Button } from "@mui/material";
-import Modal from "@/components/Modal";
-import { Modal as MuiModal } from "@mui/material";
-import Image from "next/image";
-import { Tooltip, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import {
-  useApproveFeaturedRestaurantMutation,
-  useDeleteFeaturedRestaurantMutation,
-} from "@/store/api/admin";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import StarIcon from "@mui/icons-material/Star";
+import DataModals from "./DataModals";
 
-function FeaturedSummary({ data, allRestaurants, stats }) {
+function FeaturedSummary({ data }) {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalChildOpen, setIsModalChildOpen] = useState(false);
@@ -42,38 +32,6 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
       >
         View Details
       </Button>
-    );
-  };
-
-  const removeFeatured = (params) => {
-    const [deleteFeaturedRestaurant] = useDeleteFeaturedRestaurantMutation();
-    const onRemoveFeatured = () => {
-      console.log("Delete table for id: ", params.row.id);
-      deleteFeaturedRestaurant(params.row.id);
-    };
-
-    return (
-      <Tooltip title="Delete">
-        <IconButton onClick={onRemoveFeatured}>
-          <CloseIcon sx={{ color: "red " }} />
-        </IconButton>
-      </Tooltip>
-    );
-  };
-
-  const approveTable = (params) => {
-    const [approveFeaturedRestaurant] = useApproveFeaturedRestaurantMutation();
-    const onApproveTable = () => {
-      console.log("Approve table for id: ", params.row.id);
-      approveFeaturedRestaurant(params.row.id);
-    };
-
-    return (
-      <Tooltip title="Approve">
-        <IconButton onClick={onApproveTable}>
-          <CheckBoxIcon sx={{ color: "green" }} />
-        </IconButton>
-      </Tooltip>
     );
   };
   const columns = [
@@ -115,80 +73,27 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
       width: 150,
       renderCell: renderButtonCell,
     },
-    {
-      field: "Delete",
-      headerName: "Delete",
-      width: 150,
-      renderCell: removeFeatured,
-    },
   ];
-
-  const columns1 = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "locality",
-      headerName: "Locality",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "address",
-      headerName: "Adress",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "phone_number",
-      headerName: "Phone",
-      width: 110,
-      editable: true,
-    },
-
-    {
-      field: "actionss",
-      headerName: "Details",
-      width: 150,
-      renderCell: renderButtonCell,
-    },
-    {
-      field: "Add",
-      headerName: "Add",
-      width: 150,
-      renderCell: approveTable,
-    },
-  ];
-
   return (
     <Box>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6} lg={3} xl={3}>
           <Widget
             title="Total Restaurants"
-            amount={stats?.total_restaurants}
-            icon={<StorefrontIcon />}
+            amount={100}
+            icon={<TrackChanges />}
           />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
           <Widget
             title="Total Featured Restaurants"
-            amount={stats?.total_featured}
-            icon={<StarIcon />}
+            amount={100}
+            icon={<TrackChanges />}
           />
         </Grid>
       </Grid>
-      <Box sx={{ height: 400, width: "100%", my: 3 }}>
+      <Box sx={{ height: 400, width: "100%" }}>
+        <Typography>Featured Restaurants</Typography>
         <DataGrid
           rows={data || []}
           columns={columns}
@@ -203,336 +108,16 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
           disableRowSelectionOnClick
         />
       </Box>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        {selectedRestaurantId && (
-          <Box mb={2}>
-            <Typography variant="h4" component="h2" mb={2}>
-              {`Restaurant Details:`}
-            </Typography>
-            <Typography variant="h5" component="h3">
-              Restaurant Name:
-              {data.find((item) => item.id === selectedRestaurantId)?.name}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Manager Name:
-              {
-                data.find((item) => item.id === selectedRestaurantId)
-                  ?.unit_charge
-              }
-              Rs
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Description:
-              {
-                data.find((item) => item.id === selectedRestaurantId)
-                  ?.description
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Average Cost:
-              {data.find((item) => item.id === selectedRestaurantId)?.avg_cost}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Opening Time :
-              {
-                data.find((item) => item.id === selectedRestaurantId)
-                  ?.opening_time
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Closing Time:
-              {
-                data.find((item) => item.id === selectedRestaurantId)
-                  ?.closing_time
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Per Person Charge:
-              {
-                data.find((item) => item.id === selectedRestaurantId)
-                  ?.unit_charge
-              }
-              Rs
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Tags:
-              {data
-                .find((item) => item.id === selectedRestaurantId)
-                ?.tags.map((tag) => tag.name)
-                .join(", ")}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Cuisines:
-              {data
-                .find((item) => item.id === selectedRestaurantId)
-                ?.cuisines.map((cuisine) => cuisine.name)
-                .join(", ")}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Types:
-              {data
-                .find((item) => item.id === selectedRestaurantId)
-                ?.types.map((type) => type.name)
-                .join(", ")}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Images:
-            </Typography>
-            <Box display="flex" justifyContent="flex-start" flexWrap="wrap">
-              {data
-                .find((item) => item.id === selectedRestaurantId)
-                ?.images.map((image) => (
-                  <img
-                    key={image.id}
-                    src={image.image}
-                    alt={`Restaurant ${selectedRestaurantId} Image`}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      objectFit: "cover",
-                      marginRight: 8,
-                      marginBottom: 8,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleImageClick(image.image)}
-                  />
-                ))}
-            </Box>
-            <Typography variant="body1" component="h3">
-              Menu Images:
-            </Typography>
-            <Box display="flex" justifyContent="flex-start" flexWrap="wrap">
-              {data
-                .find((item) => item.id === selectedRestaurantId)
-                ?.menuImages.map((image) => (
-                  <img
-                    key={image.id}
-                    src={image.image}
-                    alt={`Restaurant ${selectedRestaurantId} Image`}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      objectFit: "cover",
-                      marginRight: 8,
-                      marginBottom: 8,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleImageClick(image.image)}
-                  />
-                ))}
-            </Box>
-          </Box>
-        )}
-        <Button onClick={() => setIsModalOpen(false)}>Close</Button>
-      </Modal>
-      <MuiModal
-        open={isModalChildOpen}
-        onClose={() => setIsModalChildOpen(false)}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            maxWidth: 500,
-          }}
-        >
-          {selectedImage && (
-            <Box mb={2}>
-              <Typography variant="h4" component="h2" mb={2}>
-                Image Preview
-              </Typography>
-              <Image
-                src={selectedImage}
-                alt="Selected Image"
-                width="450"
-                height="600"
-              />
-            </Box>
-          )}
-          <Button onClick={() => setIsModalChildOpen(false)}>Close</Button>
-        </Box>
-      </MuiModal>{" "}
-      <Box sx={{ height: 400, width: "100%" }}>
-        <Typography gutterBottom fontWeight="bold">All Restaurants</Typography>
-        <DataGrid
-          rows={allRestaurants || []}
-          columns={columns1}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
-            },
-          }}
-          pageSizeOptions={[5]}
-          disableRowSelectionOnClick
-        />
-      </Box>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        {selectedRestaurantId && (
-          <Box mb={2}>
-            <Typography variant="h4" component="h2" mb={2}>
-              {`Restaurant Details:`}
-            </Typography>
-            <Typography variant="h5" component="h3">
-              Restaurant Name:
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.name
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Manager Name:
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.unit_charge
-              }
-              Rs
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Description:
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.description
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Average Cost:
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.avg_cost
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Opening Time :
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.opening_time
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Closing Time:
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.closing_time
-              }
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Per Person Charge:
-              {
-                allRestaurants.find((item) => item.id === selectedRestaurantId)
-                  ?.unit_charge
-              }
-              Rs
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Tags:
-              {allRestaurants
-                .find((item) => item.id === selectedRestaurantId)
-                ?.tags.map((tag) => tag.name)
-                .join(", ")}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Cuisines:
-              {allRestaurants
-                .find((item) => item.id === selectedRestaurantId)
-                ?.cuisines.map((cuisine) => cuisine.name)
-                .join(", ")}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Types:
-              {allRestaurants
-                .find((item) => item.id === selectedRestaurantId)
-                ?.types.map((type) => type.name)
-                .join(", ")}
-            </Typography>
-            <Typography variant="body1" component="h3">
-              Images:
-            </Typography>
-            <Box display="flex" justifyContent="flex-start" flexWrap="wrap">
-              {allRestaurants
-                .find((item) => item.id === selectedRestaurantId)
-                ?.images.map((image) => (
-                  <img
-                    key={image.id}
-                    src={image.image}
-                    alt={`Restaurant ${selectedRestaurantId} Image`}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      objectFit: "cover",
-                      marginRight: 8,
-                      marginBottom: 8,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleImageClick(image.image)}
-                  />
-                ))}
-            </Box>
-            <Typography variant="body1" component="h3">
-              Menu Images:
-            </Typography>
-            <Box display="flex" justifyContent="flex-start" flexWrap="wrap">
-              {allRestaurants
-                .find((item) => item.id === selectedRestaurantId)
-                ?.menuImages.map((image) => (
-                  <img
-                    key={image.id}
-                    src={image.image}
-                    alt={`Restaurant ${selectedRestaurantId} Image`}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      objectFit: "cover",
-                      marginRight: 8,
-                      marginBottom: 8,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleImageClick(image.image)}
-                  />
-                ))}
-            </Box>
-          </Box>
-        )}
-        <Button onClick={() => setIsModalOpen(false)}>Close</Button>
-      </Modal>
-      <MuiModal
-        open={isModalChildOpen}
-        onClose={() => setIsModalChildOpen(false)}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            maxWidth: 500,
-          }}
-        >
-          {selectedImage && (
-            <Box mb={2}>
-              <Typography variant="h4" component="h2" mb={2}>
-                Image Preview
-              </Typography>
-              <Image
-                src={selectedImage}
-                alt="Selected Image"
-                width="450"
-                height="600"
-              />
-            </Box>
-          )}
-          <Button onClick={() => setIsModalChildOpen(false)}>Close</Button>
-        </Box>
-      </MuiModal>
+      <DataModals
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        selectedRestaurantId={selectedRestaurantId}
+        data={data}
+        selectedImage={selectedImage}
+        handleImageClick={handleImageClick}
+        setIsModalChildOpen={setIsModalChildOpen}
+        isModalChildOpen={isModalChildOpen}
+      ></DataModals>
     </Box>
   );
 }
