@@ -21,6 +21,10 @@ import { useState } from "react";
 import EditProfile from "@/sections/user/profile/EditProfile";
 import ChangePassword from "@/sections/user/profile/ChangePassword";
 
+const handleCancelBooking = (value) => {
+  console.log(value);
+};
+
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
 
@@ -56,7 +60,76 @@ const columns = [
     field: "guests",
     headerName: "Guests",
     type: "number",
+    width: 100,
+    editable: false,
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+    type: "number",
     width: 150,
+    editable: false,
+  },
+  {
+    field: "order_payment_id",
+    headerName: "Payment Id",
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 150,
+    renderCell: (params) => {
+      const bookingId = params.row.id;
+      return (
+        <Button
+          variant="contained"
+          sx={{ color: "whitesmoke" }}
+          onClick={() => handleCancelBooking(bookingId)}
+        >
+          Cancel
+        </Button>
+      );
+    },
+  },
+];
+const columns1 = [
+  { field: "id", headerName: "ID", width: 90 },
+
+  {
+    field: "restaurant_name",
+    headerName: "Restaurant Name",
+    width: 150,
+    editable: false,
+  },
+
+  {
+    field: "date",
+    headerName: "Date",
+
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "start_time",
+    headerName: "Time",
+
+    width: 100,
+    editable: false,
+  },
+  {
+    field: "end_time",
+    headerName: "End Time",
+
+    width: 100,
+    editable: false,
+  },
+  {
+    field: "guests",
+    headerName: "Guests",
+    type: "number",
+    width: 100,
     editable: false,
   },
   {
@@ -177,7 +250,7 @@ function Index() {
               <Box sx={{ height: 300, width: "100%" }}>
                 <DataGrid
                   rows={data?.past_bookings || []}
-                  columns={columns}
+                  columns={columns1}
                   autoHeight
                   initialState={{
                     pagination: {
