@@ -31,6 +31,13 @@ export const authApi = baseApi.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "/api/change-password/",
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -39,4 +46,5 @@ export const {
   useRestaurantRegisterMutation,
   useRestaurantLoginMutation,
   useAdminLoginMutation,
+  useChangePasswordMutation,
 } = authApi;
