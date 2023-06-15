@@ -19,6 +19,7 @@ function ReviewSection({ reviews }) {
               rating={review?.rating}
               reviewText={review?.comment}
               reviewDate={review?.created_at}
+              reviewerAvatar={review?.user_imageurl}
             />
           </>
         );

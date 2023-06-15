@@ -26,6 +26,7 @@ export const restaurantsApi = baseApi.injectEndpoints({
     }),
     getUserProfile: builder.query({
       query: (userId) => `/api/restaurant/users/${userId}/`,
+      providesTags: ["User"],
     }),
     createReview: builder.mutation({
       query: (reviewData) => ({
