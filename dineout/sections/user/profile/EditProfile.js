@@ -3,21 +3,30 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import axios from "axios";
+import { TextField, Grid, Button } from "@mui/material";
 import {
-  Container,
-  Box,
-  Typography,
-  TextField,
-  Grid,
-  Button,
-} from "@mui/material";
+  useGetCurrentUserQuery,
+  useUpdateCurrentUserMutation,
+} from "@/store/api/profile";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const validationSchema = Yup.object({
   firstname: Yup.string().min(2).max(25).required("Enter your First Name"),
   lastname: Yup.string().min(2).max(25).required("Enter your Last Name"),
 });
 
+const initialValues = {
+  firstname: "",
+  lastname: "",
+};
+
 function EditProfile() {
+  const { data } = useGetCurrentUserQuery("s", {
+    refetchOnMountOrArgChange: true,
+  });
+  const [updateCurrentUser] = useUpdateCurrentUserMutation();
+  const [initialData, setInitialData] = useState(initialValues);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -35,41 +44,61 @@ function EditProfile() {
         formData.append("api_key", "257987867351426");
         formData.append("timestamp", Math.floor(Date.now() / 1000));
 
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dhe9hmzbn/image/upload",
-          formData,
-          { headers: { "X-Requested-With": "XMLHttpRequest" } }
+        const response = await toast.promise(
+          axios.post(
+            "https://api.cloudinary.com/v1_1/dhe9hmzbn/image/upload",
+            formData,
+            { headers: { "X-Requested-With": "XMLHttpRequest" } }
+          ),
+          {
+            loading: "Updating Data",
+            success: "Data Updated successfully!",
+            error: "Error uploading image",
+          }
         );
 
         imageurl = response.data.secure_url;
       }
 
       const submitData = {
-        image: imageurl,
+        image_url: imageurl,
         first_name: values.firstname,
         last_name: values.lastname,
       };
 
       console.log(submitData);
+      updateCurrentUser(submitData);
     } catch (error) {
       console.log("Error uploading image:", error);
     }
   };
 
+  useEffect(() => {
+    if (data) {
+      setInitialData({
+        firstname: data.first_name,
+        lastname: data.last_name,
+        imageUrl: data?.image_url,
+      });
+    }
+  });
+
   return (
     <>
       <Formik
-        initialValues={{
-          firstname: "",
-          lastname: "",
-        }}
+        initialValues={initialData}
         validationSchema={validationSchema}
         onSubmit={handleUpload}
         enableReinitialize
       >
         {({ values, setFieldValue }) => (
           <Form>
-            <Grid container rowSpacing={3} columnSpacing={3}>
+            <Grid
+              container
+              rowSpacing={3}
+              columnSpacing={3}
+              sx={{ margin: "0px" }}
+            >
               <Grid item>
                 <Field
                   name="firstname"
@@ -97,6 +126,7 @@ function EditProfile() {
                   onChange={handleFileChange}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <Button type="submit" variant="contained" color="primary">
                   Update

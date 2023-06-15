@@ -8,9 +8,10 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:8000",
   // credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
+    const token = getState().auth.access;
+
     if (token) {
-      headers.set("authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -50,6 +51,7 @@ const baseApi = createApi({
     "PendingRestaurant",
     "Featured",
     "Restaurant",
+    "User",
   ],
 });
 

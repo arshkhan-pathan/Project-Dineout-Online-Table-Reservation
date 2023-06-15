@@ -90,7 +90,7 @@ function Index() {
                 marginBottom: 16,
               }}
               alt="Profile"
-              src={user?.image}
+              src={data?.user?.image_url}
             />
             <Typography variant="h6" component="h2" align="center">
               {user?.first_name}
