@@ -48,6 +48,7 @@ function ChangePassword() {
 
   return (
     <>
+      <h2>Change Password</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

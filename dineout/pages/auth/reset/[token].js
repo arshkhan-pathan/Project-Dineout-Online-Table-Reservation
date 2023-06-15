@@ -7,12 +7,9 @@ const ResetPassword = () => {
   const router = useRouter();
   const token = router.query.token;
   let tokens = token?.split("&");
+  console.log(tokens);
 
-  return (
-    <UserLayout>
-      <ForgotPassword></ForgotPassword>
-    </UserLayout>
-  );
+  return <ForgotPassword tokens={tokens}></ForgotPassword>;
 };
 
 export default ResetPassword;

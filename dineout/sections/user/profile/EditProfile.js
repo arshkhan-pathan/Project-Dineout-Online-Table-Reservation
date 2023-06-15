@@ -85,6 +85,7 @@ function EditProfile() {
 
   return (
     <>
+      <h2>Edit Profile</h2>
       <Formik
         initialValues={initialData}
         validationSchema={validationSchema}

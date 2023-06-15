@@ -38,6 +38,13 @@ export const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/users/reset_password_confirm/",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -47,4 +54,5 @@ export const {
   useRestaurantLoginMutation,
   useAdminLoginMutation,
   useChangePasswordMutation,
+  useResetPasswordMutation,
 } = authApi;
