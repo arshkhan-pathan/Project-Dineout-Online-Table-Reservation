@@ -6,7 +6,7 @@ import { useAllRestaurantsQuery } from "@/store/api/admin";
 
 // Fetch all Restaurnats Data and Pass it to Performance summary
 
-function performance() {
+function Performance() {
   const { data } = useAllRestaurantsQuery("s", {
     refetchOnMountOrArgChange: true,
   });
@@ -23,4 +23,4 @@ function performance() {
   );
 }
 
-export default performance;
+export default Performance;

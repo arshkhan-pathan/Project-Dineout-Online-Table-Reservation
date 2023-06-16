@@ -8,7 +8,7 @@ import {
   useRestaurantStatsQuery,
 } from "@/store/api/admin";
 
-function featured() {
+function Featured() {
   const { data } = useFeaturedRestaurantsQuery("", {
     refetchOnMountOrArgChange: true,
   });
@@ -38,4 +38,4 @@ function featured() {
   );
 }
 
-export default featured;
+export default Featured;
