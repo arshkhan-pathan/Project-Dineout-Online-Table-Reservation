@@ -27,7 +27,8 @@ const renderCancel = (params) => {
   const bookingId = params.row.id;
   const handleCancelBooking = (value) => {
     console.log(value);
-    dispatch(baseApi.endpoints.deleteBookings.initiate(value));
+    const data = { id: value, role: { role: 3 } };
+    dispatch(baseApi.endpoints.deleteBookings.initiate(data));
   };
   return (
     <Button

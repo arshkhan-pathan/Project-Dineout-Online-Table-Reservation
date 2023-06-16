@@ -38,6 +38,7 @@ export const restaurantApi = baseApi.injectEndpoints({
     }),
     getRestaurantBookingsData: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}/bookings/data`,
+      providesTags: ["Bookings"],
     }),
     getRestaurantById: builder.query({
       query: (id) => `api/restaurant/restaurants/${id}`,

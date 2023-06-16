@@ -52,6 +52,7 @@ const baseApi = createApi({
     "Featured",
     "Restaurant",
     "User",
+    "Bookings",
   ],
 });
 

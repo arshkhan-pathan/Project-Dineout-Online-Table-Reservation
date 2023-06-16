@@ -16,11 +16,12 @@ export const profileApi = baseApi.injectEndpoints({
       invalidatesTags: ["User"],
     }),
     deleteBookings: builder.mutation({
-      query: (id) => ({
-        url: `/api/restaurant/bookings/${id}/cancel/`,
+      query: (data) => ({
+        url: `/api/restaurant/bookings/${data.id}/cancel/`,
         method: "POST",
+        body: data.role,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Bookings"],
     }),
   }),
 });

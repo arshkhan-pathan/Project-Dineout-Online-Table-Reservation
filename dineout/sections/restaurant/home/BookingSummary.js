@@ -1,4 +1,4 @@
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography, Button } from "@mui/material";
 import Widget from "../../Widget";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
@@ -9,7 +9,71 @@ import TodayIcon from "@mui/icons-material/Today";
 import UpcomingIcon from "@mui/icons-material/Upcoming";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import { useDispatch } from "react-redux";
+import baseApi from "@/store/api/base";
+import { useDeleteBookingsMutation } from "@/store/api/profile";
 
+const renderCancel = (params) => {
+  const dispatch = useDispatch();
+  const bookingId = params.row.id;
+  const handleCancelBooking = (value) => {
+    console.log(value);
+    const data = { id: value, role: { role: 2 } };
+    dispatch(baseApi.endpoints.deleteBookings.initiate(data));
+  };
+  return (
+    <Button
+      variant="contained"
+      sx={{ color: "whitesmoke" }}
+      onClick={() => handleCancelBooking(bookingId)}
+    >
+      Cancel
+    </Button>
+  );
+};
+const columns = [
+  { field: "id", headerName: "ID", width: 90 },
+
+  {
+    field: "customer_name",
+    headerName: "Customer Name",
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "customer_id",
+    headerName: "Customer Id",
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+    type: "number",
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "start_time",
+    headerName: "Time",
+
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "date",
+    headerName: "Date",
+
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 150,
+    renderCell: renderCancel,
+  },
+];
 const columns1 = [
   { field: "id", headerName: "ID", width: 90 },
 
@@ -97,7 +161,7 @@ const BookingSummary = () => {
                   <DataGrid
                     rows={data?.today_bookings_data || []}
                     autoHeight
-                    columns={columns1}
+                    columns={columns}
                     initialState={{
                       pagination: {
                         paginationModel: {
