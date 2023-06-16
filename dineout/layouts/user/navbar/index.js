@@ -14,6 +14,8 @@ import {
   selectCurrentLocation,
   setLocation,
 } from "@/store/slices/restaurantSlice";
+import Notification from "@/components/Notification"
+import { Box } from "@mui/material";
 
 const locations = [
   {
@@ -98,7 +100,10 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <Box sx={{display: 'flex', gap: 3, alignItems: 'center'}}>
+        {user && (<Notification />)}
         {!user ? <Login /> : <Profile image={user?.image} />}
+        </Box>
       </div>
       {console.log(user)}
     </header>
