@@ -15,8 +15,18 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    deleteBookings: builder.mutation({
+      query: (id) => ({
+        url: `/api/restaurant/bookings/${id}/cancel/`,
+        method: "POST",
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useGetCurrentUserQuery, useUpdateCurrentUserMutation } =
-  profileApi;
+export const {
+  useGetCurrentUserQuery,
+  useUpdateCurrentUserMutation,
+  useDeleteBookingsMutation,
+} = profileApi;

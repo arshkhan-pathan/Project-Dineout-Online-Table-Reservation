@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { selectCurrentUser } from "@/store/slices/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
@@ -20,9 +20,24 @@ import Modal from "@/components/Modal";
 import { useState } from "react";
 import EditProfile from "@/sections/user/profile/EditProfile";
 import ChangePassword from "@/sections/user/profile/ChangePassword";
+import baseApi from "@/store/api/base";
 
-const handleCancelBooking = (value) => {
-  console.log(value);
+const renderCancel = (params) => {
+  const dispatch = useDispatch();
+  const bookingId = params.row.id;
+  const handleCancelBooking = (value) => {
+    console.log(value);
+    dispatch(baseApi.endpoints.deleteBookings.initiate(value));
+  };
+  return (
+    <Button
+      variant="contained"
+      sx={{ color: "whitesmoke" }}
+      onClick={() => handleCancelBooking(bookingId)}
+    >
+      Cancel
+    </Button>
+  );
 };
 
 const columns = [
@@ -80,18 +95,7 @@ const columns = [
     field: "actions",
     headerName: "Actions",
     width: 150,
-    renderCell: (params) => {
-      const bookingId = params.row.id;
-      return (
-        <Button
-          variant="contained"
-          sx={{ color: "whitesmoke" }}
-          onClick={() => handleCancelBooking(bookingId)}
-        >
-          Cancel
-        </Button>
-      );
-    },
+    renderCell: renderCancel,
   },
 ];
 const columns1 = [

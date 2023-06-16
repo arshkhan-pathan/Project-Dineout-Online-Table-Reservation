@@ -9,15 +9,15 @@ import {
 } from "@/store/api/admin";
 
 function featured() {
-  const { data } = useFeaturedRestaurantsQuery("a", {
+  const { data } = useFeaturedRestaurantsQuery("", {
     refetchOnMountOrArgChange: true,
   });
 
-  const { data: allRestaurants } = useAllRestaurantsQuery("a", {
+  const { data: allRestaurants } = useAllRestaurantsQuery("_", {
     refetchOnMountOrArgChange: true,
   });
 
-  const { data: stats } = useRestaurantStatsQuery("a", {
+  const { data: stats } = useRestaurantStatsQuery("", {
     refetchOnMountOrArgChange: true,
   });
   console.log(data);
