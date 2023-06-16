@@ -28,6 +28,7 @@ import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 // initial values
 const initialRestaurantValues = {
@@ -142,7 +143,7 @@ const Manage = () => {
   const onSubmit = async (values) => {
     // upload images to cloudinary
 
-    // formate fields accordingly
+    // format fields accordingly
     const formatedValues = {
       name: values.name,
       locality: values.locality,
@@ -162,32 +163,59 @@ const Manage = () => {
       uploaded_images: [],
       uploaded_menuImages: [],
     };
+
     if (values?.restaurantImages) {
-      const uploaded_images = await uploadOnCloudinary(
-        values?.restaurantImages
+      const uploaded_images = await toast.promise(
+        uploadOnCloudinary(values?.restaurantImages),
+        {
+          pending: "Uploading restaurant images...",
+          success: "Restaurant images uploaded successfully!",
+          error: "Failed to upload restaurant images.",
+        }
       );
+
       console.log(uploaded_images, "images");
       formatedValues.uploaded_images = uploaded_images;
     }
 
     if (values?.menuImages) {
-      const uploaded_menuImages = await uploadOnCloudinary(values?.menuImages);
+      const uploaded_menuImages = await toast.promise(
+        uploadOnCloudinary(values?.menuImages),
+        {
+          pending: "Uploading menu images...",
+          success: "Menu images uploaded successfully!",
+          error: "Failed to upload menu images.",
+        }
+      );
+
       console.log(uploaded_menuImages, "menu");
       formatedValues.uploaded_menuImages = uploaded_menuImages;
     }
-    // create an new restaurant
+
+    // create a new restaurant
     if (State == "Add") {
-      const response = await createRestaurant(formatedValues);
-      console.log();
+      const response = await toast.promise(createRestaurant(formatedValues), {
+        pending: "Creating restaurant...",
+        success: "Restaurant created successfully!",
+        error: "Failed to create restaurant.",
+      });
+
+      console.log(response);
       if (response.data.status == 201) {
         router.push("/restaurant");
       }
     }
+
     if (State == "Update") {
       console.log(formatedValues);
       const payload = { id: restaurantData.manager, data: formatedValues };
       console.log(payload);
-      updateRestaurant(payload);
+
+      await toast.promise(updateRestaurant(payload), {
+        pending: "Updating restaurant...",
+        success: "Restaurant updated successfully!",
+        error: "Failed to update restaurant.",
+      });
     }
   };
 
