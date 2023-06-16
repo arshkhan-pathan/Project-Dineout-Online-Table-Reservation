@@ -21,84 +21,9 @@ import { useState } from "react";
 import EditProfile from "@/sections/user/profile/EditProfile";
 import ChangePassword from "@/sections/user/profile/ChangePassword";
 import baseApi from "@/store/api/base";
+import { useDeleteBookingsMutation } from "@/store/api/profile";
+import { toast } from "react-hot-toast";
 
-const renderCancel = (params) => {
-  const dispatch = useDispatch();
-  const bookingId = params.row.id;
-  const handleCancelBooking = (value) => {
-    console.log(value);
-    const data = { id: value, role: { role: 3 } };
-    dispatch(baseApi.endpoints.deleteBookings.initiate(data));
-  };
-  return (
-    <Button
-      variant="contained"
-      sx={{ color: "whitesmoke" }}
-      onClick={() => handleCancelBooking(bookingId)}
-    >
-      Cancel
-    </Button>
-  );
-};
-
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-
-  {
-    field: "restaurant_name",
-    headerName: "Restaurant Name",
-    width: 150,
-    editable: false,
-  },
-
-  {
-    field: "date",
-    headerName: "Date",
-
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "start_time",
-    headerName: "Time",
-
-    width: 100,
-    editable: false,
-  },
-  {
-    field: "end_time",
-    headerName: "End Time",
-
-    width: 100,
-    editable: false,
-  },
-  {
-    field: "guests",
-    headerName: "Guests",
-    type: "number",
-    width: 100,
-    editable: false,
-  },
-  {
-    field: "amount",
-    headerName: "Amount",
-    type: "number",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "order_payment_id",
-    headerName: "Payment Id",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 150,
-    renderCell: renderCancel,
-  },
-];
 const columns1 = [
   { field: "id", headerName: "ID", width: 90 },
 
@@ -153,6 +78,93 @@ const columns1 = [
 ];
 
 function Index() {
+  const [deleteBookings] = useDeleteBookingsMutation();
+  const renderCancel = (params) => {
+    const bookingId = params.row.id;
+    const handleCancelBooking = (value) => {
+      console.log(value, "line 31");
+      const data = { id: value, role: { role: 3 } };
+      console.log(data);
+      deleteBookings(data)
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+          toast.success("Cancelled");
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.data.error);
+        });
+    };
+    return (
+      <Button
+        variant="contained"
+        sx={{ color: "whitesmoke" }}
+        onClick={() => handleCancelBooking(bookingId)}
+      >
+        Cancel
+      </Button>
+    );
+  };
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+
+    {
+      field: "restaurant_name",
+      headerName: "Restaurant Name",
+      width: 150,
+      editable: false,
+    },
+
+    {
+      field: "date",
+      headerName: "Date",
+
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "start_time",
+      headerName: "Time",
+
+      width: 100,
+      editable: false,
+    },
+    {
+      field: "end_time",
+      headerName: "End Time",
+
+      width: 100,
+      editable: false,
+    },
+    {
+      field: "guests",
+      headerName: "Guests",
+      type: "number",
+      width: 100,
+      editable: false,
+    },
+    {
+      field: "amount",
+      headerName: "Amount",
+      type: "number",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "order_payment_id",
+      headerName: "Payment Id",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: renderCancel,
+    },
+  ];
   // Fetch user Profile By its ID
   const { isOpen, onOpen, onClose, onToggle } = useToggle();
   // Onopen will create modal

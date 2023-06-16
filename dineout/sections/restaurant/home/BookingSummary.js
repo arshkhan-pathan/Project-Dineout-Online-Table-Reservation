@@ -9,17 +9,26 @@ import TodayIcon from "@mui/icons-material/Today";
 import UpcomingIcon from "@mui/icons-material/Upcoming";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import { useDispatch } from "react-redux";
-import baseApi from "@/store/api/base";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
+import { toast } from "react-hot-toast";
 
 const renderCancel = (params) => {
-  const dispatch = useDispatch();
+  const [deleteBookings] = useDeleteBookingsMutation();
   const bookingId = params.row.id;
   const handleCancelBooking = (value) => {
-    console.log(value);
-    const data = { id: value, role: { role: 2 } };
-    dispatch(baseApi.endpoints.deleteBookings.initiate(data));
+    console.log(value, "line 31");
+    const data = { id: value, role: { role: 3 } };
+    console.log(data);
+    deleteBookings(data)
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+        toast.success("Cancelled");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.data.error);
+      });
   };
   return (
     <Button
