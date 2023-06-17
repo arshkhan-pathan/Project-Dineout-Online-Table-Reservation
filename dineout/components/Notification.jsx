@@ -73,8 +73,11 @@ const NOTIFICATIONS = [
 
 export default function NotificationsPopover() {
   const user = useSelector(selectCurrentUser);
-  const { data } = useGetUserNotificationQuery(user?.id);
-  const [notifications, setNotifications] = useState(NOTIFICATIONS);
+  const { data } = useGetUserNotificationQuery(user?.id, {
+    refetchOnFocus: true,
+  });
+
+  const [notifications, setNotifications] = useState(data || []);
 
   const totalUnRead = notifications.filter(
     (item) => item.isUnRead === true
@@ -237,13 +240,13 @@ function NotificationItem({ notification }) {
 function renderContent(notification) {
   const title = (
     <Typography variant="subtitle2">
-      {notification.title}
+      {notification.subject}
       <Typography
         component="span"
         variant="body2"
         sx={{ color: "text.secondary" }}
       >
-        &nbsp; {notification.description}
+        &nbsp; {notification.body}
       </Typography>
     </Typography>
   );
