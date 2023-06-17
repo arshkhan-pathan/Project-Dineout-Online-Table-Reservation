@@ -11,6 +11,7 @@ import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
+import Head from "next/head";
 
 const SearchPage = () => {
   const router = useRouter();
@@ -44,6 +45,9 @@ const SearchPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Search Results for {q}</title>
+      </Head>
       <Navbar />
       <Container maxWidth="lg" sx={{ my: 5 }}>
         <Grid container spacing={3} sx={{ mt: 1 }}>

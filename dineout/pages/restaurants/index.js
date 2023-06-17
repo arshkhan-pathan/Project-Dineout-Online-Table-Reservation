@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
+import Head from "next/head";
 
 const Restaurants = () => {
   const location = useSelector(selectCurrentLocation);
@@ -42,6 +43,9 @@ const Restaurants = () => {
 
   return (
     <>
+      <Head>
+        <title>All Restaurants</title>
+      </Head>
       <Navbar />
       <Container maxWidth="lg" sx={{ my: 5 }}>
         <Grid container spacing={3} sx={{ mt: 1 }}>

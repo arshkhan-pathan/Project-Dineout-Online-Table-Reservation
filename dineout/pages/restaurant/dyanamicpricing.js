@@ -7,7 +7,7 @@ import RestaurantLayout from "@/layouts/restaurant";
 
 const DyanamicPrice = () => {
   return (
-    <RestaurantLayout>
+    <RestaurantLayout title="Pricing">
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Pricing

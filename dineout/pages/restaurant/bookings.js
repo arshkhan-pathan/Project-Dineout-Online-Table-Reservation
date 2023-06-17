@@ -7,7 +7,7 @@ import RestaurantLayout from "@/layouts/restaurant";
 
 const Bookings = () => {
   return (
-    <RestaurantLayout>
+    <RestaurantLayout title="Bookings">
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Bookings

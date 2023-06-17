@@ -9,6 +9,7 @@ import { setCredentials } from "@/store/slices/auth";
 import Auth from "@/components/Auth";
 import RestaurantLayout from "@/layouts/restaurant";
 import { toast } from "react-hot-toast";
+import Head from "next/head";
 
 const initialValues = {
   name: "",
@@ -59,6 +60,9 @@ const Register = () => {
 
   return (
     <>
+      <Head>
+        <title>Manager Signup</title>
+      </Head>
       <Auth
         initialValues={initialValues}
         validationSchema={validationSchema}

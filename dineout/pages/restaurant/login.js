@@ -8,6 +8,7 @@ import { useRestaurantLoginMutation } from "@/store/api/auth";
 import { setCredentials } from "@/store/slices/auth";
 // components
 import Auth from "@/components/Auth";
+import Head from "next/head";
 
 const initialValues = {
   email: "",
@@ -46,6 +47,9 @@ const Login = () => {
   return (
     <>
       <>
+        <Head>
+          <title>Manager Login</title>
+        </Head>
         <Auth
           initialValues={initialValues}
           validationSchema={validationSchema}

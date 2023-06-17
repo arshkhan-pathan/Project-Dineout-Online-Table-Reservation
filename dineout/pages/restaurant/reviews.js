@@ -1,23 +1,12 @@
-import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import * as React from "react";
-import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
-import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 import withAuth from "@/HOC/withAuth";
 import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
 import { useGetReviewsQuery } from "@/store/api/restaurant";
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-
-  ...theme.mixins.toolbar,
-}));
+import RestaurantLayout from "@/layouts/restaurant";
 
 const Reviews = () => {
   const user = useSelector(selectCurrentUser);
@@ -45,21 +34,15 @@ const Reviews = () => {
 
   return (
     <div>
-      <PrimarySearchAppBar />
-      <Box sx={{ display: "flex" }}>
-        <MiniDrawer />
-
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-          <ReviewSummmary
-            reviews={data?.results}
-            count={data?.count}
-            onPageChange={onPageChange}
-            selectedFilters={selectedFilters}
-            onFilterChange={onFilterChange}
-          />
-        </Box>
-      </Box>
+      <RestaurantLayout title="Reviews">
+        <ReviewSummmary
+          reviews={data?.results}
+          count={data?.count}
+          onPageChange={onPageChange}
+          selectedFilters={selectedFilters}
+          onFilterChange={onFilterChange}
+        />
+      </RestaurantLayout>
     </div>
   );
 };

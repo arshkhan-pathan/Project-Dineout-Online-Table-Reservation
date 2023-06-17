@@ -31,6 +31,7 @@ import ReviewSection from "@/components/Restaurants/ReviewSection";
 import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import Head from "next/head";
 const Wrapper = styled.div`
   padding: 26px 10.56% 48px;
   color: #797979;
@@ -121,6 +122,9 @@ const RestaurantInfo = () => {
 
   return (
     <>
+      <Head>
+        <title>{data?.name} || Dineout (Find Best Restaurants)</title>
+      </Head>
       <Navbar />
       <Container maxWidth="lg" sx={{ mt: 1 }}>
         <Breadcrumbs

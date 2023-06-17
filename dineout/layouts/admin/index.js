@@ -4,6 +4,7 @@ import MiniDrawer from "./Drawer";
 import { styled } from "@mui/material/styles";
 
 import PrimarySearchAppBar from "./Appbar";
+import Head from "next/head";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -12,14 +13,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
   ...theme.mixins.toolbar,
 }));
-const AdminLayout = ({ children }) => {
+const AdminLayout = ({ children, title }) => {
   return (
     <>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <div style={{ backgroundColor: "white" }}>
         <PrimarySearchAppBar />
         <Box sx={{ display: "flex" }}>
           <MiniDrawer />
-          <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: 'auto' }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto" }}>
             <DrawerHeader />
             {children}
           </Box>

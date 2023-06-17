@@ -198,7 +198,7 @@ function Tags() {
   };
   return (
     <>
-      <AdminLayout>
+      <AdminLayout title="Edit Details">
         <Box sx={{ mb: 4 }}>
           <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
             Add Tags, Types and Cuisines

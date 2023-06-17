@@ -221,7 +221,7 @@ const Manage = () => {
 
   return (
     <>
-      <RestaurantLayout>
+      <RestaurantLayout title="Manage">
         <Box sx={{ my: 5 }}>
           <Container maxWidth="xl">
             <Box>

@@ -11,7 +11,7 @@ const Tables = () => {
   const user = useSelector(selectCurrentUser);
 
   return (
-    <RestaurantLayout>
+    <RestaurantLayout title="Table Management">
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Tables

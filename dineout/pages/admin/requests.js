@@ -16,7 +16,7 @@ function Requests() {
   const { data: stats } = useRequestStatsQuery();
 
   return (
-    <AdminLayout>
+    <AdminLayout title="Pending Requests">
       <Box>
         <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
           Pending Restaurants

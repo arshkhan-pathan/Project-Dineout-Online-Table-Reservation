@@ -34,7 +34,7 @@ const Restaurant = ({}) => {
   });
 
   return (
-    <RestaurantLayout>
+    <RestaurantLayout title="Dashboard Home">
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Hello {user?.name}

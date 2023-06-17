@@ -3,6 +3,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import { Box } from "@mui/system";
+import Head from "next/head";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -13,9 +14,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const RestaurantLayout = ({ children }) => {
+const RestaurantLayout = ({ children, title }) => {
   return (
     <>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <div style={{ backgroundColor: "white" }}>
         <PrimarySearchAppBar />
         <Box sx={{ display: "flex" }}>

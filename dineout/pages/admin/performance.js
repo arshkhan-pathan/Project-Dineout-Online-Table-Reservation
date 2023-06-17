@@ -12,7 +12,7 @@ function Performance() {
   });
 
   return (
-    <AdminLayout>
+    <AdminLayout title="Performance Page">
       <Box>
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Performance Page

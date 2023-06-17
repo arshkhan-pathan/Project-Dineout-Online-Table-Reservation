@@ -9,7 +9,7 @@ function Dashboard() {
   const { data } = useGetStatsQuery();
   return (
     <>
-      <AdminLayout>
+      <AdminLayout title="Dashboard">
         <Box sx={{ mb: 4 }}>
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>
             Hello Admin

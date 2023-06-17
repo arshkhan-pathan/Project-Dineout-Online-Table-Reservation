@@ -22,7 +22,7 @@ function Featured() {
   });
   console.log(data);
   return (
-    <AdminLayout>
+    <AdminLayout title="Featured Restaurant">
       <Box>
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Featured
