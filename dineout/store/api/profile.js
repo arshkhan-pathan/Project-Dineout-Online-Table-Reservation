@@ -7,6 +7,10 @@ export const profileApi = baseApi.injectEndpoints({
       query: () => "/api/users/me",
       providesTags: ["User"],
     }),
+    getUserNotification: builder.query({
+      query: (id) => `api/restaurant/notifications/${id}/`,
+      providesTags: ["User"],
+    }),
     updateCurrentUser: builder.mutation({
       query: (data) => ({
         url: "/api/users/me",
@@ -30,4 +34,5 @@ export const {
   useGetCurrentUserQuery,
   useUpdateCurrentUserMutation,
   useDeleteBookingsMutation,
+  useGetUserNotificationQuery,
 } = profileApi;
