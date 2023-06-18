@@ -9,6 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { selectCurrentUser } from "@/store/slices/auth";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
@@ -72,7 +73,7 @@ const columns1 = [
   {
     field: "order_payment_id",
     headerName: "Payment Id",
-    width: 150,
+    width: 300,
     editable: false,
   },
 ];
@@ -98,8 +99,8 @@ function Index() {
     };
     return (
       <Button
-        variant="contained"
-        sx={{ color: "whitesmoke" }}
+        variant="outlined"
+        size="small"
         onClick={() => handleCancelBooking(bookingId)}
       >
         Cancel
@@ -177,8 +178,8 @@ function Index() {
 
   return (
     <UserLayout title="Profile Page">
-      <div>
-        <Card style={{ maxWidth: 400, margin: "auto" }}>
+      <Box sx={{mt:4}}>
+        <Card style={{ maxWidth: 400, margin: "auto", borderRadius: 10 }}>
           <CardContent>
             <Avatar
               style={{
@@ -225,7 +226,7 @@ function Index() {
           </CardActions>
         </Card>
         <Grid>{/* Add more components or content here */}</Grid>
-      </div>
+      </Box>
 
       <Grid
         container
@@ -233,16 +234,16 @@ function Index() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ minHeight: "100vh" }}
+        sx={{mb: 5}}
       >
-        <Grid item xs={3}>
+        <Grid item xs={12} >
           {data?.upcoming_bookings.length > 0 ? (
-            <h1>Upcoming Bookings</h1>
+            <h3>Upcoming Bookings</h3>
           ) : (
-            <h1>No Upcoming Bookings to show</h1>
+            <h3>No Upcoming Bookings to show</h3>
           )}
           {data?.upcoming_bookings.length > 0 && (
-            <Box sx={{ height: 300, width: "100%" }}>
+            <Box sx={{ height: "100%", width: "100%" }}>
               <DataGrid
                 rows={data?.upcoming_bookings || []}
                 columns={columns}
@@ -256,15 +257,17 @@ function Index() {
                 }}
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
+                sx={{background: 'white'}}
+                density="comfortable"
               />
             </Box>
           )}
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12}>
           {data?.past_bookings?.length > 0 ? (
             <>
-              <h1>Past Bookings</h1>
-              <Box sx={{ height: 300, width: "100%" }}>
+              <h3>Past Bookings</h3>
+              <Box sx={{ height: "100%", width: "100%" }}>
                 <DataGrid
                   rows={data?.past_bookings || []}
                   columns={columns1}
@@ -278,12 +281,14 @@ function Index() {
                   }}
                   pageSizeOptions={[5]}
                   disableRowSelectionOnClick
+                  sx={{background: 'white'}}
+                  density="comfortable"
                 />
               </Box>
             </>
           ) : (
             <>
-              <h1>No Past Bookings to show</h1>
+              <h3>No Past Bookings to show</h3>
             </>
           )}
         </Grid>
