@@ -47,7 +47,7 @@ const Navbar = () => {
   const storeValue = useSelector(selectCurrentLocation);
   console.log(router.pathname);
   return (
-    <header id="header">
+    <Box component="header" sx={{background: 'white'}} id="header">
       <div id="nav" className={classes.nav}>
         <div id="logo" className={classes.logo}>
           <Link legacyBehavior href="/">
@@ -88,7 +88,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className={classes.li}>
-              <Link href="" className={classes.navheading}>
+              <Link href="/book-table" className={classes.navheading}>
                 Book a Table
               </Link>
             </li>
@@ -106,7 +106,7 @@ const Navbar = () => {
         </Box>
       </div>
       {console.log(user)}
-    </header>
+    </Box>
   );
 };
 

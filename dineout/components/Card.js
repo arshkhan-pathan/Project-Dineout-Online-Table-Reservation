@@ -45,7 +45,7 @@ const Card = ({
   cuisines,
 }) => {
   const router = useRouter();
-  const firstTwoCuisines = cuisines.map((tag) => tag.name);
+  const joinedCuisines = cuisines.slice(0, 2).map((tag) => tag.name).join(", ");
 
   return (
     <MuiCard
@@ -87,7 +87,7 @@ const Card = ({
                     ₹ {avg_cost} for 2 (approx)
                   </Typography>
                   <Typography sx={{ fontSize: 12 }}>
-                    {firstTwoCuisines.join(", ")}
+                    {joinedCuisines}
                   </Typography>
                 </>
               )}

@@ -1,19 +1,20 @@
 import React from "react";
 import Review from "../Review";
-import { Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 
 function ReviewSection({ reviews }) {
   return (
-    <div>
+    <Stack direction="column" spacing={1} >
       <Typography
         variant="h5"
         style={{ fontWeight: "bold", margin: "10px 15px" }}
       >
         Reviews
       </Typography>
-      {reviews?.map((review) => {
-        return (
-          <>
+      <Divider sx={{paddingBlock: 0.5, backgroundColor: '#eeeee4', borderColor: 'transparent', mt: 0}}/>
+      <Stack direction="column" spacing={1}>
+        {reviews?.map((review) => {
+          return (
             <Review
               reviewerName={review?.customer_name}
               rating={review?.rating}
@@ -21,10 +22,10 @@ function ReviewSection({ reviews }) {
               reviewDate={review?.created_at}
               reviewerAvatar={review?.user_imageurl}
             />
-          </>
-        );
-      })}
-    </div>
+          );
+        })}
+      </Stack>
+    </Stack>
   );
 }
 

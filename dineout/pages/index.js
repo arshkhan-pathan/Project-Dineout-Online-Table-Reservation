@@ -102,8 +102,14 @@ const Home = () => {
               height: "fit-content",
               "& .slick-track": {
                 display: "flex",
-                gap: "15px",
                 marginLeft: "0px",
+                "& .slick-slide":{
+                  marginRight: '15px',
+                },
+
+                "& .slick-slide:last-child": {
+                  marginRight: 'auto',
+                }
               },
             }}
           >
@@ -126,7 +132,7 @@ const Home = () => {
           </Grid>
         </Container>
       </Box>
-      <Box sx={{ mt: 4 }}>
+      <Box sx={{ py:8 }}>
         <Container maxWidth="lg">
           <Grid
             container
@@ -135,8 +141,14 @@ const Home = () => {
               height: "fit-content",
               "& .slick-track": {
                 display: "flex",
-                gap: "15px",
                 marginLeft: "0px",
+                "& .slick-slide":{
+                  marginRight: '15px',
+                },
+
+                "& .slick-slide:last-child": {
+                  marginRight: 'auto',
+                }
               },
             }}
           >
@@ -157,7 +169,7 @@ const Home = () => {
               </Slider>
             </Grid>
           </Grid>
-          <FillerButtons></FillerButtons>
+          <FillerButtons />
         </Container>
       </Box>
     </UserLayout>

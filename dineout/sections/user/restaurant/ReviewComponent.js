@@ -9,8 +9,8 @@ function ReviewComponent({
   handleReviewSubmit,
 }) {
   return (
-    <Box sx={{ marginBottom: "20px" }}>
-      <Typography variant="h6" gutterBottom>
+    <Box sx={{ p: "16px 24px" }}>
+      <Typography variant="h6" fontWeight="bold" gutterBottom>
         Write a Review
       </Typography>
       <Rating

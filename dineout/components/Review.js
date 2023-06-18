@@ -33,7 +33,7 @@ const Review = ({
           <Rating name="rating" value={rating} readOnly />
         </CardContent>
       </Card>
-      <Divider />
+      <Divider sx={{paddingBlock: 0.5, backgroundColor: '#eeeee4', borderColor: 'transparent', mt: "1px"}}/>
     </>
   );
 };

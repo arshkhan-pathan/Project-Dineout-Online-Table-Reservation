@@ -1,3 +1,4 @@
+import Link from "next/link";
 import classes from "./navbar.module.css";
 import Button from "@mui/material/Button";
 
@@ -71,7 +72,7 @@ function Navbar() {
           <>Home</>
         </div>
         <div>
-          <>Book a table</>
+          <Link href="/book-table">Book a table</Link>
         </div>
         <div>
           <>Dineout Pay</>

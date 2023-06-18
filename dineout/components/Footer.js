@@ -10,6 +10,8 @@ import Image from "next/image";
 
 const FooterStyle = styled.div`
   position: relative;
+  padding-block: 1px;
+  background: white;
   .container-heading-second {
     display: flex;
     flex-direction: column;
@@ -83,26 +85,22 @@ const FooterStyle = styled.div`
 
 export default function Footer() {
   return (
-    <>
-      <hr style={{ marginTop: "-0px" }} />
-
-      <FooterStyle>
-        <div className="footer_end_div">
-          <div className="footerlogodiv">
-            <Image src={logo} alt="" />
-          </div>
-          <p>Find the best Restaurants, Discounts, Deals, Offers</p>
-          <p>Contact: +917043492728</p>
-          <div className="sociallinks">
-            <Image src={youtube} alt="" />
-            <Image src={twitter} alt="" />
-            <Image src={facebook} alt="" />
-            <Image src={insta} alt="" />
-            <Image src={google} alt="" />
-          </div>
-          <p>2023, Dineout.co All Rights Reserved</p>
+    <FooterStyle>
+      <div className="footer_end_div">
+        <div className="footerlogodiv">
+          <Image src={logo} alt="" />
         </div>
-      </FooterStyle>
-    </>
+        <p>Find the best Restaurants, Discounts, Deals, Offers</p>
+        <p>Contact: +917043492728</p>
+        <div className="sociallinks">
+          <Image src={youtube} alt="" />
+          <Image src={twitter} alt="" />
+          <Image src={facebook} alt="" />
+          <Image src={insta} alt="" />
+          <Image src={google} alt="" />
+        </div>
+        <p>2023, Dineout.co All Rights Reserved</p>
+      </div>
+    </FooterStyle>
   );
 }

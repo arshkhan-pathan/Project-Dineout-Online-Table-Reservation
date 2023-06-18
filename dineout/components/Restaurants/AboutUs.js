@@ -85,7 +85,7 @@ const DetailsWrapper = styled.div`
 
     .lastDetails__section--cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       padding-left: 50px;
     }
   }

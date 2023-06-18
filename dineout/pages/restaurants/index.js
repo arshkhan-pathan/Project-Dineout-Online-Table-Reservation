@@ -48,48 +48,42 @@ const Restaurants = () => {
       </Head>
       <Navbar />
       <Container maxWidth="lg" sx={{ my: 5 }}>
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={3}>
-            <Filters
-              selectedFilters={selectedFilters}
-              setSelectedFilters={setSelectedFilters}
-            />
+        <Grid
+          container
+          item
+          xs={12}
+          spacing={2}
+          sx={{ height: "fit-content", mt: 1 }}
+        >
+          <Grid item xs={12}>
+            <Typography variant="h6" fontWeight="bold">
+              Best Restaurants Near me
+            </Typography>
           </Grid>
+          {isLoading
+            ? "loading..."
+            : data?.results?.map((restaurant) => (
+              <Grid item xs={12} sm={3} md={3} key={restaurant.id}>
+                <Card {...restaurant} showExtra={true} />
+              </Grid>
+            ))}
           <Grid
             container
             item
-            xs={9}
-            spacing={2}
-            sx={{ height: "fit-content" }}
+            xs={12}
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mt: 3 }}
           >
-            <Grid item xs={12}>
-              <Typography variant="h6" fontWeight="bold">
-                Best Restaurants Near me
-              </Typography>
-            </Grid>
-            {isLoading
-              ? "loading..."
-              : data?.results?.map((restaurant) => (
-                  <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
-                    <Card {...restaurant} showExtra={true} />
-                  </Grid>
-                ))}
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{ minHeight: "100vh" }}
-            >
-              <Grid item xs={12} alignItems="center">
-                <div>
-                  <Pagination
-                    count={Math.ceil(data?.count / 12)}
-                    onChange={onPageChange}
-                  />
-                </div>
-              </Grid>
+            <Grid item xs={12} alignItems="center">
+              <div>
+                <Pagination
+                  count={Math.ceil(data?.count / 12)}
+                  onChange={onPageChange}
+                />
+              </div>
             </Grid>
           </Grid>
         </Grid>
