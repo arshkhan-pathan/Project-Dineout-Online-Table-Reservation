@@ -9,6 +9,7 @@ import Auth from "@/layouts/user/navbar/Auth";
 import InvoiceDetails from "./Test/InvoiceDetails";
 import { toast } from "react-hot-toast";
 export default function Payment({
+  resetReservation,
   restaurantId,
   start_time,
   end_time,
@@ -26,7 +27,7 @@ export default function Payment({
 
       // we will send the response we've got from razorpay to the backend to validate the payment
       bodyData.append("response", JSON.stringify(response));
-
+      resetReservation();
       await Axios({
         url: `http://127.0.0.1:8000/api/restaurant/payment/success/`,
         method: "POST",

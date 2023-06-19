@@ -63,12 +63,18 @@ const Reservation = () => {
   const { restaurantId } = router.query;
   const [selectedChip, setSelectedChip] = useState(null);
 
+  const resetReservation = () => {
+    setGuests(0);
+    setSelectedDate(null);
+    setSelectedChip(null);
+  };
+
   const handleChipClick = (item) => {
     setSelectedChip(item);
     // Perform any additional actions with the selected item
     console.log("Selected Chip:", item[0][0]);
   };
-  const { data: slots, refetch } = useCheckAvailibilityQuery(
+  const { data: slots } = useCheckAvailibilityQuery(
     {
       restaurantId: restaurantId,
       date: selectedDate,
@@ -182,32 +188,35 @@ const Reservation = () => {
             </Box>
           </Box>
         )}
-        <Box sx={{ marginTop: 2 }}>
-          <Grid container spacing={1}>
-            {timeSlots?.length > 0 &&
-              timeSlots.map((item, index) => (
-                <Grid item xs={4}>
-                  <Chip
-                    sx={{
-                      borderRadius: 1,
-                      width: "100%",
-                      height: "100%",
-                      paddingBlock: "13px",
-                    }}
-                    key={index}
-                    label={item[0][0]}
-                    clickable
-                    onClick={() => handleChipClick(item)}
-                    color={selectedChip === item ? "primary" : "default"}
-                  />
-                </Grid>
-              ))}
-          </Grid>
-        </Box>
+        {guests > 0 && (
+          <Box sx={{ marginTop: 2 }}>
+            <Grid container spacing={1}>
+              {timeSlots?.length > 0 &&
+                timeSlots.map((item, index) => (
+                  <Grid item xs={4}>
+                    <Chip
+                      sx={{
+                        borderRadius: 1,
+                        width: "100%",
+                        height: "100%",
+                        paddingBlock: "13px",
+                      }}
+                      key={index}
+                      label={item[0][0]}
+                      clickable
+                      onClick={() => handleChipClick(item)}
+                      color={selectedChip === item ? "primary" : "default"}
+                    />
+                  </Grid>
+                ))}
+            </Grid>
+          </Box>
+        )}
       </StyledContent>
       <StyledFooter>
         {restaurantId && selectedChip && selectedDate && guests > 0 && (
           <Payment
+            resetReservation={resetReservation}
             restaurantId={restaurantId}
             start_time={selectedChip[0][0]}
             end_time={selectedChip[0][1]}
