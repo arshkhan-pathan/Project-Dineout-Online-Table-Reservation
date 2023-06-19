@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { selectCurrentUser } from "@/store/slices/auth";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
@@ -178,7 +178,7 @@ function Index() {
 
   return (
     <UserLayout title="Profile Page">
-      <Box sx={{mt:4}}>
+      <Box sx={{ mt: 4 }}>
         <Card style={{ maxWidth: 400, margin: "auto", borderRadius: 10 }}>
           <CardContent>
             <Avatar
@@ -234,9 +234,9 @@ function Index() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{mb: 5}}
+        sx={{ mb: 5 }}
       >
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           {data?.upcoming_bookings.length > 0 ? (
             <h3>Upcoming Bookings</h3>
           ) : (
@@ -257,7 +257,7 @@ function Index() {
                 }}
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
-                sx={{background: 'white'}}
+                sx={{ background: "white" }}
                 density="comfortable"
               />
             </Box>
@@ -281,7 +281,7 @@ function Index() {
                   }}
                   pageSizeOptions={[5]}
                   disableRowSelectionOnClick
-                  sx={{background: 'white'}}
+                  sx={{ background: "white" }}
                   density="comfortable"
                 />
               </Box>
