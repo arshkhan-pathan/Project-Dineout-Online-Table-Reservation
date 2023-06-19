@@ -27,6 +27,10 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User", "Bookings"],
     }),
+    markNotificationsAsRead: builder.mutation({
+      query: (id) => `/api/restaurant/notifications/${id}/mark-as-read/`,
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -35,4 +39,5 @@ export const {
   useUpdateCurrentUserMutation,
   useDeleteBookingsMutation,
   useGetUserNotificationQuery,
+  useMarkNotificationsAsReadMutation,
 } = profileApi;

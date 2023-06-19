@@ -4,7 +4,6 @@ import {
   Box,
   List,
   Badge,
-  Button,
   Avatar,
   Tooltip,
   Divider,
@@ -17,9 +16,13 @@ import {
   ListItemButton,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
-import { useGetUserNotificationQuery } from "@/store/api/profile";
+import {
+  useGetUserNotificationQuery,
+  useMarkNotificationsAsReadMutation,
+} from "@/store/api/profile";
+import baseApi from "@/store/api/base";
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +40,8 @@ const NOTIFICATIONS = [
 
 export default function NotificationsPopover() {
   const user = useSelector(selectCurrentUser);
+  const [markNotificationsAsRead] = useMarkNotificationsAsReadMutation();
+  const dispatch = useDispatch();
   const { data } = useGetUserNotificationQuery(user?.id, {
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
@@ -62,9 +67,10 @@ export default function NotificationsPopover() {
     setNotifications(
       notifications.map((notification) => ({
         ...notification,
-        isUnRead: false,
+        is_read: true,
       }))
     );
+    markNotificationsAsRead(user?.id);
   };
   useEffect(() => {
     setNotifications(data || []);
@@ -154,12 +160,6 @@ export default function NotificationsPopover() {
         </List>
 
         <Divider sx={{ borderStyle: "dashed" }} />
-
-        <Box sx={{ p: 1 }}>
-          <Button fullWidth disableRipple>
-            View All
-          </Button>
-        </Box>
       </Popover>
     </>
   );
