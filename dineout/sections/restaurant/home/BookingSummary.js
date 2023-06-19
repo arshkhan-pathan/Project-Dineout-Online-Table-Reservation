@@ -17,7 +17,7 @@ const renderCancel = (params) => {
   const bookingId = params.row.id;
   const handleCancelBooking = (value) => {
     console.log(value, "line 31");
-    const data = { id: value, role: { role: 3 } };
+    const data = { id: value, role: { role: 2 } };
     console.log(data);
     deleteBookings(data)
       .unwrap()
@@ -204,7 +204,7 @@ const BookingSummary = () => {
                   <DataGrid
                     autoHeight
                     rows={data?.upcoming_bookings_data || []}
-                    columns={columns1}
+                    columns={columns}
                     initialState={{
                       pagination: {
                         paginationModel: {
