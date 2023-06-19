@@ -1,6 +1,6 @@
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
-import {Modal as MuiModal} from "@mui/material";
+import { Modal as MuiModal } from "@mui/material";
 import Fade from "@mui/material/Fade";
 
 const style = {
@@ -9,13 +9,15 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  maxHeight: "80%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
+  overflow: "scroll",
   p: 4,
 };
 
-export default function Modal({isOpen, onClose, children}) {
+export default function Modal({ isOpen, onClose, children }) {
   return (
     <div>
       <MuiModal

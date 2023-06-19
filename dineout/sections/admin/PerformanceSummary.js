@@ -86,34 +86,6 @@ function PerformanceSummary({ data }) {
 
   return (
     <>
-      <Box sx={{ height: 400, width: "100%", my: 3 }}>
-        <DataGrid
-          autoHeight
-          rows={data || []}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
-            },
-          }}
-          slots={{
-            toolbar: GridToolbar,
-          }}
-          pageSizeOptions={[5]}
-          slotProps={{
-            toolbar: {
-              showQuickFilter: true,
-              quickFilterProps: { debounceMs: 500 },
-            },
-          }}
-          disableRowSelectionOnClick
-          disableColumnFilter
-          disableColumnSelector
-          disableDensitySelector
-        />
-      </Box>
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3} xl={3}>
@@ -197,6 +169,34 @@ function PerformanceSummary({ data }) {
             </LineChart>
           </Grid>
         </Grid>
+      </Box>
+      <Box sx={{ height: 400, width: "100%", my: 3 }}>
+        <DataGrid
+          autoHeight
+          rows={data || []}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          slots={{
+            toolbar: GridToolbar,
+          }}
+          pageSizeOptions={[5]}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
+          disableRowSelectionOnClick
+          disableColumnFilter
+          disableColumnSelector
+          disableDensitySelector
+        />
       </Box>
     </>
   );

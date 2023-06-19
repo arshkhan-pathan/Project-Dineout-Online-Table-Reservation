@@ -43,7 +43,7 @@ const Dropzone = ({ allFiles, handleDrop, handleDelete, title }) => {
           <StyledDropzone {...getRootProps()}>
             <input {...getInputProps()} />
             <p>
-              Drag &apos;n&apos; drop {title} files here, or click to select
+              Drag &apos;n&apos; drop {title} images here, or click to select
               files
             </p>
           </StyledDropzone>

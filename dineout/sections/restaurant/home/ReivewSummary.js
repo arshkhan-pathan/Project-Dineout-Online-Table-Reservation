@@ -52,7 +52,7 @@ const ReviewSummmary = ({
         <Review
           key={review.id}
           reviewerName={review.customer_name}
-          reviewerAvatar={"xyz.com"}
+          reviewerAvatar={review.user_imageurl}
           rating={review.rating}
           reviewText={review.comment}
           reviewDate={review.created_at}

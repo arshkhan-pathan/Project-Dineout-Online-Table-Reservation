@@ -387,7 +387,7 @@ const Manage = () => {
                         <Grid container item xs={12} spacing={3}>
                           <Grid item xs={12} sm={6}>
                             <Dropzone
-                              title="restaurant"
+                              title="Restaurant"
                               allFiles={values.restaurantImages}
                               handleDrop={(acceptedFiles) => {
                                 const newFiles = acceptedFiles.map((file) => ({
@@ -408,7 +408,7 @@ const Manage = () => {
                           </Grid>
                           <Grid item xs={12} sm={6} md={6} lg={6}>
                             <Dropzone
-                              title="menu"
+                              title="Menu"
                               allFiles={values.menuImages}
                               handleDrop={(acceptedFiles) => {
                                 const newFiles = acceptedFiles.map((file) => ({
