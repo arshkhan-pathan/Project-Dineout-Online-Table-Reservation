@@ -16,7 +16,7 @@ export default function Payment({
   table,
 }) {
   const { isOpen, onOpen, onClose } = useToggle();
-
+  const [modalContent, setModalContent] = useState("AUTH");
   const user = useSelector(selectCurrentUser);
   const handlePaymentSuccess = async (response) => {
     try {
@@ -37,6 +37,7 @@ export default function Payment({
         .then((res) => {
           console.log("Everything is OK!");
           toast.success("🎉 Your Booking Is Confimed");
+          onOpen();
         })
         .catch((err) => {
           console.log(err);
@@ -136,7 +137,11 @@ export default function Payment({
       </Button>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
-          <Auth onClose={onClose} />
+          {modalContent == "AUTH" ? (
+            <Auth onClose={onClose} />
+          ) : (
+            <>Invoice Component Will Come here</>
+          )}
         </Modal>
       )}
     </>

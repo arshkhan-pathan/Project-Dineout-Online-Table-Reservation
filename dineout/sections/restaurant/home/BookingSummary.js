@@ -50,6 +50,13 @@ const columns = [
     editable: false,
   },
   {
+    field: "table",
+    headerName: "Table",
+    type: "number",
+    width: 150,
+    editable: false,
+  },
+  {
     field: "customer_id",
     headerName: "Customer Id",
     width: 150,
@@ -109,6 +116,13 @@ const columns1 = [
     field: "start_time",
     headerName: "Time",
 
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "table",
+    headerName: "Table",
+    type: "number",
     width: 150,
     editable: false,
   },
