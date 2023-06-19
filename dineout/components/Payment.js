@@ -11,12 +11,12 @@ export default function Payment({
   restaurantId,
   start_time,
   end_time,
-  userId,
   date,
   guests,
   table,
 }) {
   const { isOpen, onOpen, onClose } = useToggle();
+
   const user = useSelector(selectCurrentUser);
   const handlePaymentSuccess = async (response) => {
     try {
@@ -109,7 +109,7 @@ export default function Payment({
         address: "Razorpay Corporate Office",
       },
       theme: {
-        color: "#3399cc",
+        color: "#913bad",
       },
     };
 
