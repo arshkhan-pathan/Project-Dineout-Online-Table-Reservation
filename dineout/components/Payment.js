@@ -6,6 +6,7 @@ import { selectCurrentUser } from "@/store/slices/auth";
 import useToggle from "@/hooks/useToggle";
 import Modal from "@/components/Modal";
 import Auth from "@/layouts/user/navbar/Auth";
+import InvoiceDetails from "./Test/InvoiceDetails";
 import { toast } from "react-hot-toast";
 export default function Payment({
   restaurantId,
@@ -141,7 +142,13 @@ export default function Payment({
       </Button>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
-          {modalContent == "AUTH" ? <Auth onClose={onClose} /> : <>{booking}</>}
+          {modalContent == "AUTH" ? (
+            <Auth onClose={onClose} />
+          ) : (
+            <>
+              <InvoiceDetails bookingId={booking}></InvoiceDetails>
+            </>
+          )}
         </Modal>
       )}
     </>

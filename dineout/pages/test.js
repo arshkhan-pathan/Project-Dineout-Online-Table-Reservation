@@ -1,9 +1,8 @@
 import React from "react";
-import EditProfile from "@/sections/user/profile/EditProfile";
-import ChangePassword from "@/sections/user/profile/ChangePassword";
+import InvoiceDetails from "@/components/Test/InvoiceDetails";
 
 function test() {
-  return <ChangePassword></ChangePassword>;
+  return <InvoiceDetails bookingId={43}></InvoiceDetails>;
 }
 
 export default test;

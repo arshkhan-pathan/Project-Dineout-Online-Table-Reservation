@@ -36,6 +36,9 @@ export const restaurantsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Restaurant"],
     }),
+    getBookingInvoice: builder.query({
+      query: (id) => `/api/restaurant/invoice/${id}/`,
+    }),
   }),
 });
 
@@ -46,4 +49,5 @@ export const {
   useGetUserProfileQuery,
   useGetFeaturedRestaurantQuery,
   useCreateReviewMutation,
+  useGetBookingInvoiceQuery,
 } = restaurantsApi;
