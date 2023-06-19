@@ -35,8 +35,9 @@ const Login = () => {
       console.log("login response: ", response);
 
       if (response && response.data.statusCode == 200) {
-        const { user, ...rest } = response.data;
-        dispatch(setCredentials({ user: user, token: rest }));
+        const { user, access } = response.data;
+        console.log(access);
+        dispatch(setCredentials({ user: user, token: access }));
         toast.success("Succesfully Authenticated");
         router.push("/restaurant");
       }

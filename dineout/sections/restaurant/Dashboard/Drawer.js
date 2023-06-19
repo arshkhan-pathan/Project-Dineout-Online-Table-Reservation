@@ -283,6 +283,38 @@ export default function MiniDrawer() {
               </ListItemButton>
             </ListItem>
           </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color:
+                router.pathname === "/restaurant/profile" ? "red" : "inherit",
+            }}
+            href="/restaurant/profile"
+          >
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Profile"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </Box>
