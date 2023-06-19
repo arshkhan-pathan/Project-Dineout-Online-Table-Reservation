@@ -134,7 +134,7 @@ const RestaurantInfo = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} id="Overview">
           <Grid item xs={12} md={8}>
             <Box>
               <Card elevation={0}>

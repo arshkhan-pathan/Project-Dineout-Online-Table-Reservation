@@ -68,7 +68,7 @@ const FoodMenu = ({ menu }) => {
   return (
     <>
       <Wrapper>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom id="AboutUs">
           Menu
         </Typography>
         <Box>

@@ -4,7 +4,7 @@ import { Divider, Stack, Typography } from "@mui/material";
 
 function ReviewSection({ reviews }) {
   return (
-    <Stack direction="column" spacing={1}>
+    <Stack direction="column" spacing={1} id="Reviews">
       <Typography
         variant="h5"
         style={{ fontWeight: "bold", margin: "10px 15px" }}

@@ -9,7 +9,7 @@ function ReviewComponent({
   handleReviewSubmit,
 }) {
   return (
-    <Box sx={{ p: "16px 24px" }}>
+    <Box sx={{ p: "16px 24px" }} id="WriteReview">
       <Typography variant="h6" fontWeight="bold" gutterBottom>
         Write a Review
       </Typography>
