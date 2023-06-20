@@ -1,7 +1,8 @@
 import React from "react";
 import RestaurantLayout from "@/layouts/restaurant";
 import MangerAdminProfile from "@/components/MangerAdminProfile";
-function profile() {
+import withAuth from "@/HOC/withAuth";
+function Profile() {
   return (
     <>
       <RestaurantLayout>
@@ -11,4 +12,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default withAuth(Profile, [2], "/restaurant/login");

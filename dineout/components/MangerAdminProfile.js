@@ -27,6 +27,7 @@ function MangerAdminProfile() {
   const { data } = useGetUserProfileQuery(user?.id, {
     refetchOnMountOrArgChange: true,
   });
+  console.log(data);
 
   return (
     <>
@@ -52,7 +53,7 @@ function MangerAdminProfile() {
               align="center"
               gutterBottom
             >
-              Total Restaurants Dined In: {data?.total_bookings}
+              {data?.user.first_name} {data?.user.last_name}
             </Typography>
             {/* Additional fields or information can be added here */}
           </CardContent>

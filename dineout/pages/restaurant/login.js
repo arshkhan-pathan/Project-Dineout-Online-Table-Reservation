@@ -31,13 +31,11 @@ const Login = () => {
 
   const onSubmit = async (values) => {
     try {
-      const response = await login(values);
-      console.log("login response: ", response);
+      const user = await login(values).unwrap();
+      console.log("login response: ", user);
 
-      if (response && response.data.statusCode == 200) {
-        const { user, access } = response.data;
-        console.log(access);
-        dispatch(setCredentials({ user: user, token: access }));
+      if (user && user.statusCode == 200) {
+        dispatch(setCredentials({ ...user }));
         toast.success("Succesfully Authenticated");
         router.push("/restaurant");
       }
