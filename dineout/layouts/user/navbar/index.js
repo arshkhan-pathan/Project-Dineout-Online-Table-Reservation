@@ -14,7 +14,7 @@ import {
   selectCurrentLocation,
   setLocation,
 } from "@/store/slices/restaurantSlice";
-import Notification from "@/components/Notification"
+import Notification from "@/components/Notification";
 import { Box } from "@mui/material";
 
 const locations = [
@@ -45,9 +45,8 @@ const Navbar = () => {
   };
   const defaultValue = locations.find((option) => option.id === "Adajan");
   const storeValue = useSelector(selectCurrentLocation);
-  console.log(router.pathname);
   return (
-    <Box component="header" sx={{background: 'white'}} id="header">
+    <Box component="header" sx={{ background: "white" }} id="header">
       <div id="nav" className={classes.nav}>
         <div id="logo" className={classes.logo}>
           <Link legacyBehavior href="/">
@@ -100,9 +99,9 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Box sx={{display: 'flex', gap: 3, alignItems: 'center'}}>
-        {user && (<Notification />)}
-        {!user ? <Login /> : <Profile image={user?.image} />}
+        <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+          {user && <Notification />}
+          {!user ? <Login /> : <Profile image={user?.image} />}
         </Box>
       </div>
       {console.log(user)}

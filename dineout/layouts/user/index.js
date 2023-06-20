@@ -1,4 +1,3 @@
-//
 import Head from "next/head";
 import Navbar from "./navbar";
 import Banner from "@/sections/user/home/Banner";
