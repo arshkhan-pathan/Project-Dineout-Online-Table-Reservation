@@ -27,7 +27,7 @@ export default function Payment({
 
       // we will send the response we've got from razorpay to the backend to validate the payment
       bodyData.append("response", JSON.stringify(response));
-      resetReservation();
+      // resetReservation();
       await Axios({
         url: `http://127.0.0.1:8000/api/restaurant/payment/success/`,
         method: "POST",
@@ -44,6 +44,7 @@ export default function Payment({
           setModalContent("");
           toast.success("🎉 Your Booking Is Confimed");
           onOpen();
+          console.log("On Open called");
         })
         .catch((err) => {
           console.log(err);
@@ -126,23 +127,22 @@ export default function Payment({
 
   return (
     <>
-      {user?.role == 3 && (
-        <Button
-          variant="contained"
-          fullWidth
-          size="large"
-          color="primary"
-          onClick={user ? showRazorpay : onOpen}
-          sx={{
-            color: "white",
-            textTransform: "capitalize",
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          Continue
-        </Button>
-      )}
+      <Button
+        variant="contained"
+        fullWidth
+        size="large"
+        color="primary"
+        onClick={user ? showRazorpay : onOpen}
+        sx={{
+          color: "white",
+          textTransform: "capitalize",
+          fontSize: "16px",
+          fontWeight: "bold",
+        }}
+      >
+        Continue
+      </Button>
+
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
           {modalContent == "AUTH" ? (
