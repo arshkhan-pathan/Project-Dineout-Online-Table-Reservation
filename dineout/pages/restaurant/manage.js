@@ -121,13 +121,15 @@ const Manage = () => {
       const { file } = imgFile;
       formData.append("file", file);
       formData.append("upload_preset", "resImages");
-      formData.append("api_key", "257987867351426");
+      formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_KEY);
       formData.append("timestamp", (Date.now() / 1000) | 0);
 
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dhe9hmzbn/image/upload",
+        process.env.NEXT_PUBLIC_CLOUDINARY_URL,
         formData,
-        { headers: { "X-Requested-With": "XMLHttpRequest" } }
+        {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        }
       );
 
       const secure_url = response?.data?.secure_url;

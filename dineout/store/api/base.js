@@ -1,9 +1,10 @@
 // packages
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+console.log(process.env.BASE_URL);
 
 // base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000",
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   // credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.access;

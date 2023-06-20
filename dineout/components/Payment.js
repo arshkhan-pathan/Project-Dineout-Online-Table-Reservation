@@ -9,7 +9,6 @@ import Auth from "@/layouts/user/navbar/Auth";
 import InvoiceDetails from "./InvoiceDetails";
 import { toast } from "react-hot-toast";
 export default function Payment({
-  resetReservation,
   restaurantId,
   start_time,
   end_time,
@@ -29,7 +28,7 @@ export default function Payment({
       bodyData.append("response", JSON.stringify(response));
       // resetReservation();
       await Axios({
-        url: `http://127.0.0.1:8000/api/restaurant/payment/success/`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/restaurant/payment/success/`,
         method: "POST",
         data: bodyData,
         headers: {
@@ -68,7 +67,7 @@ export default function Payment({
     // we will pass the amount and product name to the backend using form data
 
     const data = await Axios({
-      url: `http://127.0.0.1:8000/api/restaurant/pay/`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/restaurant/pay/`,
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -94,8 +93,8 @@ export default function Payment({
     //that has been made by the user
 
     var options = {
-      key_id: "rzp_test_YG1BooOl44BGJQ", // in react your environment variable must start with REACT_APP_
-      key_secret: "lA9TlERaqw3vmBfpjdw3f4RG",
+      key_id: process.env.NEXT_PUBLIC_REACT_RAZORPAY_KEY, // in react your environment variable must start with REACT_APP_
+      key_secret: process.env.NEXT_PUBLIC_REACT_RAZORPAY_SECRET,
       amount: data.data.payment.amount,
       currency: "INR",
       name: "DineOut",

@@ -25,7 +25,7 @@ const Auth = ({ onClose }) => {
 
     //api call to check if user exists!
     axios
-      .get(`http://127.0.0.1:8000/api/users/${values.email}`)
+      .get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${values.email}`)
       .then(function (response) {
         if (response.status == 200) {
           setAuthPage("login");
@@ -53,7 +53,7 @@ const Auth = ({ onClose }) => {
     const { firstName, lastName, password, confirmPassword } = values;
 
     axios
-      .post("http://127.0.0.1:8000/api/register/", {
+      .post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/register/`, {
         first_name: firstName,
         last_name: lastName,
         email: email,
@@ -77,7 +77,7 @@ const Auth = ({ onClose }) => {
   const onSendEmail = (values) => {
     // Send Request to Backend For password Reset
     const get = axios
-      .post("http://127.0.0.1:8000/auth/users/reset_password/", {
+      .post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/users/reset_password/`, {
         email: values.email,
       })
       .then(function (response) {

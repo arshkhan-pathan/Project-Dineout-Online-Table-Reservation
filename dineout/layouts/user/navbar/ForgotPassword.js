@@ -1,31 +1,33 @@
 // packages
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 // css
-import styles from '@/styles/Login.module.css';
-
+import styles from "@/styles/Login.module.css";
 
 const initialValues = {
-  password: '',
-  confirmPassword: '',
+  password: "",
+  confirmPassword: "",
 };
 
 const validationSchema = Yup.object({
-  password: Yup.string().min(6).required('Enter your Password'),
+  password: Yup.string().min(6).required("Enter your Password"),
   confirmPassword: Yup.string()
-    .required('Renter your Password')
-    .oneOf([Yup.ref('password'), null], 'Password must match'),
+    .required("Renter your Password")
+    .oneOf([Yup.ref("password"), null], "Password must match"),
 });
 
 const ForgotPassword = ({ tokens }) => {
   const onSubmit = async (values) => {
     axios
-      .post('http://127.0.0.1:8000/auth/users/reset_password_confirm/', {
-        uid: tokens[0],
-        token: tokens[1],
-        new_password: values.password,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/users/reset_password_confirm/`,
+        {
+          uid: tokens[0],
+          token: tokens[1],
+          new_password: values.password,
+        }
+      )
       .then(function (response) {
         console.log(response);
       })

@@ -99,8 +99,8 @@ const Reservation = () => {
 
   const handleDateChange = (date) => {
     const year = date.year();
-    const month = String(date.month() + 1).padStart(2, "0"); // Months are zero-based, so add 1 and pad with leading zeros if needed
-    const day = String(date.date()).padStart(2, "0"); // Pad day with leading zeros if needed
+    const month = String(date.month() + 1).padStart(2, "0");
+    const day = String(date.date()).padStart(2, "0");
 
     const formattedDate = `${year}-${month}-${day}`;
     console.log(formattedDate);
@@ -109,7 +109,7 @@ const Reservation = () => {
 
   const disableDate = (date) => {
     const currentDate = new Date(date);
-    currentDate.setHours(0, 0, 0, 0); // Set the time to 00:00:00 to compare the dates only
+    currentDate.setHours(0, 0, 0, 0);
 
     return (
       currentDate > oneMonthFromNow ||
