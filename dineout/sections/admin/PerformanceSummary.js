@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Widget from "../Widget";
+import Widget from "../../components/Widget";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PeopleIcon from "@mui/icons-material/People";
 import RestaurantIcon from "@mui/icons-material/Restaurant";

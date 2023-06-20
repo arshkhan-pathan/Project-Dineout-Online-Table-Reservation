@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Typography, Tooltip, IconButton } from "@mui/material";
-import Widget from "../Widget";
+import Widget from "../../components/Widget";
 import TodayIcon from "@mui/icons-material/Today";
 import UpcomingIcon from "@mui/icons-material/Upcoming";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";

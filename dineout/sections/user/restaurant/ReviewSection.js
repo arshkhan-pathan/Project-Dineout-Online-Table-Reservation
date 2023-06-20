@@ -1,5 +1,5 @@
 import React from "react";
-import Review from "../Review";
+import Review from "@/components/Review";
 import { Divider, Stack, Typography } from "@mui/material";
 
 function ReviewSection({ reviews }) {

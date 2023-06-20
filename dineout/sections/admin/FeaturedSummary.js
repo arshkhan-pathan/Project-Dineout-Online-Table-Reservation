@@ -1,5 +1,5 @@
 import React from "react";
-import Widget from "../Widget";
+import Widget from "../../components/Widget";
 import { useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {

@@ -23,11 +23,11 @@ import {
   useGetRestaurantQuery,
 } from "@/store/api/restaurants";
 import Reservation from "@/sections/user/restaurant/Reservation";
-import AboutUs from "@/components/Restaurants/AboutUs";
-import FoodMenu from "@/components/Restaurants/FoodMenu";
-import SubMenu from "@/components/Restaurants/Submenu";
+import AboutUs from "@/sections/user/restaurant/AboutUs";
+import FoodMenu from "@/sections/user/restaurant/FoodMenu";
+import SubMenu from "@/sections/user/restaurant/Submenu";
 import Footer from "@/components/Footer";
-import ReviewSection from "@/components/Restaurants/ReviewSection";
+import ReviewSection from "@/sections/user/restaurant/ReviewSection";
 import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
 import { useState } from "react";
 import { toast } from "react-hot-toast";

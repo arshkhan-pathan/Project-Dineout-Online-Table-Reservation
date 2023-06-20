@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import cuisinImg from "../../assets/images/cuisine.svg";
-import typeImg from "../../assets/images/type.svg";
-import bestsellingImg from "../../assets/images/bestselling.svg";
-import avgcostImg from "../../assets/images/avgcost.svg";
-import facilityImg from "../../assets/images/facilities.svg";
+import cuisinImg from "@/assets/images/cuisine.svg";
+import typeImg from "@/assets/images/type.svg";
+import bestsellingImg from "@/assets/images/bestselling.svg";
+import avgcostImg from "@/assets/images/avgcost.svg";
+import facilityImg from "@/assets/images/facilities.svg";
 import Image from "next/image";
 
 const Wrapper = styled.div`

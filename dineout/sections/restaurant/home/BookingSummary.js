@@ -1,5 +1,5 @@
 import { Grid, Box, Typography, Button } from "@mui/material";
-import Widget from "../../Widget";
+import Widget from "../../../components/Widget";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";

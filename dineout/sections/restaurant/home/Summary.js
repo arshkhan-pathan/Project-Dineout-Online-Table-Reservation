@@ -1,5 +1,5 @@
 import { Grid, Box } from "@mui/material";
-import Widget from "../../Widget";
+import Widget from "../../../components/Widget";
 import {
   LineChart,
   Line,
