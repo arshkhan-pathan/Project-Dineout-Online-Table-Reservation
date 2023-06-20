@@ -1,5 +1,5 @@
 import React from "react";
-import InvoiceDetails from "@/components/Test/InvoiceDetails";
+import InvoiceDetails from "@/components/InvoiceDetails";
 
 function test() {
   return <InvoiceDetails bookingId={43}></InvoiceDetails>;

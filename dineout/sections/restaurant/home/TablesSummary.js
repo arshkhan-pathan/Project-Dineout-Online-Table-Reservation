@@ -83,7 +83,9 @@ const columns = [
 const TablesSummary = () => {
   const user = useSelector(selectCurrentUser);
   const [createTable] = useCreateTableMutation();
-  const { data } = useGetRestaurantTableQuery(user?.id);
+  const { data } = useGetRestaurantTableQuery(user?.id, {
+    refetchOnMountOrArgChange: true,
+  });
   console.log(data);
 
   const onSubmit = async (values, action) => {

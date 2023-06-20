@@ -6,7 +6,7 @@ import { selectCurrentUser } from "@/store/slices/auth";
 import useToggle from "@/hooks/useToggle";
 import Modal from "@/components/Modal";
 import Auth from "@/layouts/user/navbar/Auth";
-import InvoiceDetails from "./Test/InvoiceDetails";
+import InvoiceDetails from "./InvoiceDetails";
 import { toast } from "react-hot-toast";
 export default function Payment({
   resetReservation,
