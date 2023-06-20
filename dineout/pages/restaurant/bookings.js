@@ -20,4 +20,4 @@ const Bookings = () => {
   );
 };
 
-// export default withAuth(Bookings, [2], "/restaurant/login");
+export default withAuth(Bookings, [2], "/restaurant/login");

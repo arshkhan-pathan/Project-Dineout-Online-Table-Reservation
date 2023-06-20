@@ -126,21 +126,23 @@ export default function Payment({
 
   return (
     <>
-      <Button
-        variant="contained"
-        fullWidth
-        size="large"
-        color="primary"
-        onClick={user ? showRazorpay : onOpen}
-        sx={{
-          color: "white",
-          textTransform: "capitalize",
-          fontSize: "16px",
-          fontWeight: "bold",
-        }}
-      >
-        Continue
-      </Button>
+      {user?.role == 3 && (
+        <Button
+          variant="contained"
+          fullWidth
+          size="large"
+          color="primary"
+          onClick={user ? showRazorpay : onOpen}
+          sx={{
+            color: "white",
+            textTransform: "capitalize",
+            fontSize: "16px",
+            fontWeight: "bold",
+          }}
+        >
+          Continue
+        </Button>
+      )}
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
           {modalContent == "AUTH" ? (
