@@ -103,7 +103,12 @@ const Auth = ({
           <Typography variant="h5" sx={{ px: 5, mt: 10, mb: 5 }}>
             Hi, Welcome Back
           </Typography>
-          <Image src={illustrationImage} alt="login" width="650" style={{width: '100%', objectFit: "contain"}}/>
+          <Image
+            src={illustrationImage}
+            alt="login"
+            width="650"
+            style={{ width: "100%", objectFit: "contain" }}
+          />
         </StyledSection>
       )}
       <Container component="main" maxWidth="xs">
@@ -229,13 +234,25 @@ const Auth = ({
                     )}
 
                     {authType === "Sign In" && (
-                      <MuiLink
-                        href="/restaurant/register"
-                        component={Link}
-                        variant="body2"
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
                       >
-                        Don&apos;t have an account? Sign up
-                      </MuiLink>
+                        <MuiLink
+                          href="/restaurant/register"
+                          component={Link}
+                          variant="body2"
+                        >
+                          Don&apos;t have an account? Sign up
+                        </MuiLink>
+                        <Button
+                          style={{ textTransform: "none", marginLeft: "-80px" }}
+                        >
+                          Forgot Password?
+                        </Button>
+                      </div>
                     )}
                   </Grid>
                 </Grid>
