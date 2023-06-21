@@ -26,7 +26,7 @@ const Restaurants = () => {
   useEffect(() => {
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
-      location: location.name,
+      location: "",
     }));
   }, [location]);
 
@@ -57,7 +57,7 @@ const Restaurants = () => {
         >
           <Grid item xs={12}>
             <Typography variant="h6" fontWeight="bold">
-              Best Restaurants Near me
+              Best Restaurants in Surat
             </Typography>
           </Grid>
           {isLoading
