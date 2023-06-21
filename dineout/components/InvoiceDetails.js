@@ -5,46 +5,42 @@ import { useGetBookingInvoiceQuery } from "@/store/api/restaurants";
 const InvoiceDetails = ({ bookingId }) => {
   const { data: invoice } = useGetBookingInvoiceQuery(bookingId);
   console.log(invoice);
-  return (
-    <Paper elevation={3} sx={{ p: 2 }}>
-      <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
-        Invoice #{invoice?.id}
-      </Typography>
-      <Typography variant="subtitle1" sx={{ mb: 1 }}>
-        <b>Customer:</b> {invoice?.customer_name}
-      </Typography>
-      <Typography variant="subtitle1" sx={{ mb: 1 }}>
-        <b>Amount:</b> ₹ {invoice?.amount}
-      </Typography>
-      <Typography variant="subtitle1" sx={{ mb: 1 }}>
-        <b>Created At:</b> {invoice?.created_at}
-      </Typography>
-      <Typography variant="subtitle1" sx={{ mb: 2 }}>
-        <b>Restaurant:</b> {invoice?.restaurant.name}
-      </Typography>
-      <Typography variant="subtitle1" sx={{ mb: 2 }}>
-        <b>Booking Details:</b>
-      </Typography>
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        <b>Booking ID:</b> {invoice?.booking_details.booking_id}
-      </Typography>
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        <b>Date:</b> {invoice?.booking_details.date}
-      </Typography>
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        <b>Start Time:</b> {invoice?.booking_details.start_time}
-      </Typography>
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        <b>End Time:</b> {invoice?.booking_details.end_time}
-      </Typography>
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        <b>Guests:</b> {invoice?.booking_details.guests}
-      </Typography>
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        <b>Additional Details:</b> {invoice?.booking_details.additional_details}
-      </Typography>
-    </Paper>
-  );
+
+  const renderInvoiceDetails = () => {
+    if (!invoice) {
+      return null;
+    }
+
+    const { id, customer_name, amount, created_at, restaurant, booking_details } = invoice;
+
+    const invoiceDetails = [
+      { label: "Customer", value: customer_name },
+      { label: "Amount", value: `₹ ${amount}` },
+      { label: "Created At", value: created_at },
+      { label: "Restaurant", value: restaurant?.name },
+      { label: "Booking ID", value: booking_details?.booking_id },
+      { label: "Date", value: booking_details?.date },
+      { label: "Start Time", value: booking_details?.start_time },
+      { label: "End Time", value: booking_details?.end_time },
+      { label: "Guests", value: booking_details?.guests },
+      { label: "Additional Details", value: booking_details?.additional_details },
+    ];
+
+    return (
+      <Paper elevation={3} sx={{ p: 2 }}>
+        <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+          Invoice #{id}
+        </Typography>
+        {invoiceDetails.map(({ label, value }) => (
+          <Typography variant="subtitle1" sx={{ mb: 1 }} key={label}>
+            <b>{label}:</b> {value}
+          </Typography>
+        ))}
+      </Paper>
+    );
+  };
+
+  return renderInvoiceDetails();
 };
 
 export default InvoiceDetails;

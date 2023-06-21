@@ -1,63 +1,24 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import Image from "next/image";
-import { Box, Typography } from "@mui/material";
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px 24px 24px;
-  position: relative;
-  border-radius: 4px;
+import { Box, Grid, Stack, Typography, styled } from "@mui/material";
 
-  > h4 {
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: 700;
-    color: #333333;
-    margin: inherit;
-  }
-
-  > div {
-    > img {
-      width: 136px;
-      height: 120px;
-      margin-top: 16px;
-      border-radius: 4px;
-    }
-
-    > div {
-      background-color: #333333;
-      color: #ffffff;
-      width: 136px;
-      height: 24px;
-      padding: 4px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      z-index: 3;
-      bottom: 24px;
-      border-radius: 0 0 4px 4px;
-
-      > p {
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: 700;
-      }
-    }
-  }
-`;
+// styles
+const StyedWrapper = styled(Box)({
+  padding: '16px 24px 24px',
+  borderRadius: '4px'
+});
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 550,
+  width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
+  border: "0px solid #000",
+  boxShadow: 5,
   p: 4,
 };
 
@@ -67,44 +28,56 @@ const FoodMenu = ({ menu }) => {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <Wrapper>
-        <Typography variant="h4" gutterBottom id="AboutUs">
-          Menu
-        </Typography>
-        <Box>
-          {menu &&
-            menu.map((image) => {
-              return (
-                <div key={Math.random()}>
-                  <Image
-                    src={image.image}
-                    height={50}
-                    width={50}
-                    alt="Image"
-                    onClick={handleOpen}
-                  />
-
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
+      <StyedWrapper>
+        <Stack direction="column" spacing={2}>
+          <Typography variant="h6" gutterBottom id="AboutUs" sx={{fontSize: '18px', fontWeight: 'bold'}}>
+            Menu
+          </Typography>
+          <Box>
+            <Grid container>
+              {menu &&
+                menu.map((image) => {
+                  return (
+                    <Grid item xs={2} key={image.image}>
                       <Image
                         src={image.image}
-                        height={550}
-                        width={500}
+                        height={100}
+                        width={100}
                         alt="Image"
                         onClick={handleOpen}
+                        style={{ objectFit: 'cover' }}
                       />
-                    </Box>
-                  </Modal>
-                </div>
-              );
-            })}
-        </Box>
-      </Wrapper>
+
+                      <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        sx={{
+                          "& img": {
+                            width: '100%',
+                            height: '80vh'
+                          }
+                        }}
+                      >
+                        <Box sx={style}>
+                          <Image
+                            src={image.image}
+                            height={550}
+                            width={500}
+                            alt="Image"
+                            onClick={handleOpen}
+                            
+                          />
+                        </Box>
+                      </Modal>
+                    </Grid>
+                  );
+                })}
+            </Grid>
+          </Box>
+        </Stack>
+      </StyedWrapper>
     </>
   );
 };

@@ -124,6 +124,13 @@ export default function Payment({
     rzp1.open();
   };
 
+  const onCloseModal = () => {
+    onClose();
+    if(modalContent !== 'AUTH'){
+      //
+    }
+  }
+
   return (
     <>
       <Button
@@ -143,7 +150,7 @@ export default function Payment({
       </Button>
 
       {isOpen && (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onCloseModal}>
           {modalContent == "AUTH" ? (
             <Auth onClose={onClose} />
           ) : (
