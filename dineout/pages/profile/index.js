@@ -22,46 +22,8 @@ import EditProfile from "@/sections/user/profile/EditProfile";
 import ChangePassword from "@/sections/user/profile/ChangePassword";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
 import RenderCancel from "@/sections/user/profile/Grid/RenderCancel";
-
-const commonColumns = [
-  { field: "id", headerName: "ID", width: 90 },
-
-  {
-    field: "restaurant_name",
-    headerName: "Restaurant Name",
-    width: 150,
-    editable: false,
-  },
-
-  {
-    field: "date",
-    headerName: "Date",
-
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "start_time",
-    headerName: "Time",
-
-    width: 100,
-    editable: false,
-  },
-  {
-    field: "table_no",
-    headerName: "Table No",
-
-    width: 100,
-    editable: false,
-  },
-  {
-    field: "guests",
-    headerName: "Guests",
-    type: "number",
-    width: 100,
-    editable: false,
-  },
-];
+import BookingsGrid from "@/sections/user/profile/Grid/BookingsGrid";
+import { commonColumns } from "@/sections/user/profile/Grid/BookingsGrid";
 
 function Index() {
   const [deleteBookings] = useDeleteBookingsMutation();
@@ -182,22 +144,10 @@ function Index() {
           )}
           {data?.upcoming_bookings.length > 0 && (
             <Box sx={{ height: "100%", width: "100%" }}>
-              <DataGrid
+              <BookingsGrid
                 rows={data?.upcoming_bookings || []}
                 columns={upcomingColumns}
-                autoHeight
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 5,
-                    },
-                  },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-                sx={{ background: "white" }}
-                density="comfortable"
-              />
+              ></BookingsGrid>
             </Box>
           )}
         </Grid>
@@ -206,22 +156,10 @@ function Index() {
             <>
               <h3>Past Bookings</h3>
               <Box sx={{ height: "100%", width: "100%" }}>
-                <DataGrid
+                <BookingsGrid
                   rows={data?.past_bookings || []}
                   columns={pastColumns}
-                  autoHeight
-                  initialState={{
-                    pagination: {
-                      paginationModel: {
-                        pageSize: 5,
-                      },
-                    },
-                  }}
-                  pageSizeOptions={[5]}
-                  disableRowSelectionOnClick
-                  sx={{ background: "white" }}
-                  density="comfortable"
-                />
+                ></BookingsGrid>
               </Box>
             </>
           ) : (
