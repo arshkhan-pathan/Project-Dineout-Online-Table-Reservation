@@ -26,6 +26,9 @@ import { commonColumns } from "@/sections/user/profile/Grid/BookingsGrid";
 
 function Index() {
   const [deleteBookings] = useDeleteBookingsMutation();
+  const { isOpen, onOpen, onClose } = useToggle();
+  const { isOpen: isOpenD, onOpen: onOpenD, onClose: onCloseD } = useToggle();
+
   const upcomingColumns = [
     ...commonColumns,
     {
@@ -45,7 +48,8 @@ function Index() {
       field: "actions",
       headerName: "Actions",
       width: 150,
-      renderCell: (params) => RenderCancel(params, deleteBookings, 3),
+      renderCell: (params) =>
+        RenderCancel(params, deleteBookings, 3, isOpenD, onOpenD, onCloseD),
     },
   ];
 
@@ -65,7 +69,7 @@ function Index() {
       editable: false,
     },
   ];
-  const { isOpen, onOpen, onClose } = useToggle();
+
   const user = useSelector(selectCurrentUser);
   const [modalContent, setModalContent] = useState();
   console.log(user);

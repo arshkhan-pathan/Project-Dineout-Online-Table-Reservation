@@ -11,6 +11,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import RenderCancel from "@/sections/user/profile/Grid/RenderCancel";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
+import useToggle from "@/hooks/useToggle";
 
 const commonColumns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -65,6 +66,8 @@ const commonColumns = [
 
 const BookingSummary = () => {
   const [deleteBookings] = useDeleteBookingsMutation();
+  const { isOpen, onOpen, onClose } = useToggle();
+
   const user = useSelector(selectCurrentUser);
   const cancelColums = [
     ...commonColumns,
@@ -72,7 +75,8 @@ const BookingSummary = () => {
       field: "actions",
       headerName: "Actions",
       width: 150,
-      renderCell: (params) => RenderCancel(params, deleteBookings, 2),
+      renderCell: (params) =>
+        RenderCancel(params, deleteBookings, 2, isOpen, onOpen, onClose),
     },
   ];
 
