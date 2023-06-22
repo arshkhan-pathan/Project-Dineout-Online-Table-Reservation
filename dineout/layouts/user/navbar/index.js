@@ -6,7 +6,7 @@ import classes from "@/styles/Navbar.module.css";
 //
 import Login from "./LoginButton";
 import { selectCurrentUser } from "@/store/slices/auth.js";
-import Profile from "./profile";
+import Profile from "../../../components/profile";
 import { useRouter } from "next/router";
 import Select from "@/components/Select";
 import { useState } from "react";
@@ -101,7 +101,7 @@ const Navbar = () => {
         </div>
         <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
           {user && <Notification />}
-          {!user ? <Login /> : <Profile image={user?.image} />}
+          {!user ? <Login /> : <Profile />}
         </Box>
       </div>
       {console.log(user)}

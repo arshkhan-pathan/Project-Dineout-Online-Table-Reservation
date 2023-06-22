@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import MuiAppBar from "@mui/material/AppBar";
-import Profile from "./Profile";
+import Profile from "@/components/profile";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 
@@ -61,7 +61,7 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Profile image={user?.image}></Profile>
+            <Profile></Profile>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

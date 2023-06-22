@@ -31,12 +31,11 @@ function Index() {
 
   const onSubmit = async (values) => {
     try {
-      const response = await login(values);
+      const response = await login(values).unwrap();
       console.log("login response: ", response);
 
-      if (response && response.data.statusCode == 200) {
-        const { user, ...rest } = response.data;
-        dispatch(setCredentials({ user: user, token: rest }));
+      if (response && response.statusCode == 200) {
+        dispatch(setCredentials({ ...response }));
         toast.success("Succesfully Authenticated");
         router.push("/admin/dashboard");
       }

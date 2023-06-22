@@ -6,20 +6,26 @@ import Menu from "@mui/material/Menu";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import Avatar from "@mui/material/Avatar";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { logOut } from "@/store/slices/auth";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/store/slices/auth";
+import { useGetUserProfileQuery } from "@/store/api/restaurants";
 
-const Profile = ({ image }) => {
+const Profile = () => {
   const router = useRouter();
+
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser);
+  const { data } = useGetUserProfileQuery(user?.id);
+  console.log(data, "profile");
   const logout = () => {
     dispatch(logOut());
     toast("Logout Sucess!", {
       icon: "👏",
     });
-    router.push("/");
   };
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -32,7 +38,15 @@ const Profile = ({ image }) => {
   };
 
   const handleProfileCloseUserMenu = () => {
-    router.push("/profile");
+    if (user) {
+      if (user.role == 1) {
+        router.push("/admin/dashboard");
+      } else if (user.role == 2) {
+        router.push("/restaurant");
+      } else if (user.role == 3) {
+        router.push("/profile");
+      }
+    }
     setAnchorElUser(null);
   };
 
@@ -47,7 +61,7 @@ const Profile = ({ image }) => {
         >
           <Avatar
             alt="Remy Sharp"
-            src={image}
+            src={data?.user?.image_url}
             sx={{ width: "37px", height: "37px" }}
           />
         </IconButton>
@@ -68,15 +82,15 @@ const Profile = ({ image }) => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {/* <MenuItem
-            key="profile"
-            onClick={handleProfileCloseUserMenu}
-            sx={{ padding: "10px" }}
-            >
-            <Typography fontWeight="bold" textAlign="start">
-                Profile
-            </Typography>
-            </MenuItem> */}
+        <MenuItem
+          key="profile"
+          onClick={handleProfileCloseUserMenu}
+          sx={{ padding: "10px" }}
+        >
+          <Typography fontWeight="bold" textAlign="start">
+            Profile
+          </Typography>
+        </MenuItem>
 
         <MenuItem key="Logout" onClick={logout} sx={{ padding: "10px" }}>
           <Typography fontWeight="bold" textAlign="start">
