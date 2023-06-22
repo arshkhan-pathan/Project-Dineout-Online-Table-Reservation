@@ -9,88 +9,10 @@ import TodayIcon from "@mui/icons-material/Today";
 import UpcomingIcon from "@mui/icons-material/Upcoming";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import RenderCancel from "@/sections/user/profile/Grid/RenderCancel";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
-import { toast } from "react-hot-toast";
 
-const renderCancel = (params) => {
-  const [deleteBookings] = useDeleteBookingsMutation();
-  const bookingId = params.row.id;
-  const handleCancelBooking = (value) => {
-    console.log(value, "line 31");
-    const data = { id: value, role: { role: 2 } };
-    console.log(data);
-    deleteBookings(data)
-      .unwrap()
-      .then((res) => {
-        console.log(res);
-        toast.success("Cancelled");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err.data.error);
-      });
-  };
-  return (
-    <Button
-      variant="contained"
-      sx={{ color: "whitesmoke" }}
-      onClick={() => handleCancelBooking(bookingId)}
-    >
-      Cancel
-    </Button>
-  );
-};
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-
-  {
-    field: "customer_name",
-    headerName: "Customer Name",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "table",
-    headerName: "Table",
-    type: "number",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "customer_id",
-    headerName: "Customer Id",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "amount",
-    headerName: "Amount",
-    type: "number",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "start_time",
-    headerName: "Time",
-
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "date",
-    headerName: "Date",
-
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 150,
-    renderCell: renderCancel,
-  },
-];
-const columns1 = [
+const commonColumns = [
   { field: "id", headerName: "ID", width: 90 },
 
   {
@@ -106,6 +28,12 @@ const columns1 = [
     editable: false,
   },
   {
+    field: "order_payment_id",
+    headerName: "Payment Id",
+    width: 200,
+    editable: false,
+  },
+  {
     field: "amount",
     headerName: "Amount",
     type: "number",
@@ -116,14 +44,14 @@ const columns1 = [
     field: "start_time",
     headerName: "Time",
 
-    width: 150,
+    width: 100,
     editable: false,
   },
   {
-    field: "table",
+    field: "tableNo",
     headerName: "Table",
     type: "number",
-    width: 150,
+    width: 100,
     editable: false,
   },
   {
@@ -136,7 +64,17 @@ const columns1 = [
 ];
 
 const BookingSummary = () => {
+  const [deleteBookings] = useDeleteBookingsMutation();
   const user = useSelector(selectCurrentUser);
+  const cancelColums = [
+    ...commonColumns,
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => RenderCancel(params, deleteBookings, 2),
+    },
+  ];
 
   const { data } = useGetRestaurantBookingsDataQuery(user.id, {
     refetchOnMountOrArgChange: true,
@@ -184,7 +122,7 @@ const BookingSummary = () => {
                   <DataGrid
                     rows={data?.today_bookings_data || []}
                     autoHeight
-                    columns={columns}
+                    columns={cancelColums}
                     initialState={{
                       pagination: {
                         paginationModel: {
@@ -218,7 +156,7 @@ const BookingSummary = () => {
                   <DataGrid
                     autoHeight
                     rows={data?.upcoming_bookings_data || []}
-                    columns={columns}
+                    columns={cancelColums}
                     initialState={{
                       pagination: {
                         paginationModel: {
@@ -252,7 +190,7 @@ const BookingSummary = () => {
                   <DataGrid
                     autoHeight
                     rows={data?.past_bookings_data || []}
-                    columns={columns1}
+                    columns={commonColumns}
                     initialState={{
                       pagination: {
                         paginationModel: {

@@ -1,11 +1,11 @@
 import { toast } from "react-hot-toast";
 import { Button } from "@mui/material";
 
-function RenderCancel(params, deleteBookings) {
+function RenderCancel(params, deleteBookings, role) {
   const bookingId = params.row.id;
   const handleCancelBooking = (value) => {
-    console.log(value, "line 31");
-    const data = { id: value, role: { role: 3 } };
+    const data = { id: value, role };
+
     console.log(data);
     deleteBookings(data)
       .unwrap()

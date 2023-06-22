@@ -23,7 +23,7 @@ export const profileApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `/api/restaurant/bookings/${data.id}/cancel/`,
         method: "POST",
-        body: data.role,
+        body: { role: data.role },
       }),
       invalidatesTags: ["User", "Bookings"],
     }),

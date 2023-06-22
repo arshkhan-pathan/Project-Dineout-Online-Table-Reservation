@@ -12,7 +12,6 @@ import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
 import withAuth from "@/HOC/withAuth";
 import CardActions from "@mui/material/CardActions";
 import useToggle from "@/hooks/useToggle";
@@ -46,7 +45,7 @@ function Index() {
       field: "actions",
       headerName: "Actions",
       width: 150,
-      renderCell: (params) => RenderCancel(params, deleteBookings),
+      renderCell: (params) => RenderCancel(params, deleteBookings, 3),
     },
   ];
 
@@ -66,9 +65,7 @@ function Index() {
       editable: false,
     },
   ];
-  // Fetch user Profile By its ID
   const { isOpen, onOpen, onClose } = useToggle();
-  // Onopen will create modal
   const user = useSelector(selectCurrentUser);
   const [modalContent, setModalContent] = useState();
   console.log(user);
