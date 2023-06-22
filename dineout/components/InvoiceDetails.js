@@ -11,7 +11,14 @@ const InvoiceDetails = ({ bookingId }) => {
       return null;
     }
 
-    const { id, customer_name, amount, created_at, restaurant, booking_details } = invoice;
+    const {
+      id,
+      customer_name,
+      amount,
+      created_at,
+      restaurant,
+      booking_details,
+    } = invoice;
 
     const invoiceDetails = [
       { label: "Customer", value: customer_name },
@@ -21,9 +28,13 @@ const InvoiceDetails = ({ bookingId }) => {
       { label: "Booking ID", value: booking_details?.booking_id },
       { label: "Date", value: booking_details?.date },
       { label: "Start Time", value: booking_details?.start_time },
+      { label: "Table No", value: booking_details?.table },
       { label: "End Time", value: booking_details?.end_time },
       { label: "Guests", value: booking_details?.guests },
-      { label: "Additional Details", value: booking_details?.additional_details },
+      {
+        label: "Additional Details",
+        value: booking_details?.additional_details,
+      },
     ];
 
     return (

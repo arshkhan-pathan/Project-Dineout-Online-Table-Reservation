@@ -48,8 +48,8 @@ const columns1 = [
     editable: false,
   },
   {
-    field: "end_time",
-    headerName: "End Time",
+    field: "table_no",
+    headerName: "Table No",
 
     width: 100,
     editable: false,
@@ -131,8 +131,8 @@ function Index() {
       editable: false,
     },
     {
-      field: "end_time",
-      headerName: "End Time",
+      field: "table_no",
+      headerName: "Table No",
 
       width: 100,
       editable: false,
@@ -148,13 +148,13 @@ function Index() {
       field: "amount",
       headerName: "Amount",
       type: "number",
-      width: 150,
+      width: 100,
       editable: false,
     },
     {
       field: "order_payment_id",
       headerName: "Payment Id",
-      width: 150,
+      width: 200,
       editable: false,
     },
     {
