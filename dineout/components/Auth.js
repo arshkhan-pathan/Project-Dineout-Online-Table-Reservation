@@ -13,8 +13,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image";
 // images
 import illustrationImage from "../assets/images/rest.gif";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 import dineoutLogo from "../assets/images/dineout_logo.webp";
 import { useRouter } from "next/router";
+import useToggle from "@/hooks/useToggle";
+import Modal from "@/components/Modal";
+import ForgotPassword from "@/layouts/user/navbar/Form";
 
 // styled
 const StyledPaper = styled("div")(({ theme }) => ({
@@ -86,6 +91,26 @@ const Auth = ({
 }) => {
   const isDesktop = useMediaQuery("(min-width: 1000px)");
   const router = useRouter();
+  const { isOpen, onOpen, onClose } = useToggle();
+
+  const onSendEmail = (values) => {
+    const get = axios
+      .post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/users/reset_password/`, {
+        email: values.email,
+      })
+      .then(function (response) {
+        console.log("Mail Sent Successfully");
+        onClose();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    toast.promise(get, {
+      loading: "Wait Chef is Sending You Reset Link",
+      success: "Please Check Your Mail For Resting Password",
+      error: "Error when fetching",
+    });
+  };
 
   return (
     <StyledRoot>
@@ -249,6 +274,7 @@ const Auth = ({
                         </MuiLink>
                         <Button
                           style={{ textTransform: "none", marginLeft: "-80px" }}
+                          onClick={onOpen}
                         >
                           Forgot Password?
                         </Button>
@@ -259,6 +285,14 @@ const Auth = ({
               </StyledForm>
             </Formik>
           </StyledPaper>
+          {isOpen && (
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ForgotPassword
+                title={"Forgot Password"}
+                onSubmit={onSendEmail}
+              ></ForgotPassword>
+            </Modal>
+          )}
         </Box>
       </Container>
     </StyledRoot>
