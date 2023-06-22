@@ -9,7 +9,6 @@ import {
   Button,
 } from "@mui/material";
 import { selectCurrentUser } from "@/store/slices/auth";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
@@ -21,7 +20,6 @@ import Modal from "@/components/Modal";
 import { useState } from "react";
 import EditProfile from "@/sections/user/profile/EditProfile";
 import ChangePassword from "@/sections/user/profile/ChangePassword";
-import baseApi from "@/store/api/base";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
 import { toast } from "react-hot-toast";
 
@@ -192,7 +190,7 @@ function Index() {
               src={data?.user?.image_url}
             />
             <Typography variant="h6" component="h2" align="center">
-              {user?.first_name}
+              {data?.user?.first_name} {data?.user?.last_name}
             </Typography>
             <Typography
               variant="body1"

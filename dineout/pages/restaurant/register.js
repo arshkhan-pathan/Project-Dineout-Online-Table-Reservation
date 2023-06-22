@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 import Head from "next/head";
 
 const initialValues = {
-  name: "",
+  first_name: "",
   city: "",
   email: "",
   password: "",
@@ -20,7 +20,7 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string(),
+  first_name: Yup.string(),
   city: Yup.string(),
   email: Yup.string()
     .email("Please enter an valid email address")

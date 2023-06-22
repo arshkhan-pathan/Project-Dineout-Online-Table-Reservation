@@ -163,15 +163,18 @@ const Auth = ({
                     <>
                       <Grid item xs={12} sm={6}>
                         <Field
-                          name="name"
+                          name="first_name"
                           variant="outlined"
                           fullWidth
-                          id="name"
+                          id="first_name"
                           label="Name"
                           autoFocus
                           as={TextField}
                           helperText={
-                            <StyledErrorMessage name="name" component="div" />
+                            <StyledErrorMessage
+                              name="first_name"
+                              component="div"
+                            />
                           }
                         />
                       </Grid>

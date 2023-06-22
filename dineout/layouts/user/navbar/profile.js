@@ -6,7 +6,7 @@ import Menu from "@mui/material/Menu";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import Avatar from "@mui/material/Avatar";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { logOut } from "@/store/slices/auth";
@@ -16,7 +16,7 @@ import { selectCurrentUser } from "@/store/slices/auth";
 const Profile = ({ image }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const user=useSelector(selectCurrentUser)
+  const user = useSelector(selectCurrentUser);
   const logout = () => {
     dispatch(logOut());
     toast("Logout Sucess!", {
@@ -37,12 +37,11 @@ const Profile = ({ image }) => {
   const handleProfileCloseUserMenu = () => {
     if (user) {
       if (user.role == 1) {
-        
-        router.push('/admin/dashboard');
+        router.push("/admin/dashboard");
       } else if (user.role == 2) {
-        router.push('/restaurant');
+        router.push("/restaurant");
       } else if (user.role == 3) {
-        router.push('/profile');
+        router.push("/profile");
       }
     }
     setAnchorElUser(null);

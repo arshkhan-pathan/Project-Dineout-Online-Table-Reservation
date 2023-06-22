@@ -1,4 +1,3 @@
-import MiniDrawer from "@/sections/restaurant/Dashboard/Drawer";
 import withAuth from "@/HOC/withAuth";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -10,18 +9,9 @@ import {
   useGetRestaurantBookingStatsQuery,
   useGetRestaurantEarningsQuery,
 } from "@/store/api/restaurant";
-import PrimarySearchAppBar from "@/sections/restaurant/Dashboard/Appbar";
 import Summary from "@/sections/restaurant/home/Summary";
 import RestaurantLayout from "@/layouts/restaurant";
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-
-  ...theme.mixins.toolbar,
-}));
 const Restaurant = ({}) => {
   const user = useSelector(selectCurrentUser);
 
@@ -37,7 +27,7 @@ const Restaurant = ({}) => {
     <RestaurantLayout title="Dashboard Home">
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-          Hello {user?.name}
+          Hello {user?.first_name}
         </Typography>
       </Box>
       <Box>
