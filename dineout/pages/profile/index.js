@@ -21,9 +21,9 @@ import { useState } from "react";
 import EditProfile from "@/sections/user/profile/EditProfile";
 import ChangePassword from "@/sections/user/profile/ChangePassword";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
-import { toast } from "react-hot-toast";
+import RenderCancel from "@/sections/user/profile/Grid/RenderCancel";
 
-const columns1 = [
+const commonColumns = [
   { field: "id", headerName: "ID", width: 90 },
 
   {
@@ -61,89 +61,12 @@ const columns1 = [
     width: 100,
     editable: false,
   },
-  {
-    field: "amount",
-    headerName: "Amount",
-    type: "number",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "order_payment_id",
-    headerName: "Payment Id",
-    width: 300,
-    editable: false,
-  },
 ];
 
 function Index() {
   const [deleteBookings] = useDeleteBookingsMutation();
-  const renderCancel = (params) => {
-    const bookingId = params.row.id;
-    const handleCancelBooking = (value) => {
-      console.log(value, "line 31");
-      const data = { id: value, role: { role: 3 } };
-      console.log(data);
-      deleteBookings(data)
-        .unwrap()
-        .then((res) => {
-          console.log(res);
-          toast.success("Cancelled");
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.data.error);
-        });
-    };
-    return (
-      <Button
-        variant="outlined"
-        size="small"
-        onClick={() => handleCancelBooking(bookingId)}
-      >
-        Cancel
-      </Button>
-    );
-  };
-
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-
-    {
-      field: "restaurant_name",
-      headerName: "Restaurant Name",
-      width: 150,
-      editable: false,
-    },
-
-    {
-      field: "date",
-      headerName: "Date",
-
-      width: 150,
-      editable: false,
-    },
-    {
-      field: "start_time",
-      headerName: "Time",
-
-      width: 100,
-      editable: false,
-    },
-    {
-      field: "table_no",
-      headerName: "Table No",
-
-      width: 100,
-      editable: false,
-    },
-    {
-      field: "guests",
-      headerName: "Guests",
-      type: "number",
-      width: 100,
-      editable: false,
-    },
+  const upcomingColumns = [
+    ...commonColumns,
     {
       field: "amount",
       headerName: "Amount",
@@ -161,11 +84,28 @@ function Index() {
       field: "actions",
       headerName: "Actions",
       width: 150,
-      renderCell: renderCancel,
+      renderCell: (params) => RenderCancel(params, deleteBookings),
+    },
+  ];
+
+  const pastColumns = [
+    ...commonColumns,
+    {
+      field: "amount",
+      headerName: "Amount",
+      type: "number",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "order_payment_id",
+      headerName: "Payment Id",
+      width: 300,
+      editable: false,
     },
   ];
   // Fetch user Profile By its ID
-  const { isOpen, onOpen, onClose, onToggle } = useToggle();
+  const { isOpen, onOpen, onClose } = useToggle();
   // Onopen will create modal
   const user = useSelector(selectCurrentUser);
   const [modalContent, setModalContent] = useState();
@@ -244,7 +184,7 @@ function Index() {
             <Box sx={{ height: "100%", width: "100%" }}>
               <DataGrid
                 rows={data?.upcoming_bookings || []}
-                columns={columns}
+                columns={upcomingColumns}
                 autoHeight
                 initialState={{
                   pagination: {
@@ -268,7 +208,7 @@ function Index() {
               <Box sx={{ height: "100%", width: "100%" }}>
                 <DataGrid
                   rows={data?.past_bookings || []}
-                  columns={columns1}
+                  columns={pastColumns}
                   autoHeight
                   initialState={{
                     pagination: {
