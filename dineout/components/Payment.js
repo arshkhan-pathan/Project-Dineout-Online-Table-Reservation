@@ -15,6 +15,7 @@ export default function Payment({
   date,
   guests,
   table,
+  resetReservation,
 }) {
   const { isOpen, onOpen, onClose } = useToggle();
   const [modalContent, setModalContent] = useState("AUTH");
@@ -26,7 +27,7 @@ export default function Payment({
 
       // we will send the response we've got from razorpay to the backend to validate the payment
       bodyData.append("response", JSON.stringify(response));
-      // resetReservation();
+
       await Axios({
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/restaurant/payment/success/`,
         method: "POST",
@@ -126,10 +127,10 @@ export default function Payment({
 
   const onCloseModal = () => {
     onClose();
-    if(modalContent !== 'AUTH'){
-      //
+    if (modalContent !== "AUTH") {
+      resetReservation();
     }
-  }
+  };
 
   return (
     <>
