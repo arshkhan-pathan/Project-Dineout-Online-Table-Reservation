@@ -1,7 +1,7 @@
 import React from "react";
 import AdminLayout from "@/layouts/admin";
 import MangerAdminProfile from "@/components/MangerAdminProfile";
-
+import withAuth from "@/HOC/withAuth";
 function profile() {
   return (
     <AdminLayout>
@@ -10,4 +10,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default withAuth(profile, ["1"], "/admin");

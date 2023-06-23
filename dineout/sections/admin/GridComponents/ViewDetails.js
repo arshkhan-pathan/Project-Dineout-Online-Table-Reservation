@@ -1,11 +1,4 @@
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
+import { Button } from "@mui/material";
 
 export const renderButtonCell = (params, handleButtonClick) => {
   const restaurantId = params.row.id;
@@ -19,3 +12,37 @@ export const renderButtonCell = (params, handleButtonClick) => {
     </Button>
   );
 };
+
+export const commonColumns = [
+  { field: "id", headerName: "ID", width: 90 },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "locality",
+    headerName: "Locality",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "address",
+    headerName: "Adress",
+    width: 110,
+    editable: true,
+  },
+  {
+    field: "city",
+    headerName: "City",
+    width: 110,
+    editable: true,
+  },
+  {
+    field: "phone_number",
+    headerName: "Phone",
+    width: 110,
+    editable: true,
+  },
+];

@@ -3,7 +3,7 @@ import AdminLayout from "@/layouts/admin";
 import { Typography, Box } from "@mui/material";
 import PerformanceSummary from "@/sections/admin/PerformanceSummary";
 import { useAllRestaurantsQuery } from "@/store/api/admin";
-
+import withAuth from "@/HOC/withAuth";
 // Fetch all Restaurnats Data and Pass it to Performance summary
 
 function Performance() {
@@ -23,4 +23,4 @@ function Performance() {
   );
 }
 
-export default Performance;
+export default withAuth(Performance, ["1"], "/admin");

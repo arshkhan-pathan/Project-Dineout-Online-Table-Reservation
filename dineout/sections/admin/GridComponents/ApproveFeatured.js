@@ -2,13 +2,13 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Tooltip, IconButton } from "@mui/material";
 import { toast } from "react-hot-toast";
 
-export const approveTable = (params, approveFeaturedRestaurant) => {
+export const approveTable = (params, approvedFunction) => {
   const rowData = params.row;
 
   const onApproveTable = () => {
     console.log("Approve table for id: ", rowData.id);
     toast.success("Added Restaurant To Featured Successfully");
-    approveFeaturedRestaurant(rowData.id);
+    approvedFunction(rowData.id);
   };
 
   if (rowData.is_featured) {

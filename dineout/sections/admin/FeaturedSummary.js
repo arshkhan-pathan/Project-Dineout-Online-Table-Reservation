@@ -13,40 +13,7 @@ import {
 import { renderButtonCell } from "./GridComponents/ViewDetails";
 import { removeFeatured } from "./GridComponents/RemoveFeatured";
 import { approveTable } from "./GridComponents/ApproveFeatured";
-
-const commonColumns = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "name",
-    headerName: "Name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "locality",
-    headerName: "Locality",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "address",
-    headerName: "Adress",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "city",
-    headerName: "City",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "phone_number",
-    headerName: "Phone",
-    width: 110,
-    editable: true,
-  },
-];
+import { commonColumns } from "./GridComponents/ViewDetails";
 
 function FeaturedSummary({ data, allRestaurants, stats }) {
   const [deleteFeaturedRestaurant] = useDeleteFeaturedRestaurantMutation();

@@ -10,47 +10,18 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 import { viewPerformance } from "./GridComponents/ViewPerformance";
 import { Box, Grid, Tooltip } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { commonColumns } from "./GridComponents/ViewDetails";
 
 function PerformanceSummary({ data }) {
   const dispatch = useDispatch();
   const [performanceData, setPerformanceData] = useState("");
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 200,
-      editable: true,
-    },
-    {
-      field: "locality",
-      headerName: "Locality",
-      width: 200,
-      editable: true,
-    },
-    {
-      field: "address",
-      headerName: "Adress",
-      width: 200,
-      editable: true,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      width: 200,
-      editable: true,
-    },
-    {
-      field: "phone_number",
-      headerName: "Phone",
-      width: 200,
-      editable: true,
-    },
+    ...commonColumns,
     {
       field: "view",
       headerName: "View Performance",
-      width: 150,
+      width: 200,
       renderCell: (params) =>
         viewPerformance(params, dispatch, setPerformanceData),
     },

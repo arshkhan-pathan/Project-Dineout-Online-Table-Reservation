@@ -7,6 +7,7 @@ import {
   useFeaturedRestaurantsQuery,
   useRestaurantStatsQuery,
 } from "@/store/api/admin";
+import withAuth from "@/HOC/withAuth";
 
 function Featured() {
   const { data } = useFeaturedRestaurantsQuery("", {
@@ -38,4 +39,4 @@ function Featured() {
   );
 }
 
-export default Featured;
+export default withAuth(Featured, ["1"], "/admin");
