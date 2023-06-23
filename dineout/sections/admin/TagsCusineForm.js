@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { TextField, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Typography, Grid, Divider } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 export const TagsCuisineForm = ({
   initialValues,
@@ -39,7 +39,6 @@ export const TagsCuisineForm = ({
             </Button>
           </Grid>
           <Grid item xs={12}>
-
             <Box sx={{ height: 400, width: "100%" }}>
               <DataGrid
                 rows={rows}

@@ -24,7 +24,6 @@ import { toast } from "react-hot-toast";
 function FeaturedSummary({ data, allRestaurants, stats }) {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalChildOpen, setIsModalChildOpen] = useState(false);
 
   const handleButtonClick = (restaurantId) => {
     setSelectedRestaurantId(restaurantId);

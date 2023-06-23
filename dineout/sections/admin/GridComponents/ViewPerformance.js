@@ -1,0 +1,23 @@
+import baseApi from "@/store/api/base";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { Tooltip, IconButton } from "@mui/material";
+
+export const viewPerformance = (params, dispatch, setPerformanceData) => {
+  const rowData = params.row;
+
+  const onViewPerformance = async () => {
+    console.log("Approve table for id: ", rowData.id);
+    const { status, data, error, refetch } = await dispatch(
+      baseApi.endpoints.restaurantDataStats.initiate(rowData.id)
+    );
+    setPerformanceData(data);
+  };
+
+  return (
+    <Tooltip title="Approve">
+      <IconButton onClick={onViewPerformance}>
+        <RemoveRedEyeIcon />
+      </IconButton>
+    </Tooltip>
+  );
+};

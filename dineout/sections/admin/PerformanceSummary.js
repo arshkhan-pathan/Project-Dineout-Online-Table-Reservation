@@ -7,42 +7,13 @@ import PeopleIcon from "@mui/icons-material/People";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
-
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { viewPerformance } from "./GridComponents/ViewPerformance";
+import { Box, Grid, Tooltip } from "@mui/material";
 import { useDispatch } from "react-redux";
-import baseApi from "@/store/api/base";
 
 function PerformanceSummary({ data }) {
   const dispatch = useDispatch();
   const [performanceData, setPerformanceData] = useState("");
-
-  const viewPerformance = (params) => {
-    const rowData = params.row;
-
-    const onViewPerformance = async () => {
-      console.log("Approve table for id: ", rowData.id);
-      const { status, data, error, refetch } = await dispatch(
-        baseApi.endpoints.restaurantDataStats.initiate(rowData.id)
-      );
-      setPerformanceData(data);
-    };
-
-    return (
-      <Tooltip title="Approve">
-        <IconButton onClick={onViewPerformance}>
-          <RemoveRedEyeIcon />
-        </IconButton>
-      </Tooltip>
-    );
-  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -80,7 +51,8 @@ function PerformanceSummary({ data }) {
       field: "view",
       headerName: "View Performance",
       width: 150,
-      renderCell: viewPerformance,
+      renderCell: (params) =>
+        viewPerformance(params, dispatch, setPerformanceData),
     },
   ];
 
