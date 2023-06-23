@@ -36,11 +36,11 @@ const FoodMenu = ({ menu }) => {
           </Typography>
           <Box>
             <Grid container>
-              {menu &&
-                menu.map((image) => {
-                  return (
-                    <Grid item xs={2} key={image.image}>
-                      <PhotoProvider>
+              <PhotoProvider>
+                {menu &&
+                  menu.map((image) => {
+                    return (
+                      <Grid item xs={2} key={image.image}>
                         <PhotoView key={image.image} src={image.image}>
                           <Image
                             src={image.image}
@@ -50,10 +50,10 @@ const FoodMenu = ({ menu }) => {
                             style={{ objectFit: "cover" }}
                           />
                         </PhotoView>
-                      </PhotoProvider>
-                    </Grid>
-                  );
-                })}
+                      </Grid>
+                    );
+                  })}
+              </PhotoProvider>
             </Grid>
           </Box>
         </Stack>

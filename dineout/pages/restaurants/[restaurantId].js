@@ -32,12 +32,7 @@ import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Head from "next/head";
-const Wrapper = styled.div`
-  padding: 26px 10.56% 48px;
-  color: #797979;
-  display: flex;
-  flex-direction: column;
-`;
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const Main = styled.div`
   /* width: 79vw; */
@@ -139,29 +134,33 @@ const RestaurantInfo = () => {
             <Box>
               <Card elevation={0}>
                 <CardContent sx={{ padding: 0 }}>
-                  <Slider
-                    {...settings}
-                    style={{
-                      height: 400,
-                      borderRadius: 0,
-                      overflow: "hidden",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {data?.images.map((image, id) => (
-                      <div key={id}>
-                        <img
-                          style={{
-                            height: "100%",
-                            width: "100%",
-                            objectFit: "cover",
-                          }}
-                          src={image.image}
-                          alt={`Image ${id + 1}`}
-                        />
-                      </div>
-                    ))}
-                  </Slider>
+                  <PhotoProvider>
+                    <Slider
+                      {...settings}
+                      style={{
+                        height: 400,
+                        borderRadius: 0,
+                        overflow: "hidden",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {data?.images.map((image, id) => (
+                        <div key={id}>
+                          <PhotoView key={image.image} src={image.image}>
+                            <img
+                              style={{
+                                height: "100%",
+                                width: "100%",
+                                objectFit: "cover",
+                              }}
+                              src={image.image}
+                              alt={`Image ${id + 1}`}
+                            />
+                          </PhotoView>
+                        </div>
+                      ))}
+                    </Slider>
+                  </PhotoProvider>
 
                   <Box
                     sx={{

@@ -33,7 +33,7 @@ export default function AlertDialog({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>No</Button>
         <Button onClick={handleAgree}>Yes</Button>
       </DialogActions>
     </Dialog>
