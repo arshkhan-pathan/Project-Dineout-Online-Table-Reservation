@@ -1,36 +1,25 @@
 // packages
-import { Button, Container, Grid, Typography } from "@mui/material";
+import { CircularProgress, Container, Grid, Typography } from "@mui/material";
 // layouts
 import Navbar from "@/layouts/restaurant/Navbar";
 // components
 import Card from "@/components/Card";
-import Filters from "@/sections/user/restaurants/Filters";
 import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
-import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
 import Head from "next/head";
+import { useState } from "react";
 
 const Restaurants = () => {
-  const location = useSelector(selectCurrentLocation);
-  const [selectedFilters, setSelectedFilters] = useState({
+  const selectedFilters = {
     cuisines: "",
     tags: "",
     types: "",
-    location: location.name,
-  });
+    location: "",
+  };
   const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      location: "",
-    }));
-  }, [location]);
-
-  const { data, isLoading } = useGetAllRestaurantQuery(
+  const { data, isLoading, isError } = useGetAllRestaurantQuery(
     { selectedFilters, page: pageNumber },
     {
       refetchOnMountOrArgChange: true,
@@ -60,13 +49,15 @@ const Restaurants = () => {
               Best Restaurants in Surat
             </Typography>
           </Grid>
-          {isLoading
-            ? "loading..."
-            : data?.results?.map((restaurant) => (
+          {isLoading || isError ? (
+            <CircularProgress />
+          ) : (
+            data?.results?.map((restaurant) => (
               <Grid item xs={12} sm={3} md={3} key={restaurant.id}>
                 <Card {...restaurant} showExtra={true} />
               </Grid>
-            ))}
+            ))
+          )}
           <Grid
             container
             item

@@ -1,7 +1,13 @@
 // pages/search.js
 import { useRouter } from "next/router";
 // packages
-import { Button, Container, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 // layouts
 import Navbar from "@/layouts/restaurant/Navbar";
 // components
@@ -15,7 +21,7 @@ import Head from "next/head";
 
 const SearchPage = () => {
   const router = useRouter();
-  const { q } = router.query; // Retrieve the search query from the URL
+  const { q } = router.query; // Retrieving the search query from the URL
 
   const [selectedFilters, setSelectedFilters] = useState({
     cuisines: "",
@@ -25,7 +31,7 @@ const SearchPage = () => {
   });
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { data, isLoading, refetch } = useGetAllRestaurantQuery(
+  const { data, isLoading, isError } = useGetAllRestaurantQuery(
     {
       selectedFilters,
       page: pageNumber,
@@ -39,9 +45,6 @@ const SearchPage = () => {
     console.log("on page change ", value);
     setPageNumber(value);
   };
-  useEffect(() => {
-    console.log("selectedFilters: ", selectedFilters);
-  }, [selectedFilters]);
 
   return (
     <>
@@ -69,13 +72,15 @@ const SearchPage = () => {
                 Best Restaurants Near me
               </Typography>
             </Grid>
-            {isLoading
-              ? "loading..."
-              : data?.results?.map((restaurant) => (
-                  <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
-                    <Card {...restaurant} />
-                  </Grid>
-                ))}
+            {isLoading || isError ? (
+              <CircularProgress />
+            ) : (
+              data?.results?.map((restaurant) => (
+                <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
+                  <Card {...restaurant} />
+                </Grid>
+              ))
+            )}
             <Grid item xs={12} alignItems="center">
               <div>
                 <Pagination

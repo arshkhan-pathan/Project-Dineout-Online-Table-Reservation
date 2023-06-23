@@ -10,11 +10,11 @@ import {
 } from "@/store/api/restaurants";
 // components
 import Card from "@/components/Card";
-import { useEffect } from "react";
 import FillerButtons from "@/components/FillerButtons";
 import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
 import { useSelector } from "react-redux";
 import { settings } from "@/sections/user/restaurants/SliderSettings";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Home = () => {
   const selectedLocation = useSelector(selectCurrentLocation);
@@ -36,11 +36,14 @@ const Home = () => {
     { refetchOnMountOrArgChange: true }
   );
 
-  const { data: featuredRestaurant, isLoading: featuredLoading } =
-    useGetFeaturedRestaurantQuery(
-      { selectedFilters },
-      { refetchOnMountOrArgChange: true }
-    );
+  const {
+    data: featuredRestaurant,
+    isLoading: featuredLoading,
+    isError: featuredError,
+  } = useGetFeaturedRestaurantQuery(
+    { selectedFilters },
+    { refetchOnMountOrArgChange: true }
+  );
 
   return (
     <UserLayout>
@@ -75,7 +78,7 @@ const Home = () => {
             </Grid>
             <Grid item xs={12}>
               {isLoading || isError ? (
-                "isloading"
+                <CircularProgress />
               ) : (
                 <Slider {...settings}>
                   {allRestaurans?.results?.map((restaurant) => (
@@ -117,8 +120,8 @@ const Home = () => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              {featuredLoading ? (
-                "loadinf"
+              {featuredLoading || featuredError ? (
+                <CircularProgress />
               ) : (
                 <Slider {...settings}>
                   {featuredRestaurant?.map((restaurant) => (
