@@ -1,6 +1,6 @@
 // packages
 import Slider from "react-slick";
-import { Box, Container, Typography, Grid, IconButton } from "@mui/material";
+import { Box, Container, Typography, Grid } from "@mui/material";
 // layouts
 import UserLayout from "@/layouts/user";
 // store
@@ -14,61 +14,7 @@ import { useEffect } from "react";
 import FillerButtons from "@/components/FillerButtons";
 import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
 import { useSelector } from "react-redux";
-
-const arrowSx = {
-  display: "block",
-  background: "#ff645a",
-  padding: 1,
-  borderRadius: 1,
-  alignItems: "center",
-  justifyContent: "center",
-  "&:hover": {
-    background: "red",
-  },
-};
-
-const NextArrow = (props) => {
-  const { className, style, onClick } = props;
-  const isDisabled = className.includes("slick-disabled");
-  return (
-    <Box
-      className={className}
-      sx={{
-        ...style,
-        ...arrowSx,
-        right: "-40px",
-        display: isDisabled ? "none" : "flex",
-      }}
-      onClick={onClick}
-    />
-  );
-};
-
-const PrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  const isDisabled = className.includes("slick-disabled");
-  return (
-    <Box
-      className={className}
-      sx={{
-        ...style,
-        ...arrowSx,
-        left: "-40px",
-        display: isDisabled ? "none" : "flex",
-      }}
-      onClick={onClick}
-    />
-  );
-};
-
-const settings = {
-  infinite: false,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 4,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
-};
+import { settings } from "@/sections/user/restaurants/SliderSettings";
 
 const Home = () => {
   const selectedLocation = useSelector(selectCurrentLocation);
@@ -81,15 +27,20 @@ const Home = () => {
   };
   console.log(selectedFilters);
 
-  const { data: allRestaurans, isLoading } = useGetAllRestaurantQuery(
+  const {
+    data: allRestaurans,
+    isLoading,
+    isError,
+  } = useGetAllRestaurantQuery(
     { selectedFilters, page: 1 },
     { refetchOnMountOrArgChange: true }
   );
 
-  const { data: featuredRestaurant } = useGetFeaturedRestaurantQuery(
-    { selectedFilters },
-    { refetchOnMountOrArgChange: true }
-  );
+  const { data: featuredRestaurant, isLoading: featuredLoading } =
+    useGetFeaturedRestaurantQuery(
+      { selectedFilters },
+      { refetchOnMountOrArgChange: true }
+    );
 
   return (
     <UserLayout>
@@ -103,13 +54,13 @@ const Home = () => {
               "& .slick-track": {
                 display: "flex",
                 marginLeft: "0px",
-                "& .slick-slide":{
-                  marginRight: '15px',
+                "& .slick-slide": {
+                  marginRight: "15px",
                 },
 
                 "& .slick-slide:last-child": {
-                  marginRight: 'auto',
-                }
+                  marginRight: "auto",
+                },
               },
             }}
           >
@@ -123,16 +74,20 @@ const Home = () => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Slider {...settings}>
-                {allRestaurans?.results?.map((restaurant) => (
-                  <Card key={restaurant.id} {...restaurant} />
-                ))}
-              </Slider>
+              {isLoading || isError ? (
+                "isloading"
+              ) : (
+                <Slider {...settings}>
+                  {allRestaurans?.results?.map((restaurant) => (
+                    <Card key={restaurant.id} {...restaurant} />
+                  ))}
+                </Slider>
+              )}
             </Grid>
           </Grid>
         </Container>
       </Box>
-      <Box sx={{ py:8 }}>
+      <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
           <Grid
             container
@@ -142,13 +97,13 @@ const Home = () => {
               "& .slick-track": {
                 display: "flex",
                 marginLeft: "0px",
-                "& .slick-slide":{
-                  marginRight: '15px',
+                "& .slick-slide": {
+                  marginRight: "15px",
                 },
 
                 "& .slick-slide:last-child": {
-                  marginRight: 'auto',
-                }
+                  marginRight: "auto",
+                },
               },
             }}
           >
@@ -162,11 +117,15 @@ const Home = () => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Slider {...settings}>
-                {featuredRestaurant?.map((restaurant) => (
-                  <Card key={restaurant.id} {...restaurant} />
-                ))}
-              </Slider>
+              {featuredLoading ? (
+                "loadinf"
+              ) : (
+                <Slider {...settings}>
+                  {featuredRestaurant?.map((restaurant) => (
+                    <Card key={restaurant.id} {...restaurant} />
+                  ))}
+                </Slider>
+              )}
             </Grid>
           </Grid>
           <FillerButtons />
