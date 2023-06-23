@@ -1,13 +1,40 @@
 import React from "react";
 import { Box, Typography, Rating, Button, TextField } from "@mui/material";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useCreateReviewMutation } from "@/store/api/restaurants";
 
-function ReviewComponent({
-  reviewText,
-  setReviewText,
-  rating,
-  setRating,
-  handleReviewSubmit,
-}) {
+function ReviewComponent({ restaurantId, user }) {
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0);
+  const [createReview] = useCreateReviewMutation();
+
+  const handleReviewSubmit = async () => {
+    console.log("Review submitted:", reviewText, "Rating:", rating);
+    const data = {
+      rating: rating,
+      comment: reviewText,
+      restaurant: restaurantId,
+      user: user,
+    };
+    try {
+      const review = await createReview(data).unwrap();
+      console.log(review);
+      toast.success("Review Created Successfully");
+    } catch (err) {
+      if (err.data.non_field_errors) {
+        toast.error("You Have already given a Review");
+      } else if (!user) {
+        toast.error("Sign In to Create Review");
+      } else {
+        toast.error("Review Creation Failed");
+      }
+      console.log(err);
+    }
+    setReviewText("");
+    setRating(0);
+  };
+
   return (
     <Box sx={{ p: "16px 24px" }} id="WriteReview">
       <Typography variant="h6" fontWeight="bold" gutterBottom>

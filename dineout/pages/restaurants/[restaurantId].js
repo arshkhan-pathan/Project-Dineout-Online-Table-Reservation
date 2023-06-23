@@ -18,10 +18,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 // layout
 import Navbar from "@/layouts/restaurant/Navbar";
-import {
-  useCreateReviewMutation,
-  useGetRestaurantQuery,
-} from "@/store/api/restaurants";
+import { useGetRestaurantQuery } from "@/store/api/restaurants";
 import Reservation from "@/sections/user/restaurant/Reservation";
 import AboutUs from "@/sections/user/restaurant/AboutUs";
 import FoodMenu from "@/sections/user/restaurant/FoodMenu";
@@ -29,8 +26,7 @@ import SubMenu from "@/sections/user/restaurant/Submenu";
 import Footer from "@/components/Footer";
 import ReviewSection from "@/sections/user/restaurant/ReviewSection";
 import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
+import { Skeleton } from "@mui/material";
 import Head from "next/head";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 
@@ -58,43 +54,12 @@ const Left = styled.div`
 const RestaurantInfo = () => {
   const router = useRouter();
   const { restaurantId } = router.query;
-  const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(0);
   const user = useSelector(selectCurrentUser);
-  const [createReview] = useCreateReviewMutation();
-
-  const handleReviewSubmit = async () => {
-    console.log("Review submitted:", reviewText, "Rating:", rating);
-    const data = {
-      rating: rating,
-      comment: reviewText,
-      restaurant: restaurantId,
-      user: user?.id,
-    };
-    try {
-      const review = await createReview(data).unwrap();
-      console.log(review);
-      toast.success("Review Created Successfully");
-    } catch (err) {
-      if (err.data.non_field_errors) {
-        toast.error("You Have already given a Review");
-      } else if (!user) {
-        toast.error("Sign In to Create Review");
-      } else {
-        toast.error("Review Creation Failed");
-      }
-      console.log(err);
-    }
-    setReviewText("");
-    setRating(0);
-  };
 
   console.log(restaurantId);
-  let { data } = useGetRestaurantQuery(restaurantId, {
+  let { data, isLoading, isError } = useGetRestaurantQuery(restaurantId, {
     refetchOnMountOrArgChange: true,
   });
-
-  // console.log(data);
 
   const breadcrumbs = [
     <Typography sx={{ fontSize: 14 }} key="1" color="text.disabled">
@@ -134,33 +99,37 @@ const RestaurantInfo = () => {
             <Box>
               <Card elevation={0}>
                 <CardContent sx={{ padding: 0 }}>
-                  <PhotoProvider>
-                    <Slider
-                      {...settings}
-                      style={{
-                        height: 400,
-                        borderRadius: 0,
-                        overflow: "hidden",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      {data?.images.map((image, id) => (
-                        <div key={id}>
-                          <PhotoView key={image.image} src={image.image}>
-                            <img
-                              style={{
-                                height: "100%",
-                                width: "100%",
-                                objectFit: "cover",
-                              }}
-                              src={image.image}
-                              alt={`Image ${id + 1}`}
-                            />
-                          </PhotoView>
-                        </div>
-                      ))}
-                    </Slider>
-                  </PhotoProvider>
+                  {isLoading || isError ? (
+                    <Skeleton variant="rectangular" width={800} height={400} />
+                  ) : (
+                    <PhotoProvider>
+                      <Slider
+                        {...settings}
+                        style={{
+                          height: 400,
+                          borderRadius: 0,
+                          overflow: "hidden",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        {data?.images.map((image, id) => (
+                          <div key={id}>
+                            <PhotoView key={image.image} src={image.image}>
+                              <img
+                                style={{
+                                  height: "100%",
+                                  width: "100%",
+                                  objectFit: "cover",
+                                }}
+                                src={image.image}
+                                alt={`Image ${id + 1}`}
+                              />
+                            </PhotoView>
+                          </div>
+                        ))}
+                      </Slider>
+                    </PhotoProvider>
+                  )}
 
                   <Box
                     sx={{
@@ -228,11 +197,8 @@ const RestaurantInfo = () => {
                   tags={data?.tags}
                 />
                 <ReviewComponent
-                  rating={rating}
-                  reviewText={reviewText}
-                  setRating={setRating}
-                  setReviewText={setReviewText}
-                  handleReviewSubmit={handleReviewSubmit}
+                  restaurantId={restaurantId}
+                  user={user?.id}
                 ></ReviewComponent>
                 <ReviewSection reviews={data?.reviews}></ReviewSection>
                 <></>

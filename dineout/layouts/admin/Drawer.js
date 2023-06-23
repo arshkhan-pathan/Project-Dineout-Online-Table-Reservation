@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -14,9 +13,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useRouter } from "next/router";
-import MuiAppBar from "@mui/material/AppBar";
+import HomeIcon from "@mui/icons-material/Home";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PendingActionsIcon from "@mui/icons-material/PendingActions";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
+import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Link from "next/link";
 
 const drawerWidth = 240;
@@ -115,7 +118,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <HomeIcon />
                 </ListItemIcon>
                 <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -143,7 +146,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <ManageAccountsIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Profile"
@@ -175,7 +178,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <PendingActionsIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Pending"
@@ -209,7 +212,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <EqualizerIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Performance"
@@ -241,7 +244,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <FormatListNumberedRtlIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Details"
@@ -273,7 +276,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <BookmarkIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Featured"

@@ -14,7 +14,7 @@ import Navbar from "@/layouts/restaurant/Navbar";
 import Card from "@/components/Card";
 import Filters from "@/sections/user/restaurants/Filters";
 import { useGetAllRestaurantQuery } from "@/store/api/restaurants";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
 import Head from "next/head";

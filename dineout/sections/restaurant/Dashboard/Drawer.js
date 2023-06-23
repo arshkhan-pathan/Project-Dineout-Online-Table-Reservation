@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -15,9 +14,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useRouter } from "next/router";
-import MuiAppBar from "@mui/material/AppBar";
+import HomeIcon from "@mui/icons-material/Home";
 import Link from "next/link";
-
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import PriceChangeIcon from "@mui/icons-material/PriceChange";
+import TableBarIcon from "@mui/icons-material/TableBar";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import EditIcon from "@mui/icons-material/Edit";
+import PersonIcon from "@mui/icons-material/Person";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -40,12 +44,6 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-}));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -120,7 +118,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <HomeIcon></HomeIcon>
                 </ListItemIcon>
                 <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -149,7 +147,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <LibraryBooksIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Bookings"
@@ -183,7 +181,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <PriceChangeIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Dyanamic Pricing"
@@ -215,7 +213,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <TableBarIcon />
                 </ListItemIcon>
                 <ListItemText primary="Tables" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -244,7 +242,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <ReviewsIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Reviews"
@@ -277,7 +275,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <EditIcon />
                 </ListItemIcon>
                 <ListItemText primary="Manage" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -306,7 +304,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <InboxIcon />
+                  <PersonIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="Profile"
