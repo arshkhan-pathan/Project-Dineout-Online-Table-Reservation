@@ -1,17 +1,9 @@
 import AdminLayout from "@/layouts/admin";
 import React from "react";
-import {
-  Box,
-  Typography,
-  Grid,
-  Divider,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
+import { Box, Typography, Grid, Divider } from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { TagsCuisineForm } from "@/sections/admin/TagsCusineForm";
 import {
   useCreateCuisineMutation,
@@ -24,108 +16,7 @@ import {
 } from "@/store/api/admin";
 import * as Yup from "yup";
 import withAuth from "@/HOC/withAuth";
-
-export const DeleteTypes = (params) => {
-  const [deleteTypes] = useDeleteTypesMutation();
-  const onDeleteTypes = () => {
-    console.log("delete table for id: ", params.row.id);
-    deleteTypes(params.row.id);
-  };
-
-  return (
-    <Tooltip title="Delete">
-      <IconButton onClick={onDeleteTypes}>
-        <DeleteIcon sx={{ color: "red" }} />
-      </IconButton>
-    </Tooltip>
-  );
-};
-
-export const DeleteCuisines = (params) => {
-  const [deleteCuisine] = useDeleteCuisineMutation();
-  const onDeleteCuisines = () => {
-    console.log("delete table for id: ", params.row.id);
-    console.log(params.row.id);
-    deleteCuisine(params.row.id);
-  };
-
-  return (
-    <Tooltip title="Delete">
-      <IconButton onClick={onDeleteCuisines}>
-        <DeleteIcon sx={{ color: "red" }} />
-      </IconButton>
-    </Tooltip>
-  );
-};
-
-export const DeleteTags = (params) => {
-  const [deleteTags] = useDeleteTagsMutation();
-  const onDeleteTags = () => {
-    console.log("delete table for id: ", params.row.id);
-    console.log(params.row.id);
-    deleteTags(params.row.id);
-  };
-
-  return (
-    <Tooltip title="Delete">
-      <IconButton onClick={onDeleteTags}>
-        <DeleteIcon sx={{ color: "red" }} />
-      </IconButton>
-    </Tooltip>
-  );
-};
-
-const columnsTypes = [
-  { field: "id", headerName: "ID", width: 200 },
-  {
-    field: "name",
-    headerName: "Types",
-    width: 300,
-    editable: false,
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 300,
-    renderCell: DeleteTypes,
-  },
-];
-const columnsCusinies = [
-  { field: "id", headerName: "ID", width: 200 },
-  {
-    field: "name",
-    headerName: "Cuisnies",
-    width: 300,
-    editable: false,
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 300,
-    renderCell: DeleteCuisines,
-  },
-];
-const columnsTags = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "name",
-    headerName: "Tags",
-    width: 250,
-    editable: false,
-  },
-  {
-    field: "image",
-    headerName: "Image Url",
-    width: 600,
-    editable: false,
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 150,
-    renderCell: DeleteTags,
-  },
-];
+import { DeleteButton } from "@/sections/admin/GridComponents/DeleteDetails";
 
 const cuisineInitialValues = {
   cuisine: "",
@@ -158,7 +49,11 @@ const cuisineValidationSchema = Yup.object().shape({
 
 function Tags() {
   // Cusines Submit Handler
-  const { data } = useGetTagTypeCuisineQuery("s", {
+  const [deleteTypes] = useDeleteTypesMutation();
+  const [deleteCuisine] = useDeleteCuisineMutation();
+  const [deleteTags] = useDeleteTagsMutation();
+
+  const { data } = useGetTagTypeCuisineQuery("", {
     refetchOnMountOrArgChange: true,
   });
 
@@ -196,6 +91,60 @@ function Tags() {
     createTypes(typesData);
     action.resetForm();
   };
+
+  const columnsTypes = [
+    { field: "id", headerName: "ID", width: 200 },
+    {
+      field: "name",
+      headerName: "Types",
+      width: 300,
+      editable: false,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 300,
+      renderCell: (params) => DeleteButton(params, deleteTypes, "Types"),
+    },
+  ];
+
+  const columnsCusinies = [
+    { field: "id", headerName: "ID", width: 200 },
+    {
+      field: "name",
+      headerName: "Cuisnies",
+      width: 300,
+      editable: false,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 300,
+      renderCell: (params) => DeleteButton(params, deleteCuisine, "Cuisines"),
+    },
+  ];
+  const columnsTags = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "name",
+      headerName: "Tags",
+      width: 250,
+      editable: false,
+    },
+    {
+      field: "image",
+      headerName: "Image Url",
+      width: 600,
+      editable: false,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => DeleteButton(params, deleteTags, "Tags"),
+    },
+  ];
+
   return (
     <>
       <AdminLayout title="Edit Details">

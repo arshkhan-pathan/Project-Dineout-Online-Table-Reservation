@@ -18,31 +18,31 @@ export const commonColumns = [
   {
     field: "name",
     headerName: "Name",
-    width: 150,
+    width: 170,
     editable: true,
   },
   {
     field: "locality",
     headerName: "Locality",
-    width: 150,
+    width: 170,
     editable: true,
   },
   {
     field: "address",
     headerName: "Adress",
-    width: 110,
+    width: 170,
     editable: true,
   },
   {
     field: "city",
     headerName: "City",
-    width: 110,
+    width: 170,
     editable: true,
   },
   {
     field: "phone_number",
     headerName: "Phone",
-    width: 110,
+    width: 170,
     editable: true,
   },
 ];
