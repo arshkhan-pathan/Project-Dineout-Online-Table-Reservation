@@ -9,7 +9,7 @@ function DataModals({
   selectedRestaurantId,
   data,
 }) {
-  const selectedRestaurant = data.find(
+  const selectedRestaurant = data?.find(
     (item) => item.id === selectedRestaurantId
   );
 
@@ -49,7 +49,7 @@ function DataModals({
       {selectedRestaurant && (
         <Box mb={2}>
           <Typography variant="h5" component="h5" mb={2}>
-            {selectedRestaurant.name}
+            <i>{selectedRestaurant.name}</i>
           </Typography>
 
           {details.map(({ label, value }) => (

@@ -15,9 +15,6 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
 const DashboardSummary = ({ data }) => {
-  //   console.log(data);
-  //   console.log(stats);
-
   return (
     <>
       <Box>
