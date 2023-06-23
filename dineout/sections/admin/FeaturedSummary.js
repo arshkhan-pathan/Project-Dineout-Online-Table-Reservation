@@ -25,12 +25,6 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalChildOpen, setIsModalChildOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
-    setIsModalChildOpen(true);
-  };
 
   const handleButtonClick = (restaurantId) => {
     setSelectedRestaurantId(restaurantId);
@@ -231,10 +225,6 @@ function FeaturedSummary({ data, allRestaurants, stats }) {
         setIsModalOpen={setIsModalOpen}
         selectedRestaurantId={selectedRestaurantId}
         data={allRestaurants}
-        selectedImage={selectedImage}
-        handleImageClick={handleImageClick}
-        setIsModalChildOpen={setIsModalChildOpen}
-        isModalChildOpen={isModalChildOpen}
       ></DataModals>
 
       <Box sx={{ height: 200, width: "100%" }}>
