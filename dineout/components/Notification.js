@@ -16,32 +16,16 @@ import {
   ListItemButton,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 import {
   useGetUserNotificationQuery,
   useMarkNotificationsAsReadMutation,
 } from "@/store/api/profile";
-import baseApi from "@/store/api/base";
-
-// ----------------------------------------------------------------------
-
-const NOTIFICATIONS = [
-  {
-    id: 1,
-    title: "Your order is placed",
-    description: "waiting for shipping",
-    avatar: null,
-    type: "order_placed",
-    createdAt: "04-08-2023",
-    isUnRead: true,
-  },
-];
 
 export default function NotificationsPopover() {
   const user = useSelector(selectCurrentUser);
   const [markNotificationsAsRead] = useMarkNotificationsAsReadMutation();
-  const dispatch = useDispatch();
   const { data } = useGetUserNotificationQuery(user?.id, {
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,

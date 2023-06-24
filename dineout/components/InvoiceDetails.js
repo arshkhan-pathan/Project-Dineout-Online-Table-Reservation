@@ -4,7 +4,7 @@ import { useGetBookingInvoiceQuery } from "@/store/api/restaurants";
 
 const InvoiceDetails = ({ bookingId }) => {
   const { data: invoice } = useGetBookingInvoiceQuery(bookingId);
-  console.log(invoice);
+  // console.log(invoice);
 
   const renderInvoiceDetails = () => {
     if (!invoice) {

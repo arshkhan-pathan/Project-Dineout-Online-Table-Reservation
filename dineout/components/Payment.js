@@ -38,21 +38,18 @@ export default function Payment({
         },
       })
         .then((res) => {
-          console.log(res.data.booking);
-          console.log("Everything is OK!");
+          // console.log(res.data.booking);
+          // console.log("Everything is OK!");
           setBooking(res.data.booking);
           setModalContent("");
           toast.success("🎉 Your Booking Is Confimed");
           onOpen();
-          console.log("On Open called");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           toast.error("❌ Something Went Wrong");
         });
-    } catch (error) {
-      console.log(console.error());
-    }
+    } catch (error) {}
   };
 
   // this will load a script tag which will open up Razorpay payment card to make //transactions

@@ -29,12 +29,12 @@ const ForgotPassword = ({ tokens }) => {
         }
       )
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
-    console.log(values);
+    // console.log(values);
   };
 
   return (

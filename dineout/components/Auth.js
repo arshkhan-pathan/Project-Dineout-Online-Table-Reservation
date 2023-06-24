@@ -99,11 +99,11 @@ const Auth = ({
         email: values.email,
       })
       .then(function (response) {
-        console.log("Mail Sent Successfully");
+        // console.log("Mail Sent Successfully");
         onClose();
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
     toast.promise(get, {
       loading: "Wait Chef is Sending You Reset Link",

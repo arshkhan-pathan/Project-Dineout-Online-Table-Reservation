@@ -42,7 +42,7 @@ const Auth = ({ onClose }) => {
       const user = await login({ email, password: values.password }).unwrap();
       dispatch(setCredentials({ ...user }));
       toast.success("Successfully Authenticated!");
-      console.log(user);
+      // console.log(user);
       onClose();
     } catch (err) {
       toast.error("Invalid Credentials");
@@ -61,7 +61,7 @@ const Auth = ({ onClose }) => {
         password2: confirmPassword,
       })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response.status == 201) {
           console.log("success");
           toast.success("Successfully Authenticated!");

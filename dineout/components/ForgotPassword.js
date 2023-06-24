@@ -7,7 +7,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { styled, useMediaQuery, Box } from "@mui/material";
-import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image";
 // images
@@ -109,10 +108,10 @@ const ForgotPassword = ({ tokens }) => {
         error: "Failed to reset password. Please try again.",
       });
 
-      console.log(submitData);
+      // console.log(submitData);
       router.push("/");
     } catch (error) {
-      console.error("Error resetting password:", error);
+      // console.error("Error resetting password:", error);
       toast("Failed to reset password. Please try again.", {
         appearance: "error",
       });

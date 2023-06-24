@@ -23,11 +23,11 @@ function MangerAdminProfile() {
   // Onopen will create modal
   const user = useSelector(selectCurrentUser);
   const [modalContent, setModalContent] = useState();
-  console.log(user);
+  // console.log(user);
   const { data } = useGetUserProfileQuery(user?.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -78,7 +78,7 @@ function MangerAdminProfile() {
             </Button>
           </CardActions>
         </Card>
-        <Grid>{/* Add more components or content here */}</Grid>
+        <Grid></Grid>
       </Box>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>

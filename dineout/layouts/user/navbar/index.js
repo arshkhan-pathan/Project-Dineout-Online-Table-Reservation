@@ -39,7 +39,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleSelectChange = (selectedOption) => {
-    console.log("Selected value:", selectedOption);
+    // console.log("Selected value:", selectedOption);
     setSelectedValue(selectedOption);
     dispatch(setLocation(selectedOption));
   };
@@ -104,7 +104,6 @@ const Navbar = () => {
           {!user ? <Login /> : <Profile />}
         </Box>
       </div>
-      {console.log(user)}
     </Box>
   );
 };
