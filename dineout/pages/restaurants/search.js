@@ -19,6 +19,7 @@ import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
 import Head from "next/head";
 
+
 const SearchPage = () => {
   const router = useRouter();
   const { q } = router.query; // Retrieving the search query from the URL
@@ -75,11 +76,17 @@ const SearchPage = () => {
             {isLoading || isError ? (
               <CircularProgress />
             ) : (
-              data?.results?.map((restaurant) => (
-                <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
-                  <Card {...restaurant} />
+              data?.results?.length > 0 ? (
+                data.results.map((restaurant) => (
+                  <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
+                    <Card {...restaurant} />
+                  </Grid>
+                ))
+              ) : (
+                <Grid item xs={12}>
+                  <img src={"https://media.tenor.com/unvXyxtdn3oAAAAC/no-result.gif"} alt="No Results Found" />
                 </Grid>
-              ))
+              )
             )}
             <Grid item xs={12} alignItems="center">
               <div>

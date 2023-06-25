@@ -123,6 +123,7 @@ function Tags() {
       renderCell: (params) => DeleteButton(params, deleteCuisine, "Cuisines"),
     },
   ];
+  
   const columnsTags = [
     { field: "id", headerName: "ID", width: 90 },
     {

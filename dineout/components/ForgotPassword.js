@@ -78,6 +78,7 @@ const StyledSection = styled("div")(({ theme }) => ({
   boxShadow: theme.shadows[1],
   backgroundColor: theme.palette.background.default,
 }));
+
 const initialValues = { password: "", confirmPassword: "" };
 const validationSchema = yup.object().shape({
   password: yup
@@ -89,6 +90,7 @@ const validationSchema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Passwords must match.")
     .required("Please confirm your password."),
 });
+
 const ForgotPassword = ({ tokens }) => {
   const isDesktop = useMediaQuery("(min-width: 1000px)");
   const [resetPassword] = useResetPasswordMutation();
