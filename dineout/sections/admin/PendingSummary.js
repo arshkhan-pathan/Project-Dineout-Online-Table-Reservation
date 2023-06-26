@@ -44,19 +44,19 @@ function PendingSummary({ data, stats }) {
     {
       field: "actionss",
       headerName: "Details",
-      width: 150,
+      width: 120,
       renderCell: renderButtonCell,
     },
     {
       field: "delete",
       headerName: "Delete",
-      width: 150,
+      width: 120,
       renderCell: (params) => removeFeatured(params, deletePendingRestaurant),
     },
     {
       field: "actions",
       headerName: "Approve",
-      width: 150,
+      width: 120,
       renderCell: (params) => approveTable(params, approvePendingRestaurant),
     },
   ];

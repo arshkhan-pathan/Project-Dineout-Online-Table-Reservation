@@ -55,7 +55,7 @@ function PerformanceSummary({ data }) {
           <Grid item xs={12} md={6} lg={3} xl={3}>
             <Widget
               title="Bookings this Week"
-              amount={100}
+              amount={performanceData?.bookings_this_month || 0}
               icon={<HourglassEmptyIcon />}
             />
           </Grid>

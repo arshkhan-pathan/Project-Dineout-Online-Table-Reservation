@@ -8,8 +8,11 @@ export const viewPerformance = (params, dispatch, setPerformanceData) => {
   const onViewPerformance = async () => {
     console.log("Approve table for id: ", rowData.id);
     const { status, data, error, refetch } = await dispatch(
-      baseApi.endpoints.restaurantDataStats.initiate(rowData.id)
+      baseApi.endpoints.restaurantDataStats.initiate(rowData.id, {
+        forceRefetch: true,
+      })
     );
+
     setPerformanceData(data);
   };
 
