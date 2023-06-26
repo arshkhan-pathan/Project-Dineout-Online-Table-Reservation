@@ -18,6 +18,7 @@ import { Pagination } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
 import Head from "next/head";
+import Image from "next/image";
 
 const BookTable = () => {
   const location = useSelector(selectCurrentLocation);
@@ -75,12 +76,23 @@ const BookTable = () => {
             </Grid>
             {isLoading || isError ? (
               <CircularProgress />
-            ) : (
-              data?.results?.map((restaurant) => (
+            ) : data?.results?.length > 0 ? (
+              data.results.map((restaurant) => (
                 <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
-                  <Card {...restaurant} showExtra={true} />
+                  <Card {...restaurant} />
                 </Grid>
               ))
+            ) : (
+              <Grid item xs={12}>
+                <Image
+                  src={
+                    "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1687760200/no-result_zmcl61.gif"
+                  }
+                  alt="No Results Found"
+                  height={500}
+                  width={700}
+                />
+              </Grid>
             )}
             <Grid
               container
