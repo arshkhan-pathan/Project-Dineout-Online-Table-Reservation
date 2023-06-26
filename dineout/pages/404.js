@@ -4,12 +4,16 @@ import Grid from "@mui/material/Grid";
 import Navbar from "@/layouts/restaurant/Navbar";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Error() {
   const router = useRouter();
   console.log(router);
   return (
     <>
+      <Head>
+        {router.asPath == "/forbidden" ? "Forbidden" : "404 Page Not Found"}
+      </Head>
       <Navbar></Navbar>
       <Box
         sx={{
