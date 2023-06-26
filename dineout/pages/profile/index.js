@@ -75,6 +75,7 @@ function Index() {
   console.log(user);
   const { data } = useGetUserProfileQuery(user?.id, {
     refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
   });
 
   return (
@@ -166,6 +167,23 @@ function Index() {
           ) : (
             <>
               <h3>No Past Bookings to show</h3>
+            </>
+          )}
+        </Grid>
+        <Grid item xs={12}>
+          {data?.cancelled_bookings?.length > 0 ? (
+            <>
+              <h3>Cancelled Bookings</h3>
+              <Box sx={{ height: "100%", width: "100%" }}>
+                <BookingsGrid
+                  rows={data?.cancelled_bookings || []}
+                  columns={pastColumns}
+                ></BookingsGrid>
+              </Box>
+            </>
+          ) : (
+            <>
+              <h3>No Cancelled Bookings to show</h3>
             </>
           )}
         </Grid>
