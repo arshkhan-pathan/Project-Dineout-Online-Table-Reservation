@@ -6,7 +6,7 @@ export const removeFeatured = (params, deleteFeaturedRestaurant) => {
   const onRemoveFeatured = () => {
     console.log("Delete table for id: ", params.row.id);
     deleteFeaturedRestaurant(params.row.id);
-    toast.success("Removed Restaurant from Featured Successfully");
+    toast.success("Removed Restaurant Successfully");
   };
 
   return (

@@ -21,7 +21,6 @@ function Requests() {
         <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
           Pending Restaurants
         </Typography>
-
         <PendingSummary data={data} stats={stats}></PendingSummary>
       </Box>
     </AdminLayout>

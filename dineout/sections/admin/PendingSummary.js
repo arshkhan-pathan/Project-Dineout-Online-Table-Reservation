@@ -35,7 +35,7 @@ function PendingSummary({ data, stats }) {
         color="primary"
         onClick={() => handleButtonClick(restaurantId)}
       >
-        View Details
+        Details
       </Button>
     );
   };

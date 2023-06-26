@@ -4,12 +4,10 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import MuiAppBar from "@mui/material/AppBar";
 import Profile from "@/components/profile";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "@/store/slices/auth";
+import Notification from "@/components/Notification";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -30,13 +28,6 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function PrimarySearchAppBar() {
-  const user = useSelector(selectCurrentUser);
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ backgroundColor: "#c24d4d", opacity: 1 }}>
@@ -48,7 +39,7 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <DashboardIcon />
           </IconButton>
           <Typography
             variant="h6"
@@ -60,19 +51,19 @@ export default function PrimarySearchAppBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Profile></Profile>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "flex",
+                alignItems: "center",
+                gap: "5px",
+              },
+            }}
+          >
+            <Notification />
+            <IconButton edge="end">
+              <Profile></Profile>
             </IconButton>
           </Box>
         </Toolbar>
