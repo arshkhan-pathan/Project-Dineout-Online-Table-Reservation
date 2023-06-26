@@ -13,7 +13,6 @@
 
 .searchLogo {
   box-shadow: none;
-  width: 25px;
   margin-left: 20px;
 }
 
@@ -226,7 +225,6 @@
 }
 
 .aimg {
-  width: 128px;
   box-shadow: 3px 4px 8px 0 rgb(0 0 0 / 25%);
   border-radius: 5px;
 }

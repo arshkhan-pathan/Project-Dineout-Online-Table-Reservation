@@ -29,6 +29,7 @@ import ReviewComponent from "@/sections/user/restaurant/ReviewComponent";
 import { Skeleton } from "@mui/material";
 import Head from "next/head";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import Image from "next/image";
 
 const Main = styled.div`
   /* width: 79vw; */
@@ -115,13 +116,16 @@ const RestaurantInfo = () => {
                         {data?.images.map((image, id) => (
                           <div key={id}>
                             <PhotoView key={image.image} src={image.image}>
-                              <img
+                              <Image
+                                src={image.image}
+                                width={0}
+                                height={0}
+                                sizes="100vw"
                                 style={{
                                   height: "100%",
                                   width: "100%",
                                   objectFit: "cover",
                                 }}
-                                src={image.image}
                                 alt={`Image ${id + 1}`}
                               />
                             </PhotoView>

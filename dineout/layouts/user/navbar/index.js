@@ -16,6 +16,7 @@ import {
 } from "@/store/slices/restaurantSlice";
 import Notification from "@/components/Notification";
 import { Box } from "@mui/material";
+import Image from "next/image";
 
 const locations = [
   {
@@ -51,11 +52,13 @@ const Navbar = () => {
         <div id="logo" className={classes.logo}>
           <Link legacyBehavior href="/">
             <a>
-              <img
+              <Image
                 style={{ boxShadow: "none" }}
-                src="https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
+                src="https://res.cloudinary.com/dhe9hmzbn/image/upload/v1687778178/website-logo_q0q5yy.png"
                 alt="dineout Logo"
                 classes={classes.aimg}
+                width={100}
+                height={35}
               />
             </a>
           </Link>

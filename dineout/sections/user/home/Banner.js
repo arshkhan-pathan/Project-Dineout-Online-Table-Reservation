@@ -1,5 +1,6 @@
 import classes from "@/styles/Navbar.module.css";
 import { useRouter } from "next/router";
+import Image from "next/image";
 const Banner = () => {
   const router = useRouter();
   const handleSubmit = (event) => {
@@ -18,11 +19,13 @@ const Banner = () => {
       <form onSubmit={handleSubmit}>
         <div id="serachbar" className={classes.serachbar}>
           <div>
-            <img
+            <Image
               className={classes.searchLogo}
               style={{ fontSize: "20px" }}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq4CMFkGyGVrReg7zs1ZyyVszBnPZGWbASWC9QzZnE&s"
+              src="https://res.cloudinary.com/dhe9hmzbn/image/upload/v1687777809/images_l9oml3.png"
               alt=""
+              width={25}
+              height={25}
             />
           </div>
           <input

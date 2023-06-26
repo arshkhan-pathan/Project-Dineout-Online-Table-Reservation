@@ -5,6 +5,7 @@ import Navbar from "@/layouts/restaurant/Navbar";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Error() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Error() {
         <Container maxWidth="md">
           <Grid container spacing={2}>
             <Grid xs={6}>
-              <Typography variant="h1">404</Typography>
+              <Typography variant="h2">Invalid Page</Typography>
               {router.asPath == "/forbidden" ? (
                 <Typography variant="h6">
                   Sorry Your Role doesn’t allow you to use this Page
@@ -38,8 +39,8 @@ export default function Error() {
               )}
             </Grid>
             <Grid xs={6}>
-              <img
-                src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
+              <Image
+                src="https://res.cloudinary.com/dhe9hmzbn/image/upload/v1687778649/thrillist-404_i6x186.gif"
                 alt=""
                 width={500}
                 height={250}

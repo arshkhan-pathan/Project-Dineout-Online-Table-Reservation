@@ -2,6 +2,7 @@ import React from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Box, Typography, Button } from "@mui/material";
 import Modal from "@/components/Modal";
+import Image from "next/image";
 
 function DataModals({
   isModalOpen,
@@ -64,7 +65,10 @@ function DataModals({
             <PhotoProvider>
               {selectedRestaurant.images.map((image) => (
                 <PhotoView src={image.image}>
-                  <img
+                  <Image
+                    height={0}
+                    width={0}
+                    sizes="100vw"
                     key={image.id}
                     src={image.image}
                     alt={`Restaurant ${selectedRestaurantId} Image`}
@@ -88,7 +92,10 @@ function DataModals({
             <PhotoProvider>
               {selectedRestaurant.menuImages.map((image) => (
                 <PhotoView src={image.image}>
-                  <img
+                  <Image
+                    height={0}
+                    width={0}
+                    sizes="100vw"
                     key={image.id}
                     src={image.image}
                     alt={`Restaurant ${selectedRestaurantId} Image`}

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { setLocation } from "@/store/slices/restaurantSlice";
 import { selectCurrentUser } from "@/store/slices/auth.js";
 import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
+import Image from "next/image";
 
 const locations = [
   {
@@ -67,11 +68,12 @@ const Navbar = () => {
         <div className={classes.header_section1}>
           <div className={classes.logo_section}>
             <Link href="/" legacyBehavior>
-              <img
+              <Image
                 className={classes.pageLogo}
-                src="https://st1.dineout-cdn.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
+                src="https://res.cloudinary.com/dhe9hmzbn/image/upload/v1687778178/website-logo_q0q5yy.png"
                 alt=""
-                width="100px"
+                width={100}
+                height={35}
               />
             </Link>
           </div>
