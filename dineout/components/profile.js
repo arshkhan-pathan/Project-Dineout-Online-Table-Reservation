@@ -20,7 +20,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
   const { data } = useGetUserProfileQuery(user?.id);
-  // console.log(data, "profile");
+  //
   const logout = () => {
     dispatch(logOut());
     toast("Logout Sucess!", {

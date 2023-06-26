@@ -57,7 +57,6 @@ const RestaurantInfo = () => {
   const { restaurantId } = router.query;
   const user = useSelector(selectCurrentUser);
 
-  console.log(restaurantId);
   let { data, isLoading, isError } = useGetRestaurantQuery(restaurantId, {
     refetchOnMountOrArgChange: true,
   });

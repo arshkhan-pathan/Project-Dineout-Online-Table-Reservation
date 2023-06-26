@@ -110,7 +110,7 @@ const ForgotPassword = ({ tokens }) => {
         error: "Failed to reset password. Please try again.",
       });
 
-      // console.log(submitData);
+      //
       router.push("/");
     } catch (error) {
       // console.error("Error resetting password:", error);

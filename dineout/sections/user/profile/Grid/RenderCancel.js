@@ -15,15 +15,12 @@ function RenderCancel(
   const handleCancelBooking = () => {
     const data = { id: bookingId, role };
 
-    console.log(data);
     deleteBookings(data)
       .unwrap()
       .then((res) => {
-        console.log(res);
         toast.success("Cancelled");
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.data.error);
       });
     onCloseD();

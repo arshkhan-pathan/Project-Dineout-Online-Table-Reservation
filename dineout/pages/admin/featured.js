@@ -21,7 +21,7 @@ function Featured() {
   const { data: stats } = useRestaurantStatsQuery("", {
     refetchOnMountOrArgChange: true,
   });
-  console.log(data);
+  //
   return (
     <AdminLayout title="Featured Restaurant">
       <Box>

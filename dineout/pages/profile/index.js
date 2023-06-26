@@ -72,7 +72,6 @@ function Index() {
 
   const user = useSelector(selectCurrentUser);
   const [modalContent, setModalContent] = useState();
-  console.log(user);
   const { data } = useGetUserProfileQuery(user?.id, {
     refetchOnMountOrArgChange: true,
     refetchOnFocus: true,

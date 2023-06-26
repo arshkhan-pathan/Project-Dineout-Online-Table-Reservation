@@ -66,11 +66,8 @@ function EditProfile() {
         last_name: values.lastname,
       };
 
-      console.log(submitData);
       updateCurrentUser(submitData);
-    } catch (error) {
-      console.log("Error uploading image:", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

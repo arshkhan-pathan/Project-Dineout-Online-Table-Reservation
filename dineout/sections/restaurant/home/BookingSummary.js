@@ -83,7 +83,6 @@ const BookingSummary = () => {
   const { data } = useGetRestaurantBookingsDataQuery(user.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(data);
   const gridData = [
     {
       title: "Todays Bookings",

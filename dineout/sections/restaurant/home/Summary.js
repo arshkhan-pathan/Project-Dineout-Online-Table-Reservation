@@ -15,9 +15,6 @@ import TodayIcon from "@mui/icons-material/Today";
 import UpcomingIcon from "@mui/icons-material/Upcoming";
 
 const Summary = ({ data, stats, graph }) => {
-  console.log(data);
-  console.log(stats);
-
   return (
     <>
       <Box>

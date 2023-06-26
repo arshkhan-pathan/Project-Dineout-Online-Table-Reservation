@@ -72,7 +72,6 @@ const Reservation = () => {
   const handleChipClick = (item) => {
     setSelectedChip(item);
     // Perform any additional actions with the selected item
-    console.log("Selected Chip:", item[0][0]);
   };
   const { data: slots } = useCheckAvailibilityQuery(
     {
@@ -82,7 +81,6 @@ const Reservation = () => {
     },
     { refetchOnMountOrArgChange: true }
   );
-  console.log(slots);
 
   const onGuestIncrement = () => {
     setGuests((prev) => prev + 1);
@@ -103,7 +101,7 @@ const Reservation = () => {
     const day = String(date.date()).padStart(2, "0");
 
     const formattedDate = `${year}-${month}-${day}`;
-    console.log(formattedDate);
+
     setSelectedDate(formattedDate);
   };
 

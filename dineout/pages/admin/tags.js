@@ -66,7 +66,6 @@ function Tags() {
       name: values.cuisine,
     };
 
-    console.log(cusinesData);
     createCuisine(cusinesData);
     action.resetForm();
   };
@@ -77,7 +76,6 @@ function Tags() {
       image: values.image,
     };
 
-    console.log(tagData);
     createTag(tagData);
     action.resetForm();
   };
@@ -87,7 +85,6 @@ function Tags() {
       name: values.type,
     };
 
-    console.log(typesData, "Types");
     createTypes(typesData);
     action.resetForm();
   };
@@ -123,7 +120,7 @@ function Tags() {
       renderCell: (params) => DeleteButton(params, deleteCuisine, "Cuisines"),
     },
   ];
-  
+
   const columnsTags = [
     { field: "id", headerName: "ID", width: 90 },
     {

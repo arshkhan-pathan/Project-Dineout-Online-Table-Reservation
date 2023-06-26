@@ -21,7 +21,7 @@ export const DeletePricing = (params) => {
   const [deleteRule] = useDeleteRuleMutation();
   const onDeletePricing = () => {
     const payload = { id: user?.id, ruleId: params.row.id };
-    console.log("delete dynamic price for id: ", params.row.id);
+
     deleteRule(payload);
   };
 
@@ -143,7 +143,6 @@ const Pricing = () => {
   const { data } = useGetRestaurantPricingsQuery(user?.id);
   const [createPricing] = useCreatePricingMutation();
 
-  console.log(data);
   const onSubmit = async (values, action) => {
     const pricingData = {
       price_offset: values.price_offset,
@@ -152,7 +151,7 @@ const Pricing = () => {
       end_time: values.price_end_time,
       start_time: values.price_start_time,
     };
-    console.log(pricingData);
+
     const payload = { id: user?.id, pricingData: pricingData };
     try {
       createPricing(payload);
@@ -161,7 +160,7 @@ const Pricing = () => {
     }
     action.resetForm();
   };
-  console.log(data);
+
   return (
     <>
       <Box>

@@ -6,7 +6,6 @@ export const approveTable = (params, approvedFunction) => {
   const rowData = params.row;
 
   const onApproveTable = () => {
-    console.log("Approve table for id: ", rowData.id);
     toast.success("Added Restaurant To Featured Successfully");
     approvedFunction(rowData.id);
   };

@@ -8,7 +8,7 @@ import {
   CardContent,
   Divider,
 } from "@mui/material";
-import Rating from "@mui/lab/Rating";
+import Rating from "@mui/material/Rating";
 
 const Review = ({
   reviewerName,
@@ -33,7 +33,14 @@ const Review = ({
           <Rating name="rating" value={rating} readOnly />
         </CardContent>
       </Card>
-      <Divider sx={{paddingBlock: 0.5, backgroundColor: '#eeeee4', borderColor: 'transparent', mt: "1px"}}/>
+      <Divider
+        sx={{
+          paddingBlock: 0.5,
+          backgroundColor: "#eeeee4",
+          borderColor: "transparent",
+          mt: "1px",
+        }}
+      />
     </>
   );
 };

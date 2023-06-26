@@ -34,12 +34,11 @@ const Navbar = () => {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     const search = searchQuery;
-    console.log(encodeURIComponent(search));
+
     router.push(`/restaurants/search?q=${encodeURIComponent(search)}`);
   };
 
   const handleSelectChange = (selectedOption) => {
-    console.log("Selected value:", selectedOption);
     setSelectedValue(selectedOption);
     dispatch(setLocation(selectedOption));
   };
@@ -56,7 +55,6 @@ const Navbar = () => {
   };
 
   const handleSearchChange = (e) => {
-    console.log("query value:", e.target.value);
     setSearchQuery(e.target.value);
   };
 

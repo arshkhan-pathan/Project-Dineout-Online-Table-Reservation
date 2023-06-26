@@ -35,7 +35,6 @@ export const DeleteTable = (params) => {
   const user = useSelector(selectCurrentUser);
   const [deleteTable, { isLoading }] = useDeleteTableMutation();
   const onDeleteTable = () => {
-    console.log("delete table for id: ", params.row.id);
     const payload = { id: user?.id, tableId: params.row.id };
     deleteTable(payload);
   };
@@ -86,10 +85,9 @@ const TablesSummary = () => {
   const { data } = useGetRestaurantTableQuery(user?.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(data);
 
   const onSubmit = async (values, action) => {
-    // console.log(values);
+    //
 
     const tableData = {
       table_number: values.table_number,
@@ -97,7 +95,7 @@ const TablesSummary = () => {
     };
 
     const payload = { id: user?.id, tableData: tableData };
-    console.log(payload, "payload");
+
     try {
       const data = await createTable(payload);
 

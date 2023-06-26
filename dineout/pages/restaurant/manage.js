@@ -84,7 +84,6 @@ const Manage = () => {
     refetchOnMountOrArgChange: true,
   });
   const [State, setState] = useState("Add");
-  console.log(restaurantData?.manager);
 
   useEffect(() => {
     if (restaurantData) {
@@ -111,8 +110,6 @@ const Manage = () => {
       setInitialValues(formattedRestaurantData);
     }
   }, [restaurantData]);
-
-  console.log({ initialValues });
 
   const uploadOnCloudinary = async (files) => {
     let uploadedLinks = [];
@@ -176,7 +173,6 @@ const Manage = () => {
         }
       );
 
-      console.log(uploaded_images, "images");
       formatedValues.uploaded_images = uploaded_images;
     }
 
@@ -190,7 +186,6 @@ const Manage = () => {
         }
       );
 
-      console.log(uploaded_menuImages, "menu");
       formatedValues.uploaded_menuImages = uploaded_menuImages;
     }
 
@@ -202,16 +197,13 @@ const Manage = () => {
         error: "Failed to create restaurant.",
       });
 
-      console.log(response);
       if (response.data.status == 201) {
         router.push("/restaurant");
       }
     }
 
     if (State == "Update") {
-      console.log(formatedValues);
       const payload = { id: restaurantData.manager, data: formatedValues };
-      console.log(payload);
 
       await toast.promise(updateRestaurant(payload), {
         pending: "Updating restaurant...",

@@ -4,7 +4,6 @@ import { toast } from "react-hot-toast";
 
 export const DeleteButton = (params, deleteAPI, type) => {
   const onDeleteTypes = () => {
-    console.log("delete table for id: ", params.row.id);
     deleteAPI(params.row.id);
     toast.success(`${type} Deleted Succesully`);
   };

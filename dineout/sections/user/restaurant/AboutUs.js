@@ -109,7 +109,7 @@ const MiniCard = styled.div`
 const AboutUs = ({ cuisines, data, types, charge, average, tags }) => {
   let cusineString = cuisines?.map((cusine) => cusine.name).join(", ");
   let typeString = types?.map((type) => type.name).join(", ");
-  console.log(cusineString, typeString);
+
   return (
     <>
       <Wrapper>

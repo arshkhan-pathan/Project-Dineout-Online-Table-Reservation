@@ -40,7 +40,7 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleSelectChange = (selectedOption) => {
-    // console.log("Selected value:", selectedOption);
+    //
     setSelectedValue(selectedOption);
     dispatch(setLocation(selectedOption));
   };

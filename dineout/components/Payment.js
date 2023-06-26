@@ -38,15 +38,15 @@ export default function Payment({
         },
       })
         .then((res) => {
-          // console.log(res.data.booking);
-          // console.log("Everything is OK!");
+          //
+          //
           setBooking(res.data.booking);
           setModalContent("");
           toast.success("🎉 Your Booking Is Confimed");
           onOpen();
         })
         .catch((err) => {
-          // console.log(err);
+          //
           toast.error("❌ Something Went Wrong");
         });
     } catch (error) {}

@@ -28,8 +28,6 @@ function ChangePassword() {
         new_password: values.new_password,
       };
 
-      console.log(submitData);
-
       const response = await toast.promise(
         changePassword(submitData).unwrap(),
         {
@@ -39,7 +37,6 @@ function ChangePassword() {
         }
       );
     } catch (error) {
-      console.log("Error updating password:", error);
       if (error.data.old_password) {
         toast.error("Wrong Current Password");
       }

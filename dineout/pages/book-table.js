@@ -44,7 +44,7 @@ const BookTable = () => {
     }
   );
   const onPageChange = (event, value) => {
-    console.log("on page change ", value);
+    //
     setPageNumber(value);
   };
 

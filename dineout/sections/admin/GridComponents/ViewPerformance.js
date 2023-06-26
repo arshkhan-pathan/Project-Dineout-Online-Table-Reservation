@@ -6,7 +6,6 @@ export const viewPerformance = (params, dispatch, setPerformanceData) => {
   const rowData = params.row;
 
   const onViewPerformance = async () => {
-    console.log("Approve table for id: ", rowData.id);
     const { status, data, error, refetch } = await dispatch(
       baseApi.endpoints.restaurantDataStats.initiate(rowData.id, {
         forceRefetch: true,

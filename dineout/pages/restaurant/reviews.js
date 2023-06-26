@@ -17,18 +17,12 @@ const Reviews = () => {
     setSelectedFilters(filter);
   };
 
-  useEffect(() => {
-    console.log("selected filter: ", selectedFilters);
-  }, [selectedFilters]);
-
   const { data, isError, isLoading, refetch } = useGetReviewsQuery(
     { id: user?.id, pageNumber, selectedFilters },
     { refetchOnMountOrArgChange: true }
   );
-  console.log(data);
 
   const onPageChange = (event, value) => {
-    console.log("on page change ", event, value);
     setPageNumber(value);
   };
 

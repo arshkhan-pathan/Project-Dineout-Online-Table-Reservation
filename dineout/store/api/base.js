@@ -1,6 +1,5 @@
 // packages
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-console.log(process.env.BASE_URL);
 
 // base query
 const baseQuery = fetchBaseQuery({

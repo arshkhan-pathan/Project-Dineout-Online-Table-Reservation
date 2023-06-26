@@ -32,7 +32,6 @@ const Login = () => {
   const onSubmit = async (values) => {
     try {
       const user = await login(values).unwrap();
-      console.log("login response: ", user);
 
       if (user && user.statusCode == 200) {
         dispatch(setCredentials({ ...user }));

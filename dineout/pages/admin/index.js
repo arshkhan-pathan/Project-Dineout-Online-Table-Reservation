@@ -32,7 +32,6 @@ function Index() {
   const onSubmit = async (values) => {
     try {
       const response = await login(values).unwrap();
-      console.log("login response: ", response);
 
       if (response && response.statusCode == 200) {
         dispatch(setCredentials({ ...response }));

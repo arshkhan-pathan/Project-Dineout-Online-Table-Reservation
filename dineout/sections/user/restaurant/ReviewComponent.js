@@ -10,7 +10,6 @@ function ReviewComponent({ restaurantId, user }) {
   const [createReview] = useCreateReviewMutation();
 
   const handleReviewSubmit = async () => {
-    console.log("Review submitted:", reviewText, "Rating:", rating);
     const data = {
       rating: rating,
       comment: reviewText,
@@ -19,7 +18,7 @@ function ReviewComponent({ restaurantId, user }) {
     };
     try {
       const review = await createReview(data).unwrap();
-      console.log(review);
+
       toast.success("Review Created Successfully");
     } catch (err) {
       if (err.data.non_field_errors) {
@@ -29,7 +28,6 @@ function ReviewComponent({ restaurantId, user }) {
       } else {
         toast.error("Review Creation Failed");
       }
-      console.log(err);
     }
     setReviewText("");
     setRating(0);

@@ -6,7 +6,7 @@ const Banner = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const searchQuery = event.target.search.value;
-    console.log(encodeURIComponent(searchQuery));
+
     router.push(`restaurants/search?q=${encodeURIComponent(searchQuery)}`);
   };
   return (

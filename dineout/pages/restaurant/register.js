@@ -41,7 +41,6 @@ const Register = () => {
 
   const onSubmit = async (values) => {
     try {
-      console.log(values);
       const response = await register({
         ...values,
       });
@@ -53,9 +52,7 @@ const Register = () => {
         toast.success("Signed Up Successfully!!");
         router.push("/restaurant");
       }
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   return (

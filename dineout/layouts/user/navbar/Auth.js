@@ -32,7 +32,6 @@ const Auth = ({ onClose }) => {
         }
       })
       .catch(function (error) {
-        console.log("Account does not exist.");
         setAuthPage("register");
       });
   };
@@ -42,7 +41,7 @@ const Auth = ({ onClose }) => {
       const user = await login({ email, password: values.password }).unwrap();
       dispatch(setCredentials({ ...user }));
       toast.success("Successfully Authenticated!");
-      // console.log(user);
+      //
       onClose();
     } catch (err) {
       toast.error("Invalid Credentials");
@@ -61,15 +60,13 @@ const Auth = ({ onClose }) => {
         password2: confirmPassword,
       })
       .then(function (response) {
-        // console.log(response);
+        //
         if (response.status == 201) {
-          console.log("success");
           toast.success("Successfully Authenticated!");
           onClose();
         }
       })
       .catch(function (error) {
-        console.log(error);
         toast.error("Some Problem Occured!1");
       });
   };
@@ -83,9 +80,7 @@ const Auth = ({ onClose }) => {
       .then(function (response) {
         setAuthPage("message");
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
     toast.promise(get, {
       loading: "Wait Chef is Sending You Reset Link",
       success: "Please Check Your Mail For Resting Password",

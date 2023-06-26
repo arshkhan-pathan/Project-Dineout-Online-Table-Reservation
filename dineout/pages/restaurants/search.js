@@ -43,7 +43,6 @@ const SearchPage = () => {
     }
   );
   const onPageChange = (event, value) => {
-    console.log("on page change ", value);
     setPageNumber(value);
   };
 

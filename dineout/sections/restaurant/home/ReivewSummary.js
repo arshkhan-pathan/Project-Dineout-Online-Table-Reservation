@@ -11,7 +11,6 @@ const ReviewSummmary = ({
   selectedFilters,
   onFilterChange,
 }) => {
-  console.log(reviews);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
       <Grid container>

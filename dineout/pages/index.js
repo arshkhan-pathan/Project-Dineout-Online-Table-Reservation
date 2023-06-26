@@ -18,14 +18,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Home = () => {
   const selectedLocation = useSelector(selectCurrentLocation);
-  console.log(selectedLocation);
+  //
   const selectedFilters = {
     cuisines: "",
     tags: "",
     types: "",
     location: selectedLocation.name,
   };
-  console.log(selectedFilters);
+  //
 
   const {
     data: allRestaurans,

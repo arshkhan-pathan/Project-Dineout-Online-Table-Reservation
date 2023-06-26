@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function Error() {
   const router = useRouter();
-  console.log(router);
+
   return (
     <>
       <Head>
