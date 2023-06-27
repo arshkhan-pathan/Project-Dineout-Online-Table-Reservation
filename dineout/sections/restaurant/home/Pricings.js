@@ -5,9 +5,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { DataGrid } from "@mui/x-data-grid";
 import * as Yup from "yup";
-import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import Loading from "@/components/Loading";
 import Select from "@/components/Select";
 import { Typography, Divider } from "@mui/material";
 import {
@@ -140,7 +140,7 @@ const dayOptions = [
 
 const Pricing = () => {
   const user = useSelector(selectCurrentUser);
-  const { data } = useGetRestaurantPricingsQuery(user?.id);
+  const { data, isLoading } = useGetRestaurantPricingsQuery(user?.id);
   const [createPricing] = useCreatePricingMutation();
 
   const onSubmit = async (values, action) => {
@@ -163,111 +163,119 @@ const Pricing = () => {
 
   return (
     <>
-      <Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              {({ values, setFieldValue }) => (
-                <Form>
-                  <Grid container rowSpacing={3} columnSpacing={3}>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="price_start_time"
-                        label="Start Time"
-                        type="time"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="name" />}
-                        fullWidth
-                      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({ values, setFieldValue }) => (
+                  <Form>
+                    <Grid container rowSpacing={3} columnSpacing={3}>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="price_start_time"
+                          label="Start Time"
+                          type="time"
+                          size="small"
+                          as={TextField}
+                          helperText={<ErrorMessage name="name" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="price_end_time"
+                          label="End Time"
+                          size="small"
+                          type="time"
+                          as={TextField}
+                          helperText={<ErrorMessage name="locality" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="price_multiplier"
+                          label="Multiplier"
+                          type="number"
+                          size="small"
+                          as={TextField}
+                          helperText={<ErrorMessage name="address" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="price_offset"
+                          type="number"
+                          label="Offset"
+                          size="small"
+                          as={TextField}
+                          helperText={<ErrorMessage name="city" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Select
+                          options={dayOptions}
+                          value={values.price_day}
+                          onChange={(values) =>
+                            setFieldValue("price_day", values)
+                          }
+                          placeholder="Day"
+                          isMulti={false}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                        >
+                          Add
+                        </Button>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="price_end_time"
-                        label="End Time"
-                        size="small"
-                        type="time"
-                        as={TextField}
-                        helperText={<ErrorMessage name="locality" />}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="price_multiplier"
-                        label="Multiplier"
-                        type="number"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="address" />}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="price_offset"
-                        type="number"
-                        label="Offset"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="city" />}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Select
-                        options={dayOptions}
-                        value={values.price_day}
-                        onChange={(values) =>
-                          setFieldValue("price_day", values)
-                        }
-                        placeholder="Day"
-                        isMulti={false}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button type="submit" variant="contained" color="primary">
-                        Add
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Form>
-              )}
-            </Formik>
-          </Grid>
-          <Grid item xs={12}>
-            {data?.length > 0 ? (
-              <DataGrid
-                autoHeight
-                rows={data || []}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 5,
+                  </Form>
+                )}
+              </Formik>
+            </Grid>
+            <Grid item xs={12}>
+              {data?.length > 0 ? (
+                <DataGrid
+                  autoHeight
+                  rows={data || []}
+                  columns={columns}
+                  initialState={{
+                    pagination: {
+                      paginationModel: {
+                        pageSize: 5,
+                      },
                     },
-                  },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-              />
-            ) : (
-              <>
-                <Grid item xs={12} textAlign="start">
-                  <Typography fontWeight="bold">
-                    Rules data not available. Please add a Rule to view.
-                  </Typography>
-                  <Divider />
-                </Grid>
-              </>
-            )}
+                  }}
+                  pageSizeOptions={[5]}
+                  disableRowSelectionOnClick
+                />
+              ) : (
+                <>
+                  <Grid item xs={12} textAlign="start">
+                    <Typography fontWeight="bold">
+                      Rules data not available. Please add a Rule to view.
+                    </Typography>
+                    <Divider />
+                  </Grid>
+                </>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      )}
     </>
   );
 };

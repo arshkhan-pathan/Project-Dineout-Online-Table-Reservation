@@ -12,6 +12,7 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import RenderCancel from "@/sections/user/profile/Grid/RenderCancel";
 import { useDeleteBookingsMutation } from "@/store/api/profile";
 import useToggle from "@/hooks/useToggle";
+import Loading from "@/components/Loading";
 
 const commonColumns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -80,7 +81,7 @@ const BookingSummary = () => {
     },
   ];
 
-  const { data } = useGetRestaurantBookingsDataQuery(user.id, {
+  const { data, isLoading } = useGetRestaurantBookingsDataQuery(user.id, {
     refetchOnMountOrArgChange: true,
   });
   const gridData = [
@@ -112,72 +113,78 @@ const BookingSummary = () => {
   return (
     <>
       <Box>
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget
-              title={"Todays Bookings"}
-              amount={data?.today_bookings}
-              icon={<TodayIcon />}
-            />
-          </Grid>
-          <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget
-              title={"Upcoming Bookings"}
-              amount={data?.upcoming_bookings}
-              icon={<UpcomingIcon />}
-            />
-          </Grid>
-          <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget
-              title={"Bookings this Month"}
-              amount={data?.bookings_this_month}
-              icon={<CalendarMonthIcon />}
-            />
-          </Grid>
-          <Grid item xs={12} md={6} lg={3} xl={3}>
-            <Widget
-              title={"Past Bookings"}
-              amount={data?.past_bookings}
-              icon={<EventAvailableIcon />}
-            />
-          </Grid>
-          {gridData.map((grid) => (
-            <>
-              <Grid container item xs={12} spacing={2}>
-                {grid.rows.length > 0 ? (
-                  <>
-                    <Grid item xs={12}>
-                      <Typography fontWeight="bold">{grid.title}</Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <DataGrid
-                        rows={grid.rows || []}
-                        autoHeight
-                        columns={grid.columns}
-                        initialState={{
-                          pagination: {
-                            paginationModel: {
-                              pageSize: 5,
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={6} lg={3} xl={3}>
+              <Widget
+                title={"Todays Bookings"}
+                amount={data?.today_bookings}
+                icon={<TodayIcon />}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={3} xl={3}>
+              <Widget
+                title={"Upcoming Bookings"}
+                amount={data?.upcoming_bookings}
+                icon={<UpcomingIcon />}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={3} xl={3}>
+              <Widget
+                title={"Bookings this Month"}
+                amount={data?.bookings_this_month}
+                icon={<CalendarMonthIcon />}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={3} xl={3}>
+              <Widget
+                title={"Past Bookings"}
+                amount={data?.past_bookings}
+                icon={<EventAvailableIcon />}
+              />
+            </Grid>
+            {gridData.map((grid) => (
+              <>
+                <Grid container item xs={12} spacing={2}>
+                  {grid.rows.length > 0 ? (
+                    <>
+                      <Grid item xs={12}>
+                        <Typography fontWeight="bold">{grid.title}</Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <DataGrid
+                          rows={grid.rows || []}
+                          autoHeight
+                          columns={grid.columns}
+                          initialState={{
+                            pagination: {
+                              paginationModel: {
+                                pageSize: 5,
+                              },
                             },
-                          },
-                        }}
-                        pageSizeOptions={[5]}
-                        disableRowSelectionOnClick
-                      />
-                    </Grid>
-                  </>
-                ) : (
-                  <>
-                    <Grid item xs={12} textAlign="start">
-                      <Typography fontWeight="bold">{grid.altTitle}</Typography>
-                      <Divider />
-                    </Grid>
-                  </>
-                )}
-              </Grid>
-            </>
-          ))}
-        </Grid>
+                          }}
+                          pageSizeOptions={[5]}
+                          disableRowSelectionOnClick
+                        />
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <Grid item xs={12} textAlign="start">
+                        <Typography fontWeight="bold">
+                          {grid.altTitle}
+                        </Typography>
+                        <Divider />
+                      </Grid>
+                    </>
+                  )}
+                </Grid>
+              </>
+            ))}
+          </Grid>
+        )}
       </Box>
     </>
   );

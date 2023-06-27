@@ -1,7 +1,6 @@
 import withAuth from "@/HOC/withAuth";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
@@ -11,17 +10,19 @@ import {
 } from "@/store/api/restaurant";
 import Summary from "@/sections/restaurant/home/Summary";
 import RestaurantLayout from "@/layouts/restaurant";
+import Loading from "@/components/Loading";
 
 const Restaurant = ({}) => {
   const user = useSelector(selectCurrentUser);
 
-  const { data } = useGetRestaurantEarningsQuery(user.id, {
+  const { data, isLoading } = useGetRestaurantEarningsQuery(user.id, {
     refetchOnMountOrArgChange: true,
   });
 
-  const stats = useGetRestaurantBookingStatsQuery(user.id, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data: stats, isLoading: statsLoading } =
+    useGetRestaurantBookingStatsQuery(user.id, {
+      refetchOnMountOrArgChange: true,
+    });
 
   return (
     <RestaurantLayout title="Dashboard Home">
@@ -30,9 +31,13 @@ const Restaurant = ({}) => {
           Hello {user?.first_name}
         </Typography>
       </Box>
-      <Box>
-        <Summary data={data} stats={stats.data} graph={data?.graph} />
-      </Box>
+      {isLoading && statsLoading ? (
+        <Loading></Loading>
+      ) : (
+        <Box>
+          <Summary data={data} stats={stats} graph={data?.graph} />
+        </Box>
+      )}
     </RestaurantLayout>
   );
 };

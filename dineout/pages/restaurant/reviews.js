@@ -1,12 +1,12 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 import withAuth from "@/HOC/withAuth";
 import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
 import { useGetReviewsQuery } from "@/store/api/restaurant";
 import RestaurantLayout from "@/layouts/restaurant";
+import Loading from "@/components/Loading";
 
 const Reviews = () => {
   const user = useSelector(selectCurrentUser);
@@ -29,13 +29,17 @@ const Reviews = () => {
   return (
     <div>
       <RestaurantLayout title="Reviews">
-        <ReviewSummmary
-          reviews={data?.results}
-          count={data?.count}
-          onPageChange={onPageChange}
-          selectedFilters={selectedFilters}
-          onFilterChange={onFilterChange}
-        />
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <ReviewSummmary
+            reviews={data?.results}
+            count={data?.count}
+            onPageChange={onPageChange}
+            selectedFilters={selectedFilters}
+            onFilterChange={onFilterChange}
+          />
+        )}
       </RestaurantLayout>
     </div>
   );

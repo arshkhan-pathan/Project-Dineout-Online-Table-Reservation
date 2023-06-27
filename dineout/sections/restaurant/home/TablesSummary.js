@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { useDeleteTableMutation } from "@/store/api/restaurant";
 import { Typography } from "@mui/material";
 import { Divider } from "@mui/material";
+import Loading from "@/components/Loading";
 
 // store
 
@@ -82,7 +83,7 @@ const columns = [
 const TablesSummary = () => {
   const user = useSelector(selectCurrentUser);
   const [createTable] = useCreateTableMutation();
-  const { data } = useGetRestaurantTableQuery(user?.id, {
+  const { data, isLoading } = useGetRestaurantTableQuery(user?.id, {
     refetchOnMountOrArgChange: true,
   });
 
@@ -107,77 +108,85 @@ const TablesSummary = () => {
   };
   return (
     <>
-      <Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12} lg={12}>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              {({ values, setFieldValue }) => (
-                <Form>
-                  <Grid container rowSpacing={2} columnSpacing={3}>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="table_number"
-                        label="Table Number"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="table_capacity" />}
-                        fullWidth
-                      />
+      {isLoading ? (
+        <Loading></Loading>
+      ) : (
+        <Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={12}>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({ values, setFieldValue }) => (
+                  <Form>
+                    <Grid container rowSpacing={2} columnSpacing={3}>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="table_number"
+                          label="Table Number"
+                          size="small"
+                          as={TextField}
+                          helperText={<ErrorMessage name="table_capacity" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="capacity"
+                          label="Capacity"
+                          size="small"
+                          type="number"
+                          as={TextField}
+                          helperText={<ErrorMessage name="capacity" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                        >
+                          Add
+                        </Button>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="capacity"
-                        label="Capacity"
-                        size="small"
-                        type="number"
-                        as={TextField}
-                        helperText={<ErrorMessage name="capacity" />}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button type="submit" variant="contained" color="primary">
-                        Add
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Form>
-              )}
-            </Formik>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={8}>
-            {data?.length > 0 ? (
-              <DataGrid
-                rows={data || []}
-                autoHeight
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 5,
+                  </Form>
+                )}
+              </Formik>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={8}>
+              {data?.length > 0 ? (
+                <DataGrid
+                  rows={data || []}
+                  autoHeight
+                  columns={columns}
+                  initialState={{
+                    pagination: {
+                      paginationModel: {
+                        pageSize: 5,
+                      },
                     },
-                  },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-              />
-            ) : (
-              <>
-                <Grid item xs={12} textAlign="start">
-                  <Typography fontWeight="bold">
-                    Table data not available. Please add a table to view.
-                  </Typography>
-                  <Divider />
-                </Grid>
-              </>
-            )}
+                  }}
+                  pageSizeOptions={[5]}
+                  disableRowSelectionOnClick
+                />
+              ) : (
+                <>
+                  <Grid item xs={12} textAlign="start">
+                    <Typography fontWeight="bold">
+                      Table data not available. Please add a table to view.
+                    </Typography>
+                    <Divider />
+                  </Grid>
+                </>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      )}
     </>
   );
 };
