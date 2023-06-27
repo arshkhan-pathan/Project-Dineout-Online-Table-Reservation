@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Box, Grid, Stack, Typography, styled } from "@mui/material";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { Skeleton } from "@mui/material";
 
 // styles
 const StyedWrapper = styled(Box)({
@@ -9,7 +10,7 @@ const StyedWrapper = styled(Box)({
   borderRadius: "4px",
 });
 
-const FoodMenu = ({ menu }) => {
+const FoodMenu = ({ menu, isLoading }) => {
   return (
     <>
       <StyedWrapper>
@@ -25,7 +26,7 @@ const FoodMenu = ({ menu }) => {
           <Box>
             <Grid container>
               <PhotoProvider>
-                {menu &&
+                {menu && !isLoading ? (
                   menu.map((image) => {
                     return (
                       <Grid item xs={2} key={image.image}>
@@ -40,7 +41,15 @@ const FoodMenu = ({ menu }) => {
                         </PhotoView>
                       </Grid>
                     );
-                  })}
+                  })
+                ) : (
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    width={100}
+                    height={100}
+                  />
+                )}
               </PhotoProvider>
             </Grid>
           </Box>

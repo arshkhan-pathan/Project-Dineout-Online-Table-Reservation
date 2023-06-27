@@ -191,7 +191,7 @@ const RestaurantInfo = () => {
             <Main>
               <Left>
                 <SubMenu />
-                <FoodMenu menu={data?.menuImages} />
+                <FoodMenu menu={data?.menuImages} isLoading={isLoading} />
                 <AboutUs
                   cuisines={data?.cuisines}
                   types={data?.types}
