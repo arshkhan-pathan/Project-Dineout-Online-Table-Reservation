@@ -1,19 +1,13 @@
 // packages
 import { useState } from "react";
-import {
-  Box,
-  Typography,
-  styled,
-  Button,
-  Grid,
-  IconButton,
-} from "@mui/material";
+import { Box, Typography, styled, Grid, IconButton } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
 import { useCheckAvailibilityQuery } from "@/store/api/restaurants";
 import { useRouter } from "next/router";
 import Chip from "@mui/material/Chip";
 import Payment from "@/components/Payment";
+import LinearProgress from "@mui/material/LinearProgress";
 
 // styles
 const StyledWrapper = styled(Box)(({ theme }) => ({
@@ -73,7 +67,7 @@ const Reservation = () => {
     setSelectedChip(item);
     // Perform any additional actions with the selected item
   };
-  const { data: slots } = useCheckAvailibilityQuery(
+  const { data: slots, isFetching } = useCheckAvailibilityQuery(
     {
       restaurantId: restaurantId,
       date: selectedDate,
@@ -189,24 +183,44 @@ const Reservation = () => {
         {guests > 0 && (
           <Box sx={{ marginTop: 2 }}>
             <Grid container spacing={1}>
-              {timeSlots?.length > 0 &&
-                timeSlots.map((item, index) => (
-                  <Grid item xs={4}>
-                    <Chip
-                      sx={{
-                        borderRadius: 1,
-                        width: "100%",
-                        height: "100%",
-                        paddingBlock: "13px",
-                      }}
-                      key={index}
-                      label={item[0][0]}
-                      clickable
-                      onClick={() => handleChipClick(item)}
-                      color={selectedChip === item ? "primary" : "default"}
-                    />
-                  </Grid>
-                ))}
+              {timeSlots?.length > 0 ? (
+                isFetching ? (
+                  <Box sx={{ width: "100%" }}>
+                    <LinearProgress />
+                  </Box>
+                ) : (
+                  timeSlots.map((item, index) => (
+                    <Grid item xs={4}>
+                      <Chip
+                        sx={{
+                          borderRadius: 1,
+                          width: "100%",
+                          height: "100%",
+                          paddingBlock: "13px",
+                        }}
+                        key={index}
+                        label={item[0][0]}
+                        clickable
+                        onClick={() => handleChipClick(item)}
+                        color={selectedChip === item ? "primary" : "default"}
+                      />
+                    </Grid>
+                  ))
+                )
+              ) : (
+                <Grid item xs={8}>
+                  <Chip
+                    sx={{
+                      borderRadius: 1,
+                      width: "100%",
+                      height: "100%",
+                      paddingBlock: "13px",
+                    }}
+                    key={"1"}
+                    label={"No Available slots"}
+                  />
+                </Grid>
+              )}
             </Grid>
           </Box>
         )}
