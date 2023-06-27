@@ -17,6 +17,7 @@ import {
 import * as Yup from "yup";
 import withAuth from "@/HOC/withAuth";
 import { DeleteButton } from "@/sections/admin/GridComponents/DeleteDetails";
+import Loading from "@/components/Loading";
 
 const cuisineInitialValues = {
   cuisine: "",
@@ -53,7 +54,7 @@ function Tags() {
   const [deleteCuisine] = useDeleteCuisineMutation();
   const [deleteTags] = useDeleteTagsMutation();
 
-  const { data } = useGetTagTypeCuisineQuery("", {
+  const { data, isLoading } = useGetTagTypeCuisineQuery("", {
     refetchOnMountOrArgChange: true,
   });
 
@@ -153,98 +154,106 @@ function Tags() {
           <Divider />
         </Box>
 
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} lg={12}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
-              Types
-            </Typography>
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={6} lg={12}>
+              <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
+                Types
+              </Typography>
 
-            <TagsCuisineForm
-              initialValues={typeInitialValues}
-              validationSchema={typeValidationSchema}
-              onSubmit={typesSubmitHandler}
-              label="Types"
-              name="type"
-              buttonText="Add"
-              rows={data?.types || []}
-              columns={columnsTypes}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} lg={12}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
-              Cuisines
-            </Typography>
-            <TagsCuisineForm
-              initialValues={cuisineInitialValues}
-              validationSchema={cuisineValidationSchema}
-              onSubmit={cusineSubmitHandler}
-              label="Cuisnes"
-              name="cuisine"
-              buttonText="Add"
-              rows={data?.cuisines || []}
-              columns={columnsCusinies}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} lg={12}>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
-              Tags
-            </Typography>
-            <Formik
-              initialValues={tagsInitialValues}
-              validationSchema={tagsValidationSchema}
-              onSubmit={tagsSubmitHandler}
-            >
-              {({ values, setFieldValue }) => (
-                <Form>
-                  <Grid container rowSpacing={2} columnSpacing={3}>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="tag"
-                        label="Tag Name"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="tag" />}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                      <Field
-                        name="image"
-                        label="Image"
-                        size="small"
-                        as={TextField}
-                        helperText={<ErrorMessage name="name" />}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button type="submit" variant="contained" color="primary">
-                        Add
-                      </Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Box sx={{ height: 400, width: "100%" }}>
-                        <DataGrid
-                          rows={data?.tags || []}
-                          columns={columnsTags}
-                          initialState={{
-                            pagination: {
-                              paginationModel: {
-                                pageSize: 5,
-                              },
-                            },
-                          }}
-                          pageSizeOptions={[5]}
-                          disableRowSelectionOnClick
+              <TagsCuisineForm
+                initialValues={typeInitialValues}
+                validationSchema={typeValidationSchema}
+                onSubmit={typesSubmitHandler}
+                label="Types"
+                name="type"
+                buttonText="Add"
+                rows={data?.types || []}
+                columns={columnsTypes}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={12}>
+              <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
+                Cuisines
+              </Typography>
+              <TagsCuisineForm
+                initialValues={cuisineInitialValues}
+                validationSchema={cuisineValidationSchema}
+                onSubmit={cusineSubmitHandler}
+                label="Cuisnes"
+                name="cuisine"
+                buttonText="Add"
+                rows={data?.cuisines || []}
+                columns={columnsCusinies}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12} lg={12}>
+              <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
+                Tags
+              </Typography>
+              <Formik
+                initialValues={tagsInitialValues}
+                validationSchema={tagsValidationSchema}
+                onSubmit={tagsSubmitHandler}
+              >
+                {({ values, setFieldValue }) => (
+                  <Form>
+                    <Grid container rowSpacing={2} columnSpacing={3}>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="tag"
+                          label="Tag Name"
+                          size="small"
+                          as={TextField}
+                          helperText={<ErrorMessage name="tag" />}
+                          fullWidth
                         />
-                      </Box>
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Field
+                          name="image"
+                          label="Image"
+                          size="small"
+                          as={TextField}
+                          helperText={<ErrorMessage name="name" />}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                        >
+                          Add
+                        </Button>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Box sx={{ height: 400, width: "100%" }}>
+                          <DataGrid
+                            rows={data?.tags || []}
+                            columns={columnsTags}
+                            initialState={{
+                              pagination: {
+                                paginationModel: {
+                                  pageSize: 5,
+                                },
+                              },
+                            }}
+                            pageSizeOptions={[5]}
+                            disableRowSelectionOnClick
+                          />
+                        </Box>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Form>
-              )}
-            </Formik>
+                  </Form>
+                )}
+              </Formik>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </AdminLayout>
     </>
   );

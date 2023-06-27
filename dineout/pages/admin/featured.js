@@ -8,19 +8,24 @@ import {
   useRestaurantStatsQuery,
 } from "@/store/api/admin";
 import withAuth from "@/HOC/withAuth";
+import Loading from "@/components/Loading";
 
 function Featured() {
-  const { data } = useFeaturedRestaurantsQuery("", {
+  const { data, isLoading: featLoading } = useFeaturedRestaurantsQuery("", {
     refetchOnMountOrArgChange: true,
   });
 
-  const { data: allRestaurants } = useAllRestaurantsQuery("_", {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data: allRestaurants, isLoading: restLoading } =
+    useAllRestaurantsQuery("", {
+      refetchOnMountOrArgChange: true,
+    });
 
-  const { data: stats } = useRestaurantStatsQuery("", {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data: stats, isLoading: statsLoadings } = useRestaurantStatsQuery(
+    "",
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
   //
   return (
     <AdminLayout title="Featured Restaurant">
@@ -29,11 +34,15 @@ function Featured() {
           Featured
         </Typography>
 
-        <FeaturedSummary
-          data={data}
-          allRestaurants={allRestaurants}
-          stats={stats}
-        />
+        {featLoading && restLoading && statsLoadings ? (
+          <Loading></Loading>
+        ) : (
+          <FeaturedSummary
+            data={data}
+            allRestaurants={allRestaurants}
+            stats={stats}
+          />
+        )}
       </Box>
     </AdminLayout>
   );

@@ -4,9 +4,10 @@ import { Box, Typography } from "@mui/material";
 import DashboardSummary from "@/sections/admin/DashboardSummary";
 import { useGetStatsQuery } from "@/store/api/admin";
 import withAuth from "@/HOC/withAuth";
+import Loading from "@/components/Loading";
 
 function Dashboard() {
-  const { data } = useGetStatsQuery();
+  const { data, isLoading } = useGetStatsQuery();
   return (
     <>
       <AdminLayout title="Dashboard">
@@ -16,9 +17,13 @@ function Dashboard() {
           </Typography>
         </Box>
 
-        <Box>
-          <DashboardSummary data={data}></DashboardSummary>
-        </Box>
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <Box>
+            <DashboardSummary data={data}></DashboardSummary>
+          </Box>
+        )}
       </AdminLayout>
     </>
   );

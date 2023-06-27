@@ -4,10 +4,11 @@ import { Typography, Box } from "@mui/material";
 import PerformanceSummary from "@/sections/admin/PerformanceSummary";
 import { useAllRestaurantsQuery } from "@/store/api/admin";
 import withAuth from "@/HOC/withAuth";
+import Loading from "@/components/Loading";
 // Fetch all Restaurnats Data and Pass it to Performance summary
 
 function Performance() {
-  const { data } = useAllRestaurantsQuery("s", {
+  const { data, isLoading } = useAllRestaurantsQuery("s", {
     refetchOnMountOrArgChange: true,
   });
 
@@ -17,7 +18,11 @@ function Performance() {
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Performance Page
         </Typography>
-        <PerformanceSummary data={data}></PerformanceSummary>
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <PerformanceSummary data={data}></PerformanceSummary>
+        )}
       </Box>
     </AdminLayout>
   );

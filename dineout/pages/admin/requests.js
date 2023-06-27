@@ -7,13 +7,17 @@ import {
   useRequestStatsQuery,
 } from "@/store/api/admin";
 import withAuth from "@/HOC/withAuth";
+import Loading from "@/components/Loading";
 
 function Requests() {
-  const { data } = useGetPendingRestaurantsQuery("arsh", {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading: pendingLoading } = useGetPendingRestaurantsQuery(
+    "arsh",
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
 
-  const { data: stats } = useRequestStatsQuery();
+  const { data: stats, isLoading: statsLoading } = useRequestStatsQuery();
 
   return (
     <AdminLayout title="Pending Requests">
@@ -21,7 +25,11 @@ function Requests() {
         <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
           Pending Restaurants
         </Typography>
-        <PendingSummary data={data} stats={stats}></PendingSummary>
+        {pendingLoading && statsLoading ? (
+          <Loading></Loading>
+        ) : (
+          <PendingSummary data={data} stats={stats}></PendingSummary>
+        )}
       </Box>
     </AdminLayout>
   );

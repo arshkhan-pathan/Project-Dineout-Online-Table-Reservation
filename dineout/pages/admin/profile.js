@@ -5,7 +5,7 @@ import withAuth from "@/HOC/withAuth";
 function profile() {
   return (
     <AdminLayout>
-      <MangerAdminProfile></MangerAdminProfile>
+      <MangerAdminProfile />
     </AdminLayout>
   );
 }
