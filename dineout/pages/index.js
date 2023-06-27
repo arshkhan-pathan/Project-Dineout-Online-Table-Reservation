@@ -14,7 +14,7 @@ import FillerButtons from "@/components/FillerButtons";
 import { selectCurrentLocation } from "@/store/slices/restaurantSlice";
 import { useSelector } from "react-redux";
 import { settings } from "@/sections/user/restaurants/SliderSettings";
-import CircularProgress from "@mui/material/CircularProgress";
+import Skeleton from "@mui/material/Skeleton";
 
 const Home = () => {
   const selectedLocation = useSelector(selectCurrentLocation);
@@ -78,7 +78,17 @@ const Home = () => {
             </Grid>
             <Grid item xs={12}>
               {isLoading || isError ? (
-                <CircularProgress />
+                <Slider {...settings}>
+                  {Array.from({ length: 4 }).map((_, index) => (
+                    <Skeleton
+                      key={index}
+                      animation="wave"
+                      variant="rectangular"
+                      width={50}
+                      height={140}
+                    />
+                  ))}
+                </Slider>
               ) : (
                 <Slider {...settings}>
                   {allRestaurans?.results?.map((restaurant) => (
@@ -121,7 +131,19 @@ const Home = () => {
             </Grid>
             <Grid item xs={12}>
               {featuredLoading || featuredError ? (
-                <CircularProgress />
+                <>
+                  <Slider {...settings}>
+                    {Array.from({ length: 4 }).map((_, index) => (
+                      <Skeleton
+                        key={index}
+                        animation="wave"
+                        variant="rectangular"
+                        width={50}
+                        height={140}
+                      />
+                    ))}
+                  </Slider>
+                </>
               ) : (
                 <Slider {...settings}>
                   {featuredRestaurant?.map((restaurant) => (
