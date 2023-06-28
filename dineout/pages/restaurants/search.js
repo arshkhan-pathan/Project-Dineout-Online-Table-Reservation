@@ -19,6 +19,7 @@ import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
+import { Skeleton } from "@mui/material";
 
 const SearchPage = () => {
   const router = useRouter();
