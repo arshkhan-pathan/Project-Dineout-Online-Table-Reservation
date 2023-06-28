@@ -22,6 +22,9 @@ import {
   useGetUserNotificationQuery,
   useMarkNotificationsAsReadMutation,
 } from "@/store/api/profile";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import PendingIcon from "@mui/icons-material/Pending";
 
 export default function NotificationsPopover() {
   const user = useSelector(selectCurrentUser);
@@ -112,16 +115,18 @@ export default function NotificationsPopover() {
               disableSticky
               sx={{ py: 1, px: 2.5, typography: "overline" }}
             >
-              New
+              UnRead
             </ListSubheader>
           }
         >
-          {notifications.slice(0, 2).map((notification) => (
-            <NotificationItem
-              key={notification.id}
-              notification={notification}
-            />
-          ))}
+          {notifications
+            .filter((notification) => notification.is_read == false)
+            .map((notification) => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+              />
+            ))}
         </List>
 
         <List
@@ -135,12 +140,15 @@ export default function NotificationsPopover() {
             </ListSubheader>
           }
         >
-          {notifications.slice(2, 5).map((notification) => (
-            <NotificationItem
-              key={notification.id}
-              notification={notification}
-            />
-          ))}
+          {notifications
+            .filter((notification) => notification.is_read == true)
+            .slice(0, 3)
+            .map((notification) => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+              />
+            ))}
         </List>
 
         <Divider sx={{ borderStyle: "dashed" }} />
@@ -151,7 +159,7 @@ export default function NotificationsPopover() {
 
 function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification);
-
+  const createdDate = new Date(notification.created).toLocaleString();
   return (
     <ListItemButton
       sx={{
@@ -179,7 +187,7 @@ function NotificationItem({ notification }) {
             }}
           >
             <NotificationsIcon sx={{ mr: 0.5, width: 16, height: 16 }} />
-            {notification.createdAt}
+            {createdDate}
           </Typography>
         }
       />
@@ -203,30 +211,25 @@ function renderContent(notification) {
     </Typography>
   );
 
-  if (notification.type === "order_placed") {
+  if (notification.type === "1") {
     return {
-      avatar: <NotificationsIcon />,
+      avatar: <DoneOutlineIcon />,
       title,
     };
   }
-  if (notification.type === "order_shipped") {
+  if (notification.type === "2") {
     return {
-      avatar: <NotificationsIcon />,
+      avatar: <NotInterestedIcon />,
       title,
     };
   }
-  if (notification.type === "mail") {
+  if (notification.type === "3") {
     return {
-      avatar: <NotificationsIcon />,
+      avatar: <PendingIcon />,
       title,
     };
   }
-  if (notification.type === "chat_message") {
-    return {
-      avatar: <NotificationsIcon />,
-      title,
-    };
-  }
+
   return {
     avatar: notification.avatar ? <NotificationsIcon /> : null,
     title,
