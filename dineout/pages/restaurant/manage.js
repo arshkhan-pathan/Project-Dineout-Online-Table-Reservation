@@ -167,7 +167,7 @@ const Manage = () => {
       const uploaded_images = await toast.promise(
         uploadOnCloudinary(values?.restaurantImages),
         {
-          pending: "Uploading restaurant images...",
+          loading: "Uploading restaurant images...",
           success: "Restaurant images uploaded successfully!",
           error: "Failed to upload restaurant images.",
         }
@@ -180,7 +180,7 @@ const Manage = () => {
       const uploaded_menuImages = await toast.promise(
         uploadOnCloudinary(values?.menuImages),
         {
-          pending: "Uploading menu images...",
+          loading: "Uploading menu images...",
           success: "Menu images uploaded successfully!",
           error: "Failed to upload menu images.",
         }
@@ -192,7 +192,7 @@ const Manage = () => {
     // create a new restaurant
     if (State == "Add") {
       const response = await toast.promise(createRestaurant(formatedValues), {
-        pending: "Creating restaurant...",
+        loading: "Creating restaurant...",
         success: "Restaurant created successfully!",
         error: "Failed to create restaurant.",
       });
@@ -206,7 +206,7 @@ const Manage = () => {
       const payload = { id: restaurantData.manager, data: formatedValues };
 
       await toast.promise(updateRestaurant(payload), {
-        pending: "Updating restaurant...",
+        loading: "Updating restaurant...",
         success: "Restaurant updated successfully!",
         error: "Failed to update restaurant.",
       });

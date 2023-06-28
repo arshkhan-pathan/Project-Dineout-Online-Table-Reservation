@@ -10,6 +10,7 @@ export const authApi = baseApi.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+
     restaurantRegister: builder.mutation({
       query: (credentials) => ({
         url: "/api/managers/register/",

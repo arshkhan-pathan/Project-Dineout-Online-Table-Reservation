@@ -1,9 +1,8 @@
 // packages
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 // store
 import { setCredentials } from "@/store/slices/auth";
 import { useLoginMutation } from "@/store/api/auth";
@@ -18,7 +17,6 @@ const Auth = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
-  let router = useRouter();
 
   const onValidate = (values) => {
     setEmail(values.email);
@@ -36,18 +34,22 @@ const Auth = ({ onClose }) => {
       });
   };
 
-  const onLogin = async (values, { setFieldError }) => {
+  const onLogin = async (values) => {
     try {
-      const user = await login({ email, password: values.password }).unwrap();
+      const user = await toast.promise(
+        login({ email, password: values.password }).unwrap(),
+        {
+          loading: "Authenticating...",
+          success: "Successfully Authenticated!",
+          error: "Invalid Credentials",
+        }
+      );
       dispatch(setCredentials({ ...user }));
-      toast.success("Successfully Authenticated!");
-      //
       onClose();
     } catch (err) {
-      toast.error("Invalid Credentials");
+      console.error("Invalid Credentials");
     }
   };
-
   const onRegister = (values) => {
     const { firstName, lastName, password, confirmPassword } = values;
 
