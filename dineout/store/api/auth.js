@@ -10,6 +10,13 @@ export const authApi = baseApi.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    register: builder.mutation({
+      query: (credentials) => ({
+        url: "/api/register/",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
 
     restaurantRegister: builder.mutation({
       query: (credentials) => ({
@@ -56,4 +63,5 @@ export const {
   useAdminLoginMutation,
   useChangePasswordMutation,
   useResetPasswordMutation,
+  useRegisterMutation,
 } = authApi;
