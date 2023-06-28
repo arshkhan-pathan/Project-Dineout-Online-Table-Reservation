@@ -73,7 +73,15 @@ const SearchPage = () => {
               </Typography>
             </Grid>
             {isLoading || isError ? (
-              <CircularProgress />
+              Array.from({ length: 4 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  animation="wave"
+                  variant="rectangular"
+                  width={50}
+                  height={140}
+                />
+              ))
             ) : data?.results?.length > 0 ? (
               data.results.map((restaurant) => (
                 <Grid item xs={12} sm={4} md={4} key={restaurant.id}>
