@@ -9,7 +9,6 @@ import {
   CardContent,
   Typography,
   Box,
-  Button,
   Breadcrumbs,
   Chip,
 } from "@mui/material";
@@ -156,13 +155,41 @@ const RestaurantInfo = () => {
                       </Typography>
 
                       <Typography variant="body2" sx={{ color: "#696969" }}>
-                        Time:
-                        <Button
+                        Time :
+                        <Typography
                           variant="text"
-                          sx={{ textTransform: "capitalize" }}
+                          sx={{
+                            textTransform: "capitalize",
+                            color: "green",
+                            marginLeft: "10px",
+                          }}
                         >
                           Opens at {data?.opening_time}
-                        </Button>
+                        </Typography>
+                        <Typography
+                          variant="text"
+                          sx={{
+                            textTransform: "capitalize",
+                            color: "red",
+                            marginLeft: "10px",
+                          }}
+                        >
+                          Closes at {data?.closing_time}
+                        </Typography>
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "#696969", fontWeight: "600" }}
+                      >
+                        Approx <>₹ {data?.avg_cost}</> for Two People | Booking
+                        Charge :<> ₹{data?.unit_charge}/ Person</> (Pricing May
+                        affect on Trending Days)
+                      </Typography>
+
+                      <Typography variant="body2" sx={{ color: "#696969" }}>
+                        {data?.cuisines.map((cuisine) => {
+                          return ` ${cuisine.name},`;
+                        })}
                       </Typography>
                     </Box>
                     <Chip

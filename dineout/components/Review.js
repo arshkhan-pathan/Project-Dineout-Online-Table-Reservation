@@ -6,7 +6,6 @@ import {
   Avatar,
   Typography,
   CardContent,
-  Divider,
 } from "@mui/material";
 import Rating from "@mui/material/Rating";
 
@@ -33,14 +32,6 @@ const Review = ({
           <Rating name="rating" value={rating} readOnly />
         </CardContent>
       </Card>
-      <Divider
-        sx={{
-          paddingBlock: 0.5,
-          backgroundColor: "#eeeee4",
-          borderColor: "transparent",
-          mt: "1px",
-        }}
-      />
     </>
   );
 };
