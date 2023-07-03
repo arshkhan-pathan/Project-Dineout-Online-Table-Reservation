@@ -1,15 +1,14 @@
 // packages
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 // css
-import styles from '@/styles/Login.module.css';
-
+import styles from "@/styles/Login.module.css";
 
 const initialValues = {
-  firstName: '',
-  lastName: '',
-  password: '',
-  confirmPassword: '',
+  firstName: "",
+  lastName: "",
+  password: "",
+  confirmPassword: "",
 };
 
 const validationSchema = Yup.object({
@@ -61,13 +60,13 @@ const Register = ({ onSubmit }) => {
           <input
             style={{ border: "none" }}
             type="submit"
-            value="Sign In"
+            value="Sign Up"
             className={styles.input}
           />
         </Form>
       </Formik>
     </>
   );
-}
+};
 
 export default Register;
