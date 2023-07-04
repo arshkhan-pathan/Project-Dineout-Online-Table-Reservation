@@ -62,64 +62,68 @@ export default function Payment({
   const showRazorpay = async () => {
     const res = await loadScript();
 
-    // we will pass the amount and product name to the backend using form data
+    try {
+      const data = await Axios({
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/restaurant/pay/`,
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: {
+          date: date,
+          start_time: start_time,
+          end_time: end_time,
+          guests: guests,
+          additional_details: "",
+          amount: 100,
+          isPaid: false,
+          customer: user?.id,
+          restaurant: restaurantId,
+          table: table,
+        },
+      });
 
-    const data = await Axios({
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/restaurant/pay/`,
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      data: {
-        date: date,
-        start_time: start_time,
-        end_time: end_time,
-        guests: guests,
-        additional_details: "",
-        amount: 100,
-        isPaid: false,
-        customer: user?.id,
-        restaurant: restaurantId,
-        table: table,
-      },
-    }).then((res) => {
-      return res;
-    });
+      if (data.status === 201) {
+        var options = {
+          key_id: process.env.NEXT_PUBLIC_REACT_RAZORPAY_KEY,
+          key_secret: process.env.NEXT_PUBLIC_REACT_RAZORPAY_SECRET,
+          amount: data.data.payment.amount,
+          currency: "INR",
+          name: "DineOut",
+          description: "Transaction to Confirm Booking!",
+          image:
+            "https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png",
+          order_id: data.data.payment.id,
+          handler: function (response) {
+            handlePaymentSuccess(response);
+          },
+          prefill: {
+            name: "User's name",
+            email: "User's email",
+            contact: "User's phone",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#913bad",
+          },
+        };
 
-    // in data we will receive an object from the backend with the information about the payment
-    //that has been made by the user
-
-    var options = {
-      key_id: process.env.NEXT_PUBLIC_REACT_RAZORPAY_KEY, // in react your environment variable must start with REACT_APP_
-      key_secret: process.env.NEXT_PUBLIC_REACT_RAZORPAY_SECRET,
-      amount: data.data.payment.amount,
-      currency: "INR",
-      name: "DineOut",
-      description: "Transacrion to Confirm Booking!",
-      image:
-        "https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png", // add image url
-      order_id: data.data.payment.id,
-      handler: function (response) {
-        // we will handle success by calling handlePaymentSuccess method and
-        // will pass the response that we've got from razorpay
-        handlePaymentSuccess(response);
-      },
-      prefill: {
-        name: "User's name",
-        email: "User's email",
-        contact: "User's phone",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#913bad",
-      },
-    };
-
-    var rzp1 = new window.Razorpay(options);
-    rzp1.open();
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
+      } else {
+        console.error("No tables Available for thissss slot");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast.error("No tables Avialiable");
+        console.error("No tables Available for thisd slot");
+      } else {
+        console.error("Error:", error);
+      }
+    }
   };
 
   const onCloseModal = () => {
