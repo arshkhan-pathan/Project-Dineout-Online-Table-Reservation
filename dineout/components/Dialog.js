@@ -6,7 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -17,7 +18,14 @@ export default function AlertDialog({
   dialogTitle,
   dialogText,
   handleAgree,
+  prompt,
 }) {
+  const [rejectionReason, setRejectionReason] = React.useState("");
+  const onAgree = () => {
+    handleAgree(rejectionReason); // Pass the rejection reason to the handleAgree function
+    handleClose();
+    // setRejectionReason("");
+  };
   return (
     <Dialog
       open={open}
@@ -31,10 +39,23 @@ export default function AlertDialog({
         <DialogContentText id="alert-dialog-slide-description">
           {dialogText}
         </DialogContentText>
+        {prompt && (
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Rejection Reason"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={rejectionReason}
+            onChange={(e) => setRejectionReason(e.target.value)}
+          />
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>No</Button>
-        <Button onClick={handleAgree}>Yes</Button>
+        <Button onClick={onAgree}>Yes</Button>
       </DialogActions>
     </Dialog>
   );

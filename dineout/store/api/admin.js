@@ -63,8 +63,13 @@ export const adminApi = baseApi.injectEndpoints({
       query: (id) => `/api/mod/pendingrestaurants/${id}/approve`,
       invalidatesTags: ["PendingRestaurant"],
     }),
+
     deletePendingRestaurant: builder.mutation({
-      query: (id) => `/api/mod/pendingrestaurants/${id}/delete`,
+      query: (data) => ({
+        url: `/api/mod/pendingrestaurants/${data.id}/delete`,
+        method: "POST",
+        body: { message: data.message },
+      }),
       invalidatesTags: ["PendingRestaurant"],
     }),
     requestStats: builder.query({
