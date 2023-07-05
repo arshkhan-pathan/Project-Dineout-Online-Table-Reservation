@@ -193,13 +193,11 @@ const Manage = () => {
     if (State == "Add") {
       const response = await toast.promise(createRestaurant(formatedValues), {
         loading: "Creating restaurant...",
-        success: "Restaurant created successfully!",
+        success:
+          "Restaurant created successfully! Now Add Tables to Recieve Bookings on them",
         error: "Failed to create restaurant.",
       });
-
-      if (response.data.status == 201) {
-        router.push("/restaurant");
-      }
+      router.push("/restaurant/tables");
     }
 
     if (State == "Update") {

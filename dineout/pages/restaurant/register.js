@@ -50,7 +50,6 @@ const Register = () => {
         const { user, access } = data;
         dispatch(setCredentials({ user: user, token: access }));
         toast.success("Signed Up Successfully!!");
-        router.push("/restaurant");
       }
     } catch (error) {}
   };
@@ -70,4 +69,4 @@ const Register = () => {
   );
 };
 
-export default loginRedirect(Register, "/restaurant");
+export default loginRedirect(Register, "/restaurant/manage");
