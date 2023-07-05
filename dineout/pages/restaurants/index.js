@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import { Pagination } from "@mui/material";
 import Head from "next/head";
 import { useState } from "react";
+import { Skeleton } from "@mui/material";
 
 const Restaurants = () => {
   const selectedFilters = {
@@ -48,15 +49,21 @@ const Restaurants = () => {
               Best Restaurants in Surat
             </Typography>
           </Grid>
-          {isLoading || isError ? (
-            <CircularProgress />
-          ) : (
-            data?.results?.map((restaurant) => (
-              <Grid item xs={12} sm={3} md={3} key={restaurant.id}>
-                <Card {...restaurant} showExtra={true} />
-              </Grid>
-            ))
-          )}
+          {isLoading || isError
+            ? Array.from({ length: 4 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  animation="wave"
+                  variant="rectangular"
+                  width={50}
+                  height={140}
+                />
+              ))
+            : data?.results?.map((restaurant) => (
+                <Grid item xs={12} sm={3} md={3} key={restaurant.id}>
+                  <Card {...restaurant} showExtra={true} />
+                </Grid>
+              ))}
           <Grid
             container
             item

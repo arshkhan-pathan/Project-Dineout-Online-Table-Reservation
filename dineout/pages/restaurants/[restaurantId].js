@@ -193,7 +193,7 @@ const RestaurantInfo = () => {
                       </Typography>
                     </Box>
                     <Chip
-                      label={data?.ratings}
+                      label={data?.ratings.toFixed(1)}
                       color="success"
                       sx={{
                         borderRadius: 1,

@@ -7,9 +7,9 @@ import { useRestaurantRegisterMutation } from "@/store/api/auth";
 import { setCredentials } from "@/store/slices/auth";
 // components
 import Auth from "@/components/Auth";
-import RestaurantLayout from "@/layouts/restaurant";
 import { toast } from "react-hot-toast";
 import Head from "next/head";
+import loginRedirect from "@/HOC/loginRedirect";
 
 const initialValues = {
   first_name: "",
@@ -70,4 +70,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default loginRedirect(Register, "/restaurant");

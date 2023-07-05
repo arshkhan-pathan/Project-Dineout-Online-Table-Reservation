@@ -16,7 +16,7 @@ export const viewPerformance = (params, dispatch, setPerformanceData) => {
   };
 
   return (
-    <Tooltip title="Approve">
+    <Tooltip title="View Performance">
       <IconButton onClick={onViewPerformance}>
         <RemoveRedEyeIcon />
       </IconButton>

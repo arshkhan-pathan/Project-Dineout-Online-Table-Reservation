@@ -23,6 +23,7 @@ import { useDeleteBookingsMutation } from "@/store/api/profile";
 import RenderCancel from "@/sections/user/profile/Grid/RenderCancel";
 import BookingsGrid from "@/sections/user/profile/Grid/BookingsGrid";
 import { commonColumns } from "@/sections/user/profile/Grid/BookingsGrid";
+import Loading from "@/components/Loading";
 
 function Index() {
   const [deleteBookings] = useDeleteBookingsMutation();
@@ -72,125 +73,131 @@ function Index() {
 
   const user = useSelector(selectCurrentUser);
   const [modalContent, setModalContent] = useState();
-  const { data } = useGetUserProfileQuery(user?.id, {
+  const { data, isLoading } = useGetUserProfileQuery(user?.id, {
     refetchOnMountOrArgChange: true,
     refetchOnFocus: true,
   });
 
   return (
     <UserLayout title="Profile Page">
-      <Box sx={{ mt: 4 }}>
-        <Card style={{ maxWidth: 400, margin: "auto", borderRadius: 10 }}>
-          <CardContent>
-            <Avatar
-              style={{
-                width: 80,
-                height: 80,
-                margin: "auto",
-                marginBottom: 16,
-              }}
-              alt="Profile"
-              src={data?.user?.image_url}
-            />
-            <Typography variant="h6" component="h2" align="center">
-              {data?.user?.first_name} {data?.user?.last_name}
-            </Typography>
-            <Typography
-              variant="body1"
-              component="p"
-              align="center"
-              gutterBottom
-            >
-              Total Restaurants Dined In: {data?.total_bookings}
-            </Typography>
-            {/* Additional fields or information can be added here */}
-          </CardContent>
-          <CardActions>
-            <Button
-              size="small"
-              onClick={() => {
-                setModalContent("Edit");
-                onOpen();
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              size="small"
-              onClick={() => {
-                setModalContent("Change");
-                onOpen();
-              }}
-            >
-              Change Password
-            </Button>
-          </CardActions>
-        </Card>
-        <Grid>{/* Add more components or content here */}</Grid>
-      </Box>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Box sx={{ mt: 4 }}>
+            <Card style={{ maxWidth: 400, margin: "auto", borderRadius: 10 }}>
+              <CardContent>
+                <Avatar
+                  style={{
+                    width: 80,
+                    height: 80,
+                    margin: "auto",
+                    marginBottom: 16,
+                  }}
+                  alt="Profile"
+                  src={data?.user?.image_url}
+                />
+                <Typography variant="h6" component="h2" align="center">
+                  {data?.user?.first_name} {data?.user?.last_name}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  align="center"
+                  gutterBottom
+                >
+                  Total Restaurants Dined In: {data?.total_bookings}
+                </Typography>
+                {/* Additional fields or information can be added here */}
+              </CardContent>
+              <CardActions>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    setModalContent("Edit");
+                    onOpen();
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    setModalContent("Change");
+                    onOpen();
+                  }}
+                >
+                  Change Password
+                </Button>
+              </CardActions>
+            </Card>
+            <Grid>{/* Add more components or content here */}</Grid>
+          </Box>
 
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ mb: 5 }}
-      >
-        <Grid item xs={12}>
-          {data?.upcoming_bookings.length > 0 ? (
-            <h3>Upcoming Bookings</h3>
-          ) : (
-            <h3>No Upcoming Bookings to show</h3>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mb: 5 }}
+          >
+            <Grid item xs={12}>
+              {data?.upcoming_bookings.length > 0 ? (
+                <h3>Upcoming Bookings</h3>
+              ) : (
+                <h3>No Upcoming Bookings to show</h3>
+              )}
+              {data?.upcoming_bookings.length > 0 && (
+                <Box sx={{ height: "100%", width: "100%" }}>
+                  <BookingsGrid
+                    rows={data?.upcoming_bookings || []}
+                    columns={upcomingColumns}
+                  ></BookingsGrid>
+                </Box>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              {data?.past_bookings?.length > 0 ? (
+                <>
+                  <h3>Past Bookings</h3>
+                  <Box sx={{ height: "100%", width: "100%" }}>
+                    <BookingsGrid
+                      rows={data?.past_bookings || []}
+                      columns={pastColumns}
+                    ></BookingsGrid>
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <h3>No Past Bookings to show</h3>
+                </>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              {data?.cancelled_bookings?.length > 0 ? (
+                <>
+                  <h3>Cancelled Bookings</h3>
+                  <Box sx={{ height: "100%", width: "100%" }}>
+                    <BookingsGrid
+                      rows={data?.cancelled_bookings || []}
+                      columns={pastColumns}
+                    ></BookingsGrid>
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <h3>No Cancelled Bookings to show</h3>
+                </>
+              )}
+            </Grid>
+          </Grid>
+          {isOpen && (
+            <Modal isOpen={isOpen} onClose={onClose}>
+              {modalContent == "Edit" ? <EditProfile /> : <ChangePassword />}
+            </Modal>
           )}
-          {data?.upcoming_bookings.length > 0 && (
-            <Box sx={{ height: "100%", width: "100%" }}>
-              <BookingsGrid
-                rows={data?.upcoming_bookings || []}
-                columns={upcomingColumns}
-              ></BookingsGrid>
-            </Box>
-          )}
-        </Grid>
-        <Grid item xs={12}>
-          {data?.past_bookings?.length > 0 ? (
-            <>
-              <h3>Past Bookings</h3>
-              <Box sx={{ height: "100%", width: "100%" }}>
-                <BookingsGrid
-                  rows={data?.past_bookings || []}
-                  columns={pastColumns}
-                ></BookingsGrid>
-              </Box>
-            </>
-          ) : (
-            <>
-              <h3>No Past Bookings to show</h3>
-            </>
-          )}
-        </Grid>
-        <Grid item xs={12}>
-          {data?.cancelled_bookings?.length > 0 ? (
-            <>
-              <h3>Cancelled Bookings</h3>
-              <Box sx={{ height: "100%", width: "100%" }}>
-                <BookingsGrid
-                  rows={data?.cancelled_bookings || []}
-                  columns={pastColumns}
-                ></BookingsGrid>
-              </Box>
-            </>
-          ) : (
-            <>
-              <h3>No Cancelled Bookings to show</h3>
-            </>
-          )}
-        </Grid>
-      </Grid>
-      {isOpen && (
-        <Modal isOpen={isOpen} onClose={onClose}>
-          {modalContent == "Edit" ? <EditProfile /> : <ChangePassword />}
-        </Modal>
+        </>
       )}
     </UserLayout>
   );

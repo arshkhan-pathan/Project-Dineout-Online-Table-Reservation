@@ -1,14 +1,18 @@
 import React from "react";
 import { Typography, Paper } from "@mui/material";
 import { useGetBookingInvoiceQuery } from "@/store/api/restaurants";
+import Loading from "./Loading";
 
 const InvoiceDetails = ({ bookingId }) => {
-  const { data: invoice } = useGetBookingInvoiceQuery(bookingId);
+  const { data: invoice, isLoading } = useGetBookingInvoiceQuery(bookingId);
   //
 
   const renderInvoiceDetails = () => {
     if (!invoice) {
       return null;
+    }
+    if (isLoading) {
+      return <Loading />;
     }
 
     const {
@@ -38,16 +42,18 @@ const InvoiceDetails = ({ bookingId }) => {
     ];
 
     return (
-      <Paper elevation={3} sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
-          Invoice #{id}
-        </Typography>
-        {invoiceDetails.map(({ label, value }) => (
-          <Typography variant="subtitle1" sx={{ mb: 1 }} key={label}>
-            <b>{label}:</b> {value}
+      <>
+        <Paper elevation={3} sx={{ p: 2 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+            Invoice #{id}
           </Typography>
-        ))}
-      </Paper>
+          {invoiceDetails.map(({ label, value }) => (
+            <Typography variant="subtitle1" sx={{ mb: 1 }} key={label}>
+              <b>{label}:</b> {value}
+            </Typography>
+          ))}
+        </Paper>
+      </>
     );
   };
 

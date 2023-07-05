@@ -9,6 +9,7 @@ import { setCredentials } from "@/store/slices/auth";
 // components
 import Auth from "@/components/Auth";
 import Head from "next/head";
+import loginRedirect from "@/HOC/loginRedirect";
 
 const initialValues = {
   email: "",
@@ -58,4 +59,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default loginRedirect(Login, "/restaurant");

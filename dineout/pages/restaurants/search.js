@@ -1,13 +1,7 @@
 // pages/search.js
 import { useRouter } from "next/router";
 // packages
-import {
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 // layouts
 import Navbar from "@/layouts/restaurant/Navbar";
 // components
