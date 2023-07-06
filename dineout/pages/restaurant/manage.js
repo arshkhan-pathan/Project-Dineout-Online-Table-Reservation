@@ -6,6 +6,7 @@ import {
   TextField,
   Grid,
   Button,
+  InputAdornment,
 } from "@mui/material";
 import withAuth from "@/utils/withAuth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -29,6 +30,8 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
+import IconButton from "@mui/material/IconButton";
 
 // initial values
 const initialRestaurantValues = {
@@ -293,6 +296,37 @@ const Manage = () => {
                             as={TextField}
                             helperText={<ErrorMessage name="coordinates" />}
                             fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="start">
+                                  <IconButton
+                                    onClick={() => {
+                                      navigator.geolocation.getCurrentPosition(
+                                        (position) => {
+                                          const { coords } = position;
+                                          const { latitude, longitude } =
+                                            coords;
+                                          const coordinates = `${latitude}, ${longitude}`;
+                                          setFieldValue(
+                                            "coordinates",
+                                            coordinates
+                                          );
+                                        },
+                                        (error) => {
+                                          console.log(error);
+                                          toast.error(
+                                            "Please Enable Location Permisson"
+                                          );
+                                        }
+                                      );
+                                    }}
+                                    edge="end"
+                                  >
+                                    <AddLocationIcon />
+                                  </IconButton>
+                                </InputAdornment>
+                              ),
+                            }}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} lg={3}>
