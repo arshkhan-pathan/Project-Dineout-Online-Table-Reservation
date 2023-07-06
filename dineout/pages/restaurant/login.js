@@ -9,7 +9,7 @@ import { setCredentials } from "@/store/slices/auth";
 // components
 import Auth from "@/components/Auth";
 import Head from "next/head";
-import loginRedirect from "@/components/loginRedirect";
+import loginRedirect from "@/utils/loginRedirect";
 
 const initialValues = {
   email: "",

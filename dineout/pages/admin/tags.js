@@ -15,7 +15,7 @@ import {
   useGetTagTypeCuisineQuery,
 } from "@/store/api/admin";
 import * as Yup from "yup";
-import withAuth from "@/components/withAuth";
+import withAuth from "@/utils/withAuth";
 import { DeleteButton } from "@/sections/admin/GridComponents/DeleteDetails";
 import Loading from "@/components/Loading";
 

@@ -1,4 +1,4 @@
-import withAuth from "@/components/withAuth";
+import withAuth from "@/utils/withAuth";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";

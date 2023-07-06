@@ -12,7 +12,7 @@ import { selectCurrentUser } from "@/store/slices/auth";
 import { useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "@/store/api/restaurants";
 import Box from "@mui/material/Box";
-import withAuth from "@/components/withAuth";
+import withAuth from "@/utils/withAuth";
 import CardActions from "@mui/material/CardActions";
 import useToggle from "@/hooks/useToggle";
 import Modal from "@/components/Modal";

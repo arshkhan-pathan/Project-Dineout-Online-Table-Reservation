@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
-import withAuth from "@/components/withAuth";
+import withAuth from "@/utils/withAuth";
 import ReviewSummmary from "@/sections/restaurant/home/ReivewSummary";
 import { useGetReviewsQuery } from "@/store/api/restaurant";
 import RestaurantLayout from "@/layouts/restaurant";

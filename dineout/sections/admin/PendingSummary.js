@@ -7,7 +7,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { Button } from "@mui/material";
-import { removeFeatured } from "./GridComponents/RemoveFeatured";
+import { removeFeatured } from "./GridComponents/RemovePending";
 import {
   useApprovePendingRestaurantMutation,
   useDeletePendingRestaurantMutation,

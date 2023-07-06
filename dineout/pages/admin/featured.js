@@ -7,7 +7,7 @@ import {
   useFeaturedRestaurantsQuery,
   useRestaurantStatsQuery,
 } from "@/store/api/admin";
-import withAuth from "@/components/withAuth";
+import withAuth from "@/utils/withAuth";
 import Loading from "@/components/Loading";
 
 function Featured() {

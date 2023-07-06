@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/slices/auth";
 import Typography from "@mui/material/Typography";
 import TablesSummary from "@/sections/restaurant/home/TablesSummary";
-import withAuth from "@/components/withAuth";
+import withAuth from "@/utils/withAuth";
 import RestaurantLayout from "@/layouts/restaurant";
 
 const Tables = () => {
