@@ -9,7 +9,7 @@ import { setCredentials } from "@/store/slices/auth";
 import Auth from "@/components/Auth";
 import { toast } from "react-hot-toast";
 import Head from "next/head";
-import loginRedirect from "@/HOC/loginRedirect";
+import loginRedirect from "@/components/loginRedirect";
 
 const initialValues = {
   first_name: "",

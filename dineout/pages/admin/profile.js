@@ -1,7 +1,7 @@
 import React from "react";
 import AdminLayout from "@/layouts/admin";
 import MangerAdminProfile from "@/components/MangerAdminProfile";
-import withAuth from "@/HOC/withAuth";
+import withAuth from "@/components/withAuth";
 function profile() {
   return (
     <AdminLayout>

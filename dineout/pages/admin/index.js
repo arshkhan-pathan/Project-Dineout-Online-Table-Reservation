@@ -8,7 +8,7 @@ import { useAdminLoginMutation } from "@/store/api/auth";
 import { setCredentials } from "@/store/slices/auth";
 // components
 import AdminAuth from "@/sections/admin/AdminAuth";
-import loginRedirect from "@/HOC/loginRedirect";
+import loginRedirect from "@/components/loginRedirect";
 
 const initialValues = {
   email: "",

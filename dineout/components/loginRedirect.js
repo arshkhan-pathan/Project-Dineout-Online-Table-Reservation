@@ -7,13 +7,11 @@ const loginRedirect = (WrappedComponent, link) => {
     const user = useSelector(selectCurrentUser);
     const router = useRouter();
 
-    // Check if the user is authenticated
     if (user) {
       router.replace(link);
       return null;
     }
 
-    // If the user is not authenticated,
     return <WrappedComponent />;
   };
 };

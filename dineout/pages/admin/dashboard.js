@@ -3,7 +3,7 @@ import AdminLayout from "@/layouts/admin";
 import { Box, Typography } from "@mui/material";
 import DashboardSummary from "@/sections/admin/DashboardSummary";
 import { useGetStatsQuery } from "@/store/api/admin";
-import withAuth from "@/HOC/withAuth";
+import withAuth from "@/components/withAuth";
 import Loading from "@/components/Loading";
 
 function Dashboard() {

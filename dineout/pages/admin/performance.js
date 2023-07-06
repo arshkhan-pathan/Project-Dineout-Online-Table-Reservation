@@ -3,7 +3,7 @@ import AdminLayout from "@/layouts/admin";
 import { Typography, Box } from "@mui/material";
 import PerformanceSummary from "@/sections/admin/PerformanceSummary";
 import { useAllRestaurantsQuery } from "@/store/api/admin";
-import withAuth from "@/HOC/withAuth";
+import withAuth from "@/components/withAuth";
 import Loading from "@/components/Loading";
 // Fetch all Restaurnats Data and Pass it to Performance summary
 

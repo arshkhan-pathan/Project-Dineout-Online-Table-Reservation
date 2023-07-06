@@ -6,7 +6,7 @@ import {
   useGetPendingRestaurantsQuery,
   useRequestStatsQuery,
 } from "@/store/api/admin";
-import withAuth from "@/HOC/withAuth";
+import withAuth from "@/components/withAuth";
 import Loading from "@/components/Loading";
 
 function Requests() {
