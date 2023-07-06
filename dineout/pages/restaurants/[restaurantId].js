@@ -29,6 +29,7 @@ import { Skeleton } from "@mui/material";
 import Head from "next/head";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import Image from "next/image";
+import Modal from "@/components/Maps/Modal";
 
 const Main = styled.div`
   /* width: 79vw; */
@@ -150,8 +151,12 @@ const RestaurantInfo = () => {
                       >
                         {data?.name}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: "#696969" }}>
-                        {data?.address} | {data?.locality} | {data?.city}
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "#696969", display: "flex" }}
+                      >
+                        {data?.address} | {data?.locality} | {data?.city} |{" "}
+                        {<Modal data={data?.coordinates} isOpen={true}></Modal>}
                       </Typography>
 
                       <Typography variant="body2" sx={{ color: "#696969" }}>
