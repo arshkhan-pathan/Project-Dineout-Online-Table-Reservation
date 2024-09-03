@@ -8,6 +8,7 @@ import Modal from "@/components/Modal";
 import Auth from "@/layouts/user/navbar/Auth";
 import InvoiceDetails from "./InvoiceDetails";
 import { toast } from "react-hot-toast";
+import {useRouter} from "next/router";
 export default function Payment({
   restaurantId,
   start_time,
@@ -17,6 +18,7 @@ export default function Payment({
   table,
   resetReservation,
 }) {
+  const router  = useRouter()
   const { isOpen, onOpen, onClose } = useToggle();
   const [modalContent, setModalContent] = useState("AUTH");
   const [booking, setBooking] = useState();
@@ -42,7 +44,7 @@ export default function Payment({
           //
           setBooking(res.data.booking);
           setModalContent("");
-          toast.success("🎉 Your Booking Is Confimed");
+          toast.success("🎉 Your Booking Is Confirmed");
           onOpen();
         })
         .catch((err) => {
@@ -113,8 +115,10 @@ export default function Payment({
 
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
+        // console.log("DATA", data.data.stripe_session);
+        // router.push(data.data.stripe_session )
       } else {
-        console.error("No tables Available for thissss slot");
+        console.error("No tables Available for this slot");
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
