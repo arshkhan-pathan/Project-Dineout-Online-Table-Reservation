@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-rv#1e(-xh3t+%=tg5kr@53usf+-jek2v5ju7wwg!pju3$o@6f$
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["arshkhan.pythonanywhere.com", "localhost", '127.0.0.1']
+ALLOWED_HOSTS = ["arshkhan.pythonanywhere.com", "localhost", '127.0.0.1', "0.0.0.0"]
 
 
 AUTH_USER_MODEL = 'base.CustomUser'
