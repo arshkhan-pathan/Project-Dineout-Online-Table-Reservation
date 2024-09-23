@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: fe-next-app
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src      # Mount only the src directory for live reloading
+      - ./frontend/public:/app/public  # Mount the public directory
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+
+  backend:
+    container_name: be-django-app
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DEBUG=True
+      - ALLOWED_HOSTS=*
+    depends_on:
+      - db
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=pg_dineout
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
