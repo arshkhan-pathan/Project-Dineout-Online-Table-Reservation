@@ -141,25 +141,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / fixtures /  'db.sqlite3',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',  # this is the name of your database
+        'HOST': 'db',  # here you put localhost because you're or db if running on django
+        'USER': 'postgres',  # you put the username you have
+        'PASSWORD': 'postgres',  # put your user password here
+        'PORT': '5432'  # this is the port by default.
     }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    # },
 ]
 
 LANGUAGE_CODE = 'en-us'
