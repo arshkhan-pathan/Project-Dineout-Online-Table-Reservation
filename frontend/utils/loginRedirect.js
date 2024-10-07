@@ -8,7 +8,7 @@ const loginRedirect = (WrappedComponent, link) => {
     const router = useRouter();
 
     if (user) {
-      router.replace(link);
+      // router.replace(link);
       return null;
     }
 

@@ -7,7 +7,6 @@ export const removeFeatured = (params, deleteFeaturedRestaurant) => {
   const { isOpen, onOpen, onClose } = useToggle();
   const onRemoveFeatured = (rejectionReason) => {
     deleteFeaturedRestaurant({ id: params.row.id, message: rejectionReason });
-    console.log(rejectionReason);
     toast.success("Removed Restaurant Successfully");
     onClose();
   };

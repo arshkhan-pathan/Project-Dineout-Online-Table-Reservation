@@ -67,7 +67,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
     "ROTATE_REFRESH_TOKENS": True,  # Setting it to true will update refreshing tokens
     "BLACKLIST_AFTER_ROTATION": True,
@@ -141,18 +141,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / fixtures /  'db.sqlite3',
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',  # this is the name of your database
-        'HOST': 'db',  # here you put localhost because you're or db if running on django
-        'USER': 'postgres',  # you put the username you have
-        'PASSWORD': 'postgres',  # put your user password here
-        'PORT': '5432'  # this is the port by default.
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'fixtures' /  'db.sqlite3',
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'postgres',  # this is the name of your database
+    #     'HOST': 'db',  # here you put localhost because you're or db if running on django
+    #     'USER': 'postgres',  # you put the username you have
+    #     'PASSWORD': 'postgres',  # put your user password here
+    #     'PORT': '5432'  # this is the port by default.
+    # }
 }
 
 AUTH_PASSWORD_VALIDATORS = [

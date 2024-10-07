@@ -23,7 +23,6 @@ const Form = ({ onSubmit, title }) => {
   const dispatch = useDispatch();
 
   const responseMessage = async (response) => {
-    console.log(response);
     const { credential } = response;
     const body = {
       auth_token: credential,
@@ -35,7 +34,6 @@ const Form = ({ onSubmit, title }) => {
         success: "Successfully Authenticated!",
         error: "Invalid Credentials",
       });
-      console.log(user);
       dispatch(setCredentials({ ...user }));
       onClose();
     } catch (err) {

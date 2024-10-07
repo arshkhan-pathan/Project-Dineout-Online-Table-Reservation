@@ -45,7 +45,6 @@ const Auth = ({ onClose }) => {
           error: "Invalid Credentials",
         }
       );
-      console.log(user);
       dispatch(setCredentials({ ...user }));
       onClose();
     } catch (err) {
@@ -69,7 +68,6 @@ const Auth = ({ onClose }) => {
           error: "Invalid Credentials",
         }
       );
-      console.log(user);
       dispatch(setCredentials({ ...user }));
       onClose();
     } catch (err) {

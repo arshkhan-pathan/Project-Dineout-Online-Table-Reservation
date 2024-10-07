@@ -9,7 +9,7 @@ const withAuth = (WrappedComponent, allowedRoles, link) => {
     const router = useRouter();
 
     if (!user) {
-      router.push(link);
+      // router.push(link);
       return null;
     }
 
