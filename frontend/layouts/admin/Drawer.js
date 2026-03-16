@@ -21,6 +21,7 @@ import EqualizerIcon from "@mui/icons-material/Equalizer";
 import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Link from "next/link";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const drawerWidth = 240;
 
@@ -50,11 +51,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
-const Drawer = styled(MuiDrawer, {
+const PermanentDrawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
@@ -71,222 +71,96 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+const navItems = [
+  { label: "Home", href: "/admin/dashboard", icon: <HomeIcon /> },
+  { label: "Profile", href: "/admin/profile", icon: <ManageAccountsIcon /> },
+  { label: "Pending", href: "/admin/requests", icon: <PendingActionsIcon />, subheader: "Restaurant" },
+  { label: "Performance", href: "/admin/performance", icon: <EqualizerIcon /> },
+  { label: "Details", href: "/admin/tags", icon: <FormatListNumberedRtlIcon /> },
+  { label: "Featured", href: "/admin/featured", icon: <BookmarkIcon /> },
+];
+
+export default function MiniDrawer({ mobileOpen, onClose }) {
   const router = useRouter();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerClose = () => {
     setOpen(!open);
   };
 
+  const drawerContent = (
+    <>
+      <DrawerHeader>
+        <IconButton onClick={isMobile ? onClose : handleDrawerClose}>
+          {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        {navItems.map(({ label, href, icon, subheader }) => (
+          <React.Fragment key={label}>
+            {subheader && (
+              <ListSubheader sx={{ fontWeight: "bold" }}>{subheader}</ListSubheader>
+            )}
+            <Link
+              style={{
+                textDecoration: "none",
+                color: router.pathname === href ? "red" : "inherit",
+              }}
+              href={href}
+              onClick={isMobile ? onClose : undefined}
+            >
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {icon}
+                  </ListItemIcon>
+                  <ListItemText primary={label} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          </React.Fragment>
+        ))}
+      </List>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <MuiDrawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={onClose}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+      >
+        {drawerContent}
+      </MuiDrawer>
+    );
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <Link
-            style={{
-              textDecoration: "none",
-              color: router.pathname === "/admin/dashboard" ? "red" : "inherit",
-            }}
-            href="/admin/dashboard"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color: router.pathname === "/admin/profile" ? "red" : "inherit",
-            }}
-            href="/admin/profile"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ManageAccountsIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Profile"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <ListSubheader sx={{ fontWeight: "bold" }}>Restaurant</ListSubheader>
-          <Link
-            style={{
-              textDecoration: "none",
-              color: router.pathname === "/admin/home" ? "red" : "inherit",
-            }}
-            href="/admin/requests"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <PendingActionsIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Pending"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/dyanamicpricing"
-                  ? "red"
-                  : "inherit",
-            }}
-            href="/admin/performance"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <EqualizerIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Performance"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/tables" ? "red" : "inherit",
-            }}
-            href="/admin/tags"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <FormatListNumberedRtlIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Details"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/reviews" ? "red" : "inherit",
-            }}
-            href="/admin/featured"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <BookmarkIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Featured"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        </List>
-      </Drawer>
+      <PermanentDrawer variant="permanent" open={open}>
+        {drawerContent}
+      </PermanentDrawer>
     </Box>
   );
 }

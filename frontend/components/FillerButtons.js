@@ -1,84 +1,131 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
-import { Avatar } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
+import {
+  BarIcon,
+  ParkingIcon,
+  DeliveryIcon,
+  MusicIcon,
+  CardIcon,
+  AcIcon,
+  OutdoorIcon,
+  ValetIcon,
+} from "@/components/icons";
+
+const icons = {
+  Bar: <BarIcon />,
+  Parking: <ParkingIcon />,
+  "Home Delivery": <DeliveryIcon />,
+  "Live Performance": <MusicIcon />,
+  "Cards Accepted": <CardIcon />,
+  "Air Condition": <AcIcon />,
+  Outdoors: <OutdoorIcon />,
+  "Valet Parking": <ValetIcon />,
+};
 
 const buttonsData = [
-  {
-    label: "Bar",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686552553/icons/1553738_ffqead.png",
-  },
-  {
-    label: "Parking",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/parking_ns6bha.jpg",
-  },
-  {
-    label: "Home Delivery",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/delivery_qpm6md.png",
-  },
-  {
-    label: "Live Performance",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/performance_tmlg0j.png",
-  },
-  {
-    label: "Cards Accepted",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/cards_pochqv.png",
-  },
-  {
-    label: "Air Condition",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686551836/icons/air_jaswkf.png",
-  },
-  {
-    label: "Outdoors",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686552030/icons/outdoor_eopfwg.png",
-  },
-  {
-    label: "Valet Parking",
-    imageSrc:
-      "https://res.cloudinary.com/dhe9hmzbn/image/upload/v1686552028/icons/valet_rline2.png",
-  },
+  "Bar",
+  "Parking",
+  "Home Delivery",
+  "Live Performance",
+  "Cards Accepted",
+  "Air Condition",
+  "Outdoors",
+  "Valet Parking",
 ];
 
 function FillerButtons() {
   const router = useRouter();
 
   return (
-    <div style={{ marginTop: "50px" }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          {buttonsData.map((button, index) => (
-            <Grid item xs={3} key={index}>
-              <Button
-                onClick={() =>
-                  router.push(
-                    `restaurants/search?q=${encodeURIComponent(button.label)}`
-                  )
-                }
-                variant="contained"
-                sx={{
-                  width: 250,
-                  height: 60,
-                  backgroundColor: "whitesmoke",
-                }}
-                color="primary"
-                startIcon={<Avatar variant="square" src={button.imageSrc} />}
-              >
-                {button.label}
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </div>
+    <Box sx={{ mt: 6 }}>
+      <Typography
+        sx={{
+          fontFamily: "var(--font-body)",
+          fontSize: "11px",
+          fontWeight: 500,
+          letterSpacing: "0.28em",
+          textTransform: "uppercase",
+          color: "#C94F35",
+          mb: 1,
+        }}
+      >
+        Browse by
+      </Typography>
+      <Typography
+        variant="h5"
+        sx={{
+          fontFamily: '"Cormorant Garamond", Georgia, serif',
+          fontWeight: 600,
+          color: "#1A1210",
+          mb: 3,
+          fontSize: "clamp(26px, 3vw, 34px)",
+        }}
+      >
+        What Are You Looking For?
+      </Typography>
+      <Grid container spacing={1.5}>
+        {buttonsData.map((label) => (
+          <Grid item xs={6} sm={4} md={3} key={label}>
+            <Button
+              onClick={() =>
+                router.push(`restaurants/search?q=${encodeURIComponent(label)}`)
+              }
+              variant="outlined"
+              startIcon={
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: { xs: 26, sm: 32 },
+                    height: { xs: 26, sm: 32 },
+                    borderRadius: "6px",
+                    backgroundColor: "rgba(201,79,53,0.08)",
+                    flexShrink: 0,
+                    transition: "background 0.18s",
+                    ".MuiButton-root:hover &": {
+                      backgroundColor: "rgba(255,255,255,0.18)",
+                    },
+                  }}
+                >
+                  {icons[label]}
+                </Box>
+              }
+              sx={{
+                width: "100%",
+                height: { xs: 50, sm: 54 },
+                borderColor: "rgba(0,0,0,0.10)",
+                color: "#3A2E28",
+                backgroundColor: "white",
+                fontFamily: "var(--font-body)",
+                fontWeight: 500,
+                fontSize: { xs: "12px", sm: "14px" },
+                textTransform: "none",
+                borderRadius: "8px",
+                justifyContent: "flex-start",
+                pl: 1.5,
+                gap: 0.5,
+                transition: "all 0.18s",
+                lineHeight: 1.2,
+                "& .MuiButton-startIcon": { mr: { xs: 0.5, sm: 1 }, flexShrink: 0 },
+                "&:hover": {
+                  backgroundColor: "#C94F35",
+                  borderColor: "#C94F35",
+                  color: "white",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 6px 20px rgba(201,79,53,0.25)",
+                },
+              }}
+            >
+              {label}
+            </Button>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 

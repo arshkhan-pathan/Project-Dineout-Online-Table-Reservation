@@ -25,8 +25,8 @@ export default function Error() {
         }}
       >
         <Container maxWidth="md">
-          <Grid container spacing={2}>
-            <Grid xs={6}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} sm={6}>
               <Typography variant="h2">Invalid Page</Typography>
               {router.asPath == "/forbidden" ? (
                 <Typography variant="h6">
@@ -38,12 +38,13 @@ export default function Error() {
                 </Typography>
               )}
             </Grid>
-            <Grid xs={6}>
+            <Grid item xs={12} sm={6}>
               <Image
                 src="https://res.cloudinary.com/dhe9hmzbn/image/upload/v1687778649/thrillist-404_i6x186.gif"
                 alt=""
                 width={500}
                 height={250}
+                style={{ width: "100%", height: "auto" }}
               />
             </Grid>
           </Grid>

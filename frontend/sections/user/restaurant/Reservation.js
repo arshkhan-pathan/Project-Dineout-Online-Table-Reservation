@@ -11,15 +11,19 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 // styles
 const StyledWrapper = styled(Box)(({ theme }) => ({
-  width: "330px",
+  width: "100%",
+  maxWidth: "330px",
   marginInline: "auto",
-  // height: '500px',
   boxShadow: theme.shadows[5],
   borderRadius: 4,
   marginBlock: "1px",
   position: "sticky",
   top: "30px",
   right: "20px",
+  [theme.breakpoints.down("md")]: {
+    position: "static",
+    maxWidth: "100%",
+  },
 }));
 
 const StyledHeader = styled(Box)(({ theme }) => ({

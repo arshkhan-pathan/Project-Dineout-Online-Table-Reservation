@@ -12,7 +12,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import Link from "next/link";
@@ -22,6 +21,8 @@ import TableBarIcon from "@mui/icons-material/TableBar";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import EditIcon from "@mui/icons-material/Edit";
 import PersonIcon from "@mui/icons-material/Person";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -50,11 +51,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
-const Drawer = styled(MuiDrawer, {
+const PermanentDrawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
@@ -71,250 +71,93 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+const navItems = [
+  { label: "Home", href: "/restaurant", icon: <HomeIcon /> },
+  { label: "Bookings", href: "/restaurant/bookings", icon: <LibraryBooksIcon /> },
+  { label: "Dynamic Pricing", href: "/restaurant/dyanamicpricing", icon: <PriceChangeIcon /> },
+  { label: "Tables", href: "/restaurant/tables", icon: <TableBarIcon /> },
+  { label: "Reviews", href: "/restaurant/reviews", icon: <ReviewsIcon /> },
+  { label: "Manage", href: "/restaurant/manage", icon: <EditIcon /> },
+  { label: "Profile", href: "/restaurant/profile", icon: <PersonIcon /> },
+];
+
+export default function MiniDrawer({ mobileOpen, onClose }) {
   const router = useRouter();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerClose = () => {
     setOpen(!open);
   };
 
+  const drawerContent = (
+    <>
+      <DrawerHeader>
+        <IconButton onClick={isMobile ? onClose : handleDrawerClose}>
+          {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        {navItems.map(({ label, href, icon }) => (
+          <Link
+            key={label}
+            style={{
+              textDecoration: "none",
+              color: router.pathname === href ? "red" : "inherit",
+            }}
+            href={href}
+            onClick={isMobile ? onClose : undefined}
+          >
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {icon}
+                </ListItemIcon>
+                <ListItemText primary={label} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <MuiDrawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={onClose}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        }}
+      >
+        {drawerContent}
+      </MuiDrawer>
+    );
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <Link
-            style={{
-              textDecoration: "none",
-              color: router.pathname === "/restaurant" ? "red" : "inherit",
-            }}
-            href="/restaurant"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <HomeIcon></HomeIcon>
-                </ListItemIcon>
-                <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/bookings" ? "red" : "inherit",
-            }}
-            href="/restaurant/bookings"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <LibraryBooksIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Bookings"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/dyanamicpricing"
-                  ? "red"
-                  : "inherit",
-            }}
-            href="/restaurant/dyanamicpricing"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <PriceChangeIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Dyanamic Pricing"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/tables" ? "red" : "inherit",
-            }}
-            href="/restaurant/tables"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <TableBarIcon />
-                </ListItemIcon>
-                <ListItemText primary="Tables" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/reviews" ? "red" : "inherit",
-            }}
-            href="/restaurant/reviews"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ReviewsIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Reviews"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/manage" ? "red" : "inherit",
-            }}
-            href="/restaurant/manage"
-            prefetch
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <EditIcon />
-                </ListItemIcon>
-                <ListItemText primary="Manage" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              color:
-                router.pathname === "/restaurant/profile" ? "red" : "inherit",
-            }}
-            href="/restaurant/profile"
-          >
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <PersonIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Profile"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        </List>
-      </Drawer>
+      <PermanentDrawer variant="permanent" open={open}>
+        {drawerContent}
+      </PermanentDrawer>
     </Box>
   );
 }

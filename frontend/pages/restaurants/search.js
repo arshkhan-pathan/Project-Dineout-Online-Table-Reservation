@@ -49,7 +49,7 @@ const SearchPage = () => {
       <Navbar />
       <Container maxWidth="lg" sx={{ my: 5 }}>
         <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Filters
               selectedFilters={selectedFilters}
               setSelectedFilters={setSelectedFilters}
@@ -58,7 +58,8 @@ const SearchPage = () => {
           <Grid
             container
             item
-            xs={9}
+            xs={12}
+            md={9}
             spacing={2}
             sx={{ height: "fit-content" }}
           >
@@ -92,6 +93,7 @@ const SearchPage = () => {
                   alt="No Results Found"
                   height={500}
                   width={700}
+                  style={{ maxWidth: "100%", height: "auto" }}
                 />
               </Grid>
             )}

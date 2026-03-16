@@ -2,13 +2,13 @@ import { Box } from "@mui/material";
 
 const arrowSx = {
   display: "block",
-  background: "#ff645a",
+  background: "#C94F35",
   padding: 1,
   borderRadius: 1,
   alignItems: "center",
   justifyContent: "center",
   "&:hover": {
-    background: "red",
+    background: "#A03B24",
   },
 };
 
@@ -53,6 +53,22 @@ const settings = {
   slidesToScroll: 4,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
+  responsive: [
+    {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
 export { settings };

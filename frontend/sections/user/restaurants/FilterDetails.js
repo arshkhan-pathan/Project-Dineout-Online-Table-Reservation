@@ -57,13 +57,21 @@ const FilterDetails = ({ setSelectedFilters, title, getData }) => {
                   checked={selectedItems.includes(item?.name)}
                   onChange={onSelect}
                   value={item?.name}
+                  sx={{
+                    color: "rgba(201,79,53,0.35)",
+                    "&.Mui-checked": { color: "#C94F35" },
+                    p: "4px 8px 4px 0",
+                  }}
                 />
               }
               label={item?.name}
               sx={{
-                fontSize: "13px",
-                opacity: 0.5,
-                cursor: "pointer",
+                "& .MuiFormControlLabel-label": {
+                  fontFamily: "var(--font-body)",
+                  fontSize: "14px",
+                  color: "#5A4E44",
+                },
+                mb: 0,
               }}
             />
           </Grid>

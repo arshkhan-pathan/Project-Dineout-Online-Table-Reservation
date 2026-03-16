@@ -153,7 +153,7 @@ const BookingSummary = () => {
                       <Grid item xs={12}>
                         <Typography fontWeight="bold">{grid.title}</Typography>
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={12} sx={{ overflowX: "auto" }}>
                         <DataGrid
                           rows={grid.rows || []}
                           autoHeight

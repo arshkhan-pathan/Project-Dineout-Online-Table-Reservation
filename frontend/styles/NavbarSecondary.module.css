@@ -1,242 +1,140 @@
 .body {
-  margin: 0px;
-  font-family: Metropolis, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  box-sizing: border-box;
-  background-color: white;
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: white;
 }
 
 .inner_page_header {
-  justify-content: space-around;
+    background: #FFFFFF;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201, 79, 53, 0.10);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
 }
 
+/* ── Desktop top row: logo + location + search ── */
 .header_section1 {
-  width: 90%;
-  height: 70%;
-  display: grid;
-  margin: auto;
-  text-align: center;
-  align-items: center;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "a b b b c c c c c c d d";
-  justify-content: space-around;
-  box-sizing: border-box;
-  margin-top: 1%;
-  margin-bottom: 1%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 28px;
+    height: 66px;
 }
 
 .logo_section {
-  grid-area: a;
-  /* border: 1px solid magenta; */
+    flex-shrink: 0;
 }
 
 .location_section {
-  grid-area: b;
-  margin-left: 20px;
-  width: 80%;
-  border-radius: 5px;
-  font-family: "Metropolis Light";
-  font-style: normal;
-  font-weight: 400;
-  background-color: white;
-}
-
-.select_location {
-  width: 90%;
-  padding: 5px;
-  margin: auto;
-  border: none;
-  outline: none;
+    width: 180px;
+    flex-shrink: 0;
 }
 
 .search_section {
-  grid-area: c;
-  width: 90%;
-  padding: 5px 10px;
-  margin-left: 20px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  background-color: #fff;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #F7F2EC;
+    border: 1px solid rgba(201, 79, 53, 0.14);
+    border-radius: 6px;
+    padding: 0 14px;
+    height: 40px;
+    transition: border-color 0.15s;
 }
 
-.fa_search {
-  color: #ff645a;
+.search_section:focus-within {
+    border-color: rgba(201, 79, 53, 0.40);
 }
 
 .search_section > input {
-  width: 95%;
-  height: 25px;
-  border: none;
-  outline: none;
-  font-size: 15px;
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #1A1210;
+}
+
+.search_section > input::placeholder {
+    color: #9A8878;
 }
 
 .search_button {
-  grid-area: d;
-  height: 36px;
-  position: relative;
-  right: 35px;
-  border-radius: 5px;
+    flex-shrink: 0;
 }
 
 .search_button > button {
-  width: 70%;
-  height: 100%;
-  background-color: #ff645a;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  color: white;
-  font-weight: 700;
-  font-size: 17px;
-  cursor: pointer;
+    height: 40px;
+    padding: 0 22px;
+    background: #C94F35;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
 }
 
+.search_button > button:hover {
+    background: #A03B24;
+}
+
+/* ── Desktop nav links row ── */
 .header_section2 {
-  width: 100%;
-  height: 40%;
-  box-shadow: 2px 2px 5px gray;
-  background-color: white;
+    border-top: 1px solid rgba(201, 79, 53, 0.08);
+    background: #FFFFFF;
 }
 
 .list {
-  display: flex;
-  width: 40%;
-  height: 100%;
-  margin: auto;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.list > p:hover {
-  color: #ff645a;
-  cursor: pointer;
-}
-
-.horizontal_line {
-  width: 100%;
-  height: 1px;
-  background-color: gray;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 28px;
+    height: 44px;
 }
 
 .p {
-  font-family: "Verdana";
-  font-size: 13px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: #5A4E44;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+    transition: color 0.15s, background 0.15s;
+    text-decoration: none;
+}
+
+.p:hover {
+    color: #C94F35;
+    background: rgba(201, 79, 53, 0.05);
 }
 
 .pActive {
-  font-family: "Verdana";
-  color: #b90d01;
-}
-
-@media (max-width: 575.98px) {
-  .inner_page_header {
-    height: 150px;
-  }
-
-  .header_section1 {
-    grid-template-areas:
-      "a a a a a a a a a a a a"
-      "b b b b b b b b b b b b"
-      "c c c c c c c c c c c c"
-      "d d d d d d d d d d d d";
-    grid-template-columns: repeat(12, 1fr);
-    margin: 10px auto;
-    width: 95%;
-  }
-
-  .location_section {
-    font-size: 12px;
-    margin-left: 10px;
-    width: 60%;
-  }
-
-  .select_location {
-    width: 70%;
-  }
-
-  .search_section {
-    margin-left: 10px;
-    width: 70%;
-  }
-
-  .fa-search {
-    font-size: 20px;
-  }
-
-  .search_section > input {
-    width: 90%;
-    font-size: 13px;
-  }
-
-  .search_button > button {
-    font-size: 15px;
-  }
-
-  .header_section2 {
-    height: 60%;
-    margin-top: 20px;
-  }
-
-  .list {
-    width: 70%;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-}
-
-/* For screens between 576px and 767.98px */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .inner_page_header {
-    height: 150px;
-  }
-
-  .header_section1 {
-    grid-template-areas:
-      "a a a a b b b b c c c c"
-      "d d d d d d d d d d d d";
-    grid-template-columns: repeat(12, 1fr);
-    margin: 10px auto;
-    width: 90%;
-  }
-
-  .location_section {
-    font-size: 13px;
-    margin-left: 15px;
-    width: 60%;
-  }
-
-  .select_location {
-    width: 70%;
-  }
-
-  .search_section {
-    margin-left: 15px;
-    width: 70%;
-  }
-
-  .fa-search {
-    font-size: 20px;
-  }
-
-  .search_section > input {
-    width: 90%;
+    font-family: var(--font-body);
     font-size: 14px;
-  }
-
-  .search_button > button {
-    font-size: 16px;
-  }
-
-  .header_section2 {
-    height: 60%;
-    margin-top: 20px;
-  }
-
-  .list {
-    width: 70%;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+    font-weight: 600;
+    color: #C94F35;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+    background: rgba(201, 79, 53, 0.07);
 }
+
+/* horizontal_line is replaced by CSS border, keep empty for compat */
+.horizontal_line {
+    display: none;
+}
+
+/* unused legacy classes — kept for compatibility */
+.pageLogo {}
+.select_location {}
+.fa_search {}

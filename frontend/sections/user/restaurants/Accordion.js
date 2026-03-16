@@ -1,49 +1,71 @@
-// packages
-import { useState } from 'react';
+import { useState } from "react";
 import {
-    Accordion as MuiAccordion,
-    AccordionSummary,
-    AccordionDetails,
-    Typography,
-    Box,
-} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-
-
-// styles
-const IconSx = {
-    width: 15,
-};
+  Accordion as MuiAccordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Box,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const Accordtion = ({ summary, details }) => {
-    const [expended, setExpended] = useState(true);
+  const [expended, setExpended] = useState(true);
 
-    const onToggle = () => {
-        setExpended(prev => !prev);
-    }
+  const onToggle = () => {
+    setExpended((prev) => !prev);
+  };
 
-    return (
-        <Box>
-            <MuiAccordion
-                square
-                disableGutters
-                defaultExpanded
-                TransitionProps={{ unmountOnExit: true }}
-                onChange={onToggle}
-            >
-                <AccordionSummary
-                    expandIcon={expended ? <RemoveIcon sx={IconSx} /> : <AddIcon sx={IconSx} />}
-                >
-                    <Typography variant='subtitle2' sx={{opacity: 0.5, fontWeight: 'bold'}}>{summary}</Typography>
-                </AccordionSummary>
+  return (
+    <Box sx={{ mb: 0.5 }}>
+      <MuiAccordion
+        square
+        disableGutters
+        defaultExpanded
+        TransitionProps={{ unmountOnExit: true }}
+        onChange={onToggle}
+        elevation={0}
+        sx={{
+          border: "1px solid rgba(201,79,53,0.10)",
+          borderRadius: "6px !important",
+          "&:before": { display: "none" },
+          overflow: "hidden",
+        }}
+      >
+        <AccordionSummary
+          expandIcon={
+            expended ? (
+              <RemoveIcon sx={{ width: 14, color: "#C94F35" }} />
+            ) : (
+              <AddIcon sx={{ width: 14, color: "#C94F35" }} />
+            )
+          }
+          sx={{
+            minHeight: 44,
+            backgroundColor: "#FDFAF6",
+            "& .MuiAccordionSummary-content": { my: 0 },
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "var(--font-body)",
+              fontSize: "12px",
+              fontWeight: 600,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#5A4E44",
+            }}
+          >
+            {summary}
+          </Typography>
+        </AccordionSummary>
 
-                <AccordionDetails>
-                    {details}
-                </AccordionDetails>
-            </MuiAccordion>
-        </Box>
-    );
+        <AccordionDetails sx={{ pt: 1.5, pb: 2, px: 2, backgroundColor: "#FFFFFF" }}>
+          {details}
+        </AccordionDetails>
+      </MuiAccordion>
+    </Box>
+  );
 };
 
 export default Accordtion;

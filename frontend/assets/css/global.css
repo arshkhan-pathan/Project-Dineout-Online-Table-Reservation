@@ -1,14 +1,41 @@
+:root {
+    --color-primary: #C94F35;
+    --color-primary-light: #E06349;
+    --color-primary-dark: #A03B24;
+    --color-obsidian: #0C0A09;
+    --color-charcoal: #1A1512;
+    --color-smoke: #2E2820;
+    --color-ember: #C8922A;
+    --color-cream: #F5EDE0;
+    --color-parchment: #EDE3D2;
+    --color-bone: #F0E6D3;
+    --color-stone: #9A8878;
+    --color-flint: #5A4E44;
+    --color-ink: #1A1210;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .app {
     margin: 0;
-    font-family: "Metropolis", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-        "Segoe UI Symbol";
+    font-family: var(--font-body);
 }
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: var(--font-body);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 #root, .app {

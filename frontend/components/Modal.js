@@ -8,13 +8,13 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
-  maxHeight: "80%",
+  width: { xs: "90vw", sm: 400 },
+  maxHeight: "80vh",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  overflow: "scroll",
-  p: 4,
+  overflow: "auto",
+  p: { xs: 2, sm: 4 },
 };
 
 export default function Modal({ isOpen, onClose, children }) {
