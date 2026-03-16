@@ -6,7 +6,14 @@ DineOut is an innovative online platform that aims to simplify the process of ma
 
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/dhe9hmzbn/image/upload/v1688791298/Screenshot_23_k4nnep.png)
+### Home Page
+![Home Page](screenshots/screenshot_home_desktop.png)
+
+### All Restaurants
+![Restaurants Listing](screenshots/screenshot_restaurants_desktop.png)
+
+### Restaurant Detail Page
+![Restaurant Detail](screenshots/screenshot_restaurant_detail_desktop.png)
 
 
 ## Live-Demo
