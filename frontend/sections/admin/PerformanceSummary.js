@@ -6,7 +6,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PeopleIcon from "@mui/icons-material/People";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, Tooltip as RechartsTooltip } from "recharts";
 import { viewPerformance } from "./GridComponents/ViewPerformance";
 import { Box, Grid, Tooltip } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -59,57 +59,47 @@ function PerformanceSummary({ data }) {
               icon={<HourglassEmptyIcon />}
             />
           </Grid>
-          <Grid item xs={6}>
-            <LineChart
-              width={500}
-              height={300}
-              data={performanceData?.earnings_graph}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="total_bookings"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-                name="Bookings Count"
-              />
-            </LineChart>
+          <Grid item xs={12} md={6}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={performanceData?.earnings_graph}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <RechartsTooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="total_bookings"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                  name="Bookings Count"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </Grid>
-          <Grid item xs={6}>
-            <LineChart
-              width={500}
-              height={300}
-              data={performanceData?.earnings_graph}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis></YAxis>
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="total_earnings"
-                name="Total Earnings"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
+          <Grid item xs={12} md={6}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={performanceData?.earnings_graph}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <RechartsTooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="total_earnings"
+                  name="Total Earnings"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </Grid>
         </Grid>
       </Box>

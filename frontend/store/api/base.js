@@ -18,7 +18,6 @@ const baseQuery = fetchBaseQuery({
 // Define a custom base query with token refreshing logic
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  debugger
   // If token is expired or returns 401 unauthorized
   if (result?.error?.status === 401) {
     // Try to refresh the token

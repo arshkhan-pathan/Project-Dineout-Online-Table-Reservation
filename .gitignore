@@ -52,3 +52,9 @@ venv
 
 # postgres
 /data
+
+CLAUDE.md
+.claude
+
+memory
+.playwright-mcp

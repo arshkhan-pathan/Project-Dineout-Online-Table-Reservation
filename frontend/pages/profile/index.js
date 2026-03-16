@@ -149,7 +149,7 @@ function Index() {
                 <h3>No Upcoming Bookings to show</h3>
               )}
               {data?.upcoming_bookings.length > 0 && (
-                <Box sx={{ height: "100%", width: "100%" }}>
+                <Box sx={{ height: "100%", width: "100%", overflowX: "auto" }}>
                   <BookingsGrid
                     rows={data?.upcoming_bookings || []}
                     columns={upcomingColumns}
@@ -161,7 +161,7 @@ function Index() {
               {data?.past_bookings?.length > 0 ? (
                 <>
                   <h3>Past Bookings</h3>
-                  <Box sx={{ height: "100%", width: "100%" }}>
+                  <Box sx={{ height: "100%", width: "100%", overflowX: "auto" }}>
                     <BookingsGrid
                       rows={data?.past_bookings || []}
                       columns={pastColumns}
@@ -178,7 +178,7 @@ function Index() {
               {data?.cancelled_bookings?.length > 0 ? (
                 <>
                   <h3>Cancelled Bookings</h3>
-                  <Box sx={{ height: "100%", width: "100%" }}>
+                  <Box sx={{ height: "100%", width: "100%", overflowX: "auto" }}>
                     <BookingsGrid
                       rows={data?.cancelled_bookings || []}
                       columns={pastColumns}

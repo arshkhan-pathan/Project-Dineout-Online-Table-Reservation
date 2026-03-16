@@ -100,7 +100,7 @@ const RestaurantInfo = () => {
               <Card elevation={0}>
                 <CardContent sx={{ padding: 0 }}>
                   {isLoading || isError ? (
-                    <Skeleton variant="rectangular" width={800} height={400} />
+                    <Skeleton variant="rectangular" width="100%" height={400} />
                   ) : (
                     <PhotoProvider>
                       <Slider

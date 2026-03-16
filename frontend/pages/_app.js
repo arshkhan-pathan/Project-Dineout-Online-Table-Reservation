@@ -12,6 +12,7 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import "react-photo-view/dist/react-photo-view.css";
 import toast, {Toaster} from "react-hot-toast";
 import {GoogleOAuthProvider} from "@react-oauth/google";
+import Head from "next/head";
 // import { wrapper, store } from "../app/store";
 // store
 import store, {persistor} from "@/store";
@@ -24,14 +25,49 @@ import "slick-carousel/slick/slick-theme.css";
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#ff645a",
+            main: "#C94F35",
+            light: "#E06349",
+            dark: "#A03B24",
         },
     },
+    typography: {
+        fontFamily: '"DM Sans", -apple-system, BlinkMacSystemFont, sans-serif',
+        h1: { fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 600 },
+        h2: { fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 600 },
+        h3: { fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 600 },
+        h4: { fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 600 },
+        h5: { fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 600 },
+        h6: { fontFamily: '"Cormorant Garamond", Georgia, serif', fontWeight: 600 },
+    },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: "none",
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 500,
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 600,
+                    fontSize: "12px",
+                },
+            },
+        },
+    },
+    shape: { borderRadius: 6 },
 });
 
 function App({Component, pageProps}) {
     return (
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT}>
+            <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Head>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <ThemeProvider theme={theme}>
@@ -55,7 +91,11 @@ function App({Component, pageProps}) {
                                     backgroundColor: "#333",
                                 },
                                 "#__next": {
-                                    backgroundColor: "#eeeee4",
+                                    backgroundColor: "#F5EDE0",
+                                },
+                                "html, body": {
+                                    overflowX: "hidden",
+                                    maxWidth: "100vw",
                                 },
                             }}
                         />

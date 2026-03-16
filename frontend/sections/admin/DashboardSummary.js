@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PeopleIcon from "@mui/icons-material/People";
@@ -47,57 +48,47 @@ const DashboardSummary = ({ data }) => {
               icon={<HourglassEmptyIcon />}
             />
           </Grid>
-          <Grid item xs={6}>
-            <LineChart
-              width={500}
-              height={300}
-              data={data?.bookings_graph_data}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="count"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-                name="Bookings Count"
-              />
-            </LineChart>
+          <Grid item xs={12} md={6}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={data?.bookings_graph_data}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="count"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                  name="Bookings Count"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </Grid>
-          <Grid item xs={6}>
-            <LineChart
-              width={500}
-              height={300}
-              data={data?.new_users_graph_data}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date_joined__date" />
-              <YAxis></YAxis>
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="count"
-                name="User Count"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
+          <Grid item xs={12} md={6}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={data?.new_users_graph_data}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date_joined__date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="count"
+                  name="User Count"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </Grid>
         </Grid>
       </Box>
